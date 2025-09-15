@@ -2,24 +2,18 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>482399216256-j5ppc9an3g9q0u8s9kfrm3vni9sr77lp.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.482399216256-j5ppc9an3g9q0u8s9kfrm3vni9sr77lp</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>482399216256-l3d8hshirsg5fp2plfl8lkvkeha7s58n.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAGJq1mkMiI3KS4yd3zhrcN0tKaj7ikhkU</string>
+	<string>AIzaSyCVaaV2-4UfSxyGGM5-bGn7R4aRb3pxkLs</string>
 	<key>GCM_SENDER_ID</key>
-	<string>482399216256</string>
+	<string>939178197757</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.deligo.driver</string>
 	<key>PROJECT_ID</key>
-	<string>deligo-b44e0</string>
+	<string>deligo-cab</string>
 	<key>STORAGE_BUCKET</key>
-	<string>deligo-b44e0.firebasestorage.app</string>
+	<string>deligo-cab.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:482399216256:ios:be450e3a998b9d52b5bc65</string>
+	<string>1:939178197757:ios:f12cf83be9c62a17d8b494</string>
 </dict>
 </plist>
