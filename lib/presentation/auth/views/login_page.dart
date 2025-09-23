@@ -45,7 +45,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       return;
     }
 
-    final phoneCode = ref.read(selectedCountry).selectedCode!.phoneCode.replaceAll('+', '');
+    final phoneCode = ref.read(selectedCountry).selectedCode!.phoneCode;
     ref.read(loginNotifierProvider.notifier).login(
       phone: _phoneNumber,
       countryCode: phoneCode,

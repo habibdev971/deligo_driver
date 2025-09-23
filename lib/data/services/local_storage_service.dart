@@ -130,7 +130,7 @@ class LocalStorageService {
 
   Future<String> getCountryCode() async {
     final value = await _storage.safeRead(key: 'country-code');
-    return value ?? '880';
+    return value ?? '+880';
   }
 
   /// ---------------- App settings ----------------
