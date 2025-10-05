@@ -567,5 +567,129 @@
   "@loggingInSomewhereElse": {},
 
   "stayOnThisDevice": "এই ডিভাইসে থাকুন",
-  "@stayOnThisDevice": {}
+  "@stayOnThisDevice": {},
+
+  "or": "অথবা",
+  "@or": {},
+
+  "already_have_account": "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?",
+  "@already_have_account": {},
+
+  "sign_in": "সাইন ইন",
+  "@sign_in": {},
+
+  "validator_email_required": "ইমেইল প্রয়োজন",
+  "@validator_email_required": {},
+
+  "validator_email_invalid": "একটি বৈধ ইমেইল দিন",
+  "@validator_email_invalid": {},
+
+  "validator_phone_required": "ফোন নম্বর প্রয়োজন",
+  "@validator_phone_required": {},
+
+  "validator_phone_invalid": "একটি বৈধ ফোন নম্বর দিন",
+  "@validator_phone_invalid": {},
+
+  "validator_number_required": "নম্বর প্রয়োজন",
+  "@validator_number_required": {},
+
+  "validator_number_invalid": "একটি বৈধ নম্বর দিন",
+  "@validator_number_invalid": {},
+
+  "validator_password_required": "পাসওয়ার্ড প্রয়োজন",
+  "@validator_password_required": {},
+
+  "validator_password_too_short": "পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে",
+  "@validator_password_too_short": {},
+
+  "validator_name_required": "নাম প্রয়োজন",
+  "@validator_name_required": {},
+
+  "validator_name_invalid": "একটি বৈধ নাম দিন",
+  "@validator_name_invalid": {},
+
+  "password": "পাসওয়ার্ড",
+  "@password": {},
+
+  "button": "বাটন",
+  "@button": {},
+
+  "double_tap_create_account": "অ্যাকাউন্ট তৈরি করতে ডাবল ট্যাপ করুন",
+  "@double_tap_create_account": {},
+
+  "terms_conditions_checkbox": "শর্তাবলি চেকবক্স এবং বিবরণ",
+  "@terms_conditions_checkbox": {},
+
+  "registration_form_fields": "নিবন্ধন ফর্ম ফিল্ডস",
+  "@registration_form_fields": {},
+
+  "sign_in_form_fields": "সাইন ইন ফর্ম ফিল্ডস",
+  "@sign_in_form_fields": {},
+
+  "registration_heading": "নিবন্ধন শিরোনাম",
+  "@registration_heading": {},
+
+  "sign_in_heading": "সাইন ইন শিরোনাম",
+  "@sign_in_heading": {},
+
+  "sign_in_with_email_phone": "আপনার ইমেইল বা ফোন নম্বর দিয়ে সাইন ইন করুন",
+  "@sign_in_with_email_phone": {},
+
+  "email_or_phone": "ইমেইল অথবা ফোন নম্বর",
+  "@email_or_phone": {},
+
+  "enter_your_password": "আপনার পাসওয়ার্ড লিখুন",
+  "@enter_your_password": {},
+
+  "forget_password": "পাসওয়ার্ড ভুলে গেছেন?",
+  "@forget_password": {},
+
+  "phone_verification": "ফোন যাচাইকরণ",
+  "@phone_verification": {},
+
+  "enter_otp_code": "OTP কোড দিন",
+  "@enter_otp_code": {},
+
+  "enter_otp_fields": "OTP ফিল্ডগুলো পূরণ করুন",
+  "@enter_otp_fields": {},
+
+  "didnt_receive_code": "কোডটি পাননি?",
+  "@didnt_receive_code": {},
+
+  "resend_again": "আবার পাঠান",
+  "@resend_again": {},
+
+  "otp_resend_button": "OTP পুনরায় পাঠানোর বোতাম",
+  "@otp_resend_button": {},
+
+  "verify": "যাচাই করুন",
+  "@verify": {},
+
+  "otp_verify_button": "OTP যাচাই বোতাম",
+  "@otp_verify_button": {},
+
+  "first_name": "প্রথম নাম",
+  "@first_name": {},
+
+  "last_name": "শেষ নাম",
+  "@last_name": {},
+
+  "signup_with_gmail": "জিমেইল দিয়ে সাইন আপ করুন",
+  "@signup_with_gmail": {},
+
+  "signup_with_facebook": "ফেসবুক দিয়ে সাইন আপ করুন",
+  "@signup_with_facebook": {},
+
+  "signup_with_apple": "অ্যাপল দিয়ে সাইন আপ করুন",
+  "@signup_with_apple": {},
+
+  "enter_otp_in_fields": "ঘরগুলিতে OTP দিন",
+  "@enter_otp_in_fields": {},
+
+  "enter_valid_email_or_phone": "বৈধ ইমেইল অথবা ফোন নম্বর দিন",
+  "@enter_valid_email_or_phone": {},
+  "email_or_phone_required": "ইমেইল অথবা ফোন নম্বর আবশ্যক",
+  "@email_or_phone_required": {},
+  "back": "ফিরে যান",
+  "@back": {}
 }

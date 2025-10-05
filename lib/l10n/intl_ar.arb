@@ -564,5 +564,127 @@
   "@loggingInSomewhereElse": {},
 
   "stayOnThisDevice": "البقاء على هذا الجهاز",
-  "@stayOnThisDevice": {}
+  "@stayOnThisDevice": {},
+
+  "or": "أو",
+  "@or": {},
+
+  "already_have_account": "هل لديك حساب بالفعل؟",
+  "@already_have_account": {},
+
+  "sign_in": "تسجيل الدخول",
+  "@sign_in": {},
+
+  "validator_email_required": "البريد الإلكتروني مطلوب",
+  "@validator_email_required": {},
+
+  "validator_email_invalid": "أدخل بريدًا إلكترونيًا صالحًا",
+  "@validator_email_invalid": {},
+
+  "validator_phone_required": "رقم الهاتف مطلوب",
+  "@validator_phone_required": {},
+
+  "validator_phone_invalid": "أدخل رقم هاتف صالحًا",
+  "@validator_phone_invalid": {},
+
+  "validator_number_required": "الرقم مطلوب",
+  "@validator_number_required": {},
+
+  "validator_number_invalid": "أدخل رقمًا صالحًا",
+  "@validator_number_invalid": {},
+
+  "validator_password_required": "كلمة المرور مطلوبة",
+  "@validator_password_required": {},
+
+  "validator_password_too_short": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+  "@validator_password_too_short": {},
+
+  "validator_name_required": "الاسم مطلوب",
+  "@validator_name_required": {},
+
+  "validator_name_invalid": "أدخل اسمًا صالحًا",
+  "@validator_name_invalid": {},
+
+  "password": "كلمة المرور",
+  "@password": {},
+
+  "button": "زر",
+  "@button": {},
+
+  "double_tap_create_account": "انقر مرتين لإنشاء حسابك",
+  "@double_tap_create_account": {},
+
+  "terms_conditions_checkbox": "مربع الشروط والأحكام والوصف",
+  "@terms_conditions_checkbox": {},
+
+  "registration_form_fields": "حقول نموذج التسجيل",
+  "@registration_form_fields": {},
+
+  "sign_in_form_fields": "حقول نموذج تسجيل الدخول",
+  "@sign_in_form_fields": {},
+
+  "registration_heading": "عنوان التسجيل",
+  "@registration_heading": {},
+
+  "sign_in_heading": "عنوان تسجيل الدخول",
+  "@sign_in_heading": {},
+
+  "sign_in_with_email_phone": "سجّل الدخول باستخدام بريدك الإلكتروني أو رقم هاتفك",
+  "@sign_in_with_email_phone": {},
+
+  "email_or_phone": "البريد الإلكتروني أو رقم الهاتف",
+  "@email_or_phone": {},
+
+  "enter_your_password": "أدخل كلمة المرور الخاصة بك",
+  "@enter_your_password": {},
+
+  "forget_password": "هل نسيت كلمة المرور؟",
+  "@forget_password": {},
+  "phone_verification": "التحقق من الهاتف",
+  "@phone_verification": {},
+
+  "enter_otp_code": "أدخل رمز التحقق",
+  "@enter_otp_code": {},
+
+  "enter_otp_fields": "أدخل حقول رمز التحقق",
+  "@enter_otp_fields": {},
+
+  "didnt_receive_code": "لم تستلم الرمز؟",
+  "@didnt_receive_code": {},
+
+  "resend_again": "أعد الإرسال مرة أخرى",
+  "@resend_again": {},
+
+  "otp_resend_button": "زر إعادة إرسال رمز التحقق",
+  "@otp_resend_button": {},
+
+  "verify": "تحقق",
+  "@verify": {},
+
+  "otp_verify_button": "زر التحقق من الرمز",
+  "@otp_verify_button": {},
+
+  "first_name": "الاسم الأول",
+  "@first_name": {},
+
+  "last_name": "اسم العائلة",
+  "@last_name": {},
+
+  "signup_with_gmail": "اشترك باستخدام جيميل",
+  "@signup_with_gmail": {},
+
+  "signup_with_facebook": "اشترك باستخدام فيسبوك",
+  "@signup_with_facebook": {},
+
+  "signup_with_apple": "اشترك باستخدام أبل",
+  "@signup_with_apple": {},
+
+  "enter_otp_in_fields": "أدخل رمز التحقق في الحقول",
+  "@enter_otp_in_fields": {},
+
+  "enter_valid_email_or_phone": "أدخل بريدًا إلكترونيًا أو رقم هاتف صالحًا",
+  "@enter_valid_email_or_phone": {},
+
+  "email_or_phone_required": "مطلوب البريد الإلكتروني أو رقم الهاتف",
+  "@email_or_phone_required": {}
 }

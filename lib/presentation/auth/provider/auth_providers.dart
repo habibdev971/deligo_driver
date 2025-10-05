@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
+import 'package:deligo_driver/presentation/auth/view_model/login_with_phone_email_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:deligo_driver/core/config/environment.dart';
 import 'package:deligo_driver/data/models/documents_upload_response/documents_upload_response.dart';
@@ -10,13 +12,14 @@ import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
 import 'package:deligo_driver/presentation/auth/view_model/auth_notifier.dart';
 
 import '../../../core/state/app_state.dart';
+import '../../../data/models/auth_models/registration_model.dart';
 import '../../../data/models/common_response.dart';
-import '../../../data/models/login_response/login_response.dart';
 import '../../../data/models/login_with_pass_response/login_with_pass_response.dart';
 import '../../../data/models/otp_verify_response/otp_verify_response.dart';
 import '../../../data/models/resend_otp_model/resend_otp_mode.dart';
 import '../../../data/repositories/auth_repo_impl.dart';
 import '../../../data/services/api/dio_client.dart';
+import '../view_model/registration_notifier.dart';
 
 // DioClient provider to provide DioClient instance
 final dioClientProvider = Provider<DioClient>((ref) => DioClient());
@@ -26,11 +29,17 @@ final dioClientChattingProvider = Provider<DioClient>((ref) => DioClient(baseUrl
 final authServiceProvider = Provider<IAuthService>((ref) => AuthServiceImpl(dioClient: ref.read(dioClientProvider)));
 
 // Repo Provider
-final authRepoProvider = Provider<IAuthRepository>((ref) => AuthRepoImpl(authService: ref.read(authServiceProvider)));
+final authRepoProvider = Provider<IAuthRepo>((ref) => AuthRepoImpl(authService: ref.read(authServiceProvider)));
 
 // Notifier Providers
-final loginNotifierProvider = StateNotifierProvider<LoginNotifier, AppState<LoginResponse>>(
-    (ref) => LoginNotifier(authRepoProvider: ref.read(authRepoProvider), ref: ref));
+final existingUserProvider = StateNotifierProvider<ExistingUserNotifier, AppState<UserExistenceModel>>(
+    (ref) => ExistingUserNotifier(authRepoProvider: ref.read(authRepoProvider), ref: ref));
+
+final registrationProvider = StateNotifierProvider<RegistrationNotifier, AppState<RegistrationModel>>(
+        (ref) => RegistrationNotifier(authRepo: ref.read(authRepoProvider), ref: ref));
+
+final loginWithPhoneOrEmailProvider = StateNotifierProvider<LoginWithPhoneOrEmailNotifier, AppState<RegistrationModel>>(
+        (ref) => LoginWithPhoneOrEmailNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
 final loginWithPassNotifierProvider = StateNotifierProvider<LoginWithPassNotifier, AppState<LoginWithPassResponse>>(
     (ref) => LoginWithPassNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));

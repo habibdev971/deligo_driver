@@ -70,6 +70,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tudo Pronto? Comece a Corrida Agora",
     ),
     "allow": MessageLookupByLibrary.simpleMessage("Permitir"),
+    "already_have_account": MessageLookupByLibrary.simpleMessage(
+      "Já tem uma conta?",
+    ),
     "amount": MessageLookupByLibrary.simpleMessage("Valor"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "O aplicativo encontrou um erro inesperado e precisou ser fechado. Isso pode ser causado por memória insuficiente, um bug no app ou um arquivo corrompido. Reinicie o app ou reinstale se o problema continuar.",
@@ -80,10 +83,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Você Chegou ao Ponto de Pickup",
     ),
     "average_rating": MessageLookupByLibrary.simpleMessage("Avaliação Média"),
+    "back": MessageLookupByLibrary.simpleMessage("Voltar"),
     "bad_certificate_with_api_server": MessageLookupByLibrary.simpleMessage(
       "Certificado inválido com o servidor API",
     ),
     "bad_request": MessageLookupByLibrary.simpleMessage("Solicitação inválida"),
+    "button": MessageLookupByLibrary.simpleMessage("Botão"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
     "cancel_ride": MessageLookupByLibrary.simpleMessage("Cancelar viagem"),
     "cancel_subtitle": MessageLookupByLibrary.simpleMessage(
@@ -130,9 +135,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "destination": MessageLookupByLibrary.simpleMessage("Destino"),
     "details": MessageLookupByLibrary.simpleMessage("Detalhes"),
+    "didnt_receive_code": MessageLookupByLibrary.simpleMessage(
+      "Não recebeu o código?",
+    ),
     "discount": MessageLookupByLibrary.simpleMessage("Desconto"),
     "double_check_rider": MessageLookupByLibrary.simpleMessage(
       "Verifique o nome do passageiro e confirme o destino antes de prosseguir.",
+    ),
+    "double_tap_create_account": MessageLookupByLibrary.simpleMessage(
+      "Toque duas vezes para criar sua conta",
     ),
     "driver_documents": MessageLookupByLibrary.simpleMessage(
       "Documentos do motorista",
@@ -149,6 +160,12 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "email_label": MessageLookupByLibrary.simpleMessage("Email"),
+    "email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "E-mail ou número de telefone",
+    ),
+    "email_or_phone_required": MessageLookupByLibrary.simpleMessage(
+      "E-mail ou número de telefone obrigatório",
+    ),
     "emergency_phone": MessageLookupByLibrary.simpleMessage(
       "Telefone de emergência",
     ),
@@ -174,6 +191,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "Digite Sua Experiência!",
     ),
+    "enter_otp_code": MessageLookupByLibrary.simpleMessage(
+      "Insira seu código OTP",
+    ),
+    "enter_otp_fields": MessageLookupByLibrary.simpleMessage(
+      "Insira os campos do OTP",
+    ),
+    "enter_otp_in_fields": MessageLookupByLibrary.simpleMessage(
+      "Digite o OTP nos campos",
+    ),
     "enter_password": MessageLookupByLibrary.simpleMessage("Digite sua Senha"),
     "enter_password_description": MessageLookupByLibrary.simpleMessage(
       "Por favor, digite a senha da sua conta para continuar.",
@@ -184,8 +210,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_valid_card_number": MessageLookupByLibrary.simpleMessage(
       "Digite um número de cartão válido",
     ),
+    "enter_valid_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "Digite um e-mail ou número de telefone válido",
+    ),
     "enter_vehicle_name": MessageLookupByLibrary.simpleMessage(
       "Digite o nome do veículo",
+    ),
+    "enter_your_password": MessageLookupByLibrary.simpleMessage(
+      "Digite sua senha",
     ),
     "error_with_msg": m2,
     "estimated_time": MessageLookupByLibrary.simpleMessage("Tempo estimado"),
@@ -201,11 +233,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "find_you_faster_msg": MessageLookupByLibrary.simpleMessage(
       "Ative o acesso à localização para encontrar motoristas próximos de forma rápida e fácil.",
     ),
+    "first_name": MessageLookupByLibrary.simpleMessage("Primeiro nome"),
     "follow_directions_comfortable": MessageLookupByLibrary.simpleMessage(
       "Siga as instruções, mantenha a calma e proporcione um ambiente de viagem confortável.",
     ),
     "forbidden_access_please_login_again": MessageLookupByLibrary.simpleMessage(
       "Acesso proibido. Por favor, faça login novamente.",
+    ),
+    "forget_password": MessageLookupByLibrary.simpleMessage(
+      "Esqueceu a senha?",
     ),
     "form_is_not_valid": MessageLookupByLibrary.simpleMessage(
       "O formulário não é válido",
@@ -241,6 +277,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Seu Problema foi Enviado com Sucesso",
     ),
     "language": MessageLookupByLibrary.simpleMessage("Idioma"),
+    "last_name": MessageLookupByLibrary.simpleMessage("Sobrenome"),
     "lets_ride": MessageLookupByLibrary.simpleMessage("Vamos Rodar"),
     "location": MessageLookupByLibrary.simpleMessage("Localização"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -297,18 +334,26 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nenhum dado da carteira disponível",
     ),
     "offline": MessageLookupByLibrary.simpleMessage("Offline"),
+    "or": MessageLookupByLibrary.simpleMessage("ou"),
     "or_select_avatar": MessageLookupByLibrary.simpleMessage(
       "Ou selecione um avatar da lista abaixo:",
     ),
     "otp_enter_title": MessageLookupByLibrary.simpleMessage("Digite seu OTP"),
     "otp_input_hint": MessageLookupByLibrary.simpleMessage("Escreva seu OTP"),
     "otp_resend": MessageLookupByLibrary.simpleMessage("Reenviar"),
+    "otp_resend_button": MessageLookupByLibrary.simpleMessage(
+      "Botão de reenviar OTP",
+    ),
     "otp_resend_timer": m4,
     "otp_save_button": MessageLookupByLibrary.simpleMessage("Salvar"),
     "otp_sent_message": MessageLookupByLibrary.simpleMessage(
       "Enviamos o código OTP para seu número de telefone",
     ),
     "otp_title_short": MessageLookupByLibrary.simpleMessage("OTP"),
+    "otp_verify_button": MessageLookupByLibrary.simpleMessage(
+      "Botão de verificação de OTP",
+    ),
+    "password": MessageLookupByLibrary.simpleMessage("Senha"),
     "password_hint": MessageLookupByLibrary.simpleMessage(
       "Defina uma senha forte",
     ),
@@ -340,6 +385,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "O número de telefone deve ter pelo menos 6 dígitos",
     ),
     "phoneNo": MessageLookupByLibrary.simpleMessage("Número de telefone"),
+    "phone_verification": MessageLookupByLibrary.simpleMessage(
+      "Verificação do telefone",
+    ),
     "pick_a_date": MessageLookupByLibrary.simpleMessage("Escolha uma data"),
     "pickup": MessageLookupByLibrary.simpleMessage("Embarque"),
     "pickup_rider": MessageLookupByLibrary.simpleMessage("Pegar Passageiro"),
@@ -388,6 +436,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "registration_done": MessageLookupByLibrary.simpleMessage(
       "Registro Concluído!",
     ),
+    "registration_form_fields": MessageLookupByLibrary.simpleMessage(
+      "Campos do formulário de registro",
+    ),
+    "registration_heading": MessageLookupByLibrary.simpleMessage(
+      "Cabeçalho de registro",
+    ),
     "reportIssue": MessageLookupByLibrary.simpleMessage("Reportar Problema"),
     "reportIssueSubtitle": MessageLookupByLibrary.simpleMessage(
       "Conte-nos o que deu errado. Iremos analisar imediatamente.",
@@ -405,6 +459,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "request_to_api_server_was_cancelled": MessageLookupByLibrary.simpleMessage(
       "Solicitação ao servidor API foi cancelada",
     ),
+    "resend_again": MessageLookupByLibrary.simpleMessage("Reenviar novamente"),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "Recurso não encontrado.",
     ),
@@ -470,6 +525,25 @@ class MessageLookup extends MessageLookupByLibrary {
     "share_experience": MessageLookupByLibrary.simpleMessage(
       "Compartilhe Sua Experiência!",
     ),
+    "sign_in": MessageLookupByLibrary.simpleMessage("Entrar"),
+    "sign_in_form_fields": MessageLookupByLibrary.simpleMessage(
+      "Campos do formulário de login",
+    ),
+    "sign_in_heading": MessageLookupByLibrary.simpleMessage(
+      "Cabeçalho de login",
+    ),
+    "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
+      "Entre com seu e-mail ou número de telefone",
+    ),
+    "signup_with_apple": MessageLookupByLibrary.simpleMessage(
+      "Cadastre-se com Apple",
+    ),
+    "signup_with_facebook": MessageLookupByLibrary.simpleMessage(
+      "Cadastre-se com Facebook",
+    ),
+    "signup_with_gmail": MessageLookupByLibrary.simpleMessage(
+      "Cadastre-se com Gmail",
+    ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("Pular por agora"),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
       "Algo deu errado",
@@ -495,6 +569,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Termos e Condições",
+    ),
+    "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
+      "Caixa de seleção de termos e condições e descrição",
     ),
     "textCopied": MessageLookupByLibrary.simpleMessage("Texto copiado"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(
@@ -555,6 +632,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "validation_error": MessageLookupByLibrary.simpleMessage(
       "Erro de validação",
     ),
+    "validator_email_invalid": MessageLookupByLibrary.simpleMessage(
+      "Insira um e-mail válido",
+    ),
+    "validator_email_required": MessageLookupByLibrary.simpleMessage(
+      "E-mail é obrigatório",
+    ),
+    "validator_name_invalid": MessageLookupByLibrary.simpleMessage(
+      "Insira um nome válido",
+    ),
+    "validator_name_required": MessageLookupByLibrary.simpleMessage(
+      "Nome é obrigatório",
+    ),
+    "validator_number_invalid": MessageLookupByLibrary.simpleMessage(
+      "Insira um número válido",
+    ),
+    "validator_number_required": MessageLookupByLibrary.simpleMessage(
+      "Número é obrigatório",
+    ),
+    "validator_password_required": MessageLookupByLibrary.simpleMessage(
+      "Senha é obrigatória",
+    ),
+    "validator_password_too_short": MessageLookupByLibrary.simpleMessage(
+      "A senha deve ter pelo menos 6 caracteres",
+    ),
+    "validator_phone_invalid": MessageLookupByLibrary.simpleMessage(
+      "Insira um número de telefone válido",
+    ),
+    "validator_phone_required": MessageLookupByLibrary.simpleMessage(
+      "Número de telefone é obrigatório",
+    ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("Cor do veículo"),
     "vehicle_name": MessageLookupByLibrary.simpleMessage("Nome do veículo"),
     "vehicle_papers": MessageLookupByLibrary.simpleMessage(
@@ -570,6 +677,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ano de fabricação do veículo",
     ),
     "vehicle_type": MessageLookupByLibrary.simpleMessage("Tipo de veículo"),
+    "verify": MessageLookupByLibrary.simpleMessage("Verificar"),
     "view_all": MessageLookupByLibrary.simpleMessage("Ver Tudo"),
     "wallet": MessageLookupByLibrary.simpleMessage("Carteira"),
     "wallet_balance": MessageLookupByLibrary.simpleMessage("Saldo da Carteira"),

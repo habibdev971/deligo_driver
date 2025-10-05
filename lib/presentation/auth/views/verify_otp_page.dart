@@ -108,7 +108,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
   Widget _buildResendSection(BuildContext context, WidgetRef ref) {
     final resentOTPState = ref.watch(resendOTPNotifierProvider);
     final resentOTPNotifier = ref.read(resendOTPNotifierProvider.notifier);
-    final loginResponse = ref.read(loginNotifierProvider).maybeWhen(
+    final existingUserData = ref.read(existingUserProvider).maybeWhen(
       success: (data) => data,
       orElse: () => null,
     );
@@ -118,7 +118,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
         initial: () => AppTextButton(
           text: localize(context).otp_resend,
           onPressed: () {
-            resentOTPNotifier.resendOtp(mobile: loginResponse?.data?.mobile ?? '', onSuccess: (otp){
+            resentOTPNotifier.resendOtp(mobile: existingUserData?.data?.user?.phoneNumber ?? '', onSuccess: (otp){
               otpController.text = (otp.data?.otp ?? '').toString();
             });
             _startResendCountdown();
@@ -156,7 +156,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
   Widget _buildVerifyButton(BuildContext context, WidgetRef ref) {
     final verifyState = ref.watch(otpVerifyNotifierProvider);
     final verifyNotifier = ref.read(otpVerifyNotifierProvider.notifier);
-    final loginResponse = ref.read(loginNotifierProvider).maybeWhen(
+    final existingUserData = ref.read(existingUserProvider).maybeWhen(
       success: (data) => data,
       orElse: () => null,
     );
@@ -165,9 +165,9 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
       isLoading: otpController.text.trim().length < 6 || (verifyState.whenOrNull(loading: () => true,) ?? false),
       title: '${localize(context).confirm} OTP',
       onTap: () {
-        if (loginResponse?.data?.mobile != null) {
+        if (existingUserData?.data?.user?.phoneNumber != null) {
           verifyNotifier.verifyOTP(
-            mobile: loginResponse!.data!.mobile!,
+            mobile: existingUserData?.data?.user?.phoneNumber ?? '',
             otp: otpController.text.trim(),
           );
         }
@@ -177,7 +177,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final loginResponse = ref.read(loginNotifierProvider).maybeWhen(
+    final existingUserData = ref.read(existingUserProvider).maybeWhen(
       success: (data) => data,
       orElse: () => null,
     );
@@ -191,7 +191,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTitle(context),
-              _buildSubTitle(context, loginResponse?.data?.mobile),
+              _buildSubTitle(context, existingUserData?.data?.user?.phoneNumber),
               Gap(24.h),
               Text(
                 localize(context).otp_enter_title,

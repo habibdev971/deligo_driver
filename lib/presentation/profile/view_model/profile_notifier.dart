@@ -24,7 +24,7 @@ class SelectedAvatarNotifierProvider extends StateNotifier<Tuple2<int?, String?>
 }
 
 class ProfilePhotoUploadNotifier extends StateNotifier<AppState<CommonResponse>> {
-  final IAuthRepository authRepo;
+  final IAuthRepo authRepo;
   final Ref ref;
   ProfilePhotoUploadNotifier({
     required this.ref,
@@ -65,7 +65,7 @@ class ProfilePhotoUploadNotifier extends StateNotifier<AppState<CommonResponse>>
 }
 
 class DriverDetailsViewModel extends StateNotifier<AppState<DriverDetailsResponse>> {
-  final IAuthRepository authRepo;
+  final IAuthRepo authRepo;
   final Ref ref;
   DriverDetailsViewModel({
     required this.ref,

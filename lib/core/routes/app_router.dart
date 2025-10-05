@@ -21,11 +21,14 @@ import 'package:deligo_driver/presentation/settngs/views/settings_page.dart';
 import 'package:deligo_driver/presentation/splash/views/splash_page.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
 
+import '../../data/models/auth_models/register_data_model.dart';
+import '../../presentation/auth/views/firebase_otp_page.dart';
 import '../../presentation/home_page/view/home_page.dart';
 import '../../presentation/payout_method/view/add_payment_gateway.dart';
 import '../../presentation/profile/view/profile_info_page.dart';
 import '../../presentation/report_issue/view/report_issue_view.dart';
 import '../widgets/error_view.dart';
+import 'app_routes.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -43,6 +46,13 @@ class AppRouter {
           final String? code = settings.arguments as String?;
           return VerifyOtpPage(code: code,);
         });
+      case AppRoutes.verifyOtp:
+        return MaterialPageRoute(
+            builder: (_){
+              final RegisterDataModel? data = settings.arguments as RegisterDataModel?;
+              return FirebaseOtpPage(data: data,);
+            },
+            );
       case '/set-password':
         return MaterialPageRoute(builder: (_) => const SetPasswordPage());
       case '/change-password':
@@ -62,10 +72,10 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ProfileInfoPage());
       case '/payout-method':
         return MaterialPageRoute(builder: (_) => const PayoutMethodView());
-      case '/settings-page':
-        return MaterialPageRoute(builder: (_) => const SettingsPage());
-      case '/language-settings-page':
-        return MaterialPageRoute(builder: (_) => const LanguageSettingPage());
+      // case '/settings-page':
+      //   return MaterialPageRoute(builder: (_) => const SettingsPage());
+      // case '/language-settings-page':
+      //   return MaterialPageRoute(builder: (_) => const LanguageSettingPage());
       case '/ride-history-page':
         return MaterialPageRoute(builder: (_) => const RideHistoryPage());
       case '/payment-methods':

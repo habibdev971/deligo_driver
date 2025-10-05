@@ -1,6 +1,11 @@
 class ApiEndpoints {
+  /// read: endpoint name that has Url in last used in this project
+
   static const String mediator = 'driver';
-  static const String loginUrl = '/sign-in/$mediator';
+  static const String checkUserExistenceUrl = '/users/check-existing-user';
+  static const String registrationUrl = '/users/register';
+  static const String loginWithPasswordUrl = '/users/login';
+  static const String loginWithPhoneOrEmailUrl = '/users/login';
   static const String resendSignIn = '/resend-sign-in';
   static const String resendOTP = '/resend-otp';
   static const String updatePassword = '/password-setup';

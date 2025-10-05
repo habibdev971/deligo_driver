@@ -1,7 +1,9 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:deligo_driver/core/extensions/storage_safe_read.dart';
+import '../../core/config/localization/country_data.dart';
+import '../models/auth_models/registration_model.dart';
 import '../models/hive_models/user_hive_model.dart';
 
 class LocalStorageService {
@@ -13,43 +15,86 @@ class LocalStorageService {
 
   final FlutterSecureStorage _storage = const FlutterSecureStorage();
 
-  static const String _languageKey = 'language';
+  static const String userKey = 'user';
+  static const String languageKey = 'language';
+  static const String phoneCodeKey = 'phone-code';
 
-  final ValueNotifier<String> languageNotifier = ValueNotifier('en');
-
-  Future<void> init() async {
-    final lang = await _storage.safeRead(key: _languageKey);
-    languageNotifier.value = lang ?? 'en';
-  }
+  Future<void> init() async {}
 
   Future<void> selectLanguage(String language) async {
-    await _storage.write(key: _languageKey, value: language);
-    languageNotifier.value = language;
+    await _storage.write(key: languageKey, value: language);
   }
 
-  Future<String> getSelectedLanguage() async => await _storage.safeRead(key: _languageKey) ?? 'en';
+  Future<String> getSelectedLanguage() async {
+    final String? locale = await _storage.read(key: languageKey);
+    if (locale == null) {
+      /// this current lang used for if the device location is not in our allowed list then default will be allowed language.first
+
+      final currentLang = allowedLanguages.firstWhere(
+        (lang) =>
+            lang['code'] ==
+            PlatformDispatcher.instance.locale.languageCode.toLowerCase(),
+        orElse: () => allowedLanguages.first,
+      );
+      return currentLang['code']!;
+    } else {
+      return locale;
+    }
+  }
+
+  Future<void> savePhoneCode(String countryCode) async {
+    await _storage.write(key: phoneCodeKey, value: countryCode);
+  }
+
+  Future<String> getPhoneCode() async {
+    final String? phoneCode = await _storage.read(key: phoneCodeKey);
+    if (phoneCode == null) {
+      /// this current lang used for if the device location is not in our allowed list then default will be allowed language.first
+
+      final currentLang = allowedLanguages.firstWhere(
+        (lang) =>
+            lang['code'] ==
+            PlatformDispatcher.instance.locale.languageCode.toLowerCase(),
+        orElse: () => allowedLanguages.first,
+      );
+      return currentLang['phone_code']!;
+    } else {
+      return phoneCode;
+    }
+  }
 
   void setTheme(String mode) {
     _storage.write(key: 'themeMode', value: mode);
   }
 
-  Future<String> getThemeMode() async => await _storage.safeRead(key: 'themeMode') ?? 'light';
+  Future<String> getThemeMode() async =>
+      await _storage.safeRead(key: 'themeMode') ?? 'light';
 
   Future<void> saveUser({required Map<String, dynamic>? data}) async {
-    if (data != null) {
-      final model = UserHiveModel.fromMap(data);
-      final encoded = jsonEncode(model.toMap());
-      await _storage.write(key: 'user', value: encoded);
+    if (data == null) return;
+    await _storage.write(key: userKey, value: jsonEncode(data));
+    // setOnlineOffline(model.driverStatus?.toLowerCase() == 'online');
+    // if (data != null) {
+    //   final model = UserHiveModel.fromMap(data);
+    //   final encoded = jsonEncode(model.toMap());
+    //   await _storage.write(key: 'user', value: encoded);
+    //
+    //   setOnlineOffline(model.driverStatus?.toLowerCase() == 'online');
+    // }
+  }
 
-      setOnlineOffline(model.driverStatus?.toLowerCase() == 'online');
-    }
+  Future<User?> getSavedUser() async {
+    final data = await _storage.read(key: userKey);
+    if (data == null) return null;
+    return User.fromJson(jsonDecode(data));
   }
 
   void setRegistrationProgress(String pageName) {
     _storage.write(key: 'registration', value: pageName);
   }
 
-  Future<String?> getRegistrationProgress() => _storage.safeRead(key: 'registration');
+  Future<String?> getRegistrationProgress() =>
+      _storage.safeRead(key: 'registration');
 
   Future<void> setOnlineOffline([bool isOnline = false]) async {
     await _storage.write(key: 'activity', value: isOnline.toString());
@@ -60,18 +105,18 @@ class LocalStorageService {
     return value == 'true';
   }
 
-  Future<UserHiveModel?> getSavedUser() async {
-    final json = await _storage.safeRead(key: 'user');
-    if (json != null) {
-      final map = jsonDecode(json);
-      return UserHiveModel.fromMap(Map<String, dynamic>.from(map));
-    }
-    return null;
-  }
+  // Future<UserHiveModel?> getSavedUser() async {
+  //   final json = await _storage.safeRead(key: userKey);
+  //   if (json != null) {
+  //     final map = jsonDecode(json);
+  //     return UserHiveModel.fromMap(Map<String, dynamic>.from(map));
+  //   }
+  //   return null;
+  // }
 
   Future<int?> getUserId() async {
     final user = await getSavedUser();
-    return user?.id;
+    return int.tryParse((user?.id ?? '').toString());
   }
 
   Future<void> saveToken(String? token) async {
@@ -122,15 +167,6 @@ class LocalStorageService {
 
   Future<void> clearOrderId() async {
     await _storage.delete(key: 'order_id');
-  }
-
-  Future<void> saveCountryCode(String countryCode) async {
-    await _storage.write(key: 'country-code', value: countryCode);
-  }
-
-  Future<String> getCountryCode() async {
-    final value = await _storage.safeRead(key: 'country-code');
-    return value ?? '+880';
   }
 
   /// ---------------- App settings ----------------

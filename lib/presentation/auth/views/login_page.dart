@@ -1,5 +1,5 @@
+import 'package:deligo_driver/data/services/firebase_auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -11,9 +11,11 @@ import '../../../core/theme/color_palette.dart';
 import '../../../core/utils/exit_app_dialogue.dart';
 import '../../../core/utils/helpers.dart';
 import '../../../core/utils/is_dark_mode.dart';
-import '../../../core/widgets/custom_phone_field.dart';
+import '../../../core/widgets/custom_text_field.dart';
 import '../../../data/models/login_response/login_response.dart';
+import '../../../generated/l10n.dart';
 import '../../account_page/provider/select_country_provider.dart';
+import '../../account_page/widgets/phone_code_picker_button.dart';
 import '../provider/auth_providers.dart';
 import '../widgets/auth_app_bar.dart';
 import '../widgets/auth_bottom_buttons.dart';
@@ -26,36 +28,41 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  final _formKey = GlobalKey<FormBuilderState>();
-  String _phoneNumber = '';
-  bool _isPhoneValid = false;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController phoneController = TextEditingController();
+  // String _phoneNumber = '';
+  // final bool _isPhoneValid = false;
 
-  void _onPhoneChanged(String? value) {
-    if (value != null) {
-      setState(() {
-        _phoneNumber = value;
-        _isPhoneValid = value.trim().length >= 6;
-      });
-    }
-  }
+  // void _onPhoneChanged(String? value) {
+  //   if (value != null) {
+  //     setState(() {
+  //       _phoneNumber = value;
+  //       _isPhoneValid = value.trim().length >= 6;
+  //     });
+  //   }
+  // }
 
   void _onSubmit() {
-    if (!_isPhoneValid) {
+    // final bool? isValid = _formKey.currentState?.validate();
+
+    if (phoneController.text.trim().length < 6) {
       showNotification(message: localize(context).phoneMinLengthError);
       return;
     }
 
-    final phoneCode = ref.read(selectedCountry).selectedCode!.phoneCode;
-    ref.read(loginNotifierProvider.notifier).login(
-      phone: _phoneNumber,
-      countryCode: phoneCode,
-    );
+    final String phoneCode = ref.watch(selectedPhoneCodeProvider);
+    // phoneCode = phoneCode.contains('+880')
+    //     ? phoneCode.replaceAll('0', '')
+    //     : phoneCode;
+    ref
+        .read(existingUserProvider.notifier)
+        .checkExistenceUser(phone: phoneCode + phoneController.text.trim(), countryCode: phoneCode);
   }
 
   @override
   Widget build(BuildContext context) {
-    final loginState = ref.watch(loginNotifierProvider);
-    final isLoading = loginState.whenOrNull(loading: () => true, ) ?? false;
+    final loginState = ref.watch(existingUserProvider);
+    final isLoading = loginState.whenOrNull(loading: () => true) ?? false;
     final isDark = isDarkMode();
     return ExitAppWrapper(
       child: Scaffold(
@@ -80,7 +87,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 style: context.bodyMedium?.copyWith(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w700,
-                  color: isDark ? const Color(0xFF687387) : ColorPalette.neutral24,
+                  color: isDark
+                      ? const Color(0xFF687387)
+                      : ColorPalette.neutral24,
                 ),
               ),
               Gap(8.h),
@@ -102,20 +111,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
               ),
               Gap(12.h),
-              FormBuilder(
+              Form(
                 key: _formKey,
-                child: AppPhoneNumberTextField(
-
-                  initialValue: '',
-                  onChanged: _onPhoneChanged,
-                  isDark: isDark,
+                child: textField(
+                  context,
+                  phoneController,
+                  hint: AppLocalizations.of(context).phoneNo,
+                  keyboardType: TextInputType.phone,
+                  suffix: buildPhoneCodePickerButton(),
                 ),
               ),
             ],
           ),
         ),
         bottomNavigationBar: AuthBottomButtons(
-          isLoading: isLoading,
+          isLoading: isLoading || ref.watch(authLoadingProvider),
           title: localize(context).loginSignup,
           onTap: _onSubmit,
         ),
@@ -123,5 +133,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  bool isNewDriver(LoginResponse response) => response.data?.isNewDriver ?? true;
+  bool isNewDriver(LoginResponse response) =>
+      response.data?.isNewDriver ?? true;
 }

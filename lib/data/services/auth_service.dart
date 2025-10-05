@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:deligo_driver/core/config/api_endpoints.dart';
 import 'package:deligo_driver/data/services/api/dio_client.dart';
 import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'local_storage_service.dart';
 
@@ -11,6 +12,19 @@ class AuthServiceImpl extends IAuthService {
   final DioClient dioClient;
 
   AuthServiceImpl({required this.dioClient});
+
+  @override
+  Future<Response> registration({required Map<String, dynamic> data})async{
+    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    data.addAll({
+      'idToken': idToken,
+    });
+    return await dioClient.dio.post(
+      ApiEndpoints.registrationUrl,
+      data: data
+    );
+  }
+
   @override
   Future<Response> forgetVerifyOtp({required String mobile, required String otp}) async => await dioClient.dio.post(ApiEndpoints.forgetVerifyOtp, data: {
       'mobile': mobile,
@@ -18,9 +32,23 @@ class AuthServiceImpl extends IAuthService {
     });
 
   @override
-  Future<Response> login({required String phone, required String countryCode, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.loginUrl,
-      data: {'mobile': phone, 'device_token': deviceToken, 'country_code': countryCode},
+  Future<Response> checkUserExistence({required String phone, required String countryCode, String? deviceToken}) async => await dioClient.dio.post(
+      ApiEndpoints.checkUserExistenceUrl,
+      data: {'phoneNumber': phone, 'device_token': deviceToken, 'country_code': countryCode},
+    );
+
+  @override
+  Future<Response> loginPhoneOrEmail(
+      {required String phoneOrEmail,
+        required String password,
+        // required String countryCode,
+        String? deviceToken}) async => dioClient.dio.post(
+      ApiEndpoints.loginWithPhoneOrEmailUrl,
+      data: {
+        'phoneOremail': phoneOrEmail,
+        'password': password,
+        'type': 'DRIVER'
+      },
     );
 
   @override
@@ -33,10 +61,10 @@ class AuthServiceImpl extends IAuthService {
 
   @override
   Future<Response> loginWithPassword({required String mobile, required String password, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.loginUrl,
+      ApiEndpoints.loginWithPasswordUrl,
       data: {
         'mobile': mobile,
-        'country_code': await LocalStorageService().getCountryCode(),
+        'country_code': await LocalStorageService().getPhoneCode(),
         'password': password,
         'device_token': deviceToken
       },
@@ -85,10 +113,10 @@ class AuthServiceImpl extends IAuthService {
 
   @override
   Future<Response> verifyOtp({required String mobile, required String otp, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.loginUrl,
+      ApiEndpoints.loginWithPasswordUrl,
       data: {
         'mobile': mobile,
-        'country_code': await LocalStorageService().getCountryCode(),
+        'country_code': await LocalStorageService().getPhoneCode(),
         'otp': otp,
         'device_token': deviceToken
       },

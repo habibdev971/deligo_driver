@@ -566,6 +566,130 @@
   "loggingInSomewhereElse": "Conectando-se em Outro Dispositivo",
   "@loggingInSomewhereElse": {},
   "stayOnThisDevice": "Permanecer neste Dispositivo",
-  "@stayOnThisDevice": {}
+  "@stayOnThisDevice": {},
+
+  "or": "ou",
+  "@or": {},
+
+  "already_have_account": "Já tem uma conta?",
+  "@already_have_account": {},
+
+  "sign_in": "Entrar",
+  "@sign_in": {},
+
+  "validator_email_required": "E-mail é obrigatório",
+  "@validator_email_required": {},
+
+  "validator_email_invalid": "Insira um e-mail válido",
+  "@validator_email_invalid": {},
+
+  "validator_phone_required": "Número de telefone é obrigatório",
+  "@validator_phone_required": {},
+
+  "validator_phone_invalid": "Insira um número de telefone válido",
+  "@validator_phone_invalid": {},
+
+  "validator_number_required": "Número é obrigatório",
+  "@validator_number_required": {},
+
+  "validator_number_invalid": "Insira um número válido",
+  "@validator_number_invalid": {},
+
+  "validator_password_required": "Senha é obrigatória",
+  "@validator_password_required": {},
+
+  "validator_password_too_short": "A senha deve ter pelo menos 6 caracteres",
+  "@validator_password_too_short": {},
+
+  "validator_name_required": "Nome é obrigatório",
+  "@validator_name_required": {},
+
+  "validator_name_invalid": "Insira um nome válido",
+  "@validator_name_invalid": {},
+
+  "password": "Senha",
+  "@password": {},
+
+  "button": "Botão",
+  "@button": {},
+
+  "double_tap_create_account": "Toque duas vezes para criar sua conta",
+  "@double_tap_create_account": {},
+
+  "terms_conditions_checkbox": "Caixa de seleção de termos e condições e descrição",
+  "@terms_conditions_checkbox": {},
+
+  "registration_form_fields": "Campos do formulário de registro",
+  "@registration_form_fields": {},
+
+  "sign_in_form_fields": "Campos do formulário de login",
+  "@sign_in_form_fields": {},
+
+  "registration_heading": "Cabeçalho de registro",
+  "@registration_heading": {},
+
+  "sign_in_heading": "Cabeçalho de login",
+  "@sign_in_heading": {},
+
+  "sign_in_with_email_phone": "Entre com seu e-mail ou número de telefone",
+  "@sign_in_with_email_phone": {},
+
+  "email_or_phone": "E-mail ou número de telefone",
+  "@email_or_phone": {},
+
+  "enter_your_password": "Digite sua senha",
+  "@enter_your_password": {},
+
+  "forget_password": "Esqueceu a senha?",
+  "@forget_password": {},
+
+  "phone_verification": "Verificação do telefone",
+  "@phone_verification": {},
+
+  "enter_otp_code": "Insira seu código OTP",
+  "@enter_otp_code": {},
+
+  "enter_otp_fields": "Insira os campos do OTP",
+  "@enter_otp_fields": {},
+
+  "didnt_receive_code": "Não recebeu o código?",
+  "@didnt_receive_code": {},
+
+  "resend_again": "Reenviar novamente",
+  "@resend_again": {},
+
+  "otp_resend_button": "Botão de reenviar OTP",
+  "@otp_resend_button": {},
+
+  "verify": "Verificar",
+  "@verify": {},
+
+  "otp_verify_button": "Botão de verificação de OTP",
+  "@otp_verify_button": {},
+
+  "first_name": "Primeiro nome",
+  "@first_name": {},
+
+  "last_name": "Sobrenome",
+  "@last_name": {},
+
+  "signup_with_gmail": "Cadastre-se com Gmail",
+  "@signup_with_gmail": {},
+
+  "signup_with_facebook": "Cadastre-se com Facebook",
+  "@signup_with_facebook": {},
+
+  "signup_with_apple": "Cadastre-se com Apple",
+  "@signup_with_apple": {},
+
+  "enter_otp_in_fields": "Digite o OTP nos campos",
+  "@enter_otp_in_fields": {},
+
+  "enter_valid_email_or_phone": "Digite um e-mail ou número de telefone válido",
+  "@enter_valid_email_or_phone": {},
+  "email_or_phone_required": "E-mail ou número de telefone obrigatório",
+  "@email_or_phone_required": {},
+  "back": "Voltar",
+  "@back": {}
 }
 

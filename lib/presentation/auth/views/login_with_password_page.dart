@@ -43,108 +43,127 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
 
   @override
   Widget build(BuildContext context) => ExitAppWrapper(
-      child: Scaffold(
-        backgroundColor: context.surface,
-        body: AuthAppBar(
-          title: localize(context).password_label,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                  localize(context).login_with_your_password,
-                style:
-                context.bodyMedium?.copyWith(fontSize: 24.sp, fontWeight: FontWeight.w700, color: isDarkMode() ? const Color(0xFF687387) : ColorPalette.neutral24)
+    child: Scaffold(
+      backgroundColor: context.surface,
+      body: AuthAppBar(
+        title: localize(context).password_label,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              localize(context).login_with_your_password,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode()
+                    ? const Color(0xFF687387)
+                    : ColorPalette.neutral24,
               ),
-              Gap(8.h),
-              Text(
-                localize(context).use_your_password_here,
-                style: GoogleFonts.inter(
-                    fontSize: 16.sp,
-                    color: const Color(0xFF687387),
-                    fontWeight: FontWeight.w400),
+            ),
+            Gap(8.h),
+            Text(
+              localize(context).use_your_password_here,
+              style: GoogleFonts.inter(
+                fontSize: 16.sp,
+                color: const Color(0xFF687387),
+                fontWeight: FontWeight.w400,
               ),
-              Gap(24.h),
+            ),
+            Gap(24.h),
 
-              Text(
-                  localize(context).password_label,
-                style:
-                context.bodyMedium?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.w600, color: isDarkMode() ? const Color(0xFF687387) : const Color(0xFF24262D),)
+            Text(
+              localize(context).password_label,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: isDarkMode()
+                    ? const Color(0xFF687387)
+                    : const Color(0xFF24262D),
               ),
-              Gap(12.h),
-              TextField(
-                controller: passwordController,
-                onChanged: (v) {
-                  setState(() {
-                    codeLengthIsSafe = v.length >= 6 && v.length <= 16;
-                  });
-                },
-                obscureText: !showPassword,
-                decoration: InputDecoration(
-                  hintText: localize(context).password_label,
-                  suffixIcon: CupertinoButton(
-                    onPressed: () => setState(() => showPassword = !showPassword),
-                    child: Icon(
-                      showPassword ? Ionicons.eye : Ionicons.eye_off,
-                      color: context.theme.inputDecorationTheme.suffixIconColor,
-                    ),
+            ),
+            Gap(12.h),
+            TextField(
+              controller: passwordController,
+              onChanged: (v) {
+                setState(() {
+                  codeLengthIsSafe = v.length >= 6 && v.length <= 16;
+                });
+              },
+              obscureText: !showPassword,
+              decoration: InputDecoration(
+                hintText: localize(context).password_label,
+                suffixIcon: CupertinoButton(
+                  onPressed: () => setState(() => showPassword = !showPassword),
+                  child: Icon(
+                    showPassword ? Ionicons.eye : Ionicons.eye_off,
+                    color: context.theme.inputDecorationTheme.suffixIconColor,
                   ),
                 ),
               ),
-              Gap(16.h),
-
-              Consumer(builder: (context, ref, _) {
-                final resentOTPState = ref.watch(resendOTPNotifierProvider);
-                final resentOTPNotifier = ref.read(resendOTPNotifierProvider.notifier);
-
-                final loginResponse = ref.read(loginNotifierProvider).maybeWhen(
-                  success: (data) => data,
-                  orElse: () => null,
-                );
-
-                return Center(
-                  child: AppTextButton(
-                    text: localize(context).use_otp_instead,
-                    isDisabled: resentOTPState.whenOrNull(loading: ()=> true) ?? false,
-                    onPressed: () async {
-                      await resentOTPNotifier.resendOtp(mobile: loginResponse?.data?.mobile ?? '', onSuccess: (v){
-                        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: (v.data?.otp ?? '').toString());
-                      },);
-
-                    },
-                  ),
-                );
-
-              })
-
-            ],
-          ),
-        ),
-
-        bottomNavigationBar: Consumer(
-          builder: (context, ref, _) {
-            final loginWithPassState = ref.watch(loginWithPassNotifierProvider);
-            final stateNotifier = ref.read(loginWithPassNotifierProvider.notifier);
-
-            final loginResponse = ref.read(loginNotifierProvider).maybeWhen(
-              success: (data) => data,
-              orElse: () => null,
-            );
-
-
-            return AuthBottomButtons(
-                isLoading: passwordController.text.trim().length < 6 || (loginWithPassState.whenOrNull(loading: ()=> true) ?? false),
-
-                title: localize(context).login,
-                onTap: () {
-
-                  stateNotifier.loginWithPassword(
-                    mobile: loginResponse!.data?.mobile ?? '',
-                    password: passwordController.text,
-                  );
-
-                });
-          },
+            ),
+            // Gap(16.h),
+            //
+            // Consumer(
+            //   builder: (context, ref, _) {
+            //     final resentOTPState = ref.watch(resendOTPNotifierProvider);
+            //     final resentOTPNotifier = ref.read(
+            //       resendOTPNotifierProvider.notifier,
+            //     );
+            //
+            //     final existingUserData = ref
+            //         .read(existingUserProvider)
+            //         .maybeWhen(success: (data) => data, orElse: () => null);
+            //
+            //     return Center(
+            //       child: AppTextButton(
+            //         text: localize(context).use_otp_instead,
+            //         isDisabled:
+            //             resentOTPState.whenOrNull(loading: () => true) ?? false,
+            //         onPressed: () async {
+            //           await resentOTPNotifier.resendOtp(
+            //             mobile: existingUserData?.data?.user?.phoneNumber ?? '',
+            //             onSuccess: (v) {
+            //               NavigationService.pushNamed(
+            //                 AppRoutes.verifyOTP,
+            //                 arguments: (v.data?.otp ?? '').toString(),
+            //               );
+            //             },
+            //           );
+            //         },
+            //       ),
+            //     );
+            //   },
+            // ),
+          ],
         ),
       ),
-    );
+
+      bottomNavigationBar: Consumer(
+        builder: (context, ref, _) {
+          final loginWithPassState = ref.watch(loginWithPhoneOrEmailProvider);
+          final stateNotifier = ref.read(
+            loginWithPhoneOrEmailProvider.notifier,
+          );
+
+          final existingUserData = ref
+              .read(existingUserProvider)
+              .maybeWhen(success: (data) => data, orElse: () => null);
+
+          return AuthBottomButtons(
+            isLoading:
+                passwordController.text.trim().length < 6 ||
+                (loginWithPassState.whenOrNull(loading: () => true) ?? false),
+
+            title: localize(context).login,
+            onTap: () {
+              stateNotifier.loginWithPhoneOrEmail(
+                mobile: existingUserData!.data?.user?.phoneNumber ?? '',
+                password: passwordController.text,
+              );
+            },
+          );
+        },
+      ),
+    ),
+  );
 }

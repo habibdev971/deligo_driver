@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/auth_models/registration_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -29,13 +30,14 @@ class _HomeMapState extends ConsumerState<HomeMap> {
     final homeState = ref.read(bookingNotifierProvider);
     ref.read(bookingNotifierProvider.notifier)
     .setMapController(controller);
-    final UserHiveModel? userHiveModel = await LocalStorageService().getSavedUser();
+    final User? userHiveModel = await LocalStorageService().getSavedUser();
+    // final UserHiveModel? userHiveModel = await LocalStorageService().getSavedUser();
     if (homeState.currentLocation != null) {
-      final int radius = ref.read(bookingNotifierProvider.notifier).getRadiusInKm(userHiveModel?.radiusInMeter);
-      final double zoomLevel = ref.read(bookingNotifierProvider.notifier).getZoomLevel(radius * 1000);
+      // final int radius = ref.read(bookingNotifierProvider.notifier).getRadiusInKm(userHiveModel?.radiusInMeter);
+      // final double zoomLevel = ref.read(bookingNotifierProvider.notifier).getZoomLevel(radius * 1000);
 
       controller.animateCamera(
-        CameraUpdate.newLatLngZoom(homeState.currentLocation!, zoomLevel),
+        CameraUpdate.newLatLngZoom(homeState.currentLocation!, 16),
       );
     }
   }

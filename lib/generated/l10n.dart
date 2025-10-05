@@ -2338,6 +2338,386 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `or`
+  String get or {
+    return Intl.message('or', name: 'or', desc: '', args: []);
+  }
+
+  /// `Already have an account?`
+  String get already_have_account {
+    return Intl.message(
+      'Already have an account?',
+      name: 'already_have_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get sign_in {
+    return Intl.message('Sign in', name: 'sign_in', desc: '', args: []);
+  }
+
+  /// `Email is required`
+  String get validator_email_required {
+    return Intl.message(
+      'Email is required',
+      name: 'validator_email_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid email`
+  String get validator_email_invalid {
+    return Intl.message(
+      'Enter a valid email',
+      name: 'validator_email_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone number is required`
+  String get validator_phone_required {
+    return Intl.message(
+      'Phone number is required',
+      name: 'validator_phone_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid phone number`
+  String get validator_phone_invalid {
+    return Intl.message(
+      'Enter a valid phone number',
+      name: 'validator_phone_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number is required`
+  String get validator_number_required {
+    return Intl.message(
+      'Number is required',
+      name: 'validator_number_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid number`
+  String get validator_number_invalid {
+    return Intl.message(
+      'Enter a valid number',
+      name: 'validator_number_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password is required`
+  String get validator_password_required {
+    return Intl.message(
+      'Password is required',
+      name: 'validator_password_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 6 characters`
+  String get validator_password_too_short {
+    return Intl.message(
+      'Password must be at least 6 characters',
+      name: 'validator_password_too_short',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name is required`
+  String get validator_name_required {
+    return Intl.message(
+      'Name is required',
+      name: 'validator_name_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid name`
+  String get validator_name_invalid {
+    return Intl.message(
+      'Enter a valid name',
+      name: 'validator_name_invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Button`
+  String get button {
+    return Intl.message('Button', name: 'button', desc: '', args: []);
+  }
+
+  /// `Double tap to create your account`
+  String get double_tap_create_account {
+    return Intl.message(
+      'Double tap to create your account',
+      name: 'double_tap_create_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms and Conditions Checkbox and Description`
+  String get terms_conditions_checkbox {
+    return Intl.message(
+      'Terms and Conditions Checkbox and Description',
+      name: 'terms_conditions_checkbox',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration Form Fields`
+  String get registration_form_fields {
+    return Intl.message(
+      'Registration Form Fields',
+      name: 'registration_form_fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In Form Fields`
+  String get sign_in_form_fields {
+    return Intl.message(
+      'Sign In Form Fields',
+      name: 'sign_in_form_fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration Heading`
+  String get registration_heading {
+    return Intl.message(
+      'Registration Heading',
+      name: 'registration_heading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign In Heading`
+  String get sign_in_heading {
+    return Intl.message(
+      'Sign In Heading',
+      name: 'sign_in_heading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in with your email or phone number`
+  String get sign_in_with_email_phone {
+    return Intl.message(
+      'Sign in with your email or phone number',
+      name: 'sign_in_with_email_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or Phone Number`
+  String get email_or_phone {
+    return Intl.message(
+      'Email or Phone Number',
+      name: 'email_or_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter Your Password`
+  String get enter_your_password {
+    return Intl.message(
+      'Enter Your Password',
+      name: 'enter_your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget password?`
+  String get forget_password {
+    return Intl.message(
+      'Forget password?',
+      name: 'forget_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone verification`
+  String get phone_verification {
+    return Intl.message(
+      'Phone verification',
+      name: 'phone_verification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your OTP code`
+  String get enter_otp_code {
+    return Intl.message(
+      'Enter your OTP code',
+      name: 'enter_otp_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your OTP Fields`
+  String get enter_otp_fields {
+    return Intl.message(
+      'Enter your OTP Fields',
+      name: 'enter_otp_fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn’t receive code?`
+  String get didnt_receive_code {
+    return Intl.message(
+      'Didn’t receive code?',
+      name: 'didnt_receive_code',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend again`
+  String get resend_again {
+    return Intl.message(
+      'Resend again',
+      name: 'resend_again',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OTP resend button`
+  String get otp_resend_button {
+    return Intl.message(
+      'OTP resend button',
+      name: 'otp_resend_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message('Verify', name: 'verify', desc: '', args: []);
+  }
+
+  /// `OTP verify button`
+  String get otp_verify_button {
+    return Intl.message(
+      'OTP verify button',
+      name: 'otp_verify_button',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `First Name`
+  String get first_name {
+    return Intl.message('First Name', name: 'first_name', desc: '', args: []);
+  }
+
+  /// `Last Name`
+  String get last_name {
+    return Intl.message('Last Name', name: 'last_name', desc: '', args: []);
+  }
+
+  /// `Sign up with Gmail`
+  String get signup_with_gmail {
+    return Intl.message(
+      'Sign up with Gmail',
+      name: 'signup_with_gmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up with Facebook`
+  String get signup_with_facebook {
+    return Intl.message(
+      'Sign up with Facebook',
+      name: 'signup_with_facebook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up with Apple`
+  String get signup_with_apple {
+    return Intl.message(
+      'Sign up with Apple',
+      name: 'signup_with_apple',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter OTP in the fields`
+  String get enter_otp_in_fields {
+    return Intl.message(
+      'Enter OTP in the fields',
+      name: 'enter_otp_in_fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid email or phone number`
+  String get enter_valid_email_or_phone {
+    return Intl.message(
+      'Enter a valid email or phone number',
+      name: 'enter_valid_email_or_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or Phone number required`
+  String get email_or_phone_required {
+    return Intl.message(
+      'Email or Phone number required',
+      name: 'email_or_phone_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

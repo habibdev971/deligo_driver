@@ -583,5 +583,129 @@
   "@loggingInSomewhereElse": {},
 
   "stayOnThisDevice": "Stay on This Device",
-  "@stayOnThisDevice": {}
+  "@stayOnThisDevice": {},
+
+  "or": "or",
+  "@or": {},
+
+  "already_have_account": "Already have an account?",
+  "@already_have_account": {},
+
+  "sign_in": "Sign in",
+  "@sign_in": {},
+
+  "validator_email_required": "Email is required",
+  "@validator_email_required": {},
+
+  "validator_email_invalid": "Enter a valid email",
+  "@validator_email_invalid": {},
+
+  "validator_phone_required": "Phone number is required",
+  "@validator_phone_required": {},
+
+  "validator_phone_invalid": "Enter a valid phone number",
+  "@validator_phone_invalid": {},
+
+  "validator_number_required": "Number is required",
+  "@validator_number_required": {},
+
+  "validator_number_invalid": "Enter a valid number",
+  "@validator_number_invalid": {},
+
+  "validator_password_required": "Password is required",
+  "@validator_password_required": {},
+
+  "validator_password_too_short": "Password must be at least 6 characters",
+  "@validator_password_too_short": {},
+
+  "validator_name_required": "Name is required",
+  "@validator_name_required": {},
+
+  "validator_name_invalid": "Enter a valid name",
+  "@validator_name_invalid": {},
+
+  "password": "Password",
+  "@password": {},
+
+  "button": "Button",
+  "@button": {},
+
+  "double_tap_create_account": "Double tap to create your account",
+  "@double_tap_create_account": {},
+
+  "terms_conditions_checkbox": "Terms and Conditions Checkbox and Description",
+  "@terms_conditions_checkbox": {},
+
+  "registration_form_fields": "Registration Form Fields",
+  "@registration_form_fields": {},
+
+  "sign_in_form_fields": "Sign In Form Fields",
+  "@sign_in_form_fields": {},
+
+  "registration_heading": "Registration Heading",
+  "@registration_heading": {},
+
+  "sign_in_heading": "Sign In Heading",
+  "@sign_in_heading": {},
+
+  "sign_in_with_email_phone": "Sign in with your email or phone number",
+  "@sign_in_with_email_phone": {},
+
+  "email_or_phone": "Email or Phone Number",
+  "@email_or_phone": {},
+
+  "enter_your_password": "Enter Your Password",
+  "@enter_your_password": {},
+
+  "forget_password": "Forget password?",
+  "@forget_password": {},
+  "phone_verification": "Phone verification",
+  "@phone_verification": {},
+
+  "enter_otp_code": "Enter your OTP code",
+  "@enter_otp_code": {},
+
+  "enter_otp_fields": "Enter your OTP Fields",
+  "@enter_otp_fields": {},
+
+  "didnt_receive_code": "Didn’t receive code?",
+  "@didnt_receive_code": {},
+
+  "resend_again": "Resend again",
+  "@resend_again": {},
+
+  "otp_resend_button": "OTP resend button",
+  "@otp_resend_button": {},
+
+  "verify": "Verify",
+  "@verify": {},
+
+  "otp_verify_button": "OTP verify button",
+  "@otp_verify_button": {},
+
+  "first_name": "First Name",
+  "@first_name": {},
+
+  "last_name": "Last Name",
+  "@last_name": {},
+
+  "signup_with_gmail": "Sign up with Gmail",
+  "@signup_with_gmail": {},
+
+  "signup_with_facebook": "Sign up with Facebook",
+  "@signup_with_facebook": {},
+
+  "signup_with_apple": "Sign up with Apple",
+  "@signup_with_apple": {},
+
+  "enter_otp_in_fields": "Enter OTP in the fields",
+  "@enter_otp_in_fields": {},
+
+  "enter_valid_email_or_phone": "Enter a valid email or phone number",
+  "@enter_valid_email_or_phone": {},
+  "email_or_phone_required": "Email or Phone number required",
+  "@email_or_phone_required": {},
+
+  "back": "Back",
+  "@back": {}
 }

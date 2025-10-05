@@ -5,16 +5,19 @@ import 'package:deligo_driver/data/models/common_response.dart';
 import 'package:deligo_driver/data/models/documents_upload_response/documents_upload_response.dart';
 import 'package:deligo_driver/data/models/driver_details_response/driver_details_response.dart';
 import 'package:deligo_driver/data/models/driver_info_update_response/driver_info_update_response.dart';
-import 'package:deligo_driver/data/models/login_response/login_response.dart';
 import 'package:deligo_driver/data/models/otp_verify_response/otp_verify_response.dart';
+import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 
 import '../../../core/errors/failure.dart';
+import '../../models/auth_models/registration_model.dart';
 import '../../models/forgot_verify_otp_response/forgot_verify_otp_response.dart';
 import '../../models/login_with_pass_response/login_with_pass_response.dart';
 import '../../models/resend_otp_model/resend_otp_mode.dart';
 
-abstract class IAuthRepository {
-  Future<Either<Failure, LoginResponse>> login({required String mobile, required String countryCode, String? deviceToken});
+abstract class IAuthRepo {
+  Future<Either<Failure, UserExistenceModel>> checkUserExistence({required String mobile, required String countryCode, String? deviceToken});
+  Future<Either<Failure, RegistrationModel>> registration({required Map<String, dynamic> data,});
+  Future<Either<Failure, RegistrationModel>> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken});
   Future<Either<Failure, LoginWithPassResponse>> resendSignIn({required num? userId, required String? deviceToken});
   Future<Either<Failure, LoginWithPassResponse>> loginWithPassword({required String mobile, required String password, String? deviceToken});
   Future<Either<Failure, OtpVerifyResponse>> verifyOtp({required String mobile, required String otp, String? deviceToken});

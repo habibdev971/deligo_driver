@@ -68,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "সব ঠিক? এখন রাইড শুরু করুন",
     ),
     "allow": MessageLookupByLibrary.simpleMessage("অনুমতি দিন"),
+    "already_have_account": MessageLookupByLibrary.simpleMessage(
+      "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?",
+    ),
     "amount": MessageLookupByLibrary.simpleMessage("পরিমাণ"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "অ্যাপটি একটি অপ্রত্যাশিত ত্রুটির সম্মুখীন হয়েছে এবং বন্ধ করতে হয়েছে। এটি হতে পারে ডিভাইসের মেমোরি কম থাকা, অ্যাপের বাগ, বা ক্ষতিগ্রস্ত ফাইলের কারণে। সমস্যা চলতে থাকলে অ্যাপটি রিস্টার্ট করুন অথবা পুনরায় ইনস্টল করুন।",
@@ -78,10 +81,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "আপনি পিকআপ পয়েন্টে পৌঁছেছেন",
     ),
     "average_rating": MessageLookupByLibrary.simpleMessage("গড় রেটিং"),
+    "back": MessageLookupByLibrary.simpleMessage("ফিরে যান"),
     "bad_certificate_with_api_server": MessageLookupByLibrary.simpleMessage(
       "API সার্ভারের সাথে খারাপ সার্টিফিকেট",
     ),
     "bad_request": MessageLookupByLibrary.simpleMessage("ত্রুটিপূর্ণ অনুরোধ"),
+    "button": MessageLookupByLibrary.simpleMessage("বাটন"),
     "cancel": MessageLookupByLibrary.simpleMessage("বাতিল করুন"),
     "cancel_ride": MessageLookupByLibrary.simpleMessage("রাইড বাতিল করুন"),
     "cancel_subtitle": MessageLookupByLibrary.simpleMessage(
@@ -138,9 +143,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "destination": MessageLookupByLibrary.simpleMessage("গন্তব্য"),
     "details": MessageLookupByLibrary.simpleMessage("বিস্তারিত"),
+    "didnt_receive_code": MessageLookupByLibrary.simpleMessage("কোডটি পাননি?"),
     "discount": MessageLookupByLibrary.simpleMessage("ডিসকাউন্ট"),
     "double_check_rider": MessageLookupByLibrary.simpleMessage(
       "রাইডারের নাম এবং তাদের গন্তব্য যাচাই করুন তারপর এগিয়ে যান।",
+    ),
+    "double_tap_create_account": MessageLookupByLibrary.simpleMessage(
+      "অ্যাকাউন্ট তৈরি করতে ডাবল ট্যাপ করুন",
     ),
     "driver_documents": MessageLookupByLibrary.simpleMessage(
       "ড্রাইভারের ডকুমেন্ট",
@@ -157,6 +166,12 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "email": MessageLookupByLibrary.simpleMessage("ইমেইল"),
     "email_label": MessageLookupByLibrary.simpleMessage("ইমেইল"),
+    "email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "ইমেইল অথবা ফোন নম্বর",
+    ),
+    "email_or_phone_required": MessageLookupByLibrary.simpleMessage(
+      "ইমেইল অথবা ফোন নম্বর আবশ্যক",
+    ),
     "emergency_phone": MessageLookupByLibrary.simpleMessage("জরুরি ফোন"),
     "enterPhoneDes": MessageLookupByLibrary.simpleMessage(
       "আপনার রাইড চালিয়ে যেতে এবং আপডেট থাকতে আপনার ফোন নম্বর লিখুন।",
@@ -178,6 +193,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "আপনার অভিজ্ঞতা লিখুন!",
     ),
+    "enter_otp_code": MessageLookupByLibrary.simpleMessage("OTP কোড দিন"),
+    "enter_otp_fields": MessageLookupByLibrary.simpleMessage(
+      "OTP ফিল্ডগুলো পূরণ করুন",
+    ),
+    "enter_otp_in_fields": MessageLookupByLibrary.simpleMessage(
+      "ঘরগুলিতে OTP দিন",
+    ),
     "enter_password": MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড দিন"),
     "enter_password_description": MessageLookupByLibrary.simpleMessage(
       "চালিয়ে যেতে অনুগ্রহ করে আপনার অ্যাকাউন্টের পাসওয়ার্ড লিখুন।",
@@ -188,8 +210,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_valid_card_number": MessageLookupByLibrary.simpleMessage(
       "সঠিক কার্ড নম্বর লিখুন",
     ),
+    "enter_valid_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "বৈধ ইমেইল অথবা ফোন নম্বর দিন",
+    ),
     "enter_vehicle_name": MessageLookupByLibrary.simpleMessage(
       "যানবাহনের নাম লিখুন",
+    ),
+    "enter_your_password": MessageLookupByLibrary.simpleMessage(
+      "আপনার পাসওয়ার্ড লিখুন",
     ),
     "error_with_msg": m2,
     "estimated_time": MessageLookupByLibrary.simpleMessage("আনুমানিক সময়"),
@@ -205,11 +233,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "find_you_faster_msg": MessageLookupByLibrary.simpleMessage(
       "লোকেশন চালু করুন যাতে কাছাকাছি ড্রাইভারের সাথে সহজে ম্যাচ করা যায়।",
     ),
+    "first_name": MessageLookupByLibrary.simpleMessage("প্রথম নাম"),
     "follow_directions_comfortable": MessageLookupByLibrary.simpleMessage(
       "নির্দেশগুলি অনুসরণ করুন, শান্ত থাকুন, এবং একটি আরামদায়ক রাইড পরিবেশ তৈরি করুন।",
     ),
     "forbidden_access_please_login_again": MessageLookupByLibrary.simpleMessage(
       "নিষিদ্ধ প্রবেশ। দয়া করে আবার লগইন করুন।",
+    ),
+    "forget_password": MessageLookupByLibrary.simpleMessage(
+      "পাসওয়ার্ড ভুলে গেছেন?",
     ),
     "form_is_not_valid": MessageLookupByLibrary.simpleMessage("ফর্মটি বৈধ নয়"),
     "full_name": MessageLookupByLibrary.simpleMessage("পুরো নাম"),
@@ -241,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "আপনার সমস্যা সফলভাবে জমা হয়েছে",
     ),
     "language": MessageLookupByLibrary.simpleMessage("ভাষা"),
+    "last_name": MessageLookupByLibrary.simpleMessage("শেষ নাম"),
     "lets_ride": MessageLookupByLibrary.simpleMessage("চলুন রাইড করি"),
     "location": MessageLookupByLibrary.simpleMessage("অবস্থান"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -295,6 +328,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "কোনও ওয়ালেট তথ্য পাওয়া যায়নি",
     ),
     "offline": MessageLookupByLibrary.simpleMessage("অফলাইন"),
+    "or": MessageLookupByLibrary.simpleMessage("অথবা"),
     "or_select_avatar": MessageLookupByLibrary.simpleMessage(
       "অথবা নিচের তালিকা থেকে একটি অবতার নির্বাচন করুন:",
     ),
@@ -303,12 +337,19 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "otp_input_hint": MessageLookupByLibrary.simpleMessage("ওটিপি লিখুন"),
     "otp_resend": MessageLookupByLibrary.simpleMessage("পুনরায় পাঠান"),
+    "otp_resend_button": MessageLookupByLibrary.simpleMessage(
+      "OTP পুনরায় পাঠানোর বোতাম",
+    ),
     "otp_resend_timer": m4,
     "otp_save_button": MessageLookupByLibrary.simpleMessage("সংরক্ষণ করুন"),
     "otp_sent_message": MessageLookupByLibrary.simpleMessage(
       "আমরা আপনার ফোন নম্বরে একটি ওটিপি পাঠিয়েছি",
     ),
     "otp_title_short": MessageLookupByLibrary.simpleMessage("ওটিপি"),
+    "otp_verify_button": MessageLookupByLibrary.simpleMessage(
+      "OTP যাচাই বোতাম",
+    ),
+    "password": MessageLookupByLibrary.simpleMessage("পাসওয়ার্ড"),
     "password_hint": MessageLookupByLibrary.simpleMessage(
       "একটি শক্তিশালী পাসওয়ার্ড সেট করুন",
     ),
@@ -330,6 +371,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ফোন নম্বরে অন্তত ৬টি সংখ্যা থাকতে হবে",
     ),
     "phoneNo": MessageLookupByLibrary.simpleMessage("ফোন নম্বর"),
+    "phone_verification": MessageLookupByLibrary.simpleMessage("ফোন যাচাইকরণ"),
     "pick_a_date": MessageLookupByLibrary.simpleMessage(
       "একটি তারিখ নির্বাচন করুন",
     ),
@@ -376,6 +418,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "registration_done": MessageLookupByLibrary.simpleMessage(
       "রেজিস্ট্রেশন সম্পন্ন!",
     ),
+    "registration_form_fields": MessageLookupByLibrary.simpleMessage(
+      "নিবন্ধন ফর্ম ফিল্ডস",
+    ),
+    "registration_heading": MessageLookupByLibrary.simpleMessage(
+      "নিবন্ধন শিরোনাম",
+    ),
     "reportIssue": MessageLookupByLibrary.simpleMessage("সমস্যা জানান"),
     "reportIssueSubtitle": MessageLookupByLibrary.simpleMessage(
       "আমাদের জানান কী হয়েছে। আমরা দ্রুত সমাধান করব।",
@@ -393,6 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "request_to_api_server_was_cancelled": MessageLookupByLibrary.simpleMessage(
       "API সার্ভারে অনুরোধ বাতিল হয়েছে",
     ),
+    "resend_again": MessageLookupByLibrary.simpleMessage("আবার পাঠান"),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "সম্পদ পাওয়া যায়নি।",
     ),
@@ -453,6 +502,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "share_experience": MessageLookupByLibrary.simpleMessage(
       "আপনার অভিজ্ঞতা শেয়ার করুন!",
     ),
+    "sign_in": MessageLookupByLibrary.simpleMessage("সাইন ইন"),
+    "sign_in_form_fields": MessageLookupByLibrary.simpleMessage(
+      "সাইন ইন ফর্ম ফিল্ডস",
+    ),
+    "sign_in_heading": MessageLookupByLibrary.simpleMessage("সাইন ইন শিরোনাম"),
+    "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
+      "আপনার ইমেইল বা ফোন নম্বর দিয়ে সাইন ইন করুন",
+    ),
+    "signup_with_apple": MessageLookupByLibrary.simpleMessage(
+      "অ্যাপল দিয়ে সাইন আপ করুন",
+    ),
+    "signup_with_facebook": MessageLookupByLibrary.simpleMessage(
+      "ফেসবুক দিয়ে সাইন আপ করুন",
+    ),
+    "signup_with_gmail": MessageLookupByLibrary.simpleMessage(
+      "জিমেইল দিয়ে সাইন আপ করুন",
+    ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("এখনই বাদ দিন"),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
       "কিছু ভুল হয়েছে",
@@ -477,6 +543,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "রাইড শুরু করতে ট্যাপ করুন",
     ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage("শর্তাবলী"),
+    "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
+      "শর্তাবলি চেকবক্স এবং বিবরণ",
+    ),
     "textCopied": MessageLookupByLibrary.simpleMessage("টেক্সট কপি হয়েছে"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(
       "সমস্যা জানানোর জন্য ধন্যবাদ। আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।",
@@ -532,6 +601,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "validation_error": MessageLookupByLibrary.simpleMessage(
       "ভ্যালিডেশন ত্রুটি",
     ),
+    "validator_email_invalid": MessageLookupByLibrary.simpleMessage(
+      "একটি বৈধ ইমেইল দিন",
+    ),
+    "validator_email_required": MessageLookupByLibrary.simpleMessage(
+      "ইমেইল প্রয়োজন",
+    ),
+    "validator_name_invalid": MessageLookupByLibrary.simpleMessage(
+      "একটি বৈধ নাম দিন",
+    ),
+    "validator_name_required": MessageLookupByLibrary.simpleMessage(
+      "নাম প্রয়োজন",
+    ),
+    "validator_number_invalid": MessageLookupByLibrary.simpleMessage(
+      "একটি বৈধ নম্বর দিন",
+    ),
+    "validator_number_required": MessageLookupByLibrary.simpleMessage(
+      "নম্বর প্রয়োজন",
+    ),
+    "validator_password_required": MessageLookupByLibrary.simpleMessage(
+      "পাসওয়ার্ড প্রয়োজন",
+    ),
+    "validator_password_too_short": MessageLookupByLibrary.simpleMessage(
+      "পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে",
+    ),
+    "validator_phone_invalid": MessageLookupByLibrary.simpleMessage(
+      "একটি বৈধ ফোন নম্বর দিন",
+    ),
+    "validator_phone_required": MessageLookupByLibrary.simpleMessage(
+      "ফোন নম্বর প্রয়োজন",
+    ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("যানবাহনের রঙ"),
     "vehicle_name": MessageLookupByLibrary.simpleMessage("যানবাহনের নাম"),
     "vehicle_papers": MessageLookupByLibrary.simpleMessage(
@@ -547,6 +646,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "যানবাহনের উৎপাদন বছর",
     ),
     "vehicle_type": MessageLookupByLibrary.simpleMessage("যানবাহনের ধরন"),
+    "verify": MessageLookupByLibrary.simpleMessage("যাচাই করুন"),
     "view_all": MessageLookupByLibrary.simpleMessage("সব দেখুন"),
     "wallet": MessageLookupByLibrary.simpleMessage("ওয়ালেট"),
     "wallet_balance": MessageLookupByLibrary.simpleMessage("ওয়ালেট ব্যালেন্স"),

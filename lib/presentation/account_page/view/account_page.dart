@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deligo_driver/presentation/account_page/widgets/language_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,10 +16,8 @@ import 'package:deligo_driver/presentation/profile/provider/profile_providers.da
 
 import '../../../core/routes/app_routes.dart';
 import '../../../core/utils/exit_app_dialogue.dart';
-import '../../../core/widgets/country_code_bottom_sheet.dart';
 import '../../../data/models/user_model/user_model.dart';
 import '../../../gen/assets.gen.dart';
-import '../provider/select_country_provider.dart';
 import '../provider/theme_provider.dart';
 import '../widgets/about_dialogue.dart';
 
@@ -40,7 +39,6 @@ class _AccountPageState extends ConsumerState<AccountPage> {
 
   @override
   Widget build(BuildContext context) => SafeArea(
-
     child: Scaffold(
       backgroundColor: isDarkMode() ? Colors.black : Colors.white,
       body: Column(
@@ -240,7 +238,7 @@ Widget rideStory(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.r),
       color: isDarkMode() ? Colors.black : Colors.white,
-      border: isDarkMode() ? Border.all(color: Colors.white) : null
+      border: isDarkMode() ? Border.all(color: Colors.white) : null,
     ),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -257,7 +255,9 @@ Widget rideStory(
                     style: context.bodyMedium?.copyWith(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w700,
-                      color: isDarkMode() ? Colors.white54 : const Color(0xFF24262D),
+                      color: isDarkMode()
+                          ? Colors.white54
+                          : const Color(0xFF24262D),
                     ),
                   ),
             ),
@@ -466,6 +466,7 @@ class _ThemeSwitchTileState extends ConsumerState<ThemeSwitchTile> {
     super.initState();
     isDark = isDarkMode();
   }
+
   void _toggleTheme() {
     setState(() {
       isDark = !isDark;
@@ -479,7 +480,7 @@ class _ThemeSwitchTileState extends ConsumerState<ThemeSwitchTile> {
   @override
   Widget build(BuildContext context) => Container(
     decoration: BoxDecoration(
-      color: isDark ? Colors.black12 :const Color(0xFFF6F7F9),
+      color: isDark ? Colors.black12 : const Color(0xFFF6F7F9),
       borderRadius: BorderRadius.circular(12.r),
     ),
     child: GestureDetector(
@@ -490,7 +491,7 @@ class _ThemeSwitchTileState extends ConsumerState<ThemeSwitchTile> {
         padding: EdgeInsets.all(3.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.r),
-          color: isDark ? Colors.black12 :const Color(0xFFEDEEF0),
+          color: isDark ? Colors.black12 : const Color(0xFFEDEEF0),
           border: isDark ? Border.all(color: Colors.white) : null,
         ),
         child: AnimatedAlign(
@@ -499,8 +500,8 @@ class _ThemeSwitchTileState extends ConsumerState<ThemeSwitchTile> {
           child: Container(
             width: 22.r,
             height: 22.r,
-            decoration:  const BoxDecoration(
-              color:  Colors.white,
+            decoration: const BoxDecoration(
+              color: Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
@@ -524,64 +525,8 @@ class _ThemeSwitchTileState extends ConsumerState<ThemeSwitchTile> {
   );
 }
 
-Widget countrySelector({bool showDecoration = false, bool loadAddress = false}) => Consumer(
-  builder: (BuildContext context, WidgetRef ref, Widget? child) => InkWell(
-    onTap: () {
-      showModalBottomSheet(
-        context: context,
-        isScrollControlled: true,
-        builder: (context) => CountryCodeBottomSheet(selectCountryCode: false, loadAddress: loadAddress,),
-      );
-    },
-    child: Container(
-      padding: showDecoration ? EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w) : null,
-      decoration: showDecoration ? BoxDecoration(
-        border: Border.all(color: Colors.white, width: 1.w),
-        borderRadius: BorderRadius.circular(8.r),
-      ) : null,
-      child: Consumer(
-        builder: (context, ref, _) {
-          final state = ref.watch(selectedCountry);
+Widget countrySelector({
+  bool showDecoration = false,
+  bool loadAddress = false,
 
-          if(state.selectedLang == null){
-            return const SizedBox.shrink();
-          }
-          return IntrinsicWidth(
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  state.selectedLang!.flag,
-                  width: 20.w,
-                  height: 20.h,
-                  fit: BoxFit.fill,
-                  filterQuality: FilterQuality.high,
-                  isAntiAlias: true,
-                ),
-                Gap(8.w),
-                Expanded(
-                  child: Text(
-                    state.selectedLang!.code,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.bodyMedium?.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                      color: showDecoration ? Colors.white : null
-                    ),
-                  ),
-                ),
-            
-                Icon(
-                  Icons.keyboard_arrow_down,
-                  color: showDecoration ? Colors.white : Colors.black,
-                  size: 18.h,
-                ),
-              ],
-            ),
-          );
-        },
-      ),
-    ),
-  ),
-);
+}) => buildLanguagePickerButton();

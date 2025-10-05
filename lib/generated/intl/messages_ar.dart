@@ -68,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "كل شيء جاهز؟ ابدأ الرحلة الآن",
     ),
     "allow": MessageLookupByLibrary.simpleMessage("السماح"),
+    "already_have_account": MessageLookupByLibrary.simpleMessage(
+      "هل لديك حساب بالفعل؟",
+    ),
     "amount": MessageLookupByLibrary.simpleMessage("المبلغ"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "واجه التطبيق خطأً غير متوقع واضطر إلى الإغلاق. قد يكون السبب ذاكرة جهاز غير كافية، خطأ في التطبيق، أو ملف تالف. يرجى إعادة تشغيل التطبيق أو إعادة تثبيته إذا استمرت المشكلة.",
@@ -82,6 +85,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "شهادة غير صالحة مع خادم API",
     ),
     "bad_request": MessageLookupByLibrary.simpleMessage("طلب غير صالح"),
+    "button": MessageLookupByLibrary.simpleMessage("زر"),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "cancel_ride": MessageLookupByLibrary.simpleMessage("إلغاء الرحلة"),
     "cancel_subtitle": MessageLookupByLibrary.simpleMessage(
@@ -130,9 +134,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "destination": MessageLookupByLibrary.simpleMessage("الوجهة"),
     "details": MessageLookupByLibrary.simpleMessage("تفاصيل"),
+    "didnt_receive_code": MessageLookupByLibrary.simpleMessage(
+      "لم تستلم الرمز؟",
+    ),
     "discount": MessageLookupByLibrary.simpleMessage("خصم"),
     "double_check_rider": MessageLookupByLibrary.simpleMessage(
       "تحقق من اسم الراكب وتأكد من وجهته قبل المتابعة.",
+    ),
+    "double_tap_create_account": MessageLookupByLibrary.simpleMessage(
+      "انقر مرتين لإنشاء حسابك",
     ),
     "driver_documents": MessageLookupByLibrary.simpleMessage("وثائق السائق"),
     "driving_license": MessageLookupByLibrary.simpleMessage("رخصة القيادة"),
@@ -145,6 +155,12 @@ class MessageLookup extends MessageLookupByLibrary {
         ),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "email_label": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
+    "email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني أو رقم الهاتف",
+    ),
+    "email_or_phone_required": MessageLookupByLibrary.simpleMessage(
+      "مطلوب البريد الإلكتروني أو رقم الهاتف",
+    ),
     "emergency_phone": MessageLookupByLibrary.simpleMessage("هاتف الطوارئ"),
     "enterPhoneDes": MessageLookupByLibrary.simpleMessage(
       "أدخل رقم هاتفك لمتابعة رحلتك والبقاء على اطلاع.",
@@ -164,6 +180,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "أدخل تفاصيلك لإكمال ملفك الشخصي وتحسين تجربتك.",
     ),
     "enter_experience": MessageLookupByLibrary.simpleMessage("أدخل تجربتك!"),
+    "enter_otp_code": MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
+    "enter_otp_fields": MessageLookupByLibrary.simpleMessage(
+      "أدخل حقول رمز التحقق",
+    ),
+    "enter_otp_in_fields": MessageLookupByLibrary.simpleMessage(
+      "أدخل رمز التحقق في الحقول",
+    ),
     "enter_password": MessageLookupByLibrary.simpleMessage(
       "أدخل كلمة المرور الخاصة بك",
     ),
@@ -176,8 +199,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_valid_card_number": MessageLookupByLibrary.simpleMessage(
       "أدخل رقم بطاقة صالح",
     ),
+    "enter_valid_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "أدخل بريدًا إلكترونيًا أو رقم هاتف صالحًا",
+    ),
     "enter_vehicle_name": MessageLookupByLibrary.simpleMessage(
       "أدخل اسم المركبة",
+    ),
+    "enter_your_password": MessageLookupByLibrary.simpleMessage(
+      "أدخل كلمة المرور الخاصة بك",
     ),
     "error_with_msg": m2,
     "estimated_time": MessageLookupByLibrary.simpleMessage("الوقت المقدر"),
@@ -191,11 +220,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "find_you_faster_msg": MessageLookupByLibrary.simpleMessage(
       "قم بتمكين الموقع للعثور على السائقين القريبين بسهولة وسرعة.",
     ),
+    "first_name": MessageLookupByLibrary.simpleMessage("الاسم الأول"),
     "follow_directions_comfortable": MessageLookupByLibrary.simpleMessage(
       "اتبع الإرشادات، ابق هادئًا، وخلق بيئة رحلة مريحة.",
     ),
     "forbidden_access_please_login_again": MessageLookupByLibrary.simpleMessage(
       "دخول ممنوع. يرجى تسجيل الدخول مرة أخرى.",
+    ),
+    "forget_password": MessageLookupByLibrary.simpleMessage(
+      "هل نسيت كلمة المرور؟",
     ),
     "form_is_not_valid": MessageLookupByLibrary.simpleMessage(
       "النموذج غير صالح",
@@ -229,6 +262,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "تم إرسال المشكلة بنجاح",
     ),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
+    "last_name": MessageLookupByLibrary.simpleMessage("اسم العائلة"),
     "lets_ride": MessageLookupByLibrary.simpleMessage("هيا بنا"),
     "location": MessageLookupByLibrary.simpleMessage("الموقع"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -283,18 +317,26 @@ class MessageLookup extends MessageLookupByLibrary {
       "لا توجد بيانات محفظة",
     ),
     "offline": MessageLookupByLibrary.simpleMessage("غير متصل"),
+    "or": MessageLookupByLibrary.simpleMessage("أو"),
     "or_select_avatar": MessageLookupByLibrary.simpleMessage(
       "أو اختر صورة رمزية من القائمة أدناه:",
     ),
     "otp_enter_title": MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق"),
     "otp_input_hint": MessageLookupByLibrary.simpleMessage("اكتب رمز التحقق"),
     "otp_resend": MessageLookupByLibrary.simpleMessage("إعادة الإرسال"),
+    "otp_resend_button": MessageLookupByLibrary.simpleMessage(
+      "زر إعادة إرسال رمز التحقق",
+    ),
     "otp_resend_timer": m4,
     "otp_save_button": MessageLookupByLibrary.simpleMessage("حفظ"),
     "otp_sent_message": MessageLookupByLibrary.simpleMessage(
       "لقد أرسلنا رمز التحقق إلى رقم هاتفك",
     ),
     "otp_title_short": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
+    "otp_verify_button": MessageLookupByLibrary.simpleMessage(
+      "زر التحقق من الرمز",
+    ),
+    "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
     "password_hint": MessageLookupByLibrary.simpleMessage(
       "قم بتعيين كلمة مرور قوية",
     ),
@@ -316,6 +358,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "يجب أن يحتوي رقم الهاتف على 6 أرقام على الأقل",
     ),
     "phoneNo": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+    "phone_verification": MessageLookupByLibrary.simpleMessage(
+      "التحقق من الهاتف",
+    ),
     "pick_a_date": MessageLookupByLibrary.simpleMessage("اختر تاريخًا"),
     "pickup": MessageLookupByLibrary.simpleMessage("نقطة الالتقاط"),
     "pickup_rider": MessageLookupByLibrary.simpleMessage("اصطحاب الراكب"),
@@ -356,6 +401,12 @@ class MessageLookup extends MessageLookupByLibrary {
           "تم استلام استجابة غير صالحة من الخادم.",
         ),
     "registration_done": MessageLookupByLibrary.simpleMessage("اكتمل التسجيل!"),
+    "registration_form_fields": MessageLookupByLibrary.simpleMessage(
+      "حقول نموذج التسجيل",
+    ),
+    "registration_heading": MessageLookupByLibrary.simpleMessage(
+      "عنوان التسجيل",
+    ),
     "reportIssue": MessageLookupByLibrary.simpleMessage("الإبلاغ عن مشكلة"),
     "reportIssueSubtitle": MessageLookupByLibrary.simpleMessage(
       "أخبرنا بما حدث. سنتحقق على الفور.",
@@ -372,6 +423,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "request_to_api_server_was_cancelled": MessageLookupByLibrary.simpleMessage(
       "تم إلغاء الطلب إلى خادم API",
+    ),
+    "resend_again": MessageLookupByLibrary.simpleMessage(
+      "أعد الإرسال مرة أخرى",
     ),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "المورد غير موجود.",
@@ -420,6 +474,25 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "service_charge": MessageLookupByLibrary.simpleMessage("رسوم الخدمة"),
     "share_experience": MessageLookupByLibrary.simpleMessage("شارك تجربتك!"),
+    "sign_in": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+    "sign_in_form_fields": MessageLookupByLibrary.simpleMessage(
+      "حقول نموذج تسجيل الدخول",
+    ),
+    "sign_in_heading": MessageLookupByLibrary.simpleMessage(
+      "عنوان تسجيل الدخول",
+    ),
+    "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
+      "سجّل الدخول باستخدام بريدك الإلكتروني أو رقم هاتفك",
+    ),
+    "signup_with_apple": MessageLookupByLibrary.simpleMessage(
+      "اشترك باستخدام أبل",
+    ),
+    "signup_with_facebook": MessageLookupByLibrary.simpleMessage(
+      "اشترك باستخدام فيسبوك",
+    ),
+    "signup_with_gmail": MessageLookupByLibrary.simpleMessage(
+      "اشترك باستخدام جيميل",
+    ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("تخطي الآن"),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "something_went_wrong_exclamation": MessageLookupByLibrary.simpleMessage(
@@ -442,6 +515,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "انقر لبدء الرحلة",
     ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage("الأحكام والشروط"),
+    "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
+      "مربع الشروط والأحكام والوصف",
+    ),
     "textCopied": MessageLookupByLibrary.simpleMessage("تم نسخ النص"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(
       "شكرًا على إبلاغنا. سيتولى فريقنا مراجعة مشكلتك والتواصل معك قريبًا.",
@@ -497,6 +573,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "validation_error": MessageLookupByLibrary.simpleMessage(
       "خطأ في التحقق من البيانات",
     ),
+    "validator_email_invalid": MessageLookupByLibrary.simpleMessage(
+      "أدخل بريدًا إلكترونيًا صالحًا",
+    ),
+    "validator_email_required": MessageLookupByLibrary.simpleMessage(
+      "البريد الإلكتروني مطلوب",
+    ),
+    "validator_name_invalid": MessageLookupByLibrary.simpleMessage(
+      "أدخل اسمًا صالحًا",
+    ),
+    "validator_name_required": MessageLookupByLibrary.simpleMessage(
+      "الاسم مطلوب",
+    ),
+    "validator_number_invalid": MessageLookupByLibrary.simpleMessage(
+      "أدخل رقمًا صالحًا",
+    ),
+    "validator_number_required": MessageLookupByLibrary.simpleMessage(
+      "الرقم مطلوب",
+    ),
+    "validator_password_required": MessageLookupByLibrary.simpleMessage(
+      "كلمة المرور مطلوبة",
+    ),
+    "validator_password_too_short": MessageLookupByLibrary.simpleMessage(
+      "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+    ),
+    "validator_phone_invalid": MessageLookupByLibrary.simpleMessage(
+      "أدخل رقم هاتف صالحًا",
+    ),
+    "validator_phone_required": MessageLookupByLibrary.simpleMessage(
+      "رقم الهاتف مطلوب",
+    ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("لون المركبة"),
     "vehicle_name": MessageLookupByLibrary.simpleMessage("اسم المركبة"),
     "vehicle_papers": MessageLookupByLibrary.simpleMessage("أوراق المركبة"),
@@ -510,6 +616,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "سنة إنتاج المركبة",
     ),
     "vehicle_type": MessageLookupByLibrary.simpleMessage("نوع المركبة"),
+    "verify": MessageLookupByLibrary.simpleMessage("تحقق"),
     "view_all": MessageLookupByLibrary.simpleMessage("عرض الكل"),
     "wallet": MessageLookupByLibrary.simpleMessage("المحفظة"),
     "wallet_balance": MessageLookupByLibrary.simpleMessage("رصيد المحفظة"),

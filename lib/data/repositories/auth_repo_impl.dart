@@ -8,22 +8,35 @@ import 'package:deligo_driver/data/models/driver_info_update_response/driver_inf
 import 'package:deligo_driver/data/models/forgot_verify_otp_response/forgot_verify_otp_response.dart';
 import 'package:deligo_driver/data/models/otp_verify_response/otp_verify_response.dart';
 import 'package:deligo_driver/data/models/resend_otp_model/resend_otp_mode.dart';
+import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 import 'package:deligo_driver/data/repositories/base_repository.dart';
 import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
 
 import '../../core/errors/failure.dart';
-import '../models/login_response/login_response.dart';
+import '../models/auth_models/registration_model.dart';
 import '../models/login_with_pass_response/login_with_pass_response.dart';
 import 'interfaces/auth_repo_interface.dart';
 
-class AuthRepoImpl extends BaseRepository implements IAuthRepository {
+class AuthRepoImpl extends BaseRepository implements IAuthRepo {
   final IAuthService authService;
 
   AuthRepoImpl({required this.authService});
   @override
-  Future<Either<Failure, LoginResponse>> login({required String mobile, String? deviceToken, required String countryCode, }) async => await safeApiCall(() async {
-      final response = await authService.login(phone: mobile,  deviceToken: deviceToken, countryCode: countryCode);
-      return LoginResponse.fromMap(response.data);
+  Future<Either<Failure, UserExistenceModel>> checkUserExistence({required String mobile, String? deviceToken, required String countryCode, }) async => await safeApiCall(() async {
+      final response = await authService.checkUserExistence(phone: mobile,  deviceToken: deviceToken, countryCode: countryCode);
+      return UserExistenceModel.fromJson(response.data);
+    });
+
+  @override
+  Future<Either<Failure, RegistrationModel>> registration({required Map<String, dynamic> data,})async => await safeApiCall(() async {
+      final response = await authService.registration(data: data);
+      return RegistrationModel.fromJson(response.data);
+    });
+
+  @override
+  Future<Either<Failure, RegistrationModel>> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken}) async => await safeApiCall(() async {
+      final response = await authService.loginPhoneOrEmail(phoneOrEmail: phoneOrEmail, password: password, deviceToken: deviceToken);
+      return RegistrationModel.fromJson(response.data);
     });
 
   @override

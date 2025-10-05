@@ -4,6 +4,7 @@ class AppRoutes {
   static const String dashboard = '/dashboard';
   static const String loginWithPassword = '/login-with-password';
   static const String verifyOTP = '/verify-otp';
+  static const String verifyOtp = '/verify-firebase-otp';
   static const String setPassword = '/set-password';
   static const String changePassword = '/change-password';
   static const String profileUnderReview = '/profile-under-review';
@@ -14,8 +15,8 @@ class AppRoutes {
   static const String profilePage = '/profile-page';
   static const String profileInfoPage = '/profile-info-page';
   static const String payoutMethod = '/payout-method';
-  static const String settingsPage = '/settings-page';
-  static const String languageSettingsPage = '/language-settings-page';
+  // static const String settingsPage = '/settings-page';
+  // static const String languageSettingsPage = '/language-settings-page';
   static const String rideHistory = '/ride-history-page';
   static const String rideHistoryDetail = '/ride-history-detail';
   static const String paymentMethodsPage = '/payment-methods';
