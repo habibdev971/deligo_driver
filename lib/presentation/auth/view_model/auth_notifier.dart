@@ -52,7 +52,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
   }
 
   void _handleLoginSuccess(ExistenceData? data, String phone) {
-    final localStorage = LocalStorageService();
+    // final localStorage = LocalStorageService();
     final isNewUser = data?.isNew == true;
     // final isUnderReview = loginResponse.data?.isUnderReview == true;
     final isUnderReview = data?.isLicenseVerified == false;
@@ -62,7 +62,6 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
 
       firebaseAuthNotifier.value.signInWithMobile(phone,
           onLoadingChange: (val) => loading.state = val,
-
       );
         // ..setRegistrationProgress(AppRoutes.verifyOtp);
       // NavigationService.pushNamed(
@@ -71,9 +70,9 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
       // );
     } else {
       if (isUnderReview && data?.isDriver == false) {
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.driverPersonalInfoPage);
+        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
       }else if(isUnderReview){
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.profileUnderReview);
+        NavigationService.pushNamed(AppRoutes.profileUnderReview);
       } else {
         NavigationService.pushNamed(AppRoutes.loginWithPassword);
       }

@@ -2718,6 +2718,36 @@ class AppLocalizations {
   String get back {
     return Intl.message('Back', name: 'back', desc: '', args: []);
   }
+
+  /// `Date of Birth`
+  String get date_of_birth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'date_of_birth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nationality`
+  String get nationality {
+    return Intl.message('Nationality', name: 'nationality', desc: '', args: []);
+  }
+
+  /// `Tax Number`
+  String get tax_number {
+    return Intl.message('Tax Number', name: 'tax_number', desc: '', args: []);
+  }
+
+  /// `Social Security Number`
+  String get social_security_number {
+    return Intl.message(
+      'Social Security Number',
+      name: 'social_security_number',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -16,7 +16,6 @@ import 'package:gap/gap.dart';
 
 import '../../../core/widgets/app_bar/app_bar.dart';
 import '../../../data/models/auth_models/register_data_model.dart';
-import '../provider/auth_providers.dart';
 import '../widgets/resend_otp.dart';
 
 class FirebaseOtpPage extends ConsumerStatefulWidget {
@@ -57,7 +56,7 @@ class _OtpPageState extends ConsumerState<FirebaseOtpPage> {
         otp,
         onLoadingChange: (val) => loading.state = val,
         onSuccess: () {
-          NavigationService.pushNamed(AppRoutes.setPassword);
+          NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
           // loading.state = true;
           // final data = widget.data;
           // if (data == null) {

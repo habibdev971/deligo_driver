@@ -124,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Current Password",
     ),
     "cvv": MessageLookupByLibrary.simpleMessage("CVV"),
+    "date_of_birth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "delete_account": MessageLookupByLibrary.simpleMessage("Delete Account"),
     "delete_account_confirmation": MessageLookupByLibrary.simpleMessage(
@@ -295,6 +296,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobile_number": MessageLookupByLibrary.simpleMessage("Mobile Number"),
     "my_profile": MessageLookupByLibrary.simpleMessage("My Profile"),
     "name_label": MessageLookupByLibrary.simpleMessage("Name"),
+    "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
     "new_password": MessageLookupByLibrary.simpleMessage("New Password"),
     "next": MessageLookupByLibrary.simpleMessage("Next"),
     "nid_image_required": MessageLookupByLibrary.simpleMessage(
@@ -518,6 +520,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign up with Gmail",
     ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("Skip for Now"),
+    "social_security_number": MessageLookupByLibrary.simpleMessage(
+      "Social Security Number",
+    ),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
       "Something went wrong",
     ),
@@ -540,6 +545,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tap_to_start_ride": MessageLookupByLibrary.simpleMessage(
       "Tap to Start Ride",
     ),
+    "tax_number": MessageLookupByLibrary.simpleMessage("Tax Number"),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Terms & Conditions",
     ),

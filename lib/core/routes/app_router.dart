@@ -16,8 +16,6 @@ import 'package:deligo_driver/presentation/payout_method/view/payout_method_view
 import 'package:deligo_driver/presentation/profile_under_review/view/profile_under_review.dart';
 import 'package:deligo_driver/presentation/ride_history/view/ride_history_view.dart';
 import 'package:deligo_driver/presentation/ride_history_detail/view/ride_history_detail.dart';
-import 'package:deligo_driver/presentation/settngs/views/language_setting_page.dart';
-import 'package:deligo_driver/presentation/settngs/views/settings_page.dart';
 import 'package:deligo_driver/presentation/splash/views/splash_page.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
 

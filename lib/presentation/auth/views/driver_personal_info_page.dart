@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:collection/collection.dart';
+import 'package:deligo_driver/presentation/auth/provider/driver_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +13,7 @@ import 'package:deligo_driver/core/widgets/required_title.dart';
 import 'package:deligo_driver/presentation/auth/provider/auth_providers.dart';
 import 'package:deligo_driver/presentation/auth/widgets/auth_app_bar.dart';
 import 'package:deligo_driver/presentation/auth/widgets/text_field_with_title.dart';
-import 'package:deligo_driver/presentation/profile/provider/profile_providers.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/utils/helpers.dart';
 import '../../../core/utils/is_dark_mode.dart';
@@ -34,55 +34,39 @@ class DriverPersonalInfoPage extends ConsumerStatefulWidget {
 class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   final formKey = GlobalKey<FormBuilderState>();
   File? profileImage;
-  final nameController = TextEditingController();
-  final phoneController = TextEditingController();
-  final emailController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final dateOfBirthController = TextEditingController();
+  final nationalityController = TextEditingController();
   final addressController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final taxNumberController = TextEditingController();
+  final socialSecurityNumberController = TextEditingController();
+
   final genderList = <GenderModel>[
     GenderModel(value: 'Male', name: AppLocalizations().gender_male),
     GenderModel(value: 'Female', name: AppLocalizations().gender_female),
     GenderModel(value: 'Other', name: AppLocalizations().gender_other),
   ];
   GenderModel? selectedGender;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.isUpdatingProfile) {
-      Future.microtask(() async {
-        await ref
-            .read(driverDetailsNotifierProvider.notifier)
-            .getDriverDetails();
-        ref
-            .read(driverDetailsNotifierProvider)
-            .maybeWhen(
-              success: (data) {
-                final user = data.data?.user;
-                if (user != null) {
-                  nameController.text = user.name ?? '';
-                  phoneController.text = user.licence ?? '';
-                  emailController.text = user.email ?? '';
-                  addressController.text = user.address ?? '';
-                  selectedGender = genderList.firstWhereOrNull(
-                    (element) =>
-                        element.value.toLowerCase() ==
-                        user.gender?.toLowerCase(),
-                  );
-                  setState(() {});
-                }
-              },
-              orElse: () {},
-            );
-      });
-    }
-  }
+  DateTime initialDate = DateTime.now().subtract(
+    const Duration(days: 365 * 20),
+  );
 
   @override
   void dispose() {
-    nameController.dispose();
-    phoneController.dispose();
     emailController.dispose();
     addressController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    dateOfBirthController.dispose();
+    nationalityController.dispose();
+    taxNumberController.dispose();
+    socialSecurityNumberController.dispose();
+    selectedGender = null;
+    passwordController.dispose();
+    initialDate = DateTime.now().subtract(const Duration(days: 365 * 20));
     super.dispose();
   }
 
@@ -121,7 +105,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
                 _buildFormFields(context),
                 imagePickerFormField(
                   context: context,
-                  name: 'profile_image',
+                  name: 'driverPhoto',
                   title: localize(context).profile_image,
                   initialFile: profileImage,
                   showImageSquare: false,
@@ -144,33 +128,23 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
       ),
     ),
     bottomNavigationBar: Consumer(
-      builder: (context, ref, _) {
-        final state = ref.watch(updatePersonalInfoProvider);
-        final notifier = ref.read(updatePersonalInfoProvider.notifier);
+      builder: (context, ref, _) => AuthBottomButtons(
+        title: localize(context).next,
+        onTap: () async {
+          if (formKey.currentState!.saveAndValidate()) {
+            final formData = Map<String, dynamic>.from(formKey.currentState!.value)..addAll({
+                'isNewUser': false,
+                'phoneNumber': ref
+                    .read(existingUserProvider)
+                    .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
+              });
+            ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
 
-        return AuthBottomButtons(
-          isLoading: state.maybeWhen(loading: () => true, orElse: () => false),
-          title: localize(context).next,
-          onTap: () async {
-            if (formKey.currentState!.saveAndValidate()) {
-              final data = {
-                'name': nameController.text.trim(),
-                'emergency_contact': phoneController.text.trim(),
-                'email': emailController.text.trim(),
-                'address': addressController.text.trim(),
-                'gender': selectedGender?.value.toLowerCase(),
-              };
-
-              await notifier.updatePersonalInfo(
-                data: data,
-                profilePicture: profileImage!,
-              );
-            } else {
-              showNotification(message: localize(context).all_field_required);
-            }
-          },
-        );
-      },
+          } else {
+            showNotification(message: localize(context).all_field_required);
+          }
+        },
+      ),
     ),
   );
 
@@ -179,16 +153,51 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     children: [
       _buildTextField(
         context,
-        title: localize(context).name_label,
-        controller: nameController,
-        name: 'name',
+        title: localize(context).first_name,
+        controller: firstNameController,
+        name: 'firstName',
       ),
       _buildTextField(
         context,
-        title: localize(context).emergency_phone,
-        controller: phoneController,
-        name: 'phone',
-        isNumber: true,
+        title: localize(context).last_name,
+        controller: lastNameController,
+        name: 'lastName',
+      ),
+      _buildTextField(
+        context,
+        title: localize(context).date_of_birth,
+        controller: dateOfBirthController,
+        name: 'dateOfBirth',
+        readOnly: true,
+        onTap: () async {
+          final picked = await showDatePicker(
+            context: context,
+            initialDate: initialDate,
+            firstDate: DateTime.now().subtract(const Duration(days: 365 * 90)),
+            lastDate: DateTime.now().subtract(const Duration(days: 365 * 5)),
+          );
+          if (picked != null) {
+            initialDate = picked;
+            dateOfBirthController.text = DateFormat(
+              'yyyy-MM-dd',
+              'en'
+            ).format(picked);
+            setState(() {});
+          }
+        },
+      ),
+      _buildGenderDropdown(context),
+      _buildTextField(
+        context,
+        title: localize(context).nationality,
+        controller: nationalityController,
+        name: 'nationality',
+      ),
+      _buildTextField(
+        context,
+        title: localize(context).address,
+        controller: addressController,
+        name: 'address',
       ),
       _buildTextField(
         context,
@@ -199,11 +208,24 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
       ),
       _buildTextField(
         context,
-        title: localize(context).address,
-        controller: addressController,
-        name: 'address',
+        title: localize(context).password,
+        controller: passwordController,
+        name: 'password',
       ),
-      _buildGenderDropdown(context),
+      _buildTextField(
+        context,
+        title: localize(context).tax_number,
+        controller: taxNumberController,
+        name: 'nif',
+        isNumber: true,
+      ),
+      _buildTextField(
+        context,
+        title: localize(context).social_security_number,
+        controller: socialSecurityNumberController,
+        name: 'security-number',
+        isNumber: true,
+      ),
     ],
   );
 
@@ -215,6 +237,8 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     bool isEmail = false,
     bool isNumber = false,
     bool isRequired = true,
+    bool readOnly = false,
+    Function()? onTap,
   }) => Padding(
     padding: const EdgeInsets.only(bottom: 16),
     child: FormBuilderField(
@@ -233,6 +257,13 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
           Gap(8.h),
           TextField(
             controller: controller,
+            readOnly: readOnly,
+            onTap: () async {
+              // কীবোর্ড লুকাও
+              if (onTap != null) await onTap(); // external tap handler
+
+              field.didChange(controller.text);
+            },
             keyboardType: isNumber
                 ? TextInputType.number
                 : isEmail
@@ -254,30 +285,51 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   );
 
   Widget _buildGenderDropdown(BuildContext context, {bool isRequired = true}) {
-    final genderItems = genderList
-        .map(
-          (e) => DropdownMenuItem(
-            value: e,
-            child: Text(
-              e.name?.capitalize() ?? '',
-              style: context.bodyMedium?.copyWith(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
-                color: isDarkMode() ? Colors.white : Colors.black,
-              ),
-            ),
+    // Build gender list dynamically from localization
+    final genderItems = <DropdownMenuItem<String>>[
+      DropdownMenuItem(
+        value: 'Male',
+        child: Text(
+          localize(context).gender_male,
+          style: context.bodyMedium?.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w400,
+            color: isDarkMode() ? Colors.white : Colors.black,
           ),
-        )
-        .toList();
+        ),
+      ),
+      DropdownMenuItem(
+        value: 'Female',
+        child: Text(
+          localize(context).gender_female,
+          style: context.bodyMedium?.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w400,
+            color: isDarkMode() ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+      DropdownMenuItem(
+        value: 'Other',
+        child: Text(
+          localize(context).gender_other,
+          style: context.bodyMedium?.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w400,
+            color: isDarkMode() ? Colors.white : Colors.black,
+          ),
+        ),
+      ),
+    ];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
-      child: FormBuilderField<GenderModel>(
+      child: FormBuilderField<String>(
         name: 'gender',
         validator: FormBuilderValidators.required(
           errorText: localize(context).gender_required,
         ),
-        initialValue: selectedGender,
+        initialValue: selectedGender?.value,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         builder: (field) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -287,10 +339,9 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
               title: localize(context).gender_label,
               isRequired: isRequired,
             ),
-
             Gap(8.h),
-            DropdownButtonFormField<GenderModel>(
-              value: selectedGender,
+            DropdownButtonFormField<String>(
+              initialValue: field.value,
               hint: Text(
                 localize(context).gender_select,
                 style: context.bodyMedium?.copyWith(
@@ -309,7 +360,9 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
               ),
               items: genderItems,
               onChanged: (value) {
-                setState(() => selectedGender = value);
+                setState(() {
+                  selectedGender = GenderModel(value: value!, name: '');
+                });
                 field.didChange(value);
               },
             ),

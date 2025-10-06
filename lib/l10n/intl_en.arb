@@ -707,5 +707,15 @@
   "@email_or_phone_required": {},
 
   "back": "Back",
-  "@back": {}
+  "@back": {},
+
+  "date_of_birth": "Date of Birth",
+  "@date_of_birth": {},
+  "nationality": "Nationality",
+  "@nationality": {},
+  "tax_number": "Tax Number",
+  "@tax_number": {},
+  "social_security_number": "Social Security Number",
+  "@social_security_number": {}
+
 }

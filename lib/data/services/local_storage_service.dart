@@ -4,7 +4,6 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:deligo_driver/core/extensions/storage_safe_read.dart';
 import '../../core/config/localization/country_data.dart';
 import '../models/auth_models/registration_model.dart';
-import '../models/hive_models/user_hive_model.dart';
 
 class LocalStorageService {
   static final LocalStorageService _instance = LocalStorageService._internal();
