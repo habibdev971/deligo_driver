@@ -1,4 +1,5 @@
 import 'package:deligo_driver/core/extensions/extensions.dart';
+import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/app_colors.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/utils/helpers.dart';
@@ -6,6 +7,7 @@ import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
 import 'package:deligo_driver/core/widgets/otp_textfield.dart';
 import 'package:deligo_driver/data/services/firebase_auth_service.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -55,6 +57,7 @@ class _OtpPageState extends ConsumerState<FirebaseOtpPage> {
         otp,
         onLoadingChange: (val) => loading.state = val,
         onSuccess: () {
+          NavigationService.pushNamed(AppRoutes.setPassword);
           // loading.state = true;
           // final data = widget.data;
           // if (data == null) {

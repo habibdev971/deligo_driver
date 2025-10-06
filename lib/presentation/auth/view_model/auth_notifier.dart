@@ -55,7 +55,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
     final localStorage = LocalStorageService();
     final isNewUser = data?.isNew == true;
     // final isUnderReview = loginResponse.data?.isUnderReview == true;
-    final isUnderReview = false;
+    final isUnderReview = data?.isLicenseVerified == false;
     if (isNewUser) {
       // showNotification(message: 'otp: ${loginResponse.data?.otp}', isSuccess: true);
       final loading = ref.read(authLoadingProvider.notifier);
@@ -70,7 +70,9 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
       //   // arguments: (loginResponse.data?.otp ?? '').toString(),
       // );
     } else {
-      if (isUnderReview) {
+      if (isUnderReview && data?.isDriver == false) {
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.driverPersonalInfoPage);
+      }else if(isUnderReview){
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.profileUnderReview);
       } else {
         NavigationService.pushNamed(AppRoutes.loginWithPassword);

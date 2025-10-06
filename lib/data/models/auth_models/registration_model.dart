@@ -116,7 +116,10 @@ class User {
     String? email,
     String? phoneNumber,
     bool? status,
-    bool? isVerified,}){
+    bool? isVerified,
+    bool? isDriver,
+    bool? isLicenseVerified
+  }){
     _id = id;
     _firstName = firstName;
     _lastName = lastName;
@@ -125,6 +128,8 @@ class User {
     _phoneNumber = phoneNumber;
     _status = status;
     _isVerified = isVerified;
+    _isDriver = isDriver;
+    _isLicenseVerified = isLicenseVerified;
   }
 
   User.fromJson(dynamic json) {
@@ -136,6 +141,8 @@ class User {
     _phoneNumber = json['phoneNumber'];
     _status = json['status'];
     _isVerified = json['isVerified'];
+    _isDriver = json['isDriver'];
+    _isLicenseVerified = json['isLicenseVerified'];
   }
   num? _id;
   String? _firstName;
@@ -145,6 +152,8 @@ class User {
   String? _phoneNumber;
   bool? _status;
   bool? _isVerified;
+  bool? _isDriver;
+  bool? _isLicenseVerified;
   User copyWith({  num? id,
     String? firstName,
     String? lastName,
@@ -153,6 +162,8 @@ class User {
     String? phoneNumber,
     bool? status,
     bool? isVerified,
+    bool? isDriver,
+    bool? isLicenseVerified,
   }) => User(  id: id ?? _id,
     firstName: firstName ?? _firstName,
     lastName: lastName ?? _lastName,
@@ -170,6 +181,9 @@ class User {
   String? get phoneNumber => _phoneNumber;
   bool? get status => _status;
   bool? get isVerified => _isVerified;
+  bool? get isDriver => _isDriver;
+  bool? get isLicenseVerified => _isLicenseVerified;
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -181,6 +195,8 @@ class User {
     map['phoneNumber'] = _phoneNumber;
     map['status'] = _status;
     map['isVerified'] = _isVerified;
+    map['isDriver'] = _isDriver;
+    map['isLicenseVerified'] = _isLicenseVerified;
     return map;
   }
 

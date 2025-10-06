@@ -2,6 +2,7 @@
 /// error : null
 /// message : "This User Already Exist with Number"
 /// data : {"isNew":false,"user":{"id":1,"email":"user3@example.com","firstName":"First3","lastName":"Last3","fullName":"First3 Last3","identityCode":"ID1002","userType":"RIDER","phoneNumber":"+8801534567892","password":"$2b$12$zL84XMwxpGbXA4wcJu1lFuwdl9oM6JgDfO3yvF5WI9cRh2I.23seq","isVerified":true,"lang":"de","totalRides":0,"averageRating":0,"status":true,"serviceStatus":true,"firebaseUid":null,"additionInfo":{"deviceType":"iOS","deviceToken":"device_token_3","referralCode":"REF1002","preferredLanguage":"de"},"deletedAt":"","createdAt":"2025-10-02T12:44:35.172Z","updatedAt":"2025-10-02T12:44:35.172Z","updatedBy":0}}
+library;
 
 class UserExistenceModel {
   UserExistenceModel({
@@ -57,29 +58,45 @@ UserExistenceModel copyWith({  String? status,
 
 class ExistenceData {
   ExistenceData({
-      bool? isNew, 
+      bool? isNew,
+      bool? isDriver,
+      bool? isLicenseVerified,
       User? user,}){
     _isNew = isNew;
+    _isDriver = isDriver;
+    _isLicenseVerified = isLicenseVerified;
     _user = user;
 }
 
   ExistenceData.fromJson(dynamic json) {
     _isNew = json['isNew'];
+    _isDriver = json['isDriver'];
+    _isLicenseVerified = json['isLicenseVerified'];
     _user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   bool? _isNew;
+  bool? _isDriver;
+  bool? _isLicenseVerified;
   User? _user;
 ExistenceData copyWith({  bool? isNew,
+  bool? isDriver,
+  bool? isLicenseVerified,
   User? user,
 }) => ExistenceData(  isNew: isNew ?? _isNew,
+  isDriver: isDriver ?? _isDriver,
+  isLicenseVerified: isLicenseVerified ?? _isLicenseVerified,
   user: user ?? _user,
 );
   bool? get isNew => _isNew;
+  bool? get isDriver => _isDriver;
+  bool? get isLicenseVerified => _isLicenseVerified;
   User? get user => _user;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['isNew'] = _isNew;
+    map['isDriver'] = _isDriver;
+    map['isLicenseVerified'] = _isLicenseVerified;
     if (_user != null) {
       map['user'] = _user?.toJson();
     }
