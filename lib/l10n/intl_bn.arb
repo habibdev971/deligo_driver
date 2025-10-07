@@ -691,5 +691,25 @@
   "email_or_phone_required": "ইমেইল অথবা ফোন নম্বর আবশ্যক",
   "@email_or_phone_required": {},
   "back": "ফিরে যান",
-  "@back": {}
+  "@back": {},
+
+  "date_of_birth": "জন্ম তারিখ",
+  "@date_of_birth": {},
+  "nationality": "জাতীয়তা",
+  "@nationality": {},
+  "tax_number": "ট্যাক্স নম্বর",
+  "@tax_number": {},
+  "social_security_number": "সামাজিক নিরাপত্তা নম্বর",
+  "@social_security_number": {},
+
+  "legal_documents": "আইনি নথিপত্র",
+  "add_legal_documents": "আইনি নথিপত্র যোগ করুন",
+  "enter_legal_documents_to_complete_profile": "প্রোফাইল সম্পূর্ণ করতে আইনি নথিপত্র দিন",
+  "citizen_card": "নাগরিক কার্ড",
+  "upload_front": "সামনের দিক আপলোড করুন",
+  "upload_back": "পেছনের দিক আপলোড করুন",
+  "tvde_driver_certificate": "TVDE ড্রাইভার সার্টিফিকেট",
+  "criminal_record_certificate": "অপরাধমূলক রেকর্ড সার্টিফিকেট",
+  "residence_permit_if_non_eu": "বাসস্থানের অনুমতি (যদি ইউরোপীয় ইউনিয়নের বাইরে হন)"
+
 }

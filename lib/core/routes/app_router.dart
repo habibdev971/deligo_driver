@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/auth/views/legal_documents_page.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/presentation/auth/views/change_password_page.dart';
@@ -58,6 +59,8 @@ class AppRouter {
       case '/driver-personal-info-page':
         final isUpdating = settings.arguments != null ? true : false;
         return MaterialPageRoute(builder: (_) => DriverPersonalInfoPage(isUpdatingProfile: isUpdating,));
+      case AppRoutes.legalDocumentsPage:
+        return MaterialPageRoute(builder: (_) => const LegalDocumentsPage());
       case '/profile-under-review':
         return MaterialPageRoute(builder: (_) => const ProfileUnderReview());
       case '/vehicle-info-page':

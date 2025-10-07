@@ -55,6 +55,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_driver_personal_info": MessageLookupByLibrary.simpleMessage(
       "Add Driver Personal Info",
     ),
+    "add_legal_documents": MessageLookupByLibrary.simpleMessage(
+      "Add Legal Documents",
+    ),
     "add_new": MessageLookupByLibrary.simpleMessage("Add New"),
     "add_payment_gateway": MessageLookupByLibrary.simpleMessage(
       "Add Payment Gateway",
@@ -100,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "card_number": MessageLookupByLibrary.simpleMessage("Card no"),
     "cardholder_name": MessageLookupByLibrary.simpleMessage("Cardholder Name"),
     "change_password": MessageLookupByLibrary.simpleMessage("Change Password"),
+    "citizen_card": MessageLookupByLibrary.simpleMessage("Citizen Card"),
     "close": MessageLookupByLibrary.simpleMessage("CLOSE"),
     "complete_ride": MessageLookupByLibrary.simpleMessage("Complete Ride"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
@@ -119,6 +123,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contact_support": MessageLookupByLibrary.simpleMessage("Contact Support"),
     "country": MessageLookupByLibrary.simpleMessage("Country"),
+    "criminal_record_certificate": MessageLookupByLibrary.simpleMessage(
+      "Criminal Record Certificate",
+    ),
     "current_balance": MessageLookupByLibrary.simpleMessage("Current Balance"),
     "current_password": MessageLookupByLibrary.simpleMessage(
       "Current Password",
@@ -187,6 +194,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "Enter your Experience!",
     ),
+    "enter_legal_documents_to_complete_profile":
+        MessageLookupByLibrary.simpleMessage(
+          "Enter legal documents to complete profile",
+        ),
     "enter_otp_code": MessageLookupByLibrary.simpleMessage(
       "Enter your OTP code",
     ),
@@ -274,6 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
+    "legal_documents": MessageLookupByLibrary.simpleMessage("Legal Documents"),
     "lets_ride": MessageLookupByLibrary.simpleMessage("Let’s Ride"),
     "location": MessageLookupByLibrary.simpleMessage("Location"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -441,6 +453,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Request to API server was cancelled",
     ),
     "resend_again": MessageLookupByLibrary.simpleMessage("Resend again"),
+    "residence_permit_if_non_eu": MessageLookupByLibrary.simpleMessage(
+      "Residence Permit (if non-EU)",
+    ),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "Resource not found.",
     ),
@@ -580,6 +595,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "The trip has ended. Wait for the passenger to complete their payment before closing the ride.",
     ),
     "trips": MessageLookupByLibrary.simpleMessage("Trips"),
+    "tvde_driver_certificate": MessageLookupByLibrary.simpleMessage(
+      "TVDE Driver Certificate",
+    ),
     "type_a_message": MessageLookupByLibrary.simpleMessage("Type a message"),
     "unauthorized_access_please_login_again":
         MessageLookupByLibrary.simpleMessage(
@@ -596,9 +614,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "update": MessageLookupByLibrary.simpleMessage("Update"),
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
+    "upload_back": MessageLookupByLibrary.simpleMessage("Upload Back"),
     "upload_driver_documents": MessageLookupByLibrary.simpleMessage(
       "Upload your driver documents to complete verification and start driving. Quick, easy, and secure!",
     ),
+    "upload_front": MessageLookupByLibrary.simpleMessage("Upload Front"),
     "upload_image": MessageLookupByLibrary.simpleMessage("Upload image"),
     "use_otp_instead": MessageLookupByLibrary.simpleMessage("Use OTP Instead"),
     "use_your_password_here": MessageLookupByLibrary.simpleMessage(

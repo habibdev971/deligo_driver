@@ -54,6 +54,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_driver_personal_info": MessageLookupByLibrary.simpleMessage(
       "ড্রাইভারের ব্যক্তিগত তথ্য যোগ করুন",
     ),
+    "add_legal_documents": MessageLookupByLibrary.simpleMessage(
+      "আইনি নথিপত্র যোগ করুন",
+    ),
     "add_new": MessageLookupByLibrary.simpleMessage("নতুন যোগ করুন"),
     "add_payment_gateway": MessageLookupByLibrary.simpleMessage(
       "পেমেন্ট গেটওয়ে যোগ করুন",
@@ -101,6 +104,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "change_password": MessageLookupByLibrary.simpleMessage(
       "পাসওয়ার্ড পরিবর্তন করুন",
     ),
+    "citizen_card": MessageLookupByLibrary.simpleMessage("নাগরিক কার্ড"),
     "close": MessageLookupByLibrary.simpleMessage("বন্ধ করুন"),
     "complete_ride": MessageLookupByLibrary.simpleMessage("রাইড সম্পন্ন করুন"),
     "confirm": MessageLookupByLibrary.simpleMessage("নিশ্চিত করুন"),
@@ -124,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "সাপোর্টের সাথে যোগাযোগ করুন",
     ),
     "country": MessageLookupByLibrary.simpleMessage("দেশ"),
+    "criminal_record_certificate": MessageLookupByLibrary.simpleMessage(
+      "অপরাধমূলক রেকর্ড সার্টিফিকেট",
+    ),
     "current_balance": MessageLookupByLibrary.simpleMessage(
       "বর্তমান ব্যালেন্স",
     ),
@@ -131,6 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "বর্তমান পাসওয়ার্ড",
     ),
     "cvv": MessageLookupByLibrary.simpleMessage("CVV"),
+    "date_of_birth": MessageLookupByLibrary.simpleMessage("জন্ম তারিখ"),
     "delete": MessageLookupByLibrary.simpleMessage("মুছে ফেলুন"),
     "delete_account": MessageLookupByLibrary.simpleMessage(
       "অ্যাকাউন্ট মুছে ফেলুন",
@@ -193,6 +201,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "আপনার অভিজ্ঞতা লিখুন!",
     ),
+    "enter_legal_documents_to_complete_profile":
+        MessageLookupByLibrary.simpleMessage(
+          "প্রোফাইল সম্পূর্ণ করতে আইনি নথিপত্র দিন",
+        ),
     "enter_otp_code": MessageLookupByLibrary.simpleMessage("OTP কোড দিন"),
     "enter_otp_fields": MessageLookupByLibrary.simpleMessage(
       "OTP ফিল্ডগুলো পূরণ করুন",
@@ -274,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("ভাষা"),
     "last_name": MessageLookupByLibrary.simpleMessage("শেষ নাম"),
+    "legal_documents": MessageLookupByLibrary.simpleMessage("আইনি নথিপত্র"),
     "lets_ride": MessageLookupByLibrary.simpleMessage("চলুন রাইড করি"),
     "location": MessageLookupByLibrary.simpleMessage("অবস্থান"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -296,6 +309,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobile_number": MessageLookupByLibrary.simpleMessage("মোবাইল নম্বর"),
     "my_profile": MessageLookupByLibrary.simpleMessage("আমার প্রোফাইল"),
     "name_label": MessageLookupByLibrary.simpleMessage("নাম"),
+    "nationality": MessageLookupByLibrary.simpleMessage("জাতীয়তা"),
     "new_password": MessageLookupByLibrary.simpleMessage("নতুন পাসওয়ার্ড"),
     "next": MessageLookupByLibrary.simpleMessage("পরবর্তী"),
     "nid_image_required": MessageLookupByLibrary.simpleMessage(
@@ -442,6 +456,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "API সার্ভারে অনুরোধ বাতিল হয়েছে",
     ),
     "resend_again": MessageLookupByLibrary.simpleMessage("আবার পাঠান"),
+    "residence_permit_if_non_eu": MessageLookupByLibrary.simpleMessage(
+      "বাসস্থানের অনুমতি (যদি ইউরোপীয় ইউনিয়নের বাইরে হন)",
+    ),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "সম্পদ পাওয়া যায়নি।",
     ),
@@ -520,6 +537,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "জিমেইল দিয়ে সাইন আপ করুন",
     ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("এখনই বাদ দিন"),
+    "social_security_number": MessageLookupByLibrary.simpleMessage(
+      "সামাজিক নিরাপত্তা নম্বর",
+    ),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
       "কিছু ভুল হয়েছে",
     ),
@@ -542,6 +562,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tap_to_start_ride": MessageLookupByLibrary.simpleMessage(
       "রাইড শুরু করতে ট্যাপ করুন",
     ),
+    "tax_number": MessageLookupByLibrary.simpleMessage("ট্যাক্স নম্বর"),
     "terms_conditions": MessageLookupByLibrary.simpleMessage("শর্তাবলী"),
     "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
       "শর্তাবলি চেকবক্স এবং বিবরণ",
@@ -572,6 +593,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "যাত্রা শেষ হয়েছে। রাইড বন্ধ করার আগে যাত্রী তাদের পেমেন্ট সম্পন্ন করার জন্য অপেক্ষা করুন।",
     ),
     "trips": MessageLookupByLibrary.simpleMessage("ট্রিপসমূহ"),
+    "tvde_driver_certificate": MessageLookupByLibrary.simpleMessage(
+      "TVDE ড্রাইভার সার্টিফিকেট",
+    ),
     "type_a_message": MessageLookupByLibrary.simpleMessage("একটি বার্তা লিখুন"),
     "unauthorized_access_please_login_again":
         MessageLookupByLibrary.simpleMessage(
@@ -588,8 +612,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "update": MessageLookupByLibrary.simpleMessage("আপডেট"),
     "upload": MessageLookupByLibrary.simpleMessage("আপলোড"),
+    "upload_back": MessageLookupByLibrary.simpleMessage(
+      "পেছনের দিক আপলোড করুন",
+    ),
     "upload_driver_documents": MessageLookupByLibrary.simpleMessage(
       "যাচাইকরণ সম্পূর্ণ করতে এবং ড্রাইভিং শুরু করতে আপনার ড্রাইভারের ডকুমেন্ট আপলোড করুন। দ্রুত, সহজ এবং নিরাপদ!",
+    ),
+    "upload_front": MessageLookupByLibrary.simpleMessage(
+      "সামনের দিক আপলোড করুন",
     ),
     "upload_image": MessageLookupByLibrary.simpleMessage("ছবি আপলোড করুন"),
     "use_otp_instead": MessageLookupByLibrary.simpleMessage(

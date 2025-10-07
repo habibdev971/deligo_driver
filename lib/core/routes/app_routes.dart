@@ -9,6 +9,7 @@ class AppRoutes {
   static const String changePassword = '/change-password';
   static const String profileUnderReview = '/profile-under-review';
   static const String driverPersonalInfoPage = '/driver-personal-info-page';
+  static const String legalDocumentsPage = '/legal-documents-page';
   static const String vehicleInfoPage = '/vehicle-info-page';
   static const String bookingPage = '/booking-page';
   static const String chatSheet = '/chat-sheet';

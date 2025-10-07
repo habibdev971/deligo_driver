@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/auth/provider/driver_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -139,6 +141,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
                     .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
               });
             ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
+            NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
 
           } else {
             showNotification(message: localize(context).all_field_required);

@@ -2748,6 +2748,91 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Legal Documents`
+  String get legal_documents {
+    return Intl.message(
+      'Legal Documents',
+      name: 'legal_documents',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Legal Documents`
+  String get add_legal_documents {
+    return Intl.message(
+      'Add Legal Documents',
+      name: 'add_legal_documents',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter legal documents to complete profile`
+  String get enter_legal_documents_to_complete_profile {
+    return Intl.message(
+      'Enter legal documents to complete profile',
+      name: 'enter_legal_documents_to_complete_profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Citizen Card`
+  String get citizen_card {
+    return Intl.message(
+      'Citizen Card',
+      name: 'citizen_card',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Front`
+  String get upload_front {
+    return Intl.message(
+      'Upload Front',
+      name: 'upload_front',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload Back`
+  String get upload_back {
+    return Intl.message('Upload Back', name: 'upload_back', desc: '', args: []);
+  }
+
+  /// `TVDE Driver Certificate`
+  String get tvde_driver_certificate {
+    return Intl.message(
+      'TVDE Driver Certificate',
+      name: 'tvde_driver_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Criminal Record Certificate`
+  String get criminal_record_certificate {
+    return Intl.message(
+      'Criminal Record Certificate',
+      name: 'criminal_record_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Residence Permit (if non-EU)`
+  String get residence_permit_if_non_eu {
+    return Intl.message(
+      'Residence Permit (if non-EU)',
+      name: 'residence_permit_if_non_eu',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -690,6 +690,26 @@
   "email_or_phone_required": "E-mail ou número de telefone obrigatório",
   "@email_or_phone_required": {},
   "back": "Voltar",
-  "@back": {}
+  "@back": {},
+
+  "date_of_birth": "Data de nascimento",
+  "@date_of_birth": {},
+  "nationality": "Nacionalidade",
+  "@nationality": {},
+  "tax_number": "Número fiscal",
+  "@tax_number": {},
+  "social_security_number": "Número de Segurança Social",
+  "@social_security_number": {},
+
+  "legal_documents": "Documentos Legais",
+  "add_legal_documents": "Adicionar Documentos Legais",
+  "enter_legal_documents_to_complete_profile": "Introduza os documentos legais para completar o perfil",
+  "citizen_card": "Cartão de Cidadão",
+  "upload_front": "Carregar Frente",
+  "upload_back": "Carregar Verso",
+  "tvde_driver_certificate": "Certificado de Motorista TVDE",
+  "criminal_record_certificate": "Certificado de Registo Criminal",
+  "residence_permit_if_non_eu": "Autorização de Residência (se não for da UE)"
+
 }
 

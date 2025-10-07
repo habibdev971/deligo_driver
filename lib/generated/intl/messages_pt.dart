@@ -56,6 +56,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_driver_personal_info": MessageLookupByLibrary.simpleMessage(
       "Adicionar informações pessoais do motorista",
     ),
+    "add_legal_documents": MessageLookupByLibrary.simpleMessage(
+      "Adicionar Documentos Legais",
+    ),
     "add_new": MessageLookupByLibrary.simpleMessage("Adicionar novo"),
     "add_payment_gateway": MessageLookupByLibrary.simpleMessage(
       "Adicionar Gateway de Pagamento",
@@ -105,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Nome do Titular do Cartão",
     ),
     "change_password": MessageLookupByLibrary.simpleMessage("Alterar senha"),
+    "citizen_card": MessageLookupByLibrary.simpleMessage("Cartão de Cidadão"),
     "close": MessageLookupByLibrary.simpleMessage("FECHAR"),
     "complete_ride": MessageLookupByLibrary.simpleMessage("Concluir viagem"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
@@ -122,9 +126,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "contact_support": MessageLookupByLibrary.simpleMessage("Contatar Suporte"),
     "country": MessageLookupByLibrary.simpleMessage("País"),
+    "criminal_record_certificate": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Registo Criminal",
+    ),
     "current_balance": MessageLookupByLibrary.simpleMessage("Saldo Atual"),
     "current_password": MessageLookupByLibrary.simpleMessage("Senha Atual"),
     "cvv": MessageLookupByLibrary.simpleMessage("CVV"),
+    "date_of_birth": MessageLookupByLibrary.simpleMessage("Data de nascimento"),
     "delete": MessageLookupByLibrary.simpleMessage("Excluir"),
     "delete_account": MessageLookupByLibrary.simpleMessage("Deletar Conta"),
     "delete_account_confirmation": MessageLookupByLibrary.simpleMessage(
@@ -191,6 +199,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "Digite Sua Experiência!",
     ),
+    "enter_legal_documents_to_complete_profile":
+        MessageLookupByLibrary.simpleMessage(
+          "Introduza os documentos legais para completar o perfil",
+        ),
     "enter_otp_code": MessageLookupByLibrary.simpleMessage(
       "Insira seu código OTP",
     ),
@@ -278,6 +290,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "language": MessageLookupByLibrary.simpleMessage("Idioma"),
     "last_name": MessageLookupByLibrary.simpleMessage("Sobrenome"),
+    "legal_documents": MessageLookupByLibrary.simpleMessage(
+      "Documentos Legais",
+    ),
     "lets_ride": MessageLookupByLibrary.simpleMessage("Vamos Rodar"),
     "location": MessageLookupByLibrary.simpleMessage("Localização"),
     "location_permission_msg": MessageLookupByLibrary.simpleMessage(
@@ -300,6 +315,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mobile_number": MessageLookupByLibrary.simpleMessage("Número de Celular"),
     "my_profile": MessageLookupByLibrary.simpleMessage("Meu Perfil"),
     "name_label": MessageLookupByLibrary.simpleMessage("Nome"),
+    "nationality": MessageLookupByLibrary.simpleMessage("Nacionalidade"),
     "new_password": MessageLookupByLibrary.simpleMessage("Nova Senha"),
     "next": MessageLookupByLibrary.simpleMessage("Próximo"),
     "nid_image_required": MessageLookupByLibrary.simpleMessage(
@@ -460,6 +476,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Solicitação ao servidor API foi cancelada",
     ),
     "resend_again": MessageLookupByLibrary.simpleMessage("Reenviar novamente"),
+    "residence_permit_if_non_eu": MessageLookupByLibrary.simpleMessage(
+      "Autorização de Residência (se não for da UE)",
+    ),
     "resource_not_found": MessageLookupByLibrary.simpleMessage(
       "Recurso não encontrado.",
     ),
@@ -545,6 +564,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Cadastre-se com Gmail",
     ),
     "skip_for_now": MessageLookupByLibrary.simpleMessage("Pular por agora"),
+    "social_security_number": MessageLookupByLibrary.simpleMessage(
+      "Número de Segurança Social",
+    ),
     "something_went_wrong": MessageLookupByLibrary.simpleMessage(
       "Algo deu errado",
     ),
@@ -567,6 +589,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tap_to_start_ride": MessageLookupByLibrary.simpleMessage(
       "Toque para Começar a Corrida",
     ),
+    "tax_number": MessageLookupByLibrary.simpleMessage("Número fiscal"),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Termos e Condições",
     ),
@@ -601,6 +624,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "A viagem terminou. Aguarde o passageiro completar o pagamento antes de encerrar a corrida.",
     ),
     "trips": MessageLookupByLibrary.simpleMessage("Viagens"),
+    "tvde_driver_certificate": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Motorista TVDE",
+    ),
     "type_a_message": MessageLookupByLibrary.simpleMessage(
       "Digite uma mensagem",
     ),
@@ -619,9 +645,11 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "update": MessageLookupByLibrary.simpleMessage("Atualizar"),
     "upload": MessageLookupByLibrary.simpleMessage("Enviar"),
+    "upload_back": MessageLookupByLibrary.simpleMessage("Carregar Verso"),
     "upload_driver_documents": MessageLookupByLibrary.simpleMessage(
       "Envie seus documentos do motorista para concluir a verificação e começar a dirigir. Rápido, fácil e seguro!",
     ),
+    "upload_front": MessageLookupByLibrary.simpleMessage("Carregar Frente"),
     "upload_image": MessageLookupByLibrary.simpleMessage("Carregar imagem"),
     "use_otp_instead": MessageLookupByLibrary.simpleMessage(
       "Usar OTP em vez disso",

@@ -716,6 +716,17 @@
   "tax_number": "Tax Number",
   "@tax_number": {},
   "social_security_number": "Social Security Number",
-  "@social_security_number": {}
+  "@social_security_number": {},
+
+  "legal_documents": "Legal Documents",
+  "add_legal_documents": "Add Legal Documents",
+  "enter_legal_documents_to_complete_profile": "Enter legal documents to complete profile",
+  "citizen_card": "Citizen Card",
+  "upload_front": "Upload Front",
+  "upload_back": "Upload Back",
+  "tvde_driver_certificate": "TVDE Driver Certificate",
+  "criminal_record_certificate": "Criminal Record Certificate",
+  "residence_permit_if_non_eu": "Residence Permit (if non-EU)"
+
 
 }
