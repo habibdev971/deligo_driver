@@ -6,7 +6,7 @@ import '../../../core/config/localization/country_data.dart';
 class SelectedPhoneCodeNotifier extends StateNotifier<String> {
   final LocalStorageService _storage = LocalStorageService();
 
-  SelectedPhoneCodeNotifier() : super(allowedLanguages.first['phone_code']!) {
+  SelectedPhoneCodeNotifier() : super(allowedPhoneCodes.first['phone_code']!) {
     _init();
   }
 

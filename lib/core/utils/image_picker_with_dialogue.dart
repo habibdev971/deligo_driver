@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../widgets/image_compressor/compress_image.dart';
+
 Future<File?> pickImageWithSourceSelector(BuildContext context) async {
   final ImageSource? source = await showModalBottomSheet<ImageSource>(
     context: context,
@@ -27,7 +29,8 @@ Future<File?> pickImageWithSourceSelector(BuildContext context) async {
   if (source != null) {
     final picked = await ImagePicker().pickImage(source: source);
     if (picked != null) {
-      return File(picked.path);
+      final file = await compressImage(picked);
+      return file;
     }
   }
 

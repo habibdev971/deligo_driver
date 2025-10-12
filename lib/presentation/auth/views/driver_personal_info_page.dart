@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/auth/provider/driver_info_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ import '../widgets/auth_bottom_buttons.dart';
 import '../widgets/image_picker_form_field.dart';
 
 class DriverPersonalInfoPage extends ConsumerStatefulWidget {
-  final bool isUpdatingProfile;
-  const DriverPersonalInfoPage({super.key, this.isUpdatingProfile = false});
+  final String? phoneNumber;
+  const DriverPersonalInfoPage({super.key, this.phoneNumber});
 
   @override
   ConsumerState<DriverPersonalInfoPage> createState() =>
@@ -73,80 +74,83 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.surface,
-    body: AuthAppBar(
-      title: localize(context).personal_info,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            localize(context).add_driver_personal_info,
-            style: context.bodyMedium?.copyWith(
-              fontSize: 24.sp,
-              fontWeight: FontWeight.w700,
-              color: isDarkMode()
-                  ? const Color(0xFF687387)
-                  : const Color(0xFF24262D),
+  Widget build(BuildContext context) => ExitAppWrapper(
+    child: Scaffold(
+      backgroundColor: context.surface,
+      body: AuthAppBar(
+        title: localize(context).personal_info,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              localize(context).add_driver_personal_info,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode()
+                    ? const Color(0xFF687387)
+                    : const Color(0xFF24262D),
+              ),
             ),
-          ),
-          Gap(8.h),
-          Text(
-            localize(context).enter_details_complete_profile,
-            style: context.bodyMedium?.copyWith(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xFF687387),
+            Gap(8.h),
+            Text(
+              localize(context).enter_details_complete_profile,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w400,
+                color: const Color(0xFF687387),
+              ),
             ),
-          ),
-          Gap(24.h),
-          FormBuilder(
-            key: formKey,
-            child: Column(
-              children: [
-                _buildFormFields(context),
-                imagePickerFormField(
-                  context: context,
-                  name: 'driverPhoto',
-                  title: localize(context).profile_image,
-                  initialFile: profileImage,
-                  showImageSquare: false,
-                  validator: (file) {
-                    if (file == null) {
-                      return localize(context).profile_image_required;
-                    }
-                    return null;
-                  },
-                  onChanged: (file) {
-                    setState(() {
-                      profileImage = file;
-                    });
-                  },
-                ),
-              ],
+            Gap(24.h),
+            FormBuilder(
+              key: formKey,
+              child: Column(
+                children: [
+                  _buildFormFields(context),
+                  imagePickerFormField(
+                    context: context,
+                    name: 'driverPhoto',
+                    title: localize(context).profile_image,
+                    initialFile: profileImage,
+                    showImageSquare: false,
+                    validator: (file) {
+                      if (file == null) {
+                        return localize(context).profile_image_required;
+                      }
+                      return null;
+                    },
+                    onChanged: (file) {
+                      setState(() {
+                        profileImage = file;
+                      });
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-    bottomNavigationBar: Consumer(
-      builder: (context, ref, _) => AuthBottomButtons(
-        title: localize(context).next,
-        onTap: () async {
-          if (formKey.currentState!.saveAndValidate()) {
-            final formData = Map<String, dynamic>.from(formKey.currentState!.value)..addAll({
-                'isNewUser': false,
-                'phoneNumber': ref
-                    .read(existingUserProvider)
-                    .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
-              });
-            ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
-            NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
-
-          } else {
-            showNotification(message: localize(context).all_field_required);
-          }
-        },
+      bottomNavigationBar: Consumer(
+        builder: (context, ref, _) => AuthBottomButtons(
+          title: localize(context).next,
+          onTap: () async {
+            if (formKey.currentState!.saveAndValidate()) {
+              final formData = Map<String, dynamic>.from(formKey.currentState!.value)..addAll({
+                  'isNewUser': false,
+                  'phoneNumber': widget.phoneNumber
+                  // ref
+                  //     .watch(existingUserProvider)
+                  //     .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
+                });
+              ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
+              NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
+    
+            } else {
+              showNotification(message: localize(context).all_field_required);
+            }
+          },
+        ),
       ),
     ),
   );

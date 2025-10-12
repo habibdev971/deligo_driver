@@ -8,6 +8,7 @@ import '../../../data/models/auth_models/registration_model.dart';
 import '../../../data/repositories/interfaces/auth_repo_interface.dart';
 import '../../../data/services/local_storage_service.dart';
 import '../../../data/services/navigation_service.dart';
+import '../provider/driver_info_provider.dart';
 
 class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
   final IAuthRepo authRepo;
@@ -16,28 +17,20 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
   RegistrationNotifier({required this.ref, required this.authRepo})
       : super(const AppState.initial());
 
-  Future<void> registration({
-    required String mobile,
-    required String email,
-    required String firstName,
-    required String lastName,
-    required String gender,
-    Function? onSuccess,
-    // String? password,
-  }) async {
+  Future<void> registration() async {
     state = const AppState.loading();
     final String? deviceToken = await FirebaseMessaging.instance.getToken();
     await LocalStorageService().clearToken();
-    final result = await authRepo.registration(
-      data: {
-        'mobile': mobile,
-        'email': email,
-        'first_name': firstName,
-        'last_name': lastName,
-        'gender': gender,
-        'device_token': deviceToken,
+    final Map<String, dynamic> allData = {}
+    ..addAll(ref.read(driverInfoProvider).personalInfo)
+      ..addAll(ref.read(driverInfoProvider).legalDocuments)
+      ..addAll(ref.read(driverInfoProvider).vehicleInfo)
+      ..addAll(ref.read(driverInfoProvider).bankPaymentInfo)
+      ..addAll(ref.read(driverInfoProvider).agreement);
 
-      }
+
+    final result = await authRepo.registration(
+      data: allData
     );
     result.fold(
           (failure) {
@@ -45,9 +38,7 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
         return state = AppState.error(failure);
       },
           (data) async {
-        if(onSuccess != null){
-          onSuccess();
-        }
+
         showNotification(
           message: data.message,
           isSuccess: true,
@@ -55,8 +46,8 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
         );
         LocalStorageService().setRegistrationProgress(AppRoutes.driverPersonalInfoPage);
         state = AppState.success(data);
-        await LocalStorageService().saveToken(data.data!.token);
-        NavigationService.pushNamed(AppRoutes.setPassword, arguments: mobile);
+        // await LocalStorageService().saveToken(data.data!.token);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login,);
       },
     );
   }

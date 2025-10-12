@@ -70,7 +70,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
       // );
     } else {
       if (isUnderReview && data?.isDriver == false) {
-        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
+        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage, arguments: phone);
       }else if(isUnderReview){
         NavigationService.pushNamed(AppRoutes.profileUnderReview);
       } else {

@@ -9,9 +9,9 @@ import '../provider/select_country_provider.dart';
 Widget buildPhoneCodePickerButton() => Consumer(
     builder: (context, ref, _) {
       final phoneCode = ref.watch(selectedPhoneCodeProvider);
-      final currentCountry = allowedLanguages.firstWhere(
+      final currentCountry = allowedPhoneCodes.firstWhere(
         (lang) => lang['phone_code']!.contains(phoneCode),
-        orElse: () => allowedLanguages.first,
+        orElse: () => allowedPhoneCodes.first,
       );
 
       return GestureDetector(
@@ -52,10 +52,10 @@ void _showPhoneCodeBottomSheet(BuildContext context, WidgetRef ref) {
     builder: (context) => ListView.separated(
       shrinkWrap: true,
       padding: EdgeInsets.all(16.r),
-      itemCount: allowedLanguages.length,
+      itemCount: allowedPhoneCodes.length,
       separatorBuilder: (_, _) => SizedBox(height: 12.h),
       itemBuilder: (context, index) {
-        final lang = allowedLanguages[index];
+        final lang = allowedPhoneCodes[index];
         final phoneCode = lang['phone_code'] ?? '';
 
         return ListTile(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
 import 'package:deligo_driver/data/models/common_response.dart';
 import 'package:deligo_driver/data/models/documents_upload_response/documents_upload_response.dart';
 import 'package:deligo_driver/data/models/driver_details_response/driver_details_response.dart';
@@ -15,6 +16,7 @@ import '../../models/login_with_pass_response/login_with_pass_response.dart';
 import '../../models/resend_otp_model/resend_otp_mode.dart';
 
 abstract class IAuthRepo {
+  Future<Either<Failure, DriverDropdownModel>> getDriverDropdownData();
   Future<Either<Failure, UserExistenceModel>> checkUserExistence({required String mobile, required String countryCode, String? deviceToken});
   Future<Either<Failure, RegistrationModel>> registration({required Map<String, dynamic> data,});
   Future<Either<Failure, RegistrationModel>> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken});

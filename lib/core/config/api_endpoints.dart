@@ -2,8 +2,9 @@ class ApiEndpoints {
   /// read: endpoint name that has Url in last used in this project
 
   static const String mediator = 'driver';
+  static const String getDriverDropdownDataUrl = '/dropdown/list';
   static const String checkUserExistenceUrl = '/users/check-existing-user';
-  static const String registrationUrl = '/users/register';
+  static const String registrationUrl = '$mediator/driver-register';
   static const String loginWithPasswordUrl = '/users/login';
   static const String loginWithPhoneOrEmailUrl = '/users/login';
   static const String resendSignIn = '/resend-sign-in';
@@ -23,7 +24,7 @@ class ApiEndpoints {
   static const String onlineOfflineStatusUpdate = '$mediator/update-status';
   static const String updateRadius = '/radius-update';
   static const String getDriverDetails = '$mediator/details';
-  static const String logout = '/sign-out';
+  static const String logout = 'users/logout';
   static const String sendMessage = '/send-message';
   static const String getMessage = '/message';
   static const String orderRide = '$mediator/order';

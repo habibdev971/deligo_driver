@@ -1,9 +1,9 @@
+import 'package:deligo_driver/core/widgets/custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/widgets/required_title.dart';
-import 'package:deligo_driver/presentation/auth/widgets/text_field_with_title.dart';
 
 import '../../../core/utils/is_dark_mode.dart';
 
@@ -70,29 +70,9 @@ class _DynamicYearDropdownFormFieldState
         isRequired: widget.isRequired,
       ),
       Gap(8.h),
-      DropdownButtonFormField<int>(
+      customDropdown<int>(
+        context,
         value: _selectedYear,
-        isExpanded: true,
-        hint: Text(
-          widget.hintText ?? '',
-          style: context.bodyMedium?.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: const Color(0xFF687387),
-          ),
-        ),
-        dropdownColor: context.surface,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: 16.w,
-            vertical: 14.h,
-          ),
-          border: border(),
-          enabledBorder: border(),
-          focusedBorder: border(true),
-          // fillColor: Colors.white,
-          // filled: true,
-        ),
         items: _yearList
             .map(
               (year) => DropdownMenuItem<int>(
@@ -100,9 +80,7 @@ class _DynamicYearDropdownFormFieldState
                 child: Text(
                   year.toString(),
                   style: context.bodyMedium?.copyWith(
-                    fontSize: widget.controller.text.contains(year.toString())
-                        ? 17.sp
-                        : 15.sp,
+                    fontSize: 15.sp,
                     fontWeight: FontWeight.w500,
                     color: isDarkMode()
                         ? Colors.white
@@ -126,8 +104,63 @@ class _DynamicYearDropdownFormFieldState
           }
           return null;
         },
-        autovalidateMode: AutovalidateMode.onUserInteraction,
       ),
+      // DropdownButtonFormField<int>(
+      //   value: _selectedYear,
+      //   isExpanded: true,
+      //   hint: Text(
+      //     widget.hintText ?? '',
+      //     style: context.bodyMedium?.copyWith(
+      //       fontSize: 16.sp,
+      //       fontWeight: FontWeight.w400,
+      //       color: const Color(0xFF687387),
+      //     ),
+      //   ),
+      //   dropdownColor: context.surface,
+      //   decoration: InputDecoration(
+      //     contentPadding: EdgeInsets.symmetric(
+      //       horizontal: 16.w,
+      //       vertical: 14.h,
+      //     ),
+      //     border: border(),
+      //     enabledBorder: border(),
+      //     focusedBorder: border(true),
+      //     // fillColor: Colors.white,
+      //     // filled: true,
+      //   ),
+      //   items: _yearList
+      //       .map(
+      //         (year) => DropdownMenuItem<int>(
+      //           value: year,
+      //           child: Text(
+      //             year.toString(),
+      //             style: context.bodyMedium?.copyWith(
+      //               fontSize: 15.sp,
+      //               fontWeight: FontWeight.w500,
+      //               color: isDarkMode()
+      //                   ? Colors.white
+      //                   : widget.controller.text.contains(year.toString())
+      //                   ? Colors.black
+      //                   : Colors.black87,
+      //             ),
+      //           ),
+      //         ),
+      //       )
+      //       .toList(),
+      //   onChanged: (int? newYear) {
+      //     setState(() {
+      //       _selectedYear = newYear;
+      //       widget.controller.text = newYear?.toString() ?? '';
+      //     });
+      //   },
+      //   validator: (value) {
+      //     if (value == null) {
+      //       return 'Year must be selected';
+      //     }
+      //     return null;
+      //   },
+      //   autovalidateMode: AutovalidateMode.onUserInteraction,
+      // ),
       Gap(16.h),
     ],
   );

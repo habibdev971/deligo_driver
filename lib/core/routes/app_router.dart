@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/auth/views/bank_info_page.dart';
 import 'package:deligo_driver/presentation/auth/views/legal_documents_page.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
@@ -45,26 +46,28 @@ class AppRouter {
           final String? code = settings.arguments as String?;
           return VerifyOtpPage(code: code,);
         });
-      case AppRoutes.verifyOtp:
+      case AppRoutes.verifyFirebaseOtp:
         return MaterialPageRoute(
             builder: (_){
-              final RegisterDataModel? data = settings.arguments as RegisterDataModel?;
-              return FirebaseOtpPage(data: data,);
+              final String? phoneNumber = settings.arguments as String?;
+              return FirebaseOtpPage(phoneNumber: phoneNumber,);
             },
             );
       case '/set-password':
         return MaterialPageRoute(builder: (_) => const SetPasswordPage());
       case '/change-password':
         return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
-      case '/driver-personal-info-page':
-        final isUpdating = settings.arguments != null ? true : false;
-        return MaterialPageRoute(builder: (_) => DriverPersonalInfoPage(isUpdatingProfile: isUpdating,));
+      case AppRoutes.driverPersonalInfoPage:
+        final String? phoneNumber = settings.arguments as String?;
+        return MaterialPageRoute(builder: (_) => DriverPersonalInfoPage(phoneNumber: phoneNumber,));
       case AppRoutes.legalDocumentsPage:
         return MaterialPageRoute(builder: (_) => const LegalDocumentsPage());
       case '/profile-under-review':
         return MaterialPageRoute(builder: (_) => const ProfileUnderReview());
       case '/vehicle-info-page':
-        return MaterialPageRoute(builder: (_) => const DriverDocumentsPage());
+        return MaterialPageRoute(builder: (_) => const VehicleInfoPage());
+      case '/bank-info-page':
+        return MaterialPageRoute(builder: (_) => const BankInfoPage());
       case '/home-page':
         return MaterialPageRoute(builder: (_) => const HomePage());
       case '/booking-page':

@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
+import 'package:deligo_driver/presentation/auth/view_model/driver_dropdown_notifier.dart';
 import 'package:deligo_driver/presentation/auth/view_model/login_with_phone_email_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:deligo_driver/core/config/environment.dart';
@@ -79,3 +81,6 @@ final uploadDocumentsNotifierProvider =
 
 final requiredDocsNotifierProvider =
     StateNotifierProvider.autoDispose<RequiredDocsNotifier, List<File>>((ref) => RequiredDocsNotifier());
+
+final driverDropdownProvider = StateNotifierProvider<DriverDropdownNotifier, AppState<DriverDropdownModel>>(
+        (ref) => DriverDropdownNotifier(repo: ref.read(authRepoProvider), ref: ref));

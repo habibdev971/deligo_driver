@@ -13,6 +13,7 @@ import 'package:deligo_driver/data/repositories/base_repository.dart';
 import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
 
 import '../../core/errors/failure.dart';
+import '../models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
 import '../models/auth_models/registration_model.dart';
 import '../models/login_with_pass_response/login_with_pass_response.dart';
 import 'interfaces/auth_repo_interface.dart';
@@ -21,6 +22,13 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
   final IAuthService authService;
 
   AuthRepoImpl({required this.authService});
+
+  @override
+  Future<Either<Failure, DriverDropdownModel>> getDriverDropdownData() async => await safeApiCall(() async {
+      final response = await authService.getDriverDropdownData();
+      return DriverDropdownModel.fromJson(response.data);
+  });
+
   @override
   Future<Either<Failure, UserExistenceModel>> checkUserExistence({required String mobile, String? deviceToken, required String countryCode, }) async => await safeApiCall(() async {
       final response = await authService.checkUserExistence(phone: mobile,  deviceToken: deviceToken, countryCode: countryCode);

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:deligo_driver/presentation/auth/view_model/get_multipart_form.dart';
 import 'package:dio/dio.dart';
 import 'package:deligo_driver/core/config/api_endpoints.dart';
 import 'package:deligo_driver/data/services/api/dio_client.dart';
@@ -14,6 +15,9 @@ class AuthServiceImpl extends IAuthService {
   AuthServiceImpl({required this.dioClient});
 
   @override
+  Future<Response> getDriverDropdownData() async => await dioClient.dio.get(ApiEndpoints.getDriverDropdownDataUrl);
+
+  @override
   Future<Response> registration({required Map<String, dynamic> data})async{
     final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     data.addAll({
@@ -21,7 +25,7 @@ class AuthServiceImpl extends IAuthService {
     });
     return await dioClient.dio.post(
       ApiEndpoints.registrationUrl,
-      data: data
+      data: await buildMultipartForm(data)
     );
   }
 
@@ -81,7 +85,7 @@ class AuthServiceImpl extends IAuthService {
 
 
   @override
-  Future<Response> logout() async => await dioClient.dio.get(ApiEndpoints.logout);
+  Future<Response> logout() async => await dioClient.dio.post(ApiEndpoints.logout);
 
   @override
   Future<Response> requestOTP({required String mobile}) async => await dioClient.dio.post(ApiEndpoints.requestOTP, data: {

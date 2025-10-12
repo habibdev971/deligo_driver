@@ -1,5 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/core/utils/build_network_image.dart';
+import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
+import 'package:deligo_driver/core/widgets/custom_dropdown/dropdown_from_builder.dart';
+import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,236 +19,323 @@ import 'package:deligo_driver/presentation/auth/provider/auth_providers.dart';
 import 'package:deligo_driver/presentation/auth/widgets/auth_app_bar.dart';
 import 'package:deligo_driver/presentation/auth/widgets/auth_bottom_buttons.dart';
 
+import '../../../core/utils/helpers.dart';
 import '../../../core/utils/is_dark_mode.dart';
-import '../../splash/provider/car_info_providers.dart';
+import '../provider/driver_info_provider.dart';
 import '../widgets/dropdown_date_selector.dart';
-import '../widgets/dropdown_from_builder.dart';
 import '../widgets/form_text_field.dart';
 import '../widgets/image_picker_form_field.dart';
 
-class DriverDocumentsPage extends ConsumerStatefulWidget {
-  const DriverDocumentsPage({super.key});
+class VehicleInfoPage extends ConsumerStatefulWidget {
+  const VehicleInfoPage({super.key});
 
   @override
-  ConsumerState<DriverDocumentsPage> createState() => _DocumentUploadPageState();
+  ConsumerState<VehicleInfoPage> createState() =>
+      _DocumentUploadPageState();
 }
 
-class _DocumentUploadPageState extends ConsumerState<DriverDocumentsPage> {
+class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
   final formKey = GlobalKey<FormBuilderState>();
 
-   final TextEditingController plateNumberController = TextEditingController();
-   final TextEditingController productionYearController = TextEditingController();
+  final TextEditingController plateNumberController = TextEditingController();
+  final TextEditingController manufactureYearController =
+      TextEditingController();
 
-  File? drivingLicenseImage;
-  File? nidImage;
-  File? vehiclePapers;
-  int? vehicleType;
-  int? vehicleColor;
-
+  VehicleTypes? selectedVehicleType;
+  VehicleBrands? selectedVehicleBrand;
+  VehicleColors? selectedVehicleColor;
+  FuelTypes? selectedFuelType;
+  GearTypes? selectedGearType;
+  // DateTime? yearOfManufacture;
+  File? inspectionCertificate;
+  File? insuranceCertificate;
+  File? registrationCertificate;
+  //
+  // File? drivingLicenseImage;
+  // File? nidImage;
+  // File? vehiclePapers;
+  // int? vehicleType;
+  // int? vehicleColor;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async{_fetchData();});
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      _fetchData();
+    });
   }
 
   @override
   void dispose() {
     plateNumberController.dispose();
-    productionYearController.dispose();
+    manufactureYearController.dispose();
     super.dispose();
   }
 
   Future<void> _fetchData() async {
-    final colorNotifier = ref.read(carColorNotifierProvider.notifier);
-    final modelNotifier = ref.read(carModelNotifierProvider.notifier);
+    // final colorNotifier = ref.read(carColorNotifierProvider.notifier);
+    // final modelNotifier = ref.read(carModelNotifierProvider.notifier);
+    final notifier = ref.read(driverDropdownProvider.notifier);
 
     await Future.wait([
-      colorNotifier.getCarColors(),
-      modelNotifier.getCarModels(),
+      notifier.getDriverDropdownData(),
+      // colorNotifier.getCarColors(),
+      // modelNotifier.getCarModels(),
     ]);
   }
 
+  DriverDropdownData? gerDropDownData() => ref
+      .watch(driverDropdownProvider)
+      .whenOrNull(success: (data) => data.data);
+
   @override
-  Widget build(BuildContext context) => Scaffold(
-    backgroundColor: context.surface,
-      body: AuthAppBar(
-        title: localize(context).driver_documents,
-        child: FormBuilder(
-          key: formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                localize(context).add_driver_documents,
-                style: context.bodyMedium?.copyWith(
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w700,
-                  color: isDarkMode()
-                      ? const Color(0xFF687387)
-                      : const Color(0xFF24262D),
+  Widget build(BuildContext context) {
+    final state = ref.watch(driverDropdownProvider);
+    final isLoading = state.whenOrNull(loading: () => true) ?? false;
+
+    return ExitAppWrapper(
+      child: Scaffold(
+        backgroundColor: context.surface,
+        body: AuthAppBar(
+          title: localize(context).driver_documents,
+          child: FormBuilder(
+            key: formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  localize(context).add_driver_documents,
+                  style: context.bodyMedium?.copyWith(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w700,
+                    color: isDarkMode()
+                        ? const Color(0xFF687387)
+                        : const Color(0xFF24262D),
+                  ),
                 ),
-              ),
-              Gap(8.h),
-              Text(
-                localize(context).upload_driver_documents,
-                style: context.bodyMedium?.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF687387),
+                Gap(8.h),
+                Text(
+                  localize(context).upload_driver_documents,
+                  style: context.bodyMedium?.copyWith(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF687387),
+                  ),
                 ),
-              ),
-              Gap(24.h),
-
-              textFieldFromBuilderWithTitle(
-                context,
-                title: localize(context).plate_number,
-                name: 'car_plate',
-                hintText: localize(context).vehicle_plate_number,
-                controller: plateNumberController,
-              ),
-
-              DynamicYearDropdownFormField(
-                startDate: DateTime(1990),
-                endDate: DateTime.now(),
-                controller: productionYearController,
-                hintText: localize(context).vehicle_production_year,
-                title: localize(context).production_year,
-              ),
-
-              /// --- Vehicle Model Dropdown ---
-              Consumer(
-                builder: (context, ref, _) {
-                  final carModelState = ref.watch(carModelNotifierProvider);
-
-                  return dropdownFromBuilderWithTitle<int>(
+                Gap(24.h),
+                dropdownWithTitle<VehicleTypes>(
+                  context,
+                  title: 'Vehicle Type',
+                  hintText: 'Select Vehicle Type',
+                  // name: 'categoryId',
+                  items: gerDropDownData()?.vehicleTypes?.map(
+                    (e) => DropdownMenuItem<VehicleTypes>(
+                      value: e,
+                      child: Row(
+                        children: [
+                          buildNetworkImage(imageUrl: e.categoryImage, height: 20, width: 20, errorIconSize: 20),
+                          Gap(8.w),
+                          Flexible(child: Text(
+                            e.categoryName ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.bodyMedium?.copyWith(fontSize: 15.sp),
+                          ))
+                        ],
+                      ),
+                    ),
+                  ).toList() ?? [],
+                  validator: FormBuilderValidators.required(),
+                  isLoading: isLoading,
+                  onChanged: (value){
+                    if(value != null){
+                      selectedVehicleType = value;
+                      setState(() {});
+                    }
+                  }
+                ),
+                dropdownWithTitle<VehicleBrands>(
                     context,
-                    title: localize(context).vehicle_type,
-                    name: 'car_id',
-                    hintText: localize(context).select_vehicle_type,
-                    initialValue: vehicleType,
-                    onChanged: (v){
-                      if(v != null){
-                        vehicleType = v;
-                        setState(() {
-
-                        });
+                    title: 'Vehicle Brands',
+                    hintText: 'Select Vehicle Brand',
+                    items: gerDropDownData()?.vehicleBrands?.map(
+                          (e) => DropdownMenuItem<VehicleBrands>(
+                        value: e,
+                        child:Text(
+                          e.name ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: context.bodyMedium?.copyWith(fontSize: 15.sp),
+                        )
+                      ),
+                    ).toList() ?? [],
+                    validator: FormBuilderValidators.required(),
+                    isLoading: isLoading,
+                    onChanged: (value){
+                      if(value != null){
+                        selectedVehicleBrand = value;
+                        setState(() {});
                       }
-                    },
-                    isLoading: carModelState.whenOrNull(loading: ()=> true) ?? false,
-                    items: carModelState.maybeWhen(
-                      success: (carModelResponse) => carModelResponse.data!
-                          .map((e) => DropdownMenuItem(
-                        value: e.id,
-                        child: Text(e.name ?? '', style: context.labelLarge),
-                      ))
-                          .toList(),
-                      orElse: () => [],
-                    ),
-                    validators: [FormBuilderValidators.required()],
-                  );
-                },
-              ),
-
-              /// --- Vehicle Color Dropdown ---
-              Consumer(
-                builder: (context, ref, _) {
-                  final carColorState = ref.watch(carColorNotifierProvider);
-
-                  return dropdownFromBuilderWithTitle<int>(
+                    }
+                ),
+      
+                dropdownWithTitle<VehicleColors>(
                     context,
-                    title: localize(context).vehicle_color,
-                    name: 'car_color_id',
-                    hintText: localize(context).select_vehicle_color,
-                    initialValue: vehicleColor,
-                    onChanged: (v){
-                      if(v != null){
-                        vehicleColor = v;
-                        setState(() {
-
-                        });
+                    title: 'Vehicle Color',
+                    hintText: 'Select Vehicle Color',
+                    items: gerDropDownData()?.colors?.map(
+                          (e) => DropdownMenuItem<VehicleColors>(
+                          value: e,
+                          child:Text(
+                            e.name ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.bodyMedium?.copyWith(fontSize: 15.sp),
+                          )
+                      ),
+                    ).toList() ?? [],
+                    validator: FormBuilderValidators.required(),
+                    isLoading: isLoading,
+                    onChanged: (value){
+                      if(value != null){
+                        selectedVehicleColor = value;
+                        setState(() {});
                       }
-                    },
-                    isLoading: carColorState.when(
-                      initial: () => false,
-                      loading: () => true,
-                      success: (d) => false,
-                      error: (e) => false,
-                    ),
-                    items: carColorState.maybeWhen(
-                      success: (carColorResponse) => carColorResponse.data!
-                          .map((e) => DropdownMenuItem(
-                        value: e.id,
-                        child: Text(e.name ?? '', style: context.labelLarge),
-                      ))
-                          .toList(),
-                      orElse: () => [],
-                    ),
-                    validators: [FormBuilderValidators.required()],
-                  );
-                },
-              ),
+                    }
+                ),
+      
+                dropdownWithTitle<FuelTypes>(
+                    context,
+                    title: 'Fuel Types',
+                    hintText: 'Select Fuel Types',
+                    items: gerDropDownData()?.fuelTypes?.map(
+                          (e) => DropdownMenuItem<FuelTypes>(
+                          value: e,
+                          child:Text(
+                            e.name ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.bodyMedium?.copyWith(fontSize: 15.sp),
+                          )
+                      ),
+                    ).toList() ?? [],
+                    validator: FormBuilderValidators.required(),
+                    isLoading: isLoading,
+                    onChanged: (value){
+                      if(value != null){
+                        selectedFuelType = value;
+                        setState(() {});
+                      }
+                    }
+                ),
+                dropdownWithTitle<GearTypes>(
+                    context,
+                    title: 'Gear Types',
+                    hintText: 'Select Gear Types',
+                    items: gerDropDownData()?.gearTypes?.map(
+                          (e) => DropdownMenuItem<GearTypes>(
+                          value: e,
+                          child:Text(
+                            e.name ?? '',
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: context.bodyMedium?.copyWith(fontSize: 15.sp),
+                          )
+                      ),
+                    ).toList() ?? [],
+                    validator: FormBuilderValidators.required(),
+                    isLoading: isLoading,
+                    onChanged: (value){
+                      if(value != null){
+                        selectedGearType = value;
+                        setState(() {});
+                      }
+                    }
+                ),
+                textFieldFromBuilderWithTitle(
+                  context,
+                  title: localize(context).plate_number,
+                  name: 'licensePlateNumber',
+                  hintText: localize(context).vehicle_plate_number,
+                  controller: plateNumberController,
+                ),
+      
+                DynamicYearDropdownFormField(
+                  startDate: DateTime(1990),
+                  endDate: DateTime.now(),
+                  controller: manufactureYearController,
+                  hintText: localize(context).vehicle_production_year,
+                  title: localize(context).production_year,
+                ),
+      
+                /// --- Image Picker Fields ---
+                imagePickerFormField(
+                  context: context,
+                  name: 'inspectionCertificate',
+                  // title: localize(context).nid_photo,
+                  title: 'Inspection Certificate',
+                  initialFile: inspectionCertificate,
+                  validator: (file) =>
+                      file == null ? 'Inspection Certificate Required' : null,
+                  onChanged: (file) => setState(() => inspectionCertificate = file),
+                ),
+                Gap(16.h),
+                imagePickerFormField(
+                  context: context,
+                  name: 'registrationCertificate',
+                  title: 'Registration Certificate',
+                  initialFile: registrationCertificate,
+                  validator: (file) => file == null
+                      ? 'Registration Certificate Required'
+                      : null,
+                  onChanged: (file) => setState(() => registrationCertificate = file),
+                ),
+                Gap(16.h),
+                imagePickerFormField(
+                  context: context,
+                  name: 'insurancePolicy',
+                  title: 'Insurance Policy',
+                  initialFile: insuranceCertificate,
+                  validator: (file) => file == null
+                      ? 'Insurance Policy Required'
+                      : null,
+                  onChanged: (file) => setState(() => insuranceCertificate = file),
+                ),
+                Gap(16.h),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Consumer(
+          builder: (context, ref, _) => AuthBottomButtons(
+            title: localize(context).next,
+            onTap: () async {
+              if (formKey.currentState!.saveAndValidate()) {
+                // final formData = Map<String, dynamic>.from(formKey.currentState!.value);
+                final formData = {
+                  'vehicleModel': selectedVehicleType?.categoryName,
+                  'categoryId': selectedVehicleType?.id,
+                  'vehicleBrand': selectedVehicleBrand?.name,
+                  'vehicleColor': selectedVehicleColor?.name,
+                  'fuelType': selectedFuelType?.name,
+                  'gearType': selectedGearType?.name,
+                  'licensePlateNumber': plateNumberController.text,
+                  'yearOfManufacture': manufactureYearController.text,
+                  'inspectionCertificate': inspectionCertificate,
+                  'registrationCertificate': registrationCertificate,
+                  'insurancePolicy': insuranceCertificate,
 
-              Gap(20.h),
-
-              /// --- Image Picker Fields ---
-              imagePickerFormField(
-                context: context,
-                name: 'nid_image',
-                title: localize(context).nid_photo,
-                initialFile: nidImage,
-                validator: (file) => file == null ? localize(context).nid_image_required : null,
-                onChanged: (file) => setState(() => nidImage = file),
-              ),
-              Gap(16.h),
-              imagePickerFormField(
-                context: context,
-                name: 'driving_license',
-                title: localize(context).driving_license,
-                initialFile: drivingLicenseImage,
-                validator: (file) => file == null ? localize(context).driving_license_required : null,
-                onChanged: (file) => setState(() => drivingLicenseImage = file),
-              ),
-              Gap(16.h),
-              imagePickerFormField(
-                context: context,
-                name: 'vehicle_papers',
-                title: localize(context).vehicle_papers,
-                initialFile: vehiclePapers,
-                validator: (file) => file == null ? localize(context).vehicle_papers_required : null,
-                onChanged: (file) => setState(() => vehiclePapers = file),
-              ),
-              Gap(16.h),
-            ],
+                };
+                log(formData.toString());
+                ref.read(driverInfoProvider.notifier).updateVehicleInfo(formData);
+                NavigationService.pushNamed(AppRoutes.bankInfoPage);
+              } else {
+                showNotification(message: localize(context).all_field_required);
+              }
+            },
           ),
         ),
       ),
-      bottomNavigationBar: Consumer(builder: (context, ref, _) {
-        final uploadDocumentsState = ref.watch(updateVehicleDetailsNotifierProvider);
-        final uploadDocumentsNotifier = ref.read(updateVehicleDetailsNotifierProvider.notifier);
-
-        return AuthBottomButtons(
-          title: localize(context).submit,
-          isLoading: uploadDocumentsState.whenOrNull(loading: () => true, ) ??  false,
-          onTap: () async {
-            final bool? isValid = formKey.currentState?.validate();
-            if(isValid ?? false){
-
-                await uploadDocumentsNotifier.updateVehicleDetails(
-                  documents: [nidImage!, drivingLicenseImage!, vehiclePapers!],
-                  data: {
-                    'vehicle_type': vehicleType,
-                    'vehicle_color': vehicleColor,
-                    'vehicle_plate': plateNumberController.text.trim(),
-                    'vehicle_regi_year': productionYearController.text.trim(),
-                  }
-                );
-            }{
-
-            }
-
-          },
-        );
-      }),
     );
+  }
 }

@@ -1,3 +1,6 @@
+import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -54,9 +57,12 @@ class ProfileUnderReview extends StatelessWidget {
                 color: const Color(0xFF687387),
               ),
             ),
+            Gap(16.h),
+            AppPrimaryButton(onPressed: () => NavigationService.pushNamedAndRemoveUntil(AppRoutes.login), child: Text('Go to Login Page', style: context.bodyMedium?.copyWith(color: Colors.white),)),
           ],
         ),
       ),
+
     ),
   );
 

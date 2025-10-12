@@ -4,13 +4,14 @@ class AppRoutes {
   static const String dashboard = '/dashboard';
   static const String loginWithPassword = '/login-with-password';
   static const String verifyOTP = '/verify-otp';
-  static const String verifyOtp = '/verify-firebase-otp';
+  static const String verifyFirebaseOtp = '/verify-firebase-otp';
   static const String setPassword = '/set-password';
   static const String changePassword = '/change-password';
   static const String profileUnderReview = '/profile-under-review';
   static const String driverPersonalInfoPage = '/driver-personal-info-page';
   static const String legalDocumentsPage = '/legal-documents-page';
   static const String vehicleInfoPage = '/vehicle-info-page';
+  static const String bankInfoPage = '/bank-info-page';
   static const String bookingPage = '/booking-page';
   static const String chatSheet = '/chat-sheet';
   static const String profilePage = '/profile-page';

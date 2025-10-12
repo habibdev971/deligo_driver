@@ -19,8 +19,8 @@ import '../../../data/models/auth_models/register_data_model.dart';
 import '../widgets/resend_otp.dart';
 
 class FirebaseOtpPage extends ConsumerStatefulWidget {
-  final RegisterDataModel? data;
-  const FirebaseOtpPage({super.key, this.data});
+  final String? phoneNumber;
+  const FirebaseOtpPage({super.key, this.phoneNumber});
 
   @override
   ConsumerState<FirebaseOtpPage> createState() => _OtpPageState();
@@ -56,7 +56,7 @@ class _OtpPageState extends ConsumerState<FirebaseOtpPage> {
         otp,
         onLoadingChange: (val) => loading.state = val,
         onSuccess: () {
-          NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
+          NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage, arguments: widget.phoneNumber);
           // loading.state = true;
           // final data = widget.data;
           // if (data == null) {
@@ -138,7 +138,7 @@ class _OtpPageState extends ConsumerState<FirebaseOtpPage> {
                 ),
               ),
               Gap(20.h),
-              resendOtp(context, phoneNumber: widget.data?.phoneNumber ?? ''),
+              resendOtp(context, phoneNumber: widget.phoneNumber ?? ''),
             ],
           ),
         ),

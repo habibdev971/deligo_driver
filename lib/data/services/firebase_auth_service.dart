@@ -56,7 +56,7 @@ class FirebaseAuthService {
         log('Verification ID: $verificationId');
         showNotification(message: 'OTP sent to $phoneNumber', isSuccess: true);
         onLoadingChange(false);
-        NavigationService.pushNamed(AppRoutes.verifyOtp,);
+        NavigationService.pushNamed(AppRoutes.verifyFirebaseOtp, arguments: phoneNumber);
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         _verificationId = verificationId;

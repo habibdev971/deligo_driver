@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 abstract class IAuthService {
+  Future<Response> getDriverDropdownData();
   Future<Response> checkUserExistence({required String phone, required String countryCode, String? deviceToken});
   Future<Response> registration({required Map<String, dynamic> data});
   Future<Response> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken});
