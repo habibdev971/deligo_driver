@@ -6,7 +6,7 @@ import '../../../core/errors/failure.dart';
 
 abstract class IStatusRepo {
   Future<Either<Failure, OnlineStatusUpdateResponse>> updateOnlineStatus(
-      {required String status});
+      {required bool status});
   Future<Either<Failure, DriverRadiusUpdateResponse>> updateRadius(
       {required int radius});
 }

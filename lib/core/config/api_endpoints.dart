@@ -21,7 +21,7 @@ class ApiEndpoints {
   static const String uploadDocuments = '/upload-documents';
   static const String getCarColors = '/configs/vehicle-color-details';
   static const String getCarModels = '/configs/vehicle-details';
-  static const String onlineOfflineStatusUpdate = '$mediator/update-status';
+  static const String onlineOfflineStatusUpdate = '/users/user-active-deactive';
   static const String updateRadius = '/radius-update';
   static const String getDriverDetails = '$mediator/details';
   static const String logout = 'users/logout';
@@ -31,7 +31,7 @@ class ApiEndpoints {
   static const String checkActiveTrip = '$mediator/order/on-trip';
   static const String dashboard = '$mediator/dashboard';
   static const String cancelRide = '/cancel-ride';
-  static const String driverLocationsUpdate = '$mediator/locations/update';
+  static const String driverLocationsUpdate = '/driver/location';
   static const String rideHistory = '$mediator/order';
   static const String earnings = '/earning';
   static const String paymentMethods = '/payment-method';

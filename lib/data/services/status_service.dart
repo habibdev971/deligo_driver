@@ -9,9 +9,9 @@ class StatusService implements IStatusService {
 
   StatusService({required this.dioClient});
   @override
-  Future<Response> updateOnlineStatus({required String status}) async => await dioClient.dio
-        .get(ApiEndpoints.onlineOfflineStatusUpdate, queryParameters: {
-      'status': status,
+  Future<Response> updateOnlineStatus({required bool status}) async => await dioClient.dio
+        .post(ApiEndpoints.onlineOfflineStatusUpdate, data: {
+      'isActive': status,
     });
 
   @override

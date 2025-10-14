@@ -318,7 +318,7 @@ class PaymentMethods {
   PaymentMethods.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
-    _logo = json['logo'];
+    _logo = json['gatewayImage'];
   }
   num? _id;
   String? _name;
@@ -338,7 +338,7 @@ PaymentMethods copyWith({  num? id,
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['name'] = _name;
-    map['logo'] = _logo;
+    map['gatewayImage'] = _logo;
     return map;
   }
 

@@ -13,9 +13,9 @@ class StatusRepoImpl extends BaseRepository implements IStatusRepo {
 
   @override
   Future<Either<Failure, OnlineStatusUpdateResponse>> updateOnlineStatus(
-      {required String status}) async => await safeApiCall(() async {
-      final data = status[0].toUpperCase() + status.substring(1);
-      final response = await statusService.updateOnlineStatus(status: data);
+      {required bool status}) async => await safeApiCall(() async {
+      // final data = status[0].toUpperCase() + status.substring(1);
+      final response = await statusService.updateOnlineStatus(status: status);
       return OnlineStatusUpdateResponse.fromJson(response.data);
     });
 

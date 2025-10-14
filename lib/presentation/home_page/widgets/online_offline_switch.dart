@@ -143,12 +143,8 @@ class OnlineOfflineSwitch extends ConsumerWidget {
   }
 
   void _handleTap(WidgetRef ref, bool isOnline) {
-    final newStatus = isOnline
-        ? DriverStatus.offline.name
-        : DriverStatus.online.name;
-
     ref.read(driverStatusNotifierProvider.notifier)
-        .updateOnlineStatus(newStatus);
+        .updateOnlineStatus(!isOnline);
   }
 
   Widget _buildSwitchContainer(BuildContext context, SwitchState switchState) => Container(

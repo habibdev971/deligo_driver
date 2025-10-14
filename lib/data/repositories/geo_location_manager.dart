@@ -39,8 +39,9 @@ class GeoLocationManager implements IGeoLocationManager {
   Future<CommonResponse> saveDriverLocation(LatLng latLng, {required Ref ref}) async{
 
       try{
-        final response = await ref.read(dioClientProvider).dio.post(ApiEndpoints.driverLocationsUpdate, data: {
-          'location': [latLng.latitude, latLng.longitude]
+        final response = await ref.read(dioClientProvider).dio.put(ApiEndpoints.driverLocationsUpdate, data: {
+          'longitude': latLng.longitude,
+          'latitude': latLng.latitude
         });
         return CommonResponse.fromJson(response.data);
       }catch (e){

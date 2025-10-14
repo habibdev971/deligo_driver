@@ -128,7 +128,7 @@ Future<bool> showExitLogoutDialogue({WidgetRef? ref, required bool isLogout})  a
           await ref?.read(logoutNotifierProvider.notifier).logout();
         }else{
           ref?.read(pusherNotifierProvider.notifier).disconnect();
-          ref?.read(driverStatusNotifierProvider.notifier).updateOnlineStatus('offline');
+          ref?.read(driverStatusNotifierProvider.notifier).updateOnlineStatus(false);
           SystemNavigator.pop();
         }
       }, isLogout: isLogout,

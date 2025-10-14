@@ -7,7 +7,6 @@ import 'package:deligo_driver/data/models/driver_radius_update_response/driver_r
 import 'package:deligo_driver/data/repositories/interfaces/status_repo_interface.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/order_request_dialogue.dart';
 
-import '../../../core/enums/driver_status.dart';
 import '../../../data/services/local_storage_service.dart';
 import '../../home_page/widgets/online_offline_switch.dart';
 import '../provider/home_providers.dart';
@@ -55,13 +54,13 @@ class DriverStatusNotifier extends StateNotifier<DriverStatusState> {
 
   }
 
-  Future<void> updateOnlineStatus(String status) async {
+  Future<void> updateOnlineStatus(bool status) async {
     state = DriverStatusState.loading();
     final result = await statusRepo.updateOnlineStatus(status: status);
     result.fold(
           (failure) => state = const DriverStatusState.offline(),
           (data) async{
-        if (data.data?.status?.toLowerCase() == DriverStatus.offline.name) {
+        if (data.data?.serviceStatus == false) {
           await LocalStorageService().setOnlineOffline();
           isOnlineNotifier.value = false;
           ref.read(pusherNotifierProvider.notifier).disconnect();
