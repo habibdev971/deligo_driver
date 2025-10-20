@@ -13,5 +13,6 @@ abstract class IRideRepo {
       {required int orderId, required String status});
   Future<Either<Failure, CommonResponse>> cancelRide({required int? orderId});
   Future<Either<Failure, TripModel>> checkActiveTrip();
+  Future<Either<Failure, CommonResponse>> acceptRejectRide({required int orderId, required String status});
 
 }

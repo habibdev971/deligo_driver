@@ -57,4 +57,10 @@ class RideRepoImpl extends BaseRepository implements IRideRepo {
         return TripModel.fromJson(response.data);
       }
     });
+
+  @override
+  Future<Either<Failure, CommonResponse>> acceptRejectRide({required int orderId, required String status}) async => await safeApiCall(()async{
+      final response = await rideService.acceptRejectRide(orderId: orderId, status: status);
+      return CommonResponse.fromJson(response.data);
+    });
 }

@@ -6,4 +6,5 @@ abstract class IRideService {
   Future<Response> saveRideStatus({required int orderId, required String status});
   Future<Response> cancelRide({required int? orderId});
   Future<Response> checkActiveTrip();
+  Future<Response> acceptRejectRide({required int orderId, required String status});
 }

@@ -28,6 +28,8 @@ class ApiEndpoints {
   static const String sendMessage = '/send-message';
   static const String getMessage = '/message';
   static const String orderRide = '$mediator/order';
+  static const String rideDetails = 'ride/request';
+  static const String acceptRejectUrl = '$mediator/ride-requests';
   static const String checkActiveTrip = '$mediator/order/on-trip';
   static const String dashboard = '$mediator/dashboard';
   static const String cancelRide = '/cancel-ride';

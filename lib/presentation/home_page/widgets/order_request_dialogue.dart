@@ -1,3 +1,6 @@
+import 'package:deligo_driver/data/models/order_response/order_model/address/address.dart';
+import 'package:deligo_driver/data/models/order_response/order_model/rider/rider.dart';
+import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,18 +12,18 @@ import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart'
 import 'package:deligo_driver/presentation/home_page/widgets/location_time_calculated.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/order_request_buttons.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/readable_location_view.dart';
-import 'package:deligo_driver/presentation/home_page/widgets/ride_preference.dart';
 
 import '../../booking/provider/ride_providers.dart';
 
-void orderRequestDialogue() {
+void orderRequestDialogue({PusherRequestOrderModel? data}) {
   showGlobalAlertDialog(
-    child: const _OrderRequestDialog(),
+    child: _OrderRequestDialog(data: data,),
   );
 }
 
 class _OrderRequestDialog extends ConsumerWidget {
-  const _OrderRequestDialog();
+  final PusherRequestOrderModel? data;
+  const _OrderRequestDialog({this.data});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,22 +35,33 @@ class _OrderRequestDialog extends ConsumerWidget {
       child: IntrinsicHeight(
         child: Padding(
           padding: EdgeInsets.all(16.r),
-          child: state.when(
-              loading: ()=> const LoadingView(), success: (order)=> Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween, // even spacing
             children: [
-              riderDetails(context, order?.rider, amount: order?.payableAmount.toString()),
+              riderDetails(context, Rider(
+                id: data?.user?.id,
+                name: data?.user?.fullName,
+                profilePicture: data?.user?.userInfo?.picture,
+                rating: data?.user?.userInfo?.rattings,
+              ), amount: (data?.estimatedFare ?? 0).toString()),
               Gap(8.h),
-              locationTime(context, time: ((order?.duration ?? 0) / 60).toStringAsFixed(1), distance: ((order?.distance  ?? 0) / 1000).toStringAsFixed(1)),
+              locationTime(context, 
+                  // time: ((order?.duration ?? 0) / 60).toStringAsFixed(1), 
+                  time: (data?.estimatedTime ?? 0).toStringAsFixed(1),
+                distance: (data?.distanceFromDriver ?? 0).toStringAsFixed(1)
+              ),
+                  // distance: ((order?.distance  ?? 0) / 1000).toStringAsFixed(1)),
               Gap(8.h),
-              readAbleLocationView(context, order?.addresses),
-              Gap(8.h),
-              ridePreference(context, preferenceList: order?.ridePreference ?? []),
+              readAbleLocationView(context, Addresses(
+                pickupAddress: data?.pickupLocation?.address,
+                dropAddress: data?.dropoffLocation?.address
+              )),
+              // Gap(8.h),
+              // ridePreference(context, preferenceList: order?.ridePreference ?? []),
               Gap(16.h),
-              orderRequestButtons(context, orderId: order?.id),
+              orderRequestButtons(context, orderId: data?.rideRequestId),
 
             ],
-          ),
           )
 
         ),

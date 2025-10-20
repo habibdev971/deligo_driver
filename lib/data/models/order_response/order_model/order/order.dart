@@ -142,6 +142,8 @@ class Order {
     map['payable_amount'] = payableAmount;
     map['currency'] = currency;
     map['directions'] = directions;
+    map['rating'] = rating;
+
     if (service != null) {
       map['service'] = service?.toJson();
     }

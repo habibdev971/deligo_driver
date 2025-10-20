@@ -14,7 +14,7 @@ class RideService implements IRideService {
 
   @override
   Future<Response> orderDetails({required int orderId}) async => await dioClient.dio
-        .get('${ApiEndpoints.orderRide}/$orderId',);
+        .get('${ApiEndpoints.rideDetails}/$orderId',);
 
   @override
   Future<Response> saveRideStatus({required int orderId, required String status}) async => await dioClient.dio
@@ -25,6 +25,7 @@ class RideService implements IRideService {
 
   @override
   Future<Response> checkActiveTrip() async => await dioClient.dio.get(ApiEndpoints.checkActiveTrip,);
-
-
+  
+  @override
+  Future<Response> acceptRejectRide({required int orderId, required String status}) async => await dioClient.dio.put('${ApiEndpoints.acceptRejectUrl}/$orderId/$status' );
 }

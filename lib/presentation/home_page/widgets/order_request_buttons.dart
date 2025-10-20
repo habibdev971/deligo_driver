@@ -37,7 +37,7 @@ Widget orderRequestButtons(BuildContext context, {num? orderId})=> Consumer(
                   }
                 }, onSuccess: (data)async{
                   await LocalStorageService().clearOrderId();
-                  driverStatusNotifier.online();
+                  // driverStatusNotifier.online();
                   NavigationService.pop();
                 });
                 }, child: Text(localize(context).cancel, style: context.bodyMedium?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: isDarkMode() ? Colors.white : const Color(0xFF24262D)),))),
