@@ -1,3 +1,5 @@
+import 'package:deligo_driver/data/models/order_response/order_model/rider/rider.dart';
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,15 +17,24 @@ import '../../provider/ride_providers.dart';
 
 Widget gotoPickupLocation(BuildContext context, Order? order) => Consumer(
   builder: (context, ref, _) {
-    final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
-    final rideOrderState = ref.watch(rideOrderNotifierProvider);
+    final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+    final rideOrderState = ref.watch(saveOrderStatusProvider);
     final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
+    final riderData = ref.watch(rideDetailsProvider).whenOrNull(success: (data)=> data?.rider);
 
     return actionSheet(
       context,
       riderInfo: riderDetails(
         context,
-        rideOrderState.whenOrNull(success: (order) => order?.rider),
+        Rider(
+          id: riderData?.id,
+          name: riderData?.name,
+          mobile: riderData?.mobile,
+          email: riderData?.email,
+          profilePicture: riderData?.profilePicture,
+          rating: riderData?.rating
+        )
+        // rideOrderState.whenOrNull(success: (order) => order?.rider),
       ),
       title: localize(context).rider_waiting_move_now,
       description: localize(context).time_to_pickup,
@@ -38,7 +49,8 @@ Widget gotoPickupLocation(BuildContext context, Order? order) => Consumer(
             isLoading: rideOrderState.whenOrNull(loading: () => true) ?? false,
             onPressed: () {
               rideOrderNotifier.saveOrderStatus(
-                status: 'go_to_pickup',
+
+                status: 'GOTO_PICKUP',
                 onSuccess: (v) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     onTripNotifier.updateOnTripStatus(

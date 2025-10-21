@@ -53,7 +53,7 @@ class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
         : const AppStateOrder.loading();
 
     final result = await rideRepo.saveRideStatus(
-      orderId: await LocalStorageService().getOrderId() ?? 0,
+      orderId: await LocalStorageService().getRequestId() ?? 0,
       status: status,
     );
 
@@ -77,7 +77,7 @@ class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
   }
 
   Future<void> setOrderData(Order order) async {
-    await LocalStorageService().saveOrderId(order.id);
+    await LocalStorageService().saveRequestId(order.id);
     state = AppStateOrder.success(order);
   }
 

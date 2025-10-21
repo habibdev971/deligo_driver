@@ -18,7 +18,7 @@ class CancelRideNotifier extends StateNotifier<AppState<CommonResponse>> {
     final local = LocalStorageService();
     state = const AppState.loading();
 
-    final orderId = await local.getOrderId();
+    final orderId = await local.getRequestId();
 
     final result = await rideRepo.cancelRide(orderId: orderId);
 

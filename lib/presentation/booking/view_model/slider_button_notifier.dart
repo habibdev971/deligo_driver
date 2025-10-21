@@ -16,7 +16,7 @@ class SliderButtonNotifier extends StateNotifier<AppState<Order>> {
 
   Future<void> saveOrderStatus({ required String status, Function(Order? data)? onSuccess})async{
     state = const AppState.loading();
-    final result = await rideRepo.saveRideStatus(orderId: await LocalStorageService().getOrderId() ?? 0, status: status);
+    final result = await rideRepo.saveRideStatus(orderId: await LocalStorageService().getRequestId() ?? 0, status: status);
 
     result.fold(
           (failure) {

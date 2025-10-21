@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,11 +13,10 @@ import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart'
 import 'package:deligo_driver/presentation/home_page/widgets/location_time_calculated.dart';
 
 import '../../../../core/utils/localize.dart';
-import '../../provider/ride_providers.dart';
 
 Widget rideStarted(BuildContext context,  Order? order)=> Consumer(
       builder: (context, ref, _) {
-        final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
+        final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
         final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
         return actionSheet(context,
             riderInfo: riderDetails(context, order?.rider),
@@ -27,7 +27,7 @@ Widget rideStarted(BuildContext context,  Order? order)=> Consumer(
             actions: [
               Expanded(
                 child: AppPrimaryButton(onPressed: (){
-                  rideOrderNotifier.saveOrderStatus(status: 'start_ride', onSuccess: (v){
+                  rideOrderNotifier.saveOrderStatus(status: 'START', onSuccess: (v){
                     WidgetsBinding.instance.addPostFrameCallback((_){
                       onTripNotifier.updateOnTripStatus(status: BookingStatus.headingToDestination, );
                     });

@@ -155,16 +155,26 @@ class LocalStorageService {
     return value == 'true';
   }
 
-  Future<void> saveOrderId(int? id) async {
+  Future<void> saveRequestId(int? id) async {
     await _storage.write(key: 'order_id', value: id?.toString());
   }
 
-  Future<int?> getOrderId() async {
+  Future<int?> getRequestId() async {
     final value = await _storage.safeRead(key: 'order_id');
     return value != null ? int.tryParse(value) : null;
   }
 
+  Future<void> saveRideId(num? id) async {
+    await _storage.write(key: 'ride_id', value: id?.toString());
+  }
+
+  Future<num?> getRideId() async {
+    final value = await _storage.safeRead(key: 'ride_id');
+    return value != null ? num.tryParse(value) : null;
+  }
+
   Future<void> clearOrderId() async {
+    await _storage.delete(key: 'ride_id');
     await _storage.delete(key: 'order_id');
   }
 

@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,13 +17,11 @@ import 'package:deligo_driver/presentation/booking/provider/driver_providers.dar
 import 'package:deligo_driver/presentation/booking/provider/home_providers.dart';
 import 'package:deligo_driver/presentation/booking/provider/pusher_provider.dart';
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_sheet.dart';
-
 import '../../../../core/utils/is_dark_mode.dart';
-import '../../provider/ride_providers.dart';
 
 Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: (context, ref, _) {
-    final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
-    final rideOrderState = ref.watch(rideOrderNotifierProvider);
+    final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+    final rideOrderState = ref.watch(saveOrderStatusProvider);
     final tripStateNotifier = ref.read(ontripStatusNotifier.notifier);
     final bookingNotifier = ref.read(bookingNotifierProvider.notifier);
     final pusherNotifier = ref.read(pusherNotifierProvider.notifier);
@@ -32,11 +31,11 @@ Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: 
         localize(context).trip_ended_wait_payment,
         image: Assets.images.paymentReceived
             .image(height: 125.h, width: 201.w, fit: BoxFit.fill),
-        content: serviceOverView(context, order!, widgets: [
+        content: serviceOverView(context, order, widgets: [
           Padding(
             padding: EdgeInsets.all(8.0.r),
             child: rowText(context,
-                title: localize(context).payout_method, value: order.payMethod?.capitalize()),
+                title: localize(context).payout_method, value: order?.payMethod?.capitalize()),
           ),
         ]),
         actions: [
@@ -46,7 +45,7 @@ Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: 
                 rideOrderState.whenOrNull(loading: () => true) ?? false,
                 onPressed: () {
                   rideOrderNotifier.saveOrderStatus(
-                      status: 'completed',
+                      status: 'END',
                       onSuccess: (v) {
                         WidgetsBinding.instance.addPostFrameCallback((_) async{
                           tripStateNotifier.updateOnTripStatus(
@@ -72,7 +71,7 @@ Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: 
         ]);
   });
 
-Widget serviceOverView(BuildContext context, Order order,
+Widget serviceOverView(BuildContext context, Order? order,
     {List<Widget>? widgets}) => Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
@@ -84,17 +83,17 @@ Widget serviceOverView(BuildContext context, Order order,
           padding: EdgeInsets.all(8.0.r),
           child: rowText(context,
               title: localize(context).rideCharge,
-              value: r'$' '${order.subTotal ?? 0.00}'),
+              value: r'$' '${order?.subTotal ?? 0.00}'),
         ),
         Padding(
           padding: EdgeInsets.all(8.0.r),
           child: rowText(context,
               title: localize(context).service_charge,
-              value: r'$' '${order.service?.baseFare ?? 0.00}'),
+              value: r'$' '${order?.service?.baseFare ?? 0.00}'),
         ),
         Padding(
           padding: EdgeInsets.only(left: 8.0.w, right: 8.w, bottom: 8.h),
-          child: rowText(context, title: localize(context).discount, value: r'$' + (order.discount ?? 0).toString()),
+          child: rowText(context, title: localize(context).discount, value: r'$' + (order?.discount ?? 0).toString()),
         ),
         Container(
             padding: EdgeInsets.all(8.r),
@@ -105,7 +104,7 @@ Widget serviceOverView(BuildContext context, Order order,
                 color: isDarkMode() ? Colors.grey.shade900 : const Color(0xFFF6F4FE)),
             child: rowText(context,
                 title: localize(context).total_amount,
-                value: r'$' '${order.payableAmount ?? 0.00}',
+                value: r'$' '${order?.payableAmount ?? 0.00}',
                 fontWeight: FontWeight.w600,
                 color: ColorPalette.primary50)),
       ],

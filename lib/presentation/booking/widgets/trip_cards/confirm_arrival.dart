@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,8 +17,8 @@ import '../../provider/ride_providers.dart';
 
 Widget confirmArrival(BuildContext context,  Order? order)=> Consumer(
     builder: (context, ref, _) {
-      final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
-      final rideOrderState = ref.read(rideOrderNotifierProvider);
+      final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+      final rideOrderState = ref.read(saveOrderStatusProvider);
       final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
       final cancelTimerNotifier = ref.read(cancelButtonEnableTimerProvider.notifier);
 
@@ -31,9 +32,9 @@ Widget confirmArrival(BuildContext context,  Order? order)=> Consumer(
             child: AppPrimaryButton(
                 isLoading: rideOrderState.whenOrNull(loading: ()=> true) ?? false,
                 onPressed: (){
-              rideOrderNotifier.saveOrderStatus(status: 'confirm_arrival', onSuccess: (v){
+              rideOrderNotifier.saveOrderStatus(status: 'ARRIVED', onSuccess: (v){
                 WidgetsBinding.instance.addPostFrameCallback((_){
-                  onTripNotifier.updateOnTripStatus(status: BookingStatus.pickupConfirmed,
+                  onTripNotifier.updateOnTripStatus(status: BookingStatus.rideStarted,
       );
                   cancelTimerNotifier.startTimer();
                 });

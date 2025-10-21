@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,12 +11,11 @@ import 'package:deligo_driver/presentation/booking/provider/driver_providers.dar
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_sheet.dart';
 
 import '../../../../core/utils/localize.dart';
-import '../../provider/ride_providers.dart';
 
 Widget reachedDestination(BuildContext context,  Order? order)=> Consumer(
       builder: (context, ref, _) {
-        final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
-        final rideOrderState = ref.read(rideOrderNotifierProvider);
+        final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+        final rideOrderState = ref.read(saveOrderStatusProvider);
         final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
 
         return actionSheet(context,
@@ -27,7 +27,7 @@ Widget reachedDestination(BuildContext context,  Order? order)=> Consumer(
                 child: AppPrimaryButton(
                     isLoading: rideOrderState.whenOrNull(loading: ()=> true) ?? false,
                     onPressed: (){
-                      rideOrderNotifier.saveOrderStatus(status: 'dropped_off', onSuccess: (v){
+                      rideOrderNotifier.saveOrderStatus(status: 'DROPPED_OFF', onSuccess: (v){
                         WidgetsBinding.instance.addPostFrameCallback((_){
                           onTripNotifier.updateOnTripStatus(status: BookingStatus.payment,);
                         });

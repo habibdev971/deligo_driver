@@ -27,6 +27,7 @@ class PusherNotifier extends StateNotifier<void> {
   Future<void> setupPusherListeners() async {
     final int? driverId = await LocalStorageService().getUserId();
     final String orderChannel = 'driver-$driverId';
+    final String chatChannel = 'chat_$driverId';
 
     await PusherService().init(
       onEvent: (event) {
@@ -36,6 +37,7 @@ class PusherNotifier extends StateNotifier<void> {
 
     /// Subscribe to global & private driver channels
     await PusherService().subscribeChannel(orderChannel);
+    await PusherService().subscribeChannel(chatChannel);
   }
 
   /// Handle incoming pusher event
@@ -66,7 +68,7 @@ class PusherNotifier extends StateNotifier<void> {
       final PusherRequestOrderModel model = PusherRequestOrderModel.fromJson(eventData);
 
       final orderId = model.rideRequestId;
-      await LocalStorageService().saveOrderId(orderId?.toInt());
+      await LocalStorageService().saveRequestId(orderId?.toInt());
       orderRequestDialogue(data: model);
           // ref.read(driverStatusNotifierProvider.notifier)
           // .orderRequest(data: {'order_id': orderId});
@@ -83,11 +85,11 @@ class PusherNotifier extends StateNotifier<void> {
       //   }
       // }
     } else if (event.channelName.contains(
-      'order.${await LocalStorageService().getOrderId()}.$driverId',
+      'order.${await LocalStorageService().getRequestId()}.$driverId',
     )) {
       playRingtone();
       await PusherService().unsubscribeChannel(
-        'order.${await LocalStorageService().getOrderId()}.$driverId',
+        'order.${await LocalStorageService().getRequestId()}.$driverId',
       );
       showNotification(message: 'Your Ride has been cancel by Rider!');
       final local = LocalStorageService();

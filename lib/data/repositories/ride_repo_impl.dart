@@ -5,6 +5,8 @@ import 'package:deligo_driver/data/repositories/base_repository.dart';
 import '../../domain/interfaces/ride_service_interface.dart';
 import '../models/order_response/order_detail/order_detail_model.dart';
 import '../models/order_response/tip_model/trip_model.dart';
+import '../models/request_accept_model/OrderAcceptModel.dart';
+import '../models/ride_details_model/RideDetailsModel.dart';
 import 'interfaces/ride_repo_interface.dart';
 
 class RideRepoImpl extends BaseRepository implements IRideRepo {
@@ -59,8 +61,20 @@ class RideRepoImpl extends BaseRepository implements IRideRepo {
     });
 
   @override
-  Future<Either<Failure, CommonResponse>> acceptRejectRide({required int orderId, required String status}) async => await safeApiCall(()async{
+  Future<Either<Failure, OrderAcceptModel>> acceptRejectRide({required int orderId, required String status}) async => await safeApiCall(()async{
       final response = await rideService.acceptRejectRide(orderId: orderId, status: status);
-      return CommonResponse.fromJson(response.data);
+      return OrderAcceptModel.fromJson(response.data);
     });
+
+  @override
+  Future<Either<Failure, RideDetailsModel>> rideDetail({required int? orderId})async => safeApiCall(()async{
+      final response = await rideService.rideDetail(orderId: orderId);
+      return RideDetailsModel.fromJson(response.data);
+    });
+
+  @override
+  Future<Either<Failure, CommonResponse>> saveOrderStatus({required num? orderId, required String status, bool sendOtherData = false}) async => safeApiCall(()async{
+    final response = await rideService.saveOrderStatus(orderId: orderId, status: status, sendOtherData: sendOtherData);
+    return CommonResponse.fromJson(response.data);
+  });
 }

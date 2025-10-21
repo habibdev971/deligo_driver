@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +20,8 @@ import '../../provider/ride_providers.dart';
 
 Widget confirmPickup(BuildContext context, Order? order) => Consumer(
   builder: (context, ref, _) {
-    final rideOrderNotifier = ref.read(rideOrderNotifierProvider.notifier);
-    final rideOrderState = ref.read(rideOrderNotifierProvider);
+    final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+    final rideOrderState = ref.read(saveOrderStatusProvider);
     final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
     final timerState = ref.watch(cancelButtonEnableTimerProvider);
     final timerStateNotifier = ref.read(
@@ -66,10 +67,10 @@ Widget confirmPickup(BuildContext context, Order? order) => Consumer(
         Gap(16.w),
         Expanded(
           child: AppPrimaryButton(
-            isLoading: rideOrderState.whenOrNull(loading: () => true) ?? false,
+            // isLoading: rideOrderState.whenOrNull(loading: () => true) ?? false,
             onPressed: () {
               rideOrderNotifier.saveOrderStatus(
-                status: 'picked_up',
+                status: 'DROPPED_OFF',
                 onSuccess: (v) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
                     onTripNotifier.updateOnTripStatus(

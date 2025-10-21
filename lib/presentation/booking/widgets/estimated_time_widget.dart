@@ -44,7 +44,7 @@ Widget headingToDestination(BuildContext context) => Column(
       final onTripStatusNotifier = ref.read(ontripStatusNotifier.notifier);
       return TextButton(onPressed: (){
         onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.reachedDestination, );
-      }, child: Text("Test button for next page"));
+      }, child: const Text('Test button for next page'));
     })
   ],
 );

@@ -26,10 +26,7 @@ class _OrderRequestDialog extends ConsumerWidget {
   const _OrderRequestDialog({this.data});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(rideOrderNotifierProvider);
-
-    return Dialog(
+  Widget build(BuildContext context, WidgetRef ref) => Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.r), side: isDarkMode() ? const BorderSide(color: Colors.white) : BorderSide.none),
       insetPadding: EdgeInsets.all(16.r),
       child: IntrinsicHeight(
@@ -45,8 +42,8 @@ class _OrderRequestDialog extends ConsumerWidget {
                 rating: data?.user?.userInfo?.rattings,
               ), amount: (data?.estimatedFare ?? 0).toString()),
               Gap(8.h),
-              locationTime(context, 
-                  // time: ((order?.duration ?? 0) / 60).toStringAsFixed(1), 
+              locationTime(context,
+                  // time: ((order?.duration ?? 0) / 60).toStringAsFixed(1),
                   time: (data?.estimatedTime ?? 0).toStringAsFixed(1),
                 distance: (data?.distanceFromDriver ?? 0).toStringAsFixed(1)
               ),
@@ -67,5 +64,4 @@ class _OrderRequestDialog extends ConsumerWidget {
         ),
       ),
     );
-  }
 }
