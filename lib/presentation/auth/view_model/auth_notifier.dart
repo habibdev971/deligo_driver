@@ -56,7 +56,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
     final isNewUser = data?.isNew == true;
     // final isUnderReview = loginResponse.data?.isUnderReview == true;
     final isUnderReview = data?.isLicenseVerified == false;
-    if (isNewUser) {
+    if (isNewUser ) { //|| (isNewUser == false && data?.isDriver == false)
       // showNotification(message: 'otp: ${loginResponse.data?.otp}', isSuccess: true);
       final loading = ref.read(authLoadingProvider.notifier);
 
