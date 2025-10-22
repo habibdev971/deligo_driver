@@ -726,7 +726,11 @@
   "upload_back": "Upload Back",
   "tvde_driver_certificate": "TVDE Driver Certificate",
   "criminal_record_certificate": "Criminal Record Certificate",
-  "residence_permit_if_non_eu": "Residence Permit (if non-EU)"
+  "residence_permit_if_non_eu": "Residence Permit (if non-EU)",
+
+  "tips_withdraw": "Tips Withdraw",
+  "@tips_withdraw": {}
+
 
 
 }

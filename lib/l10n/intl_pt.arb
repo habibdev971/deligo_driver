@@ -709,7 +709,10 @@
   "upload_back": "Carregar Verso",
   "tvde_driver_certificate": "Certificado de Motorista TVDE",
   "criminal_record_certificate": "Certificado de Registo Criminal",
-  "residence_permit_if_non_eu": "Autorização de Residência (se não for da UE)"
+  "residence_permit_if_non_eu": "Autorização de Residência (se não for da UE)",
+
+  "tips_withdraw": "Levantamento de gorjetas",
+  "@tips_withdraw": {}
 
 }
 

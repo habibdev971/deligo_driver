@@ -2833,6 +2833,16 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Tips Withdraw`
+  String get tips_withdraw {
+    return Intl.message(
+      'Tips Withdraw',
+      name: 'tips_withdraw',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

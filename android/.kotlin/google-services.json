@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "939178197757",
+    "project_id": "deligo-cab",
+    "storage_bucket": "deligo-cab.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939178197757:android:bd7059e985d917ebd8b494",
+        "android_client_info": {
+          "package_name": "com.deligo.driver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn6ytiu4w9VonelsTc9qR5MPnNjS7bTCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939178197757:android:89fc067f5def87a7d8b494",
+        "android_client_info": {
+          "package_name": "com.deligo.rider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn6ytiu4w9VonelsTc9qR5MPnNjS7bTCc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

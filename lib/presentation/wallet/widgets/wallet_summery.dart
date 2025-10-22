@@ -57,7 +57,7 @@ Widget walletSummery(BuildContext context)=> Consumer(
                         borderRadius: BorderRadius.circular(8.r),
                         color: ColorPalette.primary50
                       ),
-                      child: Text(localize(context).withdraw, style: context.bodyMedium?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.white),),
+                      child: Text(localize(context).tips_withdraw, style: context.bodyMedium?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w500, color: Colors.white),),
                     ),
                   )
                 ],

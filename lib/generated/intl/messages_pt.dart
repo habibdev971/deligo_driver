@@ -604,6 +604,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "time_to_pickup": MessageLookupByLibrary.simpleMessage(
       "Hora de pegar seu passageiro! Siga a navegação e chegue sem atrasos",
     ),
+    "tips_withdraw": MessageLookupByLibrary.simpleMessage(
+      "Levantamento de gorjetas",
+    ),
     "today": MessageLookupByLibrary.simpleMessage("Hoje"),
     "todays_activity": MessageLookupByLibrary.simpleMessage(
       "Atividade de Hoje",
