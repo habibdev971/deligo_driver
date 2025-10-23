@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/utils/helpers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -15,7 +16,9 @@ import 'package:deligo_driver/presentation/auth/provider/auth_providers.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/theme/color_palette.dart';
 import '../../../core/utils/exit_app_dialogue.dart';
-import '../../../core/widgets/buttons/app_text_button.dart';
+import '../../../core/widgets/custom_text_field.dart';
+import '../../../generated/l10n.dart';
+import '../../account_page/widgets/phone_code_picker_button.dart';
 import '../widgets/auth_app_bar.dart';
 import '../widgets/auth_bottom_buttons.dart';
 
@@ -29,15 +32,17 @@ class LoginWithPasswordPage extends ConsumerStatefulWidget {
 
 class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
   final GlobalKey<FormBuilderState> formKey = GlobalKey<FormBuilderState>();
+  final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   bool showPassword = false;
 
-  bool codeLengthIsSafe = false;
+  // bool codeLengthIsSafe = false;
 
   @override
   void dispose() {
     super.dispose();
+    phoneController.dispose();
     passwordController.dispose();
   }
 
@@ -72,6 +77,24 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
             Gap(24.h),
 
             Text(
+              localize(context).phoneNo,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: isDarkMode()
+                    ? const Color(0xFF687387)
+                    : const Color(0xFF24262D),
+              ),
+            ),
+            Gap(12.h),
+            textField(
+              context,
+              phoneController,
+              hint: AppLocalizations.of(context).phoneNo,
+              keyboardType: TextInputType.phone,
+              suffix: buildPhoneCodePickerButton(),
+            ),
+            Text(
               localize(context).password_label,
               style: context.bodyMedium?.copyWith(
                 fontSize: 18.sp,
@@ -82,25 +105,61 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
               ),
             ),
             Gap(12.h),
-            TextField(
-              controller: passwordController,
-              onChanged: (v) {
-                setState(() {
-                  codeLengthIsSafe = v.length >= 6 && v.length <= 16;
-                });
-              },
+            textField(
+              context,
+              passwordController,
+              hint: localize(context).password_label,
+              keyboardType: TextInputType.visiblePassword,
               obscureText: !showPassword,
-              decoration: InputDecoration(
-                hintText: localize(context).password_label,
-                suffixIcon: CupertinoButton(
-                  onPressed: () => setState(() => showPassword = !showPassword),
-                  child: Icon(
-                    showPassword ? Ionicons.eye : Ionicons.eye_off,
-                    color: context.theme.inputDecorationTheme.suffixIconColor,
-                  ),
+              suffix: CupertinoButton(
+                onPressed: () => setState(() => showPassword = !showPassword),
+                child: Icon(
+                  showPassword ? Ionicons.eye : Ionicons.eye_off,
+                  color: context.theme.inputDecorationTheme.suffixIconColor,
                 ),
               ),
             ),
+            // TextField(
+            //   controller: passwordController,
+            //   onChanged: (v) {
+            //     setState(() {
+            //       codeLengthIsSafe = v.length >= 6 && v.length <= 16;
+            //     });
+            //   },
+            //   obscureText: !showPassword,
+            //   decoration: InputDecoration(
+            //     hintText: localize(context).password_label,
+            //     suffixIcon: CupertinoButton(
+            //       onPressed: () => setState(() => showPassword = !showPassword),
+            //       child: Icon(
+            //         showPassword ? Ionicons.eye : Ionicons.eye_off,
+            //         color: context.theme.inputDecorationTheme.suffixIconColor,
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Gap(12.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account? ", style: context.bodySmall,),
+                Flexible(
+                  child: GestureDetector(
+                    onTap: () {
+                      NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
+                    },
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+
             // Gap(16.h),
             //
             // Consumer(
@@ -145,21 +204,26 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
             loginWithPhoneOrEmailProvider.notifier,
           );
 
-          final existingUserData = ref
-              .read(existingUserProvider)
-              .maybeWhen(success: (data) => data, orElse: () => null);
+          // final existingUserData = ref
+          //     .read(existingUserProvider)
+          //     .maybeWhen(success: (data) => data, orElse: () => null);
 
           return AuthBottomButtons(
-            isLoading:
-                passwordController.text.trim().length < 6 ||
-                (loginWithPassState.whenOrNull(loading: () => true) ?? false),
-
+            isLoading: (phoneController.text.length < 5 && passwordController.text.length < 5) || (loginWithPassState.whenOrNull(loading: () => true) ?? false),
             title: localize(context).login,
             onTap: () {
-              stateNotifier.loginWithPhoneOrEmail(
-                mobile: existingUserData!.data?.user?.phoneNumber ?? '',
-                password: passwordController.text,
-              );
+              if(phoneController.text.length > 6 && passwordController.text.length > 5){
+                stateNotifier.loginWithPhoneOrEmail(
+                  mobile: phoneController.text.trim(),
+                  password: passwordController.text,
+                );
+              }else if(phoneController.text.length < 6){
+                showNotification(message: 'Please enter a valid phone number');
+              }else if(passwordController.text.length < 6) {
+                showNotification(message: 'Please enter a valid password');
+              }else{
+                showNotification(message: 'Please enter a valid phone number and password');
+              }
             },
           );
         },

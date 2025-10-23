@@ -12,6 +12,7 @@ Widget textField(
   String? Function(String?)? validator,
   TextInputType? keyboardType,
   bool emailOrPhoneEnable = false,
+      bool obscureText = false,
 }) {
   String? Function(String?)? dynamicValidator = validator;
 
@@ -99,6 +100,7 @@ Widget textField(
             state: state,
             keyboardType: keyboardType,
             validator: validator,
+            obscureText: obscureText,
           ),
           SizedBox(height: 4.h),
           if (state.hasError)

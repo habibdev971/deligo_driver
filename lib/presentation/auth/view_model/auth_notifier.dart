@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:deligo_driver/core/state/app_state.dart';
 import 'package:deligo_driver/core/utils/device_token_firebase.dart';
@@ -202,7 +203,28 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyResponse>> {
     : super(const AppState.initial());
 
   /// Main method to verify OTP
-  Future<void> verifyOTP({required String mobile, required String otp}) async {}
+  Future<void> verifyOTP({required String mobile, required String otp}) async {
+    state = const AppState.loading();
+    final deviceToken = await FirebaseMessaging.instance.getToken();
+
+    final result = await authRepoProvider.verifyOtp(
+      mobile: mobile,
+      otp: otp,
+      deviceToken: deviceToken,
+    );
+
+    result.fold(
+          (failure) {
+        showNotification(message: failure.message);
+        state = AppState.error(failure);
+      },
+          (response) {
+        showNotification(message: response.message, isSuccess: true);
+        state = AppState.success(response);
+        NavigationService.pushNamed(AppRoutes.legalDocumentsPage, arguments: mobile);
+      },
+    );
+  }
   // Future<void> verifyOTP({
   //   required String mobile,
   //   required String otp,

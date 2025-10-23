@@ -710,6 +710,13 @@
   "upload_back": "পেছনের দিক আপলোড করুন",
   "tvde_driver_certificate": "TVDE ড্রাইভার সার্টিফিকেট",
   "criminal_record_certificate": "অপরাধমূলক রেকর্ড সার্টিফিকেট",
-  "residence_permit_if_non_eu": "বাসস্থানের অনুমতি (যদি ইউরোপীয় ইউনিয়নের বাইরে হন)"
-
+  "residence_permit_if_non_eu": "বাসস্থানের অনুমতি (যদি ইউরোপীয় ইউনিয়নের বাইরে হন)",
+  "select_gender": "লিঙ্গ নির্বাচন করুন",
+  "@select_gender": {},
+  "male": "পুরুষ",
+  "@male": {},
+  "female": "মহিলা",
+  "@female": {},
+  "other": "অন্যান্য",
+  "@other": {}
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
+import 'package:deligo_driver/data/models/auth_models/initial_registration_model.dart';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 import 'package:deligo_driver/presentation/auth/view_model/driver_dropdown_notifier.dart';
 import 'package:deligo_driver/presentation/auth/view_model/login_with_phone_email_notifier.dart';
@@ -36,6 +37,9 @@ final authRepoProvider = Provider<IAuthRepo>((ref) => AuthRepoImpl(authService: 
 // Notifier Providers
 final existingUserProvider = StateNotifierProvider<ExistingUserNotifier, AppState<UserExistenceModel>>(
     (ref) => ExistingUserNotifier(authRepoProvider: ref.read(authRepoProvider), ref: ref));
+
+final initialRegistrationProvider = StateNotifierProvider<InitialRegistrationNotifier, AppState<InitialRegistrationModel>>(
+        (ref) => InitialRegistrationNotifier(authRepo: ref.read(authRepoProvider), ref: ref));
 
 final registrationProvider = StateNotifierProvider<RegistrationNotifier, AppState<RegistrationModel>>(
         (ref) => RegistrationNotifier(authRepo: ref.read(authRepoProvider), ref: ref));

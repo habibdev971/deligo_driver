@@ -36,14 +36,14 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
     await Future.delayed(const Duration(seconds: 2));
 
-    Future.microtask(() async{
+    // Future.microtask(() async{
       final bool isLoggedIn = await LocalStorageService().isLoggedIn();
       if(isLoggedIn){
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
       }else{
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
       }
-    });
+    // });
 
   }
 

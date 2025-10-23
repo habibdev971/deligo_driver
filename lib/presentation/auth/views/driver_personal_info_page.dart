@@ -1,8 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
+import 'package:deligo_driver/presentation/account_page/widgets/phone_code_picker_button.dart';
 import 'package:deligo_driver/presentation/auth/provider/driver_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -39,6 +41,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   File? profileImage;
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
+  final phoneController = TextEditingController();
   final dateOfBirthController = TextEditingController();
   final nationalityController = TextEditingController();
   final addressController = TextEditingController();
@@ -63,6 +66,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     addressController.dispose();
     firstNameController.dispose();
     lastNameController.dispose();
+    phoneController.dispose();
     dateOfBirthController.dispose();
     nationalityController.dispose();
     taxNumberController.dispose();
@@ -134,6 +138,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
       bottomNavigationBar: Consumer(
         builder: (context, ref, _) => AuthBottomButtons(
           title: localize(context).next,
+          isLoading: ref.watch(initialRegistrationProvider).whenOrNull(loading: ()=> true) ?? false,
           onTap: () async {
             if (formKey.currentState!.saveAndValidate()) {
               final formData = Map<String, dynamic>.from(formKey.currentState!.value)..addAll({
@@ -144,7 +149,16 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
                   //     .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
                 });
               ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
-              NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
+              final Map<String, dynamic> filteredData = {
+                'firstName': formData['firstName'],
+                'lastName': formData['lastName'],
+                'email': formData['email'],
+                'phoneNumber': formData['phoneNumber'] ?? '', // fallback if null
+                'gender': (formData['gender'] as String).toUpperCase(),
+                'userType': 'DRIVER', // fixed value
+              };
+              ref.read(initialRegistrationProvider.notifier).initialRegistration(data: filteredData);
+              // NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
     
             } else {
               showNotification(message: localize(context).all_field_required);
@@ -170,6 +184,13 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
         controller: lastNameController,
         name: 'lastName',
       ),
+      // _buildTextField(
+      //   context,
+      //   title: localize(context).phoneNo,
+      //   controller: phoneController,
+      //   name: 'phoneNumber',
+      //   suffix: buildPhoneCodePickerButton()
+      // ),
       _buildTextField(
         context,
         title: localize(context).date_of_birth,
@@ -246,6 +267,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     bool isRequired = true,
     bool readOnly = false,
     Function()? onTap,
+        Widget? suffix,
   }) => Padding(
     padding: const EdgeInsets.only(bottom: 16),
     child: FormBuilderField(
@@ -284,7 +306,14 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
               enabledBorder: border(),
               border: border(),
               errorText: field.errorText,
+              prefixIcon: suffix != null
+                  ? Padding(
+                padding: EdgeInsets.only(left: 8.w),
+                child: IntrinsicWidth(child: suffix),
+              )
+                  : null,
             ),
+
           ),
         ],
       ),

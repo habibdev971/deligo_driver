@@ -4,6 +4,7 @@ class ApiEndpoints {
   static const String mediator = 'driver';
   static const String getDriverDropdownDataUrl = '/dropdown/list';
   static const String checkUserExistenceUrl = '/users/check-existing-user';
+  static const String initialRegistrationUrl = '$mediator/register';
   static const String registrationUrl = '$mediator/driver-register';
   static const String loginWithPasswordUrl = '/users/login';
   static const String loginWithPhoneOrEmailUrl = '/users/login';

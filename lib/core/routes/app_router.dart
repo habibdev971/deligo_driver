@@ -41,7 +41,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const DashboardPage());
       case '/login-with-password':
         return MaterialPageRoute(builder: (_) => const LoginWithPasswordPage());
-      case '/verify-otp':
+      case AppRoutes.verifyOTP:
         return MaterialPageRoute(builder: (_) {
           final String? code = settings.arguments as String?;
           return VerifyOtpPage(code: code,);

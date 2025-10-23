@@ -729,8 +729,14 @@
   "residence_permit_if_non_eu": "Residence Permit (if non-EU)",
 
   "tips_withdraw": "Tips Withdraw",
-  "@tips_withdraw": {}
+  "@tips_withdraw": {},
 
-
-
+  "select_gender": "Select Gender",
+  "@select_gender": {},
+  "male": "Male",
+  "@male": {},
+  "female": "Female",
+  "@female": {},
+  "other": "Other",
+  "@other": {}
 }

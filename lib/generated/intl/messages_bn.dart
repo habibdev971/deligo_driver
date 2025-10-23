@@ -236,6 +236,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "exit": MessageLookupByLibrary.simpleMessage("প্রস্থান"),
     "exp_date": MessageLookupByLibrary.simpleMessage("মেয়াদ শেষের তারিখ"),
     "expiryDate": MessageLookupByLibrary.simpleMessage("মেয়াদ শেষের তারিখ"),
+    "female": MessageLookupByLibrary.simpleMessage("মহিলা"),
     "field_required": MessageLookupByLibrary.simpleMessage(
       "এই ঘরটি অবশ্যই পূরণ করতে হবে",
     ),
@@ -304,6 +305,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login_with_your_password": MessageLookupByLibrary.simpleMessage(
       "আপনার পাসওয়ার্ড দিয়ে লগইন করুন",
     ),
+    "male": MessageLookupByLibrary.simpleMessage("পুরুষ"),
     "method": MessageLookupByLibrary.simpleMessage("পদ্ধতি: "),
     "min_length_error": m3,
     "mobile_number": MessageLookupByLibrary.simpleMessage("মোবাইল নম্বর"),
@@ -346,6 +348,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "or_select_avatar": MessageLookupByLibrary.simpleMessage(
       "অথবা নিচের তালিকা থেকে একটি অবতার নির্বাচন করুন:",
     ),
+    "other": MessageLookupByLibrary.simpleMessage("অন্যান্য"),
     "otp_enter_title": MessageLookupByLibrary.simpleMessage(
       "আপনার ওটিপি লিখুন",
     ),
@@ -496,6 +499,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "select_card_type": MessageLookupByLibrary.simpleMessage(
       "কার্ডের ধরন নির্বাচন করুন",
+    ),
+    "select_gender": MessageLookupByLibrary.simpleMessage(
+      "লিঙ্গ নির্বাচন করুন",
     ),
     "select_payment_method": MessageLookupByLibrary.simpleMessage(
       "পেমেন্ট পদ্ধতি নির্বাচন করুন",

@@ -11,6 +11,7 @@ Widget textFieldOnly({
   TextEditingController? controller,
   FormFieldState<String>? state,
   bool readOnly = false,
+  bool obscureText = false,
 }) => SizedBox(
     height: 60.h,
     child: Semantics(
@@ -18,6 +19,7 @@ Widget textFieldOnly({
       label: hint,
       child: TextField(
         controller: controller,
+        obscureText: obscureText,
         keyboardType: keyboardType,
         onChanged: (val) {
           state?.didChange(val);

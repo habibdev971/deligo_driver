@@ -6,6 +6,7 @@ abstract class IAuthService {
   Future<Response> getDriverDropdownData();
   Future<Response> checkUserExistence({required String phone, required String countryCode, String? deviceToken});
   Future<Response> registration({required Map<String, dynamic> data});
+  Future<Response> initialRegistration({required Map<String, dynamic> data});
   Future<Response> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken});
   Future<Response> resendSignIn({required num? userId, required String? deviceToken});
   Future<Response> loginWithPassword({required String mobile, required String password, String? deviceToken});

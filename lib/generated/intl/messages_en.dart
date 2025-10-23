@@ -233,6 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "exit": MessageLookupByLibrary.simpleMessage("Exit"),
     "exp_date": MessageLookupByLibrary.simpleMessage("Exp. Date"),
     "expiryDate": MessageLookupByLibrary.simpleMessage("Expiry Date"),
+    "female": MessageLookupByLibrary.simpleMessage("Female"),
     "field_required": MessageLookupByLibrary.simpleMessage(
       "This field is required",
     ),
@@ -303,6 +304,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "login_with_your_password": MessageLookupByLibrary.simpleMessage(
       "Login with your Password",
     ),
+    "male": MessageLookupByLibrary.simpleMessage("Male"),
     "method": MessageLookupByLibrary.simpleMessage("Method: "),
     "min_length_error": m3,
     "mobile_number": MessageLookupByLibrary.simpleMessage("Mobile Number"),
@@ -343,6 +345,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "or_select_avatar": MessageLookupByLibrary.simpleMessage(
       "Or select an avatar from the list below:",
     ),
+    "other": MessageLookupByLibrary.simpleMessage("Other"),
     "otp_enter_title": MessageLookupByLibrary.simpleMessage("Enter Your OTP"),
     "otp_input_hint": MessageLookupByLibrary.simpleMessage("Write Your OTP"),
     "otp_resend": MessageLookupByLibrary.simpleMessage("Resend"),
@@ -494,6 +497,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_card_type": MessageLookupByLibrary.simpleMessage(
       "Select Card type",
     ),
+    "select_gender": MessageLookupByLibrary.simpleMessage("Select Gender"),
     "select_payment_method": MessageLookupByLibrary.simpleMessage(
       "Select payment method",
     ),

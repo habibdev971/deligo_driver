@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:deligo_driver/data/models/auth_models/initial_registration_model.dart';
 import 'package:deligo_driver/data/models/common_response.dart';
 import 'package:deligo_driver/data/models/documents_upload_response/documents_upload_response.dart';
 import 'package:deligo_driver/data/models/driver_details_response/driver_details_response.dart';
@@ -34,6 +35,12 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
       final response = await authService.checkUserExistence(phone: mobile,  deviceToken: deviceToken, countryCode: countryCode);
       return UserExistenceModel.fromJson(response.data);
     });
+
+  @override
+  Future<Either<Failure, InitialRegistrationModel>> initialRegistration({required Map<String, dynamic> data,})async => await safeApiCall(() async {
+    final response = await authService.registration(data: data);
+    return InitialRegistrationModel.fromJson(response.data);
+  });
 
   @override
   Future<Either<Failure, RegistrationModel>> registration({required Map<String, dynamic> data,})async => await safeApiCall(() async {

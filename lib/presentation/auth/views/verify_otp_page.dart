@@ -35,16 +35,15 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
   bool canResend = false;
   TextEditingController otpController = TextEditingController();
 
-  void setCodeToController(String? codes){
-    otpController.text = codes ?? '';
-
-  }
+  // void setCodeToController(String? codes){
+  //   otpController.text = codes ?? '';
+  // }
   @override
   void initState() {
     super.initState();
-    if(widget.code != null){
-      setCodeToController(widget.code);
-    }
+    // if(widget.code != null){
+    //   setCodeToController(widget.code);
+    // }
     _startResendCountdown();
   }
 
@@ -165,12 +164,16 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
       isLoading: otpController.text.trim().length < 6 || (verifyState.whenOrNull(loading: () => true,) ?? false),
       title: '${localize(context).confirm} OTP',
       onTap: () {
-        if (existingUserData?.data?.user?.phoneNumber != null) {
-          verifyNotifier.verifyOTP(
-            mobile: existingUserData?.data?.user?.phoneNumber ?? '',
-            otp: otpController.text.trim(),
-          );
-        }
+        verifyNotifier.verifyOTP(
+          mobile: widget.code ?? '',
+          otp: otpController.text.trim(),
+        );
+        // if (existingUserData?.data?.user?.phoneNumber != null) {
+        //   verifyNotifier.verifyOTP(
+        //     mobile: existingUserData?.data?.user?.phoneNumber ?? '',
+        //     otp: otpController.text.trim(),
+        //   );
+        // }
       },
     );
   }

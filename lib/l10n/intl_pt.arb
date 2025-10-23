@@ -712,7 +712,15 @@
   "residence_permit_if_non_eu": "Autorização de Residência (se não for da UE)",
 
   "tips_withdraw": "Levantamento de gorjetas",
-  "@tips_withdraw": {}
+  "@tips_withdraw": {},
 
+  "select_gender": "Selecionar gênero",
+  "@select_gender": {},
+  "male": "Masculino",
+  "@male": {},
+  "female": "Feminino",
+  "@female": {},
+  "other": "Outro",
+  "@other": {}
 }
 

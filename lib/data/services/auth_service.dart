@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:deligo_driver/core/utils/device_token_firebase.dart';
 import 'package:deligo_driver/presentation/auth/view_model/get_multipart_form.dart';
 import 'package:dio/dio.dart';
 import 'package:deligo_driver/core/config/api_endpoints.dart';
@@ -18,14 +19,27 @@ class AuthServiceImpl extends IAuthService {
   Future<Response> getDriverDropdownData() async => await dioClient.dio.get(ApiEndpoints.getDriverDropdownDataUrl);
 
   @override
+  Future<Response> initialRegistration({required Map<String, dynamic> data})async{
+    // final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    final deviceToken = await deviceTokenFirebase();
+    data.addAll({
+      'device_token': deviceToken,
+    });
+    return await dioClient.dio.post(
+      ApiEndpoints.initialRegistrationUrl,
+      data: data
+    );
+  }
+
+  @override
   Future<Response> registration({required Map<String, dynamic> data})async{
     final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     data.addAll({
       'idToken': idToken,
     });
     return await dioClient.dio.post(
-      ApiEndpoints.registrationUrl,
-      data: await buildMultipartForm(data)
+        ApiEndpoints.registrationUrl,
+        data: await buildMultipartForm(data)
     );
   }
 
@@ -120,8 +134,9 @@ class AuthServiceImpl extends IAuthService {
       ApiEndpoints.loginWithPasswordUrl,
       data: {
         'mobile': mobile,
-        'country_code': await LocalStorageService().getPhoneCode(),
+        // 'country_code': await LocalStorageService().getPhoneCode(),
         'otp': otp,
+        'userType': 'DRIVER',
         'device_token': deviceToken
       },
     );
