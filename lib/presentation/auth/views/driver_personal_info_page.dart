@@ -143,22 +143,23 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
             if (formKey.currentState!.saveAndValidate()) {
               final formData = Map<String, dynamic>.from(formKey.currentState!.value)..addAll({
                   'isNewUser': false,
-                  'phoneNumber': widget.phoneNumber
+                  // 'phoneNumber': widget.phoneNumber
                   // ref
                   //     .watch(existingUserProvider)
                   //     .whenOrNull(success: (data) => data.data?.user?.phoneNumber),
                 });
               ref.read(driverInfoProvider.notifier).updatePersonalInfo(formData);
-              final Map<String, dynamic> filteredData = {
-                'firstName': formData['firstName'],
-                'lastName': formData['lastName'],
-                'email': formData['email'],
-                'phoneNumber': formData['phoneNumber'] ?? '', // fallback if null
-                'gender': (formData['gender'] as String).toUpperCase(),
-                'userType': 'DRIVER', // fixed value
-              };
-              ref.read(initialRegistrationProvider.notifier).initialRegistration(data: filteredData);
-              // NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
+              // final Map<String, dynamic> filteredData = {
+              //   'firstName': formData['firstName'],
+              //   'lastName': formData['lastName'],
+              //   'email': formData['email'],
+              //   'phoneNumber': formData['phoneNumber'] ?? '', // fallback if null
+              //   'gender': (formData['gender'] as String).toUpperCase(),
+              //   'userType': 'DRIVER', // fixed value
+              // };
+              // ref.read(driverInfoProvider.notifier).updatePersonalInfo()
+              // ref.read(initialRegistrationProvider.notifier).initialRegistration(mapData: filteredData);
+              NavigationService.pushNamed(AppRoutes.legalDocumentsPage);
     
             } else {
               showNotification(message: localize(context).all_field_required);
@@ -172,18 +173,18 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   Widget _buildFormFields(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _buildTextField(
-        context,
-        title: localize(context).first_name,
-        controller: firstNameController,
-        name: 'firstName',
-      ),
-      _buildTextField(
-        context,
-        title: localize(context).last_name,
-        controller: lastNameController,
-        name: 'lastName',
-      ),
+      // _buildTextField(
+      //   context,
+      //   title: localize(context).first_name,
+      //   controller: firstNameController,
+      //   name: 'firstName',
+      // ),
+      // _buildTextField(
+      //   context,
+      //   title: localize(context).last_name,
+      //   controller: lastNameController,
+      //   name: 'lastName',
+      // ),
       // _buildTextField(
       //   context,
       //   title: localize(context).phoneNo,
@@ -227,19 +228,19 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
         controller: addressController,
         name: 'address',
       ),
-      _buildTextField(
-        context,
-        title: localize(context).email_label,
-        controller: emailController,
-        name: 'email',
-        isEmail: true,
-      ),
-      _buildTextField(
-        context,
-        title: localize(context).password,
-        controller: passwordController,
-        name: 'password',
-      ),
+      // _buildTextField(
+      //   context,
+      //   title: localize(context).email_label,
+      //   controller: emailController,
+      //   name: 'email',
+      //   isEmail: true,
+      // ),
+      // _buildTextField(
+      //   context,
+      //   title: localize(context).password,
+      //   controller: passwordController,
+      //   name: 'password',
+      // ),
       _buildTextField(
         context,
         title: localize(context).tax_number,

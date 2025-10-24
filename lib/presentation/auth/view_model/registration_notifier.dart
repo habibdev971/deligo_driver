@@ -1,4 +1,5 @@
 import 'package:deligo_driver/data/models/auth_models/initial_registration_model.dart';
+import 'package:deligo_driver/presentation/auth/provider/auth_providers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +19,7 @@ class InitialRegistrationNotifier extends StateNotifier<AppState<InitialRegistra
   InitialRegistrationNotifier({required this.ref, required this.authRepo})
       : super(const AppState.initial());
 
-  Future<void> initialRegistration({required Map<String, dynamic> data}) async {
+  Future<void> initialRegistration({required Map<String, dynamic> mapData}) async {
     state = const AppState.loading();
     // final String? deviceToken = await FirebaseMessaging.instance.getToken();
     await LocalStorageService().clearToken();
@@ -27,7 +28,7 @@ class InitialRegistrationNotifier extends StateNotifier<AppState<InitialRegistra
 
     // allData = ;
     final result = await authRepo.initialRegistration(
-      data: data
+      data: mapData
     );
     result.fold(
           (failure) {
@@ -41,10 +42,11 @@ class InitialRegistrationNotifier extends StateNotifier<AppState<InitialRegistra
           isSuccess: true,
           type: MessageType.snackBar,
         );
-        LocalStorageService().setRegistrationProgress(AppRoutes.driverPersonalInfoPage);
+        LocalStorageService().setRegistrationProgress(AppRoutes.register);
         state = AppState.success(data);
+        ref.read(driverInfoProvider.notifier).updateInitialRegisterInfo(mapData);
         // await LocalStorageService().saveToken(data.data!.token);
-        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: ref.read(driverInfoProvider).personalInfo['phoneNumber']);
+        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: mapData['phoneNumber']);
       },
     );
   }
@@ -67,6 +69,7 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
     final String? deviceToken = await FirebaseMessaging.instance.getToken();
     await LocalStorageService().clearToken();
     final Map<String, dynamic> allData = {}
+    ..addAll(ref.read(driverInfoProvider).initialRegisterInfo)
     ..addAll(ref.read(driverInfoProvider).personalInfo)
       ..addAll(ref.read(driverInfoProvider).legalDocuments)
       ..addAll(ref.read(driverInfoProvider).vehicleInfo)
@@ -91,8 +94,8 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
         );
         LocalStorageService().setRegistrationProgress(AppRoutes.driverPersonalInfoPage);
         state = AppState.success(data);
-        // await LocalStorageService().saveToken(data.data!.token);
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login,);
+        await LocalStorageService().saveToken(data.data?.token);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.setPassword,);
       },
     );
   }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
 import 'package:deligo_driver/data/models/auth_models/initial_registration_model.dart';
+import 'package:deligo_driver/data/models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 import 'package:deligo_driver/presentation/auth/view_model/driver_dropdown_notifier.dart';
 import 'package:deligo_driver/presentation/auth/view_model/login_with_phone_email_notifier.dart';
@@ -53,7 +54,7 @@ final loginWithPassNotifierProvider = StateNotifierProvider<LoginWithPassNotifie
 final resendSignInProvider = StateNotifierProvider<ResendSignInNotifier, AppState<LoginWithPassResponse>>(
         (ref) => ResendSignInNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
-final otpVerifyNotifierProvider = StateNotifierProvider<OtpVerifyNotifier, AppState<OtpVerifyResponse>>(
+final otpVerifyProvider = StateNotifierProvider<OtpVerifyNotifier, AppState<OtpVerifyModel>>(
     (ref) => OtpVerifyNotifier(authRepoProvider: ref.read(authRepoProvider), ref: ref));
 
 final updatePassViewModelProvider = StateNotifierProvider.autoDispose<UpdatePassViewModel, AppState<CommonResponse>>(

@@ -153,17 +153,22 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
   }
 
   Widget _buildVerifyButton(BuildContext context, WidgetRef ref) {
-    final verifyState = ref.watch(otpVerifyNotifierProvider);
-    final verifyNotifier = ref.read(otpVerifyNotifierProvider.notifier);
-    final existingUserData = ref.read(existingUserProvider).maybeWhen(
-      success: (data) => data,
-      orElse: () => null,
-    );
+    final verifyState = ref.watch(otpVerifyProvider);
+    final verifyNotifier = ref.read(otpVerifyProvider.notifier);
+    // final existingUserData = ref.read(existingUserProvider).maybeWhen(
+    //   success: (data) => data,
+    //   orElse: () => null,
+    // );
 
     return AuthBottomButtons(
-      isLoading: otpController.text.trim().length < 6 || (verifyState.whenOrNull(loading: () => true,) ?? false),
+      isLoading:(verifyState.whenOrNull(loading: ()=> true) ?? false),
+      // isLoading: otpController.text.trim().length < 6 || (verifyState.whenOrNull(loading: () => true,) ?? false),
       title: '${localize(context).confirm} OTP',
       onTap: () {
+        if(otpController.text.trim().length < 6){
+          showNotification(message: 'Please enter a valid OTP');
+          return;
+        }
         verifyNotifier.verifyOTP(
           mobile: widget.code ?? '',
           otp: otpController.text.trim(),

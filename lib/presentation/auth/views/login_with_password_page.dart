@@ -1,4 +1,5 @@
 import 'package:deligo_driver/core/utils/helpers.dart';
+import 'package:deligo_driver/presentation/account_page/provider/select_country_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -146,7 +147,7 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
                 Flexible(
                   child: GestureDetector(
                     onTap: () {
-                      NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
+                      NavigationService.pushNamed(AppRoutes.register);
                     },
                     child: const Text(
                       'Register',
@@ -209,12 +210,13 @@ class _LoginWithPasswordPageState extends ConsumerState<LoginWithPasswordPage> {
           //     .maybeWhen(success: (data) => data, orElse: () => null);
 
           return AuthBottomButtons(
-            isLoading: (phoneController.text.length < 5 && passwordController.text.length < 5) || (loginWithPassState.whenOrNull(loading: () => true) ?? false),
+              // (phoneController.text.length < 5 && passwordController.text.length < 5) ||
+                  isLoading:(loginWithPassState.whenOrNull(loading: () => true) ?? false),
             title: localize(context).login,
             onTap: () {
               if(phoneController.text.length > 6 && passwordController.text.length > 5){
                 stateNotifier.loginWithPhoneOrEmail(
-                  mobile: phoneController.text.trim(),
+                  mobile: ref.watch(selectedPhoneCodeProvider) + phoneController.text.trim(),
                   password: passwordController.text,
                 );
               }else if(phoneController.text.length < 6){

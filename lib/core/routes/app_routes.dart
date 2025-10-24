@@ -4,6 +4,7 @@ class AppRoutes {
   static const String dashboard = '/dashboard';
   static const String loginWithPassword = '/login-with-password';
   static const String verifyOTP = '/verify-otp';
+  static const String register = '/register';
   static const String verifyFirebaseOtp = '/verify-firebase-otp';
   static const String setPassword = '/set-password';
   static const String changePassword = '/change-password';

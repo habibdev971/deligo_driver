@@ -6,6 +6,12 @@ import '../../../data/models/auth_models/driver_info_state.dart';
 class DriverInfoNotifier extends StateNotifier<DriverInfoState> {
   DriverInfoNotifier() : super(DriverInfoState.empty());
 
+  /// Update driver info
+  void updateInitialRegisterInfo(Map<String, dynamic> info){
+    state = state.copyWith(
+      initialRegisterInfo: {...state.initialRegisterInfo, ...info},
+    );
+  }
   /// Update personal info
   void updatePersonalInfo(Map<String, dynamic> info) {
     state = state.copyWith(

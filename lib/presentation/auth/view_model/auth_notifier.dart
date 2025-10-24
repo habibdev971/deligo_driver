@@ -16,6 +16,7 @@ import 'package:deligo_driver/presentation/splash/provider/app_flow_providers.da
 
 import '../../../core/routes/app_routes.dart';
 import '../../../core/utils/helpers.dart';
+import '../../../data/models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import '../../../data/models/common_response.dart';
 import '../../../data/models/login_with_pass_response/login_with_pass_response.dart';
 import '../../../data/models/otp_verify_response/otp_verify_response.dart';
@@ -195,7 +196,7 @@ class ResendSignInNotifier
   }
 }
 
-class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyResponse>> {
+class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
   final IAuthRepo authRepoProvider;
   final Ref ref;
 
@@ -218,10 +219,11 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyResponse>> {
         showNotification(message: failure.message);
         state = AppState.error(failure);
       },
-          (response) {
+          (response) async{
         showNotification(message: response.message, isSuccess: true);
         state = AppState.success(response);
-        NavigationService.pushNamed(AppRoutes.legalDocumentsPage, arguments: mobile);
+        await LocalStorageService().saveRegisterToken(response.data?.token);
+        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage,);
       },
     );
   }
@@ -327,7 +329,7 @@ class UpdatePassViewModel extends StateNotifier<AppState<CommonResponse>> {
         LocalStorageService().setRegistrationProgress(
           AppRoutes.driverPersonalInfoPage,
         );
-        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
         resetStateAfterDelay();
       },
     );

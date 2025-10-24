@@ -15,6 +15,7 @@ import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
 
 import '../../core/errors/failure.dart';
 import '../models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
+import '../models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import '../models/auth_models/registration_model.dart';
 import '../models/login_with_pass_response/login_with_pass_response.dart';
 import 'interfaces/auth_repo_interface.dart';
@@ -38,7 +39,7 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
 
   @override
   Future<Either<Failure, InitialRegistrationModel>> initialRegistration({required Map<String, dynamic> data,})async => await safeApiCall(() async {
-    final response = await authService.registration(data: data);
+    final response = await authService.initialRegistration(data: data);
     return InitialRegistrationModel.fromJson(response.data);
   });
 
@@ -61,9 +62,9 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
   });
 
   @override
-  Future<Either<Failure, OtpVerifyResponse>> verifyOtp({required String mobile, required String otp, String? deviceToken}) async => await safeApiCall(() async {
+  Future<Either<Failure, OtpVerifyModel>> verifyOtp({required String mobile, required String otp, String? deviceToken}) async => await safeApiCall(() async {
       final response = await authService.verifyOtp(mobile: mobile, otp: otp, deviceToken: deviceToken);
-      return OtpVerifyResponse.fromMap(response.data);
+      return OtpVerifyModel.fromJson(response.data);
     });
 
   @override

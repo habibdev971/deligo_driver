@@ -4,13 +4,14 @@ class ApiEndpoints {
   static const String mediator = 'driver';
   static const String getDriverDropdownDataUrl = '/dropdown/list';
   static const String checkUserExistenceUrl = '/users/check-existing-user';
-  static const String initialRegistrationUrl = '$mediator/register';
+  static const String initialRegistrationUrl = 'users/register';
   static const String registrationUrl = '$mediator/driver-register';
   static const String loginWithPasswordUrl = '/users/login';
   static const String loginWithPhoneOrEmailUrl = '/users/login';
   static const String resendSignIn = '/resend-sign-in';
   static const String resendOTP = '/resend-otp';
-  static const String updatePassword = '/password-setup';
+  static const String updatePassword = 'users/set-password';
+  static const String verifyOTP = 'users/verify-otp';
   static const String requestOTP = '/forgot-password/request-otp';
   static const String forgetVerifyOtp = '/forgot-password/verify-otp';
   static const String resetPassword = '/forgot-password/reset-password';

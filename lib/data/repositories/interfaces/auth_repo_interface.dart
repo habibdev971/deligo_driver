@@ -11,6 +11,7 @@ import 'package:deligo_driver/data/models/otp_verify_response/otp_verify_respons
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 
 import '../../../core/errors/failure.dart';
+import '../../models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import '../../models/auth_models/registration_model.dart';
 import '../../models/forgot_verify_otp_response/forgot_verify_otp_response.dart';
 import '../../models/login_with_pass_response/login_with_pass_response.dart';
@@ -24,7 +25,7 @@ abstract class IAuthRepo {
   Future<Either<Failure, RegistrationModel>> loginPhoneOrEmail({required String phoneOrEmail, required String password, String? deviceToken});
   Future<Either<Failure, LoginWithPassResponse>> resendSignIn({required num? userId, required String? deviceToken});
   Future<Either<Failure, LoginWithPassResponse>> loginWithPassword({required String mobile, required String password, String? deviceToken});
-  Future<Either<Failure, OtpVerifyResponse>> verifyOtp({required String mobile, required String otp, String? deviceToken});
+  Future<Either<Failure, OtpVerifyModel>> verifyOtp({required String mobile, required String otp, String? deviceToken});
   Future<Either<Failure, CommonResponse>> updatePassword({required String password});
   Future<Either<Failure, CommonResponse>> changePassword({required String currentPassword, required String newPassword, required newConfirmPassword});
   Future<Either<Failure, ResendOtpModel>> resendOTP({required String mobile});

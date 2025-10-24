@@ -122,6 +122,11 @@ class LocalStorageService {
     await _storage.write(key: 'token', value: token);
   }
 
+  Future<void> saveRegisterToken(String? token) async {
+    await _storage.write(key: 'register-token', value: token);
+  }
+
+  Future<String?> getRegisterToken() async => _storage.safeRead(key: 'register-token');
   Future<String?> getToken() async => _storage.safeRead(key: 'token');
 
   Future<void> clearToken() async {

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:deligo_driver/core/utils/device_token_firebase.dart';
@@ -33,10 +34,14 @@ class AuthServiceImpl extends IAuthService {
 
   @override
   Future<Response> registration({required Map<String, dynamic> data})async{
-    final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
+    // final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     data.addAll({
-      'idToken': idToken,
+      'isNewUser': false,
+      'password': 'secret'
+      // 'idToken': idToken,
+
     });
+    log(data.toString());
     return await dioClient.dio.post(
         ApiEndpoints.registrationUrl,
         data: await buildMultipartForm(data)
@@ -65,7 +70,7 @@ class AuthServiceImpl extends IAuthService {
       data: {
         'phoneOremail': phoneOrEmail,
         'password': password,
-        'type': 'DRIVER'
+        'userType': 'DRIVER'
       },
     );
 
@@ -118,7 +123,8 @@ class AuthServiceImpl extends IAuthService {
   @override
   Future<Response> updatePassword({required String password}) async => dioClient.dio.post(ApiEndpoints.updatePassword, data: {
       'password': password,
-      'password_confirmation': password,
+      // 'password_confirmation': password,
+    'userType': 'DRIVER'
     });
 
   @override
@@ -131,7 +137,7 @@ class AuthServiceImpl extends IAuthService {
 
   @override
   Future<Response> verifyOtp({required String mobile, required String otp, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.loginWithPasswordUrl,
+      ApiEndpoints.verifyOTP,
       data: {
         'mobile': mobile,
         // 'country_code': await LocalStorageService().getPhoneCode(),
