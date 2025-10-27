@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
 
+import '../../../core/config/api_endpoints.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../core/utils/logger.dart';
 import '../navigation_service.dart';
@@ -9,10 +12,11 @@ import '../navigation_service.dart';
 class DioInterceptors extends Interceptor {
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    Logger.log('REQUEST[${options.method}] => PATH: ${options.path}');
-
+    String? token;
+    final String url = options.uri.path;
+    log('-->> request url: $url');
     // Token fetch from local storage
-    final token = await LocalStorageService().getToken();
+    token = (url.contains(ApiEndpoints.updatePassword) || url.contains(ApiEndpoints.registrationUrl)) ? await LocalStorageService().getRegisterToken() : await LocalStorageService().getToken();
     if (token != null) {
       options.headers['Authorization'] = 'Bearer $token';
     }

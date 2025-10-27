@@ -133,6 +133,10 @@ class LocalStorageService {
     await _storage.delete(key: 'token');
   }
 
+  Future<void> clearRegisterToken() async {
+    await _storage.delete(key: 'register-token');
+  }
+
   Future<void> clearUser() async {
     await _storage.delete(key: 'user');
   }

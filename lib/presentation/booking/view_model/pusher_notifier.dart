@@ -64,6 +64,7 @@ class PusherNotifier extends StateNotifier<void> {
     if (event.channelName.contains(chatChannel)) {
       _handleChatMessages(eventData);
     } else if (event.channelName.contains(orderChannel)) {
+      if(Navigator.canPop(NavigationService.navigatorKey.currentContext!))return;
       playRingtone();
       final PusherRequestOrderModel model = PusherRequestOrderModel.fromJson(eventData);
 

@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
+import 'package:deligo_driver/core/widgets/custom_dropdown.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/account_page/widgets/phone_code_picker_button.dart';
 import 'package:deligo_driver/presentation/auth/provider/driver_info_provider.dart';
@@ -322,42 +323,47 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   );
 
   Widget _buildGenderDropdown(BuildContext context, {bool isRequired = true}) {
+    TextStyle? textStyle() => context.bodyMedium?.copyWith(
+      fontSize: 16.sp,
+      // fontWeight: FontWeight.w500,
+      color: isDarkMode() ? Colors.white : Colors.black,
+    );
     // Build gender list dynamically from localization
-    final genderItems = <DropdownMenuItem<String>>[
-      DropdownMenuItem(
-        value: 'Male',
-        child: Text(
-          localize(context).gender_male,
-          style: context.bodyMedium?.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: isDarkMode() ? Colors.white : Colors.black,
-          ),
-        ),
-      ),
-      DropdownMenuItem(
-        value: 'Female',
-        child: Text(
-          localize(context).gender_female,
-          style: context.bodyMedium?.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: isDarkMode() ? Colors.white : Colors.black,
-          ),
-        ),
-      ),
-      DropdownMenuItem(
-        value: 'Other',
-        child: Text(
-          localize(context).gender_other,
-          style: context.bodyMedium?.copyWith(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w400,
-            color: isDarkMode() ? Colors.white : Colors.black,
-          ),
-        ),
-      ),
-    ];
+    // final genderItems = <DropdownMenuItem<String>>[
+    //   DropdownMenuItem(
+    //     value: 'Male',
+    //     child: Text(
+    //       localize(context).gender_male,
+    //       style: context.bodyMedium?.copyWith(
+    //         fontSize: 16.sp,
+    //         fontWeight: FontWeight.w400,
+    //         color: isDarkMode() ? Colors.white : Colors.black,
+    //       ),
+    //     ),
+    //   ),
+    //   DropdownMenuItem(
+    //     value: 'Female',
+    //     child: Text(
+    //       localize(context).gender_female,
+    //       style: context.bodyMedium?.copyWith(
+    //         fontSize: 16.sp,
+    //         fontWeight: FontWeight.w400,
+    //         color: isDarkMode() ? Colors.white : Colors.black,
+    //       ),
+    //     ),
+    //   ),
+    //   DropdownMenuItem(
+    //     value: 'Other',
+    //     child: Text(
+    //       localize(context).gender_other,
+    //       style: context.bodyMedium?.copyWith(
+    //         fontSize: 16.sp,
+    //         fontWeight: FontWeight.w400,
+    //         color: isDarkMode() ? Colors.white : Colors.black,
+    //       ),
+    //     ),
+    //   ),
+    // ];
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -377,32 +383,60 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
               isRequired: isRequired,
             ),
             Gap(8.h),
-            DropdownButtonFormField<String>(
-              initialValue: field.value,
-              hint: Text(
-                localize(context).gender_select,
-                style: context.bodyMedium?.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xFF687387),
+            customDropdown<String>(
+              context,
+              value: field.value,
+              hint: AppLocalizations.of(context).gender,
+              contentPadding: const EdgeInsets.symmetric(),
+              items: [
+                DropdownMenuItem(
+                  value: 'Male',
+                  child: Text(AppLocalizations.of(context).male, style: textStyle()),
                 ),
-              ),
-              dropdownColor: context.surface,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-                focusedBorder: border(true),
-                enabledBorder: border(),
-                border: border(),
-                errorText: field.errorText,
-              ),
-              items: genderItems,
+                DropdownMenuItem(
+                  value: 'Female',
+                  child: Text(AppLocalizations.of(context).female, style: textStyle()),
+                ),
+                DropdownMenuItem(
+                  value: 'Other',
+                  child: Text(AppLocalizations.of(context).other, style: textStyle()),
+                ),
+              ],
               onChanged: (value) {
                 setState(() {
                   selectedGender = GenderModel(value: value!, name: '');
                 });
                 field.didChange(value);
               },
+
+              menuPadding: EdgeInsets.only(left: 16.w),
             ),
+            // DropdownButtonFormField<String>(
+            //   initialValue: field.value,
+            //   hint: Text(
+            //     localize(context).gender_select,
+            //     style: context.bodyMedium?.copyWith(
+            //       fontSize: 16.sp,
+            //       fontWeight: FontWeight.w400,
+            //       color: const Color(0xFF687387),
+            //     ),
+            //   ),
+            //   dropdownColor: context.surface,
+            //   decoration: InputDecoration(
+            //     contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+            //     focusedBorder: border(true),
+            //     enabledBorder: border(),
+            //     border: border(),
+            //     errorText: field.errorText,
+            //   ),
+            //   items: genderItems,
+            //   onChanged: (value) {
+            //     setState(() {
+            //       selectedGender = GenderModel(value: value!, name: '');
+            //     });
+            //     field.didChange(value);
+            //   },
+            // ),
           ],
         ),
       ),

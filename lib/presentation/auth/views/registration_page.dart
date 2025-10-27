@@ -43,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       child: Scaffold(
         body: AuthAppBar(
           title: 'Register',
-          showLeading: false,
+          // showLeading: true,
           child: Form(
               key: _formKey,
               child: registrationLoginFields(context, firstNameController: firstNameController, lastNameController: lastNameController, emailController: emailController, phoneController: phoneController, passwordController: passwordController, genderController: genderController, loginPage: false)),

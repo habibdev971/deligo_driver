@@ -5,15 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:deligo_driver/common/loading_view.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/show_global_dialogue.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/location_time_calculated.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/order_request_buttons.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/readable_location_view.dart';
-
-import '../../booking/provider/ride_providers.dart';
 
 void orderRequestDialogue({PusherRequestOrderModel? data}) {
   showGlobalAlertDialog(

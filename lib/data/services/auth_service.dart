@@ -7,7 +7,6 @@ import 'package:dio/dio.dart';
 import 'package:deligo_driver/core/config/api_endpoints.dart';
 import 'package:deligo_driver/data/services/api/dio_client.dart';
 import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'local_storage_service.dart';
 

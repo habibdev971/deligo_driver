@@ -19,7 +19,6 @@ import '../../../core/utils/helpers.dart';
 import '../../../data/models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import '../../../data/models/common_response.dart';
 import '../../../data/models/login_with_pass_response/login_with_pass_response.dart';
-import '../../../data/models/otp_verify_response/otp_verify_response.dart';
 import '../../../data/models/resend_otp_model/resend_otp_mode.dart';
 import '../../../data/services/firebase_auth_service.dart';
 
@@ -222,6 +221,8 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
           (response) async{
         showNotification(message: response.message, isSuccess: true);
         state = AppState.success(response);
+        await LocalStorageService().clearToken();
+        await LocalStorageService().clearRegisterToken();
         await LocalStorageService().saveRegisterToken(response.data?.token);
         NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage,);
       },
@@ -323,12 +324,15 @@ class UpdatePassViewModel extends StateNotifier<AppState<CommonResponse>> {
         showNotification(message: failure.message);
         state = AppState.error(failure);
       },
-      (data) {
+      (data) async{
         showNotification(message: data.message, isSuccess: true);
         state = AppState.success(data);
         LocalStorageService().setRegistrationProgress(
           AppRoutes.driverPersonalInfoPage,
         );
+        await LocalStorageService().clearToken();
+        await LocalStorageService().clearRegisterToken();
+        // await LocalStorageService().saveToken(data)
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
         resetStateAfterDelay();
       },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import '../../../core/widgets/custom_text_field.dart';
 import '../../../generated/l10n.dart';
 import '../../account_page/widgets/phone_code_picker_button.dart';
@@ -65,6 +66,27 @@ Widget registrationLoginFields(
         loginPage
             ? const SizedBox.shrink()
             : genderDropdown(context, genderController),
+        // Gap(16.h),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     Text('Already have an account? ', style: context.bodySmall,),
+        //     Flexible(
+        //       child: GestureDetector(
+        //         onTap: () {
+        //           NavigationService.pushReplacementNamed(AppRoutes.login);
+        //         },
+        //         child: const Text(
+        //           'Login',
+        //           style: TextStyle(
+        //             color: Colors.blue,
+        //             fontWeight: FontWeight.bold,
+        //           ),
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // )
       ],
     ),
   );

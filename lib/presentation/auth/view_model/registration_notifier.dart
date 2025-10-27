@@ -94,7 +94,9 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
         );
         LocalStorageService().setRegistrationProgress(AppRoutes.driverPersonalInfoPage);
         state = AppState.success(data);
-        await LocalStorageService().saveToken(data.data?.token);
+        await LocalStorageService().clearToken();
+        await LocalStorageService().clearRegisterToken();
+        await LocalStorageService().saveRegisterToken(data.data?.token);
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.setPassword,);
       },
     );
