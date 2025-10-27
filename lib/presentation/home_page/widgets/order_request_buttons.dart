@@ -15,61 +15,103 @@ import '../../../data/services/local_storage_service.dart';
 import '../../../data/services/pusher_service.dart';
 import '../../booking/provider/driver_providers.dart';
 
-Widget orderRequestButtons(BuildContext context, {num? orderId})=> Consumer(
-    builder: (context, ref, _) {
-      final driverStatusNotifier = ref.watch(driverStatusNotifierProvider.notifier);
-      final onTripStatusNotifier = ref.watch(ontripStatusNotifier.notifier);
-      final orderStatusNotifier = ref.read(rideOrderNotifierProvider.notifier);
-      final rideDetailState = ref.watch(rideDetailsProvider);
-      // final orderStatusState = ref.watch(rideOrderNotifierProvider);
-      final acceptRejectNotifier = ref.read(acceptRejectProvider.notifier);
-      // final acceptRejectState = ref.watch(acceptRejectProvider);
-      final bool isLoading = ref.watch(acceptRejectProvider).whenOrNull(loading: ()=> true) ?? false || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true,) ?? false);
-      return Row(
-        children: [
-          Expanded(child: AppPrimaryButton(
+Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
+  builder: (context, ref, _) {
+    final driverStatusNotifier = ref.watch(
+      driverStatusNotifierProvider.notifier,
+    );
+    final onTripStatusNotifier = ref.watch(ontripStatusNotifier.notifier);
+    final orderStatusNotifier = ref.read(rideOrderNotifierProvider.notifier);
+    final rideDetailState = ref.watch(rideDetailsProvider);
+    // final orderStatusState = ref.watch(rideOrderNotifierProvider);
+    final acceptRejectNotifier = ref.read(acceptRejectProvider.notifier);
+    // final acceptRejectState = ref.watch(acceptRejectProvider);
+    final bool isLoading =
+        ref.watch(acceptRejectProvider).whenOrNull(loading: () => true) ??
+        false ||
+            (ref.watch(rideDetailsProvider).whenOrNull(loading: () => true) ??
+                false);
+    return Row(
+      children: [
+        Expanded(
+          child: AppPrimaryButton(
             isLoading: isLoading,
-              isDisabled: isLoading,
-              backgroundColor: isDarkMode() ? Colors.black12 : const Color(0xFFF6F7F9),
-              onPressed: (){
-                acceptRejectNotifier.rejectRide(orderId: int.tryParse(orderId.toString()) ?? 0);
-                // orderStatusNotifier.saveOrderStatus(status: 'rejected', onError: (failure)async{
-                //   if(failure.code == 422){
-                //     await LocalStorageService().clearOrderId();
-                //     driverStatusNotifier.online();
-                //     NavigationService.pop();
-                //   }
-                // }, onSuccess: (data)async{
-                //   await LocalStorageService().clearOrderId();
-                //   // driverStatusNotifier.online();
-                //   NavigationService.pop();
-                // });
-                }, child: Text(localize(context).cancel, style: context.bodyMedium?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: isDarkMode() ? Colors.white : const Color(0xFF24262D)),))),
-          Gap(16.w),
-          Expanded(child: AppPrimaryButton(
-              isLoading: isLoading,
-              isDisabled: isLoading,
-              onPressed: ()async{
-            await acceptRejectNotifier.acceptRide(orderId: int.tryParse(orderId.toString()) ?? 0);
+            isDisabled: isLoading,
+            backgroundColor: isDarkMode()
+                ? Colors.black12
+                : const Color(0xFFF6F7F9),
+            onPressed: () {
+              acceptRejectNotifier.rejectRide(
+                orderId: int.tryParse(orderId.toString()) ?? 0,
+              );
+              // orderStatusNotifier.saveOrderStatus(status: 'rejected', onError: (failure)async{
+              //   if(failure.code == 422){
+              //     await LocalStorageService().clearOrderId();
+              //     driverStatusNotifier.online();
+              //     NavigationService.pop();
+              //   }
+              // }, onSuccess: (data)async{
+              //   await LocalStorageService().clearOrderId();
+              //   // driverStatusNotifier.online();
+              //   NavigationService.pop();
+              // });
+            },
+            child: Text(
+              localize(context).cancel,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: isDarkMode() ? Colors.white : const Color(0xFF24262D),
+              ),
+            ),
+          ),
+        ),
+        Gap(16.w),
+        Expanded(
+          child: AppPrimaryButton(
+            isLoading: isLoading,
+            isDisabled: isLoading,
+            onPressed: () async {
+              await acceptRejectNotifier.acceptRide(
+                orderId: int.tryParse(orderId.toString()) ?? 0,
+                onSuccess: (){
+                  rideDetailState.whenOrNull(
+                    success: (data) {
+                      driverStatusNotifier.onTrip();
+                      // NavigationService.pop();
+                      onTripStatusNotifier.updateOnTripStatus(
+                        status: BookingStatus.goForPickup,
+                      );
+                    },
+                  );
+                }
+              );
 
-            rideDetailState.whenOrNull(success: (data){
-              driverStatusNotifier.onTrip();
-              // NavigationService.pop();
-                   onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.goForPickup,);
 
-            });
-            //  orderStatusNotifier.saveOrderStatus(
-            //   status: 'accepted',
-            //    onSuccess: (data)async{
-            //      driverStatusNotifier.onTrip();
-            //      onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.goForPickup,);
-            //      NavigationService.pushNamed(AppRoutes.bookingPage);
-            //      final userId = await LocalStorageService().getUserId();
-            //      PusherService().subscribeChannel('chat_$userId');
-            //    }
-            // );
-          }, child: Text(localize(context).accept_ride, maxLines: 1, overflow: TextOverflow.ellipsis, style: context.bodyMedium?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w600, color: Colors.white),))),
-        ],
-      );
-    }
-  );
+              //  orderStatusNotifier.saveOrderStatus(
+              //   status: 'accepted',
+              //    onSuccess: (data)async{
+              //      driverStatusNotifier.onTrip();
+              //      onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.goForPickup,);
+              //      NavigationService.pushNamed(AppRoutes.bookingPage);
+              //      final userId = await LocalStorageService().getUserId();
+              //      PusherService().subscribeChannel('chat_$userId');
+              //    }
+              // );
+            },
+            child: Text(
+              localize(context).accept_ride,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  },
+);
