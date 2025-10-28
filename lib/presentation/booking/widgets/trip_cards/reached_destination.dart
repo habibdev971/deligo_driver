@@ -16,7 +16,7 @@ Widget reachedDestination(BuildContext context,  Order? order)=> Consumer(
       builder: (context, ref, _) {
         final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
         final rideOrderState = ref.read(saveOrderStatusProvider);
-        final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
+        final onTripNotifier = ref.read(onTripStatusProvider.notifier);
 
         return actionSheet(context,
             title: localize(context).reached_passenger_destination,

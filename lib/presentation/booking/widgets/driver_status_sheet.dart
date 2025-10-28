@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/chat_page/view/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,7 +77,7 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
   @override
   Widget build(BuildContext context) {
 
-    final onTripStatusState = ref.watch(ontripStatusNotifier);
+    final onTripStatusState = ref.watch(onTripStatusProvider);
     final Order? order = ref.watch(rideOrderNotifierProvider).whenOrNull(success: (d)=> d);
 
     return Align(
@@ -115,7 +116,7 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
                           headingToDestination(context),
                       reachedDestination: () =>
                           reachedDestination(context, order),
-                      chat: () => const ChatSheet(),
+                      chat: () => const ChatPage(),
                       payment: () => paymentReceived(context, order),
                     )
                   )

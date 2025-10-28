@@ -1,4 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -131,14 +133,15 @@ Widget riderDetails(BuildContext context, Rider? rider, {String? amount}) {
                   Consumer(
                     builder: (context, ref, _) {
                       final tripNotifier = ref.read(
-                        ontripStatusNotifier.notifier,
+                        onTripStatusProvider.notifier,
                       );
                       return getBackground(
                         icon: Ionicons.chatbubble_ellipses_outline,
                         backgroundColor: const Color(0xFFF6F7F9),
                         iconColor: isDarkMode() ? Colors.white : const Color(0xFF24262D),
                         onTap: () {
-                          tripNotifier.goToChat();
+                          // tripNotifier.goToChat();
+                          NavigationService.pushNamed(AppRoutes.chatSheet);
                         },
                       );
                     },

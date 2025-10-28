@@ -1,6 +1,7 @@
 import 'package:deligo_driver/presentation/auth/views/bank_info_page.dart';
 import 'package:deligo_driver/presentation/auth/views/legal_documents_page.dart';
 import 'package:deligo_driver/presentation/auth/views/registration_page.dart';
+import 'package:deligo_driver/presentation/chat_page/view/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/presentation/auth/views/change_password_page.dart';
@@ -56,6 +57,8 @@ class AppRouter {
             );
       case '/set-password':
         return MaterialPageRoute(builder: (_) => const SetPasswordPage());
+      case AppRoutes.chatSheet:
+        return MaterialPageRoute(builder: (_) => const ChatPage());
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegistrationPage());
       case '/change-password':

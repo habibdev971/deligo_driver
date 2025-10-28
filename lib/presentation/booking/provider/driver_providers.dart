@@ -11,7 +11,7 @@ import 'provider.dart';
 final driverStatusNotifierProvider = StateNotifierProvider<DriverStatusNotifier, DriverStatusState>(
     (ref) => DriverStatusNotifier(ref, ref.read(statusRepoProvider), ));
 
-final ontripStatusNotifier =
+final onTripStatusProvider =
     StateNotifierProvider<OnTripStatusNotifier, OnTripStatusState>((ref) => OnTripStatusNotifier(ref));
 
 final driverRadiusNotifierProvider = StateNotifierProvider<DriverRadiusNotifier, AppState<DriverRadiusUpdateResponse>>(

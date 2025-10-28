@@ -14,7 +14,7 @@ void handleOrderStatusUpdate({
   bool fromPusher = false,
   String? payMethod,
 }) {
-  final tripStatusNotifier = ref.read(ontripStatusNotifier.notifier);
+  final tripStatusNotifier = ref.read(onTripStatusProvider.notifier);
 
   void handlePostPusherActions() {
     ref.read(pusherNotifierProvider.notifier).setupPusherListeners();

@@ -543,7 +543,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
   void resetToInitial({bool enablePusher = true}) {
     state = state.copyWith(hasAnimatedCamera: false);
     initialize();
-    ref.read(ontripStatusNotifier.notifier).resetState();
+    ref.read(onTripStatusProvider.notifier).resetState();
     ref.read(driverStatusNotifierProvider.notifier).initialize();
     stopLocationUpdates(setPolyLineEmpty: true);
     if (enablePusher) {
@@ -612,7 +612,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
                 );
                 if (distance <= 50) {
                   ref
-                      .read(ontripStatusNotifier.notifier)
+                      .read(onTripStatusProvider.notifier)
                       .updateOnTripStatus(
                         status: BookingStatus.reachedDestination,
                       );

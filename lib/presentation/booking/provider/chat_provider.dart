@@ -15,11 +15,11 @@ final chatServiceProvider = Provider<IChatService>((ref) => ChatService(dioClien
 final chatRepoProvider = Provider<IChatRepo>((ref) => ChatRepoImpl(chatService: ref.read(chatServiceProvider)));
 
 // ViewModel Provider
-final chatNotifierProvider = StateNotifierProvider.autoDispose<ChatNotifier, AppState<List<Message>>>(
-      (ref) {
-    final repo = ref.read(chatRepoProvider);
-    return ChatNotifier(chatRepo: repo, ref: ref);
-  },
-);
+// final chatNotifierProvider = StateNotifierProvider.autoDispose<ChatNotifier, AppState<List<Message>>>(
+//       (ref) {
+//     final repo = ref.read(chatRepoProvider);
+//     return ChatNotifier(chatRepo: repo, ref: ref);
+//   },
+// );
 
 

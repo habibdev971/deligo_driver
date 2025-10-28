@@ -27,8 +27,8 @@ class ApiEndpoints {
   static const String updateRadius = '/radius-update';
   static const String getDriverDetails = '$mediator/details';
   static const String logout = 'users/logout';
-  static const String sendMessage = '/send-message';
-  static const String getMessage = '/message';
+  static const String sendMessage = '/ride';
+  static const String getMessage = '/ride';
   static const String orderRide = '$mediator/order';
   static const String saveOrderStatusUrl = '$mediator/rides';
   static const String getRideDetails = '/ride/request';

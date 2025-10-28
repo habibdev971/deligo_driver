@@ -2277,6 +2277,9 @@ class $AssetsImagesGen {
   AssetGenImage get sendRight =>
       const AssetGenImage('assets/images/send-right.png');
 
+  /// File path: assets/images/send.png
+  AssetGenImage get send => const AssetGenImage('assets/images/send.png');
+
   /// File path: assets/images/star.png
   AssetGenImage get star => const AssetGenImage('assets/images/star.png');
 
@@ -2376,6 +2379,7 @@ class $AssetsImagesGen {
     route,
     scheduledRidesHeaderBackground,
     sendRight,
+    send,
     star,
     startRide,
     successRound,

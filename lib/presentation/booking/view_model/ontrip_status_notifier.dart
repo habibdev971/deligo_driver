@@ -25,7 +25,7 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
         break;
       case BookingStatus.goForPickup:
         state = const OnTripStatusState.goForPickup();
-        PusherService().subscribeChannel('order.${await local.getRequestId()}.${await local.getUserId()}');
+        // PusherService().subscribeChannel('order.${await local.getRequestId()}.${await local.getUserId()}');
         bookingNotifier.updateMarkerForOrder(mode: MovementMode.orderAccept);
 
         break;
@@ -90,6 +90,6 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
   }
 
   void resetState() {
-    state = const OnTripStatusState.initial();
+    state = const OnTripStatusState.goForPickup();
   }
 }

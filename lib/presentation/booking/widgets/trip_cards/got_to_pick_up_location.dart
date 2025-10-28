@@ -19,7 +19,7 @@ Widget gotoPickupLocation(BuildContext context, Order? order) => Consumer(
   builder: (context, ref, _) {
     final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
     final rideOrderState = ref.watch(saveOrderStatusProvider);
-    final onTripNotifier = ref.read(ontripStatusNotifier.notifier);
+    final onTripNotifier = ref.read(onTripStatusProvider.notifier);
     final riderData = ref.watch(rideDetailsProvider).whenOrNull(success: (data)=> data?.rider);
 
     return actionSheet(

@@ -20,7 +20,7 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
     final driverStatusNotifier = ref.watch(
       driverStatusNotifierProvider.notifier,
     );
-    final onTripStatusNotifier = ref.watch(ontripStatusNotifier.notifier);
+    final onTripStatusNotifier = ref.watch(onTripStatusProvider.notifier);
     final orderStatusNotifier = ref.read(rideOrderNotifierProvider.notifier);
     final rideDetailState = ref.watch(rideDetailsProvider);
     // final orderStatusState = ref.watch(rideOrderNotifierProvider);

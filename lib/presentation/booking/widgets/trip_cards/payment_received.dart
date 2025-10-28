@@ -22,7 +22,7 @@ import '../../../../core/utils/is_dark_mode.dart';
 Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: (context, ref, _) {
     final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
     final rideOrderState = ref.watch(saveOrderStatusProvider);
-    final tripStateNotifier = ref.read(ontripStatusNotifier.notifier);
+    final tripStateNotifier = ref.read(onTripStatusProvider.notifier);
     final bookingNotifier = ref.read(bookingNotifierProvider.notifier);
     final pusherNotifier = ref.read(pusherNotifierProvider.notifier);
     return actionSheet(context,

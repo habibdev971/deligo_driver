@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:deligo_driver/data/models/chatting_models/chat_message_model.dart';
 import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
+import 'package:deligo_driver/presentation/chat_page/provider/message_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +30,7 @@ class PusherNotifier extends StateNotifier<void> {
   Future<void> setupPusherListeners() async {
     final int? driverId = await LocalStorageService().getUserId();
     final String orderChannel = 'driver-$driverId';
-    final String chatChannel = 'chat_$driverId';
+    final String chatChannel = 'user-$driverId';
 
     await PusherService().init(
       onEvent: (event) {
@@ -59,7 +62,7 @@ class PusherNotifier extends StateNotifier<void> {
       return;
     }
 
-    final chatChannel = 'chat_$driverId';
+    final chatChannel = 'user-$driverId';
 
     if (event.channelName.contains(chatChannel)) {
       _handleChatMessages(eventData);
@@ -101,11 +104,12 @@ class PusherNotifier extends StateNotifier<void> {
   }
 
   Future<void> _handleChatMessages(Map<String, dynamic> data) async {
-    final trackOrderState = ref.read(ontripStatusNotifier);
-    final message = Message.fromJson(data, convertPusher: true);
+    log('------>> here is chatting event and data: $data');
+    final trackOrderState = ref.read(onTripStatusProvider);
+    final message = ChatMessage.fromJson(data);
     trackOrderState.maybeWhen(
       chat: () {
-        ref.read(chatNotifierProvider.notifier).addMessage(message);
+        ref.read(messageProvider.notifier).addMessage(message);
       },
       orElse: () {
         playRingtone();
@@ -155,7 +159,7 @@ class PusherNotifier extends StateNotifier<void> {
     }
   }
 
-  void _showChatSnackBar(Message message) {
+  void _showChatSnackBar(ChatMessage message) {
     final context = NavigationService.navigatorKey.currentContext;
     if (context == null) return;
 
@@ -179,7 +183,7 @@ class PusherNotifier extends StateNotifier<void> {
         action: SnackBarAction(
           label: 'See',
           onPressed: () {
-            ref.read(ontripStatusNotifier.notifier).goToChat();
+            ref.read(onTripStatusProvider.notifier).goToChat();
           },
           textColor: Colors.yellowAccent,
         ),
