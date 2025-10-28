@@ -75,9 +75,10 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
               await acceptRejectNotifier.acceptRide(
                 orderId: int.tryParse(orderId.toString()) ?? 0,
                 onSuccess: (){
+                  driverStatusNotifier.onTrip();
                   rideDetailState.whenOrNull(
                     success: (data) {
-                      driverStatusNotifier.onTrip();
+
                       // NavigationService.pop();
                       onTripStatusNotifier.updateOnTripStatus(
                         status: BookingStatus.goForPickup,
