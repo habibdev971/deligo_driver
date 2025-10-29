@@ -14,6 +14,7 @@ import 'package:deligo_driver/presentation/booking/widgets/trip_cards/payment_re
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/reached_destination.dart';
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/ride_started.dart';
 import '../../../data/models/order_response/order_model/order/order.dart';
+import '../../../data/services/local_storage_service.dart';
 import '../provider/driver_providers.dart';
 
 class DriverStatusSheet extends ConsumerStatefulWidget {
@@ -35,7 +36,9 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
   @override
   void initState() {
     super.initState();
-
+    Future.microtask((){
+      LocalStorageService().saveChatState(isOpen: false);
+    });
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 500),

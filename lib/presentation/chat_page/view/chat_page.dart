@@ -8,9 +8,11 @@ import '../../../core/utils/is_dark_mode.dart';
 import '../../../core/widgets/app_bar/app_bar.dart';
 import '../../../core/widgets/text_field_only.dart';
 import '../../../data/models/chatting_models/chat_message_model.dart';
+import '../../../data/services/local_storage_service.dart';
 import '../../../gen/assets.gen.dart';
 import '../provider/message_provider.dart';
 import '../widget/chat_item.dart';
+final ScrollController scrollController = ScrollController();
 
 class ChatPage extends ConsumerStatefulWidget {
   const ChatPage({super.key});
@@ -21,34 +23,42 @@ class ChatPage extends ConsumerStatefulWidget {
 
 class _ChatPageState extends ConsumerState<ChatPage> {
   final TextEditingController _controller = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    scrollToBottom(milliSeconds: 1);
+    // scrollToBottom(milliSeconds: 1);
     Future.microtask((){
+      LocalStorageService().saveChatState(isOpen: true);
       ref.read(messageProvider.notifier).getMessages();
+
     });
   }
 
+  @override
+  void dispose() {
+    _controller.dispose();
 
-  void scrollToBottom({int? milliSeconds}) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(Duration(milliseconds: milliSeconds ?? 100), () {
-        if (_scrollController.hasClients) {
-          if(!context.mounted)return;
-          final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
-
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent + (keyboardHeight > 0 ? 58 : 60), // Add extra offset when keyboard is open
-            duration: Duration(milliseconds: milliSeconds ?? 300),
-            curve: Curves.easeOut,
-          );
-        }
-      });
-    });
+    LocalStorageService().saveChatState(isOpen: false);
+    super.dispose();
   }
+
+  // void scrollToBottom({int? milliSeconds}) {
+  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+  //     Future.delayed(Duration(milliseconds: milliSeconds ?? 100), () {
+  //       if (_scrollController.hasClients) {
+  //         if(!context.mounted)return;
+  //         final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
+  //
+  //         _scrollController.animateTo(
+  //           _scrollController.position.maxScrollExtent + (keyboardHeight > 0 ? 58 : 60), // Add extra offset when keyboard is open
+  //           duration: Duration(milliseconds: milliSeconds ?? 300),
+  //           curve: Curves.easeOut,
+  //         );
+  //       }
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +115,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                       //   list.add(Message(id: 0, senderId: 1, receiverId: 2, message: _controller.text, createdAt: DateTime.now(), updatedAt: DateTime.now()));
                       //   _controller.clear();
                       // });
-                      scrollToBottom();
+                      // scrollToBottom();
                     }
 
                   },
@@ -127,11 +137,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
               initial: ()=> const SizedBox.shrink(),
               loading: ()=> const LoadingView(),
               success: (data)=> ListView.builder(
-
-                  controller: _scrollController,
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                  controller: scrollController,
                   itemCount: data.length,
                   itemBuilder: (context, index){
-                    ChatMessage item = data[index];
+                    final ChatMessage item = data[index];
                     return chatItem(context, message: item, isMe: item.senderRole?.contains('DRIVER') ?? false);
                   }
               ),

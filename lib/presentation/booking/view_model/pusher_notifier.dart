@@ -104,18 +104,16 @@ class PusherNotifier extends StateNotifier<void> {
   }
 
   Future<void> _handleChatMessages(Map<String, dynamic> data) async {
-    log('------>> here is chatting event and data: $data');
-    final trackOrderState = ref.read(onTripStatusProvider);
+    final isChatOpen = await LocalStorageService().getChatState();
+    // final trackOrderState = ref.read(onTripStatusProvider);
     final message = ChatMessage.fromJson(data);
-    trackOrderState.maybeWhen(
-      chat: () {
-        ref.read(messageProvider.notifier).addMessage(message);
-      },
-      orElse: () {
-        playRingtone();
-        _showChatSnackBar(message);
-      },
-    );
+    if(isChatOpen){
+      ref.read(messageProvider.notifier).addMessage(message);
+    }else{
+      playRingtone();
+      _showChatSnackBar(message);
+    }
+
   }
 
   /// Disconnect and unsubscribe from all channels
@@ -182,8 +180,9 @@ class PusherNotifier extends StateNotifier<void> {
         ),
         action: SnackBarAction(
           label: 'See',
-          onPressed: () {
-            ref.read(onTripStatusProvider.notifier).goToChat();
+          onPressed: () async{
+            if(await LocalStorageService().getChatState())return;
+            NavigationService.pushNamed(AppRoutes.chatSheet);
           },
           textColor: Colors.yellowAccent,
         ),

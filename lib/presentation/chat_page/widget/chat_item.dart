@@ -15,7 +15,7 @@ Widget chatItem(BuildContext context, {ChatMessage? message, bool isMe = true}) 
         backgroundColor: AppColors.primary,
         child: ClipOval(
           child: buildNetworkImage(
-            imageUrl: 'https://i.pravatar.cc/250?u=unique@id.com',
+            imageUrl: message?.sender?.picture,
             height: 36.h,
             width: 36.w,
             fit: BoxFit.fill,

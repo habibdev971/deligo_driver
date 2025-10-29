@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/state/app_state.dart';
 import '../../../data/models/chatting_models/chat_message_model.dart';
 import '../../../data/models/chatting_models/send_message_model.dart';
 import '../../../data/repositories/interfaces/chat_repo_interface.dart';
+import '../view/chat_page.dart';
 
 class MessageState {
   final AppState<List<ChatMessage>> list;
@@ -51,6 +53,7 @@ class MessageNotifier extends StateNotifier<MessageState> {
           sendMessage: AppState.success(success),
           list: AppState.success(updatedList),
         );
+        scrollToBottom();
       },
     );
   }
@@ -59,9 +62,12 @@ class MessageNotifier extends StateNotifier<MessageState> {
     state = state.copyWith(list: const AppState.loading());
     final res = await repo.getMessage();
     res.fold(
-          (l) => state = state.copyWith(list: AppState.error(l)),
-          (success) =>
-      state = state.copyWith(list: AppState.success(success.data ?? [])),
+            (l) => state = state.copyWith(list: AppState.error(l)),
+            (success) {
+          state = state.copyWith(list: AppState.success(success.data ?? []));
+          scrollToBottom(milliseconds: 5);
+        }
+
     );
   }
 
@@ -69,6 +75,20 @@ class MessageNotifier extends StateNotifier<MessageState> {
     state.list.whenOrNull(success: (list){
       final updatedList = [...list, message];
       state = state.copyWith(list: AppState.success(updatedList));
+      scrollToBottom();
     },);
   }
+
+}
+
+void scrollToBottom({int milliseconds = 300}) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (scrollController.hasClients) {
+      scrollController.animateTo(
+        scrollController.position.maxScrollExtent,
+        duration: Duration(milliseconds: milliseconds),
+        curve: Curves.easeOut,
+      );
+    }
+  });
 }
