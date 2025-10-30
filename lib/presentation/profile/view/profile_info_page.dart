@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,6 +37,13 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
   final emailController = TextEditingController();
   String? selectedGender;
 
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask((){
+      ref.read(selectedProfilePhotoProvider.notifier).reset();
+    });
+  }
 
   @override
   void dispose() {
@@ -46,14 +55,17 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
 
   void _saveProfile() {
     if (_formKey.currentState?.validate() ?? false) {
-      ref.read(updatePersonalInfoProvider.notifier)
+      final File? file = ref.watch(selectedProfilePhotoProvider);
+      ref.read(updateProfileProvider.notifier)
       .updateProfile(
 
         data: {
-          'name': nameController.text.trim(),
-          'mobile': mobileController.text.trim(),
+          'firstName': nameController.text.trim(),
+          'lastName': '',
+          'phoneNumber': mobileController.text.trim(),
           'email': emailController.text.trim(),
-          'gender': selectedGender?.toLowerCase(),
+          'gender': selectedGender?.capitalize(),
+          'picture': file
         },
 
       );
@@ -89,12 +101,14 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
             ),
 
             state.when(initial: ()=> const SizedBox.shrink(), loading: ()=> const LoadingView(), success: (data){
-              final User? user = data.data?.user;
+              final user = data.data;
 
-                nameController.text = user?.name ?? '';
-                mobileController.text = user?.mobile ?? '';
+                nameController.text = user?.fullName ?? '';
+                mobileController.text = user?.phoneNumber ?? '';
                 emailController.text = user?.email ?? '';
-                selectedGender = user?.gender?.capitalize();
+                selectedGender = user?.userInfo?.gender?.capitalize();
+
+
               return Expanded(
                 child: SingleChildScrollView(
                   child: Container(
@@ -105,7 +119,7 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          AvatarSelectButton(avatarPath: user?.profilePicture),
+                          AvatarSelectButton(avatarPath: user?.userInfo?.fullPictureUrl, ref: ref),
                           Gap(16.h),
                           _buildTextField(context, title: localize(context).full_name, controller: nameController),
                           Gap(16.h),

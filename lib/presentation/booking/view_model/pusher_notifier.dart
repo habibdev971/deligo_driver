@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:deligo_driver/data/models/chatting_models/chat_message_model.dart';
 import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
@@ -10,15 +9,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/helpers.dart';
-import 'package:deligo_driver/data/models/chat_message_response/chat_message.dart';
 import 'package:vibration/vibration.dart';
 
 import '../../../data/services/local_storage_service.dart';
 import '../../../data/services/navigation_service.dart';
 import '../../../data/services/pusher_service.dart';
 import '../../home_page/widgets/order_request_dialogue.dart';
-import '../provider/chat_provider.dart';
-import '../provider/driver_providers.dart';
 import '../provider/home_providers.dart';
 
 class PusherNotifier extends StateNotifier<void> {

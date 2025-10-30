@@ -40,7 +40,7 @@ class AuthServiceImpl extends IAuthService {
       // 'idToken': idToken,
 
     });
-    log(data.toString());
+    // log(data.toString());
     return await dioClient.dio.post(
         ApiEndpoints.registrationUrl,
         data: await buildMultipartForm(data)
@@ -176,10 +176,13 @@ class AuthServiceImpl extends IAuthService {
   }
 
   @override
-  Future<Response> updateProfile({required Map<String, dynamic> data}) async => await dioClient.dio.post(
+  Future<Response> updateProfile({required Map<String, dynamic> data}) async {
+    log(data.toString());
+    return await dioClient.dio.put(
       ApiEndpoints.updateProfile,
-      data: data,
+      data: await buildMultipartForm(data),
     );
+  }
 
 
   @override

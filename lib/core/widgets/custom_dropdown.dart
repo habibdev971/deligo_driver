@@ -9,6 +9,7 @@ DropdownButtonHideUnderline customDropdown<T>(
     BuildContext context, {
       required T? value,
       required List<DropdownMenuItem<T>>? items,
+      List<Widget> Function(BuildContext)? selectedItemBuilder,
       required Function(T?)? onChanged,
       // String? label,
       String? hint,
@@ -23,6 +24,7 @@ DropdownButtonHideUnderline customDropdown<T>(
     isExpanded: true,
     value: value,
     items: items,
+    selectedItemBuilder: selectedItemBuilder,
     onChanged: readOnly ? null : onChanged,
     hint: Padding(
       padding: const EdgeInsets.only(left: 8.0),

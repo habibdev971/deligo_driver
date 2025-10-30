@@ -475,21 +475,7 @@ class UpdatePersonalInfoNotifier
     );
   }
 
-  Future<void> updateProfile({required Map<String, dynamic> data}) async {
-    state = const AppState.loading();
-    final result = await authRepo.updateProfile(data: data);
-    result.fold(
-      (failure) {
-        showNotification(message: failure.message);
-        state = AppState.error(failure);
-      },
-      (data) {
-        state = AppState.success(data);
-        showNotification(message: data.message, isSuccess: true);
-        ref.read(driverDetailsNotifierProvider.notifier).getDriverDetails();
-      },
-    );
-  }
+
 
   void resetStateAfterDelay() {
     Future.delayed(Duration.zero, () {

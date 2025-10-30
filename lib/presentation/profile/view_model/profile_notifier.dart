@@ -11,6 +11,7 @@ import 'package:deligo_driver/data/services/navigation_service.dart';
 
 import '../../../core/state/app_state.dart';
 import '../../../data/models/common_response.dart';
+import '../../../data/models/profile_model/get_profile/GetProfileModel.dart';
 import '../provider/profile_providers.dart';
 
 class SelectedAvatarNotifierProvider extends StateNotifier<Tuple2<int?, String?>> {
@@ -23,28 +24,10 @@ class SelectedAvatarNotifierProvider extends StateNotifier<Tuple2<int?, String?>
   void reset() => state = const Tuple2(null, null);
 }
 
-class ProfilePhotoUploadNotifier extends StateNotifier<AppState<CommonResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
-  ProfilePhotoUploadNotifier({
-    required this.ref,
-    required this.authRepo,
-  }) : super(const AppState.initial());
 
-  Future<void> updateProfilePhoto({required String imagePath}) async {
-    state = const AppState.loading();
-    final result = await authRepo.updateProfilePhoto(imagePath: imagePath);
-    result.fold(
-      (failure) {
-        state = AppState.error(failure);
-      },
-      (data) {
-        state = AppState.success(data);
-        ref.refresh(driverDetailsNotifierProvider.notifier).stream;
-        NavigationService.pop();
-      },
-    );
-  }
+class SelectedProfilePhotoNotifier extends StateNotifier<File?> {
+  SelectedProfilePhotoNotifier() : super(null);
+  void selectProfilePath({required File file}) => state = file;
 
   Future<String> getImagePathFromLocalAsset({required String imagePath}) async {
     final ByteData byteData = await rootBundle.load(imagePath);
@@ -56,15 +39,50 @@ class ProfilePhotoUploadNotifier extends StateNotifier<AppState<CommonResponse>>
     return file.path;
   }
 
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-      ref.invalidate(selectedAvatarProvider);
-    });
-  }
+  void reset() => state = null;
 }
+// class ProfilePhotoUploadNotifier extends StateNotifier<AppState<CommonResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//   ProfilePhotoUploadNotifier({
+//     required this.ref,
+//     required this.authRepo,
+//   }) : super(const AppState.initial());
+//
+//   Future<void> updateProfilePhoto({required String imagePath}) async {
+//     state = const AppState.loading();
+//     final result = await authRepo.updateProfilePhoto(imagePath: imagePath);
+//     result.fold(
+//       (failure) {
+//         state = AppState.error(failure);
+//       },
+//       (data) {
+//         state = AppState.success(data);
+//         ref.refresh(driverDetailsNotifierProvider.notifier).stream;
+//         NavigationService.pop();
+//       },
+//     );
+//   }
 
-class DriverDetailsViewModel extends StateNotifier<AppState<DriverDetailsResponse>> {
+//   Future<String> getImagePathFromLocalAsset({required String imagePath}) async {
+//     final ByteData byteData = await rootBundle.load(imagePath);
+//     final List<int> bytes = byteData.buffer.asUint8List();
+//
+//     final temDir = await getTemporaryDirectory();
+//     final file = await File('${temDir.path}/avatar.jpg').create(recursive: true);
+//     await file.writeAsBytes(bytes);
+//     return file.path;
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//       ref.invalidate(selectedAvatarProvider);
+//     });
+//   }
+// }
+
+class DriverDetailsViewModel extends StateNotifier<AppState<GetProfileModel>> {
   final IAuthRepo authRepo;
   final Ref ref;
   DriverDetailsViewModel({
@@ -88,3 +106,28 @@ class DriverDetailsViewModel extends StateNotifier<AppState<DriverDetailsRespons
     );
   }
 }
+
+class UpdateProfileNotifier extends StateNotifier<AppState<CommonResponse>> {
+  final IAuthRepo authRepo;
+  final Ref ref;
+  UpdateProfileNotifier({
+    required this.ref,
+    required this.authRepo,
+  }) : super(const AppState.initial());
+
+  Future<void> updateProfile({required Map<String, dynamic> data}) async {
+    state = const AppState.loading();
+    final result = await authRepo.updateProfile(data: data);
+    result.fold(
+          (failure) {
+        showNotification(message: failure.message);
+        state = AppState.error(failure);
+      },
+          (data) {
+        state = AppState.success(data);
+        showNotification(message: data.message, isSuccess: true);
+        ref.read(driverDetailsNotifierProvider.notifier).getDriverDetails();
+        ref.read(selectedProfilePhotoProvider.notifier).reset();
+      },
+    );
+  }}

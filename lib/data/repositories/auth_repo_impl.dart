@@ -18,6 +18,7 @@ import '../models/auth_models/driver_dropdown_model_data/driver_dropdown_model.d
 import '../models/auth_models/otp_verify_model/OtpVerifyModel.dart';
 import '../models/auth_models/registration_model.dart';
 import '../models/login_with_pass_response/login_with_pass_response.dart';
+import '../models/profile_model/get_profile/GetProfileModel.dart';
 import 'interfaces/auth_repo_interface.dart';
 
 class AuthRepoImpl extends BaseRepository implements IAuthRepo {
@@ -124,9 +125,9 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
     });
 
   @override
-  Future<Either<Failure, DriverInfoUpdateResponse>> updateProfile({required Map<String, dynamic> data}) async => await safeApiCall(() async {
+  Future<Either<Failure, CommonResponse>> updateProfile({required Map<String, dynamic> data}) async => await safeApiCall(() async {
       final response = await authService.updateProfile(data: data);
-      return DriverInfoUpdateResponse.fromJson(response.data);
+      return CommonResponse.fromJson(response.data);
     });
 
 
@@ -150,12 +151,12 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
     });
 
   @override
-  Future<Either<Failure, DriverDetailsResponse>> getDriverDetails() async => await safeApiCall(() async {
+  Future<Either<Failure, GetProfileModel>> getDriverDetails() async => await safeApiCall(() async {
       final response = await authService.getDriverDetails();
       try{
-        return DriverDetailsResponse.fromJson(response.data);
+        return GetProfileModel.fromJson(response.data);
       }catch(e){
-        return DriverDetailsResponse.fromJson(response.data);
+        return GetProfileModel.fromJson(response.data);
       }
     });
 

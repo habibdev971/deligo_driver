@@ -17,7 +17,7 @@ class ApiEndpoints {
   static const String resetPassword = '/forgot-password/reset-password';
   static const String changePassword = '$mediator/change-password';
   static const String updatePersonalInfo = '$mediator/personal-info';
-  static const String updateProfile = '$mediator/profile/update';
+  static const String updateProfile = 'users/update-profile';
   static const String updateVehicleDetails = '$mediator/professional-info';
   static const String updateProfilePhoto = '/update/$mediator/profile-photo';
   static const String uploadDocuments = '/upload-documents';
@@ -25,7 +25,7 @@ class ApiEndpoints {
   static const String getCarModels = '/configs/vehicle-details';
   static const String onlineOfflineStatusUpdate = '/users/user-active-deactive';
   static const String updateRadius = '/radius-update';
-  static const String getDriverDetails = '$mediator/details';
+  static const String getDriverDetails = 'users/profile';
   static const String logout = 'users/logout';
   static const String sendMessage = '/ride';
   static const String getMessage = '/ride';

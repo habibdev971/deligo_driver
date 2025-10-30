@@ -8,6 +8,7 @@ import 'package:deligo_driver/data/models/documents_upload_response/documents_up
 import 'package:deligo_driver/data/models/driver_details_response/driver_details_response.dart';
 import 'package:deligo_driver/data/models/driver_info_update_response/driver_info_update_response.dart';
 import 'package:deligo_driver/data/models/otp_verify_response/otp_verify_response.dart';
+import 'package:deligo_driver/data/models/profile_model/get_profile/GetProfileModel.dart';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 
 import '../../../core/errors/failure.dart';
@@ -33,9 +34,9 @@ abstract class IAuthRepo {
   Future<Either<Failure, ForgotVerifyOtpResponse>> forgetVerifyOtp({required String mobile, required String otp});
   Future<Either<Failure, CommonResponse>> resetPassword({required Map<String, dynamic> data});
   Future<Either<Failure, DriverInfoUpdateResponse>> updatePersonalInfo({required File profilePicture, required Map<String, dynamic> data});
-  Future<Either<Failure, DriverInfoUpdateResponse>> updateProfile({required Map<String, dynamic> data});
+  Future<Either<Failure, CommonResponse>> updateProfile({required Map<String, dynamic> data});
   Future<Either<Failure, CommonResponse>> updateVehicleDetails({required List<File> documents, required Map<String, dynamic> data});
-  Future<Either<Failure, DriverDetailsResponse>> getDriverDetails();
+  Future<Either<Failure, GetProfileModel>> getDriverDetails();
   Future<Either<Failure, CommonResponse>> updateProfilePhoto({required String imagePath});
   Future<Either<Failure, DocumentsUploadResponse>> uploadDocuments(
       {required File profilePicture, required List<File> documents});

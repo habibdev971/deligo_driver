@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deligo_driver/core/utils/build_network_image.dart';
 import 'package:deligo_driver/presentation/account_page/widgets/language_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -76,7 +77,7 @@ Widget userDetails(BuildContext context) => Padding(
             final driverDetails = ref
                 .watch(driverDetailsNotifierProvider)
                 .mapOrNull(
-                  success: (data) => data.data.data?.user,
+                  success: (data) => data.data.data,
                   error: (error) => null,
                 );
             final bool isLoading =
@@ -133,23 +134,24 @@ Widget userDetails(BuildContext context) => Padding(
                       CircleAvatar(
                         radius: 33.r,
                         backgroundColor: Colors.white,
-                        child: driverDetails?.profilePicture != null
+                        child: driverDetails?.userInfo?.fullPictureUrl != null
                             ? Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: ClipOval(
-                                  child: CachedNetworkImage(
-                                    imageUrl: driverDetails!.profilePicture!,
-                                    height: 60.h,
-                                    width: 60.w,
-                                    fit: BoxFit.fill,
-                                  ),
+                                  child: buildNetworkImage(imageUrl: driverDetails!.userInfo!.fullPictureUrl!, height: 60.h, width: 60.w, fit: BoxFit.fill)
+                                  // child: CachedNetworkImage(
+                                  //   imageUrl: driverDetails!.profilePicture!,
+                                  //   height: 60.h,
+                                  //   width: 60.w,
+                                  //   fit: BoxFit.fill,
+                                  // ),
                                 ),
                               )
                             : const SizedBox.shrink(),
                       ),
                       Gap(8.h),
                       Text(
-                        driverDetails?.name ?? 'N/A',
+                        driverDetails?.fullName ?? 'N/A',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.bodyMedium?.copyWith(
@@ -160,7 +162,7 @@ Widget userDetails(BuildContext context) => Padding(
                       ),
                       Gap(4.h),
                       Text(
-                        driverDetails?.mobile ?? 'N/A',
+                        driverDetails?.phoneNumber ?? 'N/A',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: context.bodyMedium?.copyWith(
@@ -170,7 +172,7 @@ Widget userDetails(BuildContext context) => Padding(
                         ),
                       ),
                       Gap(16.h),
-                      driverRideStory(context, driverDetails),
+                      driverRideStory(context, null),
                     ],
                   );
           },

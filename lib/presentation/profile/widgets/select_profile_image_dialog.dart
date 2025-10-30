@@ -38,14 +38,14 @@ class _SelectProfileImageDialogState extends State<SelectProfileImageDialog> {
       ),
       primaryButton: Consumer(builder: (context, ref, _) {
         final selectedAvatar = ref.watch(selectedAvatarProvider);
-        final profilePhotoUploadState = ref.watch(profilePhotoUploadNotifierProvider);
-        final profilePhotoNotifier = ref.read(profilePhotoUploadNotifierProvider.notifier);
-        final bool isLoading = profilePhotoUploadState.whenOrNull(loading: () => true) ?? false;
+        // final profilePhotoUploadState = ref.watch(selectedProfilePhotoProvider);
+        final profilePhotoNotifier = ref.read(selectedProfilePhotoProvider.notifier);
+        // final bool isLoading = profilePhotoUploadState.whenOrNull(loading: () => true) ?? false;
         return AnimatedSwitcher(
           duration: AnimationDuration.pageStateTransitionMobile,
           child: AppPrimaryButton(
-            isLoading: isLoading,
-            isDisabled: isLoading,
+            // isLoading: isLoading,
+            // isDisabled: isLoading,
             onPressed: () async {
               if (selectedAvatar.value2 != null) {
                 String imagePath = selectedAvatar.value2!;
@@ -54,7 +54,8 @@ class _SelectProfileImageDialogState extends State<SelectProfileImageDialog> {
                 } else {
                   imagePath = selectedAvatar.value2!;
                 }
-                profilePhotoNotifier.updateProfilePhoto(imagePath: imagePath);
+                // profilePhotoNotifier.selectProfilePath(path: imagePath);
+                // Navigator.pop(context);
               }
             },
             child: Text(

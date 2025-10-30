@@ -1,5 +1,8 @@
+import 'package:deligo_driver/core/utils/image_picker_with_dialogue.dart';
+import 'package:deligo_driver/presentation/profile/provider/profile_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:deligo_driver/core/utils/build_network_image.dart';
@@ -10,13 +13,17 @@ import 'select_profile_image_dialog.dart';
 
 class AvatarSelectButton extends StatelessWidget {
   final String? avatarPath;
+  final WidgetRef ref;
   const AvatarSelectButton({
     super.key,
     required this.avatarPath,
+    required this.ref,
   });
 
   @override
-  Widget build(BuildContext context) => Stack(
+  Widget build(BuildContext context) {
+    final file = ref.watch(selectedProfilePhotoProvider);
+    return Stack(
       alignment: Alignment.center,
       children: [
         Container(
@@ -34,12 +41,17 @@ class AvatarSelectButton extends StatelessWidget {
         Center(
           child: CupertinoButton(
             padding: EdgeInsets.zero,
-            onPressed: () {
-              showDialog(
-                context: context,
-                useSafeArea: false,
-                builder: (context) => const SelectProfileImageDialog(),
-              );
+            onPressed: () async{
+              ref.read(selectedProfilePhotoProvider.notifier).reset();
+              final selected = await pickImageWithSourceSelector(context);
+              if(selected != null){
+                ref.read(selectedProfilePhotoProvider.notifier).selectProfilePath(file: selected);
+              }
+              // showDialog(
+              //   context: context,
+              //   useSafeArea: false,
+              //   builder: (context) => const SelectProfileImageDialog(),
+              // );
             }, minimumSize: const Size(0, 0),
             child: Stack(
               alignment: Alignment.bottomRight,
@@ -47,12 +59,11 @@ class AvatarSelectButton extends StatelessWidget {
                 CircleAvatar(
                   radius: 62.r,
                   backgroundColor: ColorPalette.primary50,
-                  child: avatarPath != null
-                      ? Padding(
+                  child: Padding(
                     padding: const EdgeInsets.all(1.0),
-                    child: ClipOval(child: buildNetworkImage(imageUrl: avatarPath, height: 120.h, width: 120.w, fit: BoxFit.fill)),
-                  )
-                      : const SizedBox.shrink(),
+                    child: ClipOval(child: file != null ? Image.file(file, height: 120.h, width: 120.w, fit: BoxFit.fill,) : buildNetworkImage(imageUrl: avatarPath, height: 120.h, width: 120.w, fit: BoxFit.fill)),
+                  ),
+                      // : const SizedBox.shrink(),
                 ),
                 Positioned(
                   bottom: 4.r,
@@ -76,4 +87,5 @@ class AvatarSelectButton extends StatelessWidget {
         ),
       ],
     );
+  }
 }
