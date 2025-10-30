@@ -131,7 +131,7 @@ class PusherNotifier extends StateNotifier<void> {
     FlutterRingtonePlayer().play(
       fromAsset: 'assets/notification2.mp3',
       looping: false,
-      volume: 0.0,
+      volume: 1.0,
       asAlarm: true,
     );
     vibratePhone();

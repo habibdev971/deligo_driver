@@ -10,10 +10,8 @@ import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 
 import '../../../core/enums/booking_status.dart';
-import '../../../core/routes/app_routes.dart';
-import '../../../data/services/local_storage_service.dart';
-import '../../../data/services/pusher_service.dart';
 import '../../booking/provider/driver_providers.dart';
+import '../../booking/view_model/reverse_timer_notifier.dart';
 
 Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
   builder: (context, ref, _) {
@@ -21,11 +19,12 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
       driverStatusNotifierProvider.notifier,
     );
     final onTripStatusNotifier = ref.watch(onTripStatusProvider.notifier);
-    final orderStatusNotifier = ref.read(rideOrderNotifierProvider.notifier);
+    // final orderStatusNotifier = ref.read(rideOrderNotifierProvider.notifier);
     final rideDetailState = ref.watch(rideDetailsProvider);
     // final orderStatusState = ref.watch(rideOrderNotifierProvider);
     final acceptRejectNotifier = ref.read(acceptRejectProvider.notifier);
     // final acceptRejectState = ref.watch(acceptRejectProvider);
+    final timerNotifier = ref.read(reverseTimerProvider.notifier);
     final bool isLoading =
         ref.watch(acceptRejectProvider).whenOrNull(loading: () => true) ??
         false ||
@@ -35,12 +34,14 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
       children: [
         Expanded(
           child: AppPrimaryButton(
-            isLoading: isLoading,
+            isLoading: (acceptRejectNotifier.status.isNotEmpty && acceptRejectNotifier.status.contains('reject')) ? isLoading : false,
             isDisabled: isLoading,
             backgroundColor: isDarkMode()
                 ? Colors.black12
                 : const Color(0xFFF6F7F9),
             onPressed: () {
+              timerNotifier.stopTimer();
+              // NavigationService.pop();
               acceptRejectNotifier.rejectRide(
                 orderId: int.tryParse(orderId.toString()) ?? 0,
               );
@@ -69,12 +70,13 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
         Gap(16.w),
         Expanded(
           child: AppPrimaryButton(
-            isLoading: isLoading,
+            isLoading: (acceptRejectNotifier.status.isNotEmpty && acceptRejectNotifier.status.contains('accept')) ? isLoading : false,
             isDisabled: isLoading,
             onPressed: () async {
               await acceptRejectNotifier.acceptRide(
                 orderId: int.tryParse(orderId.toString()) ?? 0,
                 onSuccess: (){
+                  timerNotifier.stopTimer();
                   driverStatusNotifier.onTrip();
                   rideDetailState.whenOrNull(
                     success: (data) {

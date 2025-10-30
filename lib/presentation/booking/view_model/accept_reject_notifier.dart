@@ -15,7 +15,9 @@ class AcceptRejectNotifier extends StateNotifier<AppState<OrderAcceptModel>>{
   final Ref ref;
   final IRideRepo repo;
   AcceptRejectNotifier({required this.ref, required this.repo}):super(const AppState.initial());
+  String status = '';
   Future<void> acceptRide({required int orderId, Function? onSuccess})async{
+    status = 'accept';
     state = const AppState.loading();
     final res = await repo.acceptRejectRide(orderId: orderId, status: 'accept');
     res.fold(
@@ -31,10 +33,12 @@ class AcceptRejectNotifier extends StateNotifier<AppState<OrderAcceptModel>>{
               await ref.read(rideDetailsProvider.notifier).getRideDetails(orderId);
               onSuccess != null ? onSuccess() : null;
             });
+    status = '';
 
   }
 
   Future<void> rejectRide({required int orderId})async{
+    status = 'reject';
     state = const AppState.loading();
     final res = await repo.acceptRejectRide(orderId: orderId, status: 'reject');
     res.fold(
@@ -48,6 +52,7 @@ class AcceptRejectNotifier extends StateNotifier<AppState<OrderAcceptModel>>{
               showNotification(message: r.message, isSuccess: true);
               NavigationService.pop();
             });
+    status = '';
   }
 }
 

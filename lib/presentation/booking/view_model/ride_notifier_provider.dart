@@ -10,6 +10,7 @@ import '../../../data/models/order_response/order_model/order/order.dart';
 import '../../../data/services/local_storage_service.dart';
 import '../../splash/provider/app_flow_providers.dart';
 import '../provider/driver_providers.dart';
+import 'loading_notifier.dart';
 
 class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
   final IRideRepo rideRepo;
@@ -42,11 +43,15 @@ class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
     );
   }
 
+  String currentStatus = '';
   Future<void> saveOrderStatus({
     required String status,
     Function(Order? data)? onSuccess,
     Function(Failure data)? onError,
   }) async {
+    currentStatus = status;
+    final loadingNotifier = ref.read(loadingProvider.notifier)
+      ..startLoading();
     final previousData = _getPreviousDataOrNull();
     state = previousData != null
         ? AppStateOrder.success(previousData)
@@ -74,6 +79,8 @@ class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
         }
       },
     );
+    loadingNotifier.stopLoading();
+    currentStatus = '';
   }
 
   Future<void> setOrderData(Order order) async {
