@@ -23,7 +23,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
   }) : super(const AppState.initial());
 
   Future<void> fetchRoutesDetail(Points? points,
-      {bool sendDataToRider = false, LatLng? pickUpPoint, int? orderId}) async {
+      {bool sendDataToRider = true, LatLng? pickUpPoint, num? orderId}) async {
     state = const AppState.loading();
 
     final result = await googleAPIRepo.fetchWayPoints(waypoints: points);
@@ -61,7 +61,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
 
           calculateRouteProgress(
             ref,
-            orderId: orderId,
+            orderId: int.tryParse(orderId.toString()),
             pickup: pickup,
             current: current,
             totalDistanceInMeters: totalDistance,

@@ -36,7 +36,8 @@ class AuthServiceImpl extends IAuthService {
     // final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     data.addAll({
       'isNewUser': false,
-      'password': 'secret'
+      'password': 'secret',
+      'device_token': await deviceTokenFirebase(),
       // 'idToken': idToken,
 
     });
@@ -69,7 +70,8 @@ class AuthServiceImpl extends IAuthService {
       data: {
         'phoneOremail': phoneOrEmail,
         'password': password,
-        'userType': 'DRIVER'
+        'userType': 'DRIVER',
+        'device_token': await deviceTokenFirebase()
       },
     );
 

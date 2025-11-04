@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/utils/device_token_firebase.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -21,7 +22,7 @@ class LoginWithPhoneOrEmailNotifier extends StateNotifier<AppState<RegistrationM
     required String password,
   }) async {
     state = const AppState.loading();
-    final String? deviceToken = await FirebaseMessaging.instance.getToken();
+    final String? deviceToken = await deviceTokenFirebase();
     await LocalStorageService().clearToken();
     // log('---------------->>> mobile: $mobile, password: $password');
     final result = await authRepo.loginPhoneOrEmail(
