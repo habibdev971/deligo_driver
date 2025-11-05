@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,7 @@ Widget walletSummery(BuildContext context)=> Consumer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(r'$' + (data?.wallet?.toString() ?? ''), textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w700, color: Colors.white),),
+                        Text(ref.watch(currencyProvider) + (data?.wallet?.toString() ?? ''), textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w700, color: Colors.white),),
                         Text(localize(context).current_balance, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, color: Colors.white60),)
                       ],
                     ),
