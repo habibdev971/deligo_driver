@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,13 +13,14 @@ Widget summery(BuildContext context)=> Consumer(
     builder: (context, ref, _) {
       final state = ref.watch(homeProvider);
       final data = state.whenOrNull(success: (d)=> d);
+      final currency = ref.watch(currencyProvider);
       return Column(
         children: [
           Row(
             children: [
-              summeryCard(context, title: localize(context).your_balance, value: r'$' '${data?.wallet ?? 0}', icon: Assets.images.balance, backgroundColor: const Color(0xFF3B3E4B)),
+              summeryCard(context, title: localize(context).your_balance, value: '$currency${data?.wallet ?? 0}', icon: Assets.images.balance, backgroundColor: const Color(0xFF3B3E4B)),
               Gap(12.w),
-              summeryCard(context, title: localize(context).todays_earning, value: r'$' '${data?.todayEarning ?? 0}', icon: Assets.images.balance, backgroundColor: const Color(0xFF8154DA)),
+              summeryCard(context, title: localize(context).todays_earning, value:  '$currency${data?.todayEarning ?? 0}', icon: Assets.images.balance, backgroundColor: const Color(0xFF8154DA)),
             ],
           ),
           Gap(12.h),

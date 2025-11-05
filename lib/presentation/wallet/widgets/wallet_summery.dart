@@ -17,6 +17,7 @@ Widget walletSummery(BuildContext context)=> Consumer(
     builder: (context, ref, _) {
       final balance = ref.watch(walletsBalanceProvider);
       final data = balance.whenOrNull(success: (data)=> data.data);
+      final currency = ref.watch(currencyProvider);
       return Container(
         padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
@@ -28,9 +29,9 @@ Widget walletSummery(BuildContext context)=> Consumer(
             children: [
               Row(
                 children: [
-                  gradientCard(context, title: localize(context).payment_received, value: (data?.paymentHistory ?? 0).toString()),
+                  gradientCard(context, title: localize(context).payment_received, value: (data?.paymentHistory ?? 0).toString(), currency: currency),
                   Gap(16.w),
-                  gradientCard(context, title: localize(context).payment_withdraw, value: (data?.paymentWithdraw ?? 0).toString(), isReceived: false),
+                  gradientCard(context, title: localize(context).payment_withdraw, value: (data?.paymentWithdraw ?? 0).toString(), isReceived: false, currency: currency),
                 ],
               ),
               Gap(12.h),
@@ -41,7 +42,7 @@ Widget walletSummery(BuildContext context)=> Consumer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(ref.watch(currencyProvider) + (data?.wallet?.toString() ?? ''), textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w700, color: Colors.white),),
+                        Text(currency + (data?.wallet?.toString() ?? ''), textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 32.sp, fontWeight: FontWeight.w700, color: Colors.white),),
                         Text(localize(context).current_balance, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.start, style: context.bodyMedium?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w400, color: Colors.white60),)
                       ],
                     ),

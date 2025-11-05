@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/gen/assets.gen.dart';
 
-Widget gradientCard(BuildContext context, {bool isReceived = true, String? value, required String title }) => Expanded(
+Widget gradientCard(BuildContext context, {bool isReceived = true, String? value, required String title, required String currency}) => Expanded(
     child: Container(
       padding: EdgeInsets.all(8.r),
       decoration: BoxDecoration(
@@ -27,7 +27,7 @@ Widget gradientCard(BuildContext context, {bool isReceived = true, String? value
             children: [
               Expanded(
                   child: Text(
-                r'$' + (value ?? ''),
+                currency + (value ?? ''),
                 style: context.bodyMedium?.copyWith(
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w600,
