@@ -18,7 +18,7 @@ Widget todayActivity(BuildContext context) => Padding(
           builder: (context, ref, _) {
             final state = ref.watch(rideHistoryProvider);
             return state.when(
-              initial: () => Text(localize(context).initializing),
+              initial: () => const SizedBox.shrink(),
               loading: () => const LoadingView(),
               success: (data) => activityBuilder(context, orderList: data),
               error: (e) => ErrorView(message: e.message),

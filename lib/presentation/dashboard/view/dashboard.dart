@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/utils/set_status_bar_color.dart';
@@ -5,18 +6,19 @@ import 'package:deligo_driver/core/widgets/location_permission_wrapper.dart';
 import 'package:deligo_driver/presentation/account_page/view/account_page.dart';
 import 'package:deligo_driver/presentation/ride_history/view/ride_history_view.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../home_page/view/home_page.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 
-class DashboardPage extends StatefulWidget {
+class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
 
   @override
-  State<DashboardPage> createState() => _DashboardPageState();
+  ConsumerState<DashboardPage> createState() => _DashboardPageState();
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends ConsumerState<DashboardPage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   int _selectedIndex = 0;
 
@@ -25,6 +27,9 @@ class _DashboardPageState extends State<DashboardPage> {
   void initState() {
     super.initState();
     setStatusBarColor(change: true);
+    Future.microtask((){
+      ref.read(rideDetailsProvider.notifier).reset();
+    });
   }
 
   final List<Widget> _pages = const [

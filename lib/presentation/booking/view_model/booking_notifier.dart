@@ -409,7 +409,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
     await setCurrentLocation(); // this is used for when user close the app and return the app and there is need for location permission
 
     ref
-        .read(rideOrderNotifierProvider)
+        .read(rideDetailsProvider)
         .maybeWhen(
           orElse: () {},
           success: (data) async {
@@ -476,7 +476,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
                             pickupPos!.latitude,
                             pickupPos.longitude,
                           ],
-                        ),
+                        ), orderId: data?.id,
                       );
                   _fitBoundsToPickupAndDropOff(pickupPos, dropPos!);
                   break;
@@ -494,7 +494,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
                             pickupPos!.latitude,
                             pickupPos.longitude,
                           ],
-                        ),
+                        ), orderId: data?.id,
                       );
                   _fitBoundsToPickupAndDropOff(
                     state.currentLocation!,
@@ -513,7 +513,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
                             state.currentLocation!.longitude,
                           ],
                           dropLocation: [dropPos!.latitude, dropPos.longitude],
-                        ),
+                        ), orderId: data?.id,
                       );
                   _fitBoundsToPickupAndDropOff(state.currentLocation!, dropPos);
                   break;
@@ -585,11 +585,11 @@ class BookingNotifier extends StateNotifier<BookingState> {
       ref.read(locationNotifierProvider.notifier).enableOnUpdateCallback();
 
       final points = ref
-          .watch(rideOrderNotifierProvider)
+          .watch(rideDetailsProvider)
           .maybeWhen(success: (data) => data?.points, orElse: () => null);
 
       final orderId = ref
-          .watch(rideOrderNotifierProvider)
+          .watch(rideDetailsProvider)
           .maybeWhen(success: (data) => data?.id, orElse: () => null);
 
       final LatLng? pickupLatLng = listToLatLng(points?.pickupLocation);
@@ -618,46 +618,46 @@ class BookingNotifier extends StateNotifier<BookingState> {
                       );
                 }
               }
-              await ref
-                  .read(routeNotifierProvider.notifier)
-                  .fetchRoutesDetail(
-                    Points(
-                      pickupLocation: [location.latitude, location.longitude],
-                      dropLocation: [
-                        targetLatLng?.latitude ?? 0,
-                        targetLatLng?.longitude ?? 0,
-                      ],
-                    ),
-                    sendDataToRider: mode == MovementMode.towardsDestination,
-                    pickUpPoint: pickupLatLng,
-                    orderId: orderId,
-                  );
-
-              // Update marker rotation based on closest segment
-              double bearing = 0;
-              final polylinePoints = state.polylines.isNotEmpty
-                  ? state.polylines.first.points
-                  : [];
-              for (int i = 0; i < polylinePoints.length - 1; i++) {
-                final point = polylinePoints[i];
-                final nextPoint = polylinePoints[i + 1];
-                if (_isPointNearSegment(location, point, nextPoint)) {
-                  bearing = _calculateBearing(point, nextPoint);
-                  break;
-                }
-              }
-
-              if (state.mapController != null) {
-                await state.mapController?.animateCamera(
-                  CameraUpdate.newCameraPosition(
-                    CameraPosition(
-                      target: location,
-                      zoom: 18.0,
-                      bearing: bearing,
-                    ),
-                  ),
-                );
-              }
+            //   await ref
+            //       .read(routeNotifierProvider.notifier)
+            //       .fetchRoutesDetail(
+            //         Points(
+            //           pickupLocation: [location.latitude, location.longitude],
+            //           dropLocation: [
+            //             targetLatLng?.latitude ?? 0,
+            //             targetLatLng?.longitude ?? 0,
+            //           ],
+            //         ),
+            //         // sendDataToRider: mode == MovementMode.towardsDestination,
+            //         // pickUpPoint: pickupLatLng,
+            //         orderId: orderId,
+            //       );
+            //
+            //   // Update marker rotation based on closest segment
+            //   double bearing = 0;
+            //   final polylinePoints = state.polylines.isNotEmpty
+            //       ? state.polylines.first.points
+            //       : [];
+            //   for (int i = 0; i < polylinePoints.length - 1; i++) {
+            //     final point = polylinePoints[i];
+            //     final nextPoint = polylinePoints[i + 1];
+            //     if (_isPointNearSegment(location, point, nextPoint)) {
+            //       bearing = _calculateBearing(point, nextPoint);
+            //       break;
+            //     }
+            //   }
+            //
+            //   if (state.mapController != null) {
+            //     await state.mapController?.animateCamera(
+            //       CameraUpdate.newCameraPosition(
+            //         CameraPosition(
+            //           target: location,
+            //           zoom: 18.0,
+            //           bearing: bearing,
+            //         ),
+            //       ),
+            //     );
+            //   }
             },
           );
     } catch (e) {

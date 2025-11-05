@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deligo_driver/core/utils/build_network_image.dart';
+import 'package:deligo_driver/data/services/url_launch_services.dart';
 import 'package:deligo_driver/presentation/account_page/widgets/language_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -340,17 +341,17 @@ Widget accountDetails(
             trailing: const ThemeSwitchTile(),
           ),
           Gap(8.h),
-          accountButton(
-            context,
-            leading: Assets.images.changePassword.image(
-              height: 24.h,
-              width: 24.w,
-              fit: BoxFit.fill,
-            ),
-            title: localize(context).change_password,
-            onTap: () => NavigationService.pushNamed(AppRoutes.changePassword),
-          ),
-          Gap(8.h),
+          // accountButton(
+          //   context,
+          //   leading: Assets.images.changePassword.image(
+          //     height: 24.h,
+          //     width: 24.w,
+          //     fit: BoxFit.fill,
+          //   ),
+          //   title: localize(context).change_password,
+          //   onTap: () => NavigationService.pushNamed(AppRoutes.changePassword),
+          // ),
+          // Gap(8.h),
           accountButton(
             context,
             leading: Assets.images.terms.image(
@@ -360,8 +361,9 @@ Widget accountDetails(
             ),
             title: localize(context).terms_conditions,
             onTap: () {
-              ref.read(termsAndConditionProvider.notifier).termsAndCondition();
-              termsAndConditionDialogue(context);
+              UrlLaunchServices.launchUrls('https://deligoeu.com/term.html');
+              // ref.read(termsAndConditionProvider.notifier).termsAndCondition();
+              // termsAndConditionDialogue(context);
             },
           ),
           Gap(8.h),
@@ -374,8 +376,9 @@ Widget accountDetails(
             ),
             title: localize(context).privacy_policy,
             onTap: () {
-              ref.read(privacyAndPolicyProvider.notifier).privacyPolicy();
-              termsAndConditionDialogue(context, showTermsAndCondition: false);
+              UrlLaunchServices.launchUrls('https://deligoeu.com/term.html');
+              // ref.read(privacyAndPolicyProvider.notifier).privacyPolicy();
+              // termsAndConditionDialogue(context, showTermsAndCondition: false);
             },
           ),
           Gap(8.h),

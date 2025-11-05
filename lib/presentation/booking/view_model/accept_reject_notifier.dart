@@ -1,6 +1,7 @@
 import 'package:deligo_driver/core/state/app_state.dart';
 import 'package:deligo_driver/core/utils/helpers.dart';
 import 'package:deligo_driver/data/models/common_response.dart';
+import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:deligo_driver/data/repositories/interfaces/ride_repo_interface.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
@@ -67,8 +68,18 @@ class RideDetailsNotifier extends StateNotifier<AppState<RideRequest?>>{
     final res = await repo.rideDetail(orderId: orderId);
     res.fold(
             (l) => state = AppState.error(l),
-            (r) => state = AppState.success(r.data?.rideRequest ));
+            (r) {
+              state = AppState.success(r.data?.rideRequest );
+              if(r.data?.rideRequest != null){
+                // ref.read(rideOrderNotifierProvider.notifier).setOrderData(r.data!.rideRequest!);
+              }
 
+            });
+
+  }
+
+  void reset(){
+    state = const AppState.initial();
   }
 }
 

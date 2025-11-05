@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,14 +6,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:deligo_driver/core/enums/booking_status.dart';
 import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/gen/assets.gen.dart';
 import 'package:deligo_driver/presentation/booking/provider/driver_providers.dart';
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_sheet.dart';
 
 import '../../../../core/utils/localize.dart';
 
-Widget reachedDestination(BuildContext context,  Order? order)=> Consumer(
+Widget reachedDestination(BuildContext context,  RideRequest? order)=> Consumer(
       builder: (context, ref, _) {
         final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
         final rideOrderState = ref.read(saveOrderStatusProvider);

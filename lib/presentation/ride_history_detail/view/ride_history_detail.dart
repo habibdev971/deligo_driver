@@ -113,7 +113,8 @@ class RideHistoryDetail extends ConsumerWidget {
               isComplete
                   ? serviceOverView(
                       context,
-                      order!,
+                      null,
+                      // order!, //TODO: here add data
                       widgets: [
                         Padding(
                           padding: EdgeInsets.only(

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
+import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,10 +11,10 @@ import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/extensions/number_extension.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/rider/rider.dart';
 import 'package:deligo_driver/presentation/booking/provider/driver_providers.dart';
 
 import '../../../core/theme/color_palette.dart';
+import '../../../data/models/ride_details_model/RideDetailsModel.dart';
 import '../../../data/services/url_launch_services.dart';
 
 Widget riderDetails(BuildContext context, Rider? rider, {String? amount}) {
@@ -106,28 +107,30 @@ Widget riderDetails(BuildContext context, Rider? rider, {String? amount}) {
         ),
 
         amount != null
-            ? Column(
-                children: [
-                  Text(
-                    localize(context).amount,
-                    style: context.bodyMedium?.copyWith(
-                      fontSize: 10.sp,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF687387),
-                    ),
-                  ),
-                  Text(
-                    r'$' + amount,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.bodyMedium?.copyWith(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                      color: isDarkMode() ? const Color(0xFF687387) : const Color(0xFF24262D),
-                    ),
-                  ),
-                ],
-              )
+            ? Consumer(
+              builder: (context, ref, _) => Column(
+                    children: [
+                      Text(
+                        localize(context).amount,
+                        style: context.bodyMedium?.copyWith(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF687387),
+                        ),
+                      ),
+                      Text(
+                        amount + ref.watch(currencyProvider),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.bodyMedium?.copyWith(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: isDarkMode() ? const Color(0xFF687387) : const Color(0xFF24262D),
+                        ),
+                      ),
+                    ],
+                  )
+            )
             : Row(
                 children: [
                   Consumer(

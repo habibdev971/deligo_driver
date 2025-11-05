@@ -47,7 +47,7 @@ class DriverStatusNotifier extends StateNotifier<DriverStatusState> {
   Future<void> orderRequest({required Map<String, dynamic> data}) async{
 
     orderRequestDialogue();
-    await ref.read(rideOrderNotifierProvider.notifier).orderDetails(orderId: data['order_id']);
+    // await ref.read(rideOrderNotifierProvider.notifier).orderDetails(orderId: data['order_id']);
     ref.read(bookingNotifierProvider.notifier).updateMapZoom();
 
     state = DriverStatusState.orderRequest(data);

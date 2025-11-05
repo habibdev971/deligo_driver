@@ -22,9 +22,9 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
   void initState() {
     super.initState();
 
-    Future.microtask(
-      () => ref.read(rideHistoryProvider.notifier).getRideHistory(),
-    );
+    // Future.microtask(
+    //   () => ref.read(rideHistoryProvider.notifier).getRideHistory(),
+    // );
   }
 
   @override
@@ -33,7 +33,7 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.read(rideHistoryProvider.notifier).getRideHistory();
+        // ref.read(rideHistoryProvider.notifier).getRideHistory();
       },
       child: Scaffold(
         backgroundColor: isDarkMode() ? Colors.black : context.surface,

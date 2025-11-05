@@ -46,7 +46,7 @@ Widget locationTime(BuildContext context, {String? time, String? distance}) =>
           ),
           child: Row(
             children: [
-              infoCard(context, title: distance ?? distanceText),
+              infoCard(context, title: distance == null ? distanceText : ('${distance}km') ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.0),
                 child: DottedLine(
@@ -55,7 +55,7 @@ Widget locationTime(BuildContext context, {String? time, String? distance}) =>
                   lineLength: 80,
                 ),
               ),
-              infoCard(context, showImage: false, title: time ?? timeText),
+              infoCard(context, showImage: false, title: time == null ? timeText : ('${time}min')),
             ],
           ),
         );
@@ -88,7 +88,7 @@ Widget infoCard(BuildContext context, {bool showImage = true, String? title}) =>
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: context.bodyMedium?.copyWith(
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
                   fontWeight: FontWeight.w500,
                   color: isDarkMode() ? Colors.white : const Color(0xFF24262D),
                 ),

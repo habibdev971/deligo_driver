@@ -1,4 +1,7 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
+import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
+import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +12,6 @@ import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/is_arabic.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/gen/assets.gen.dart';
@@ -19,7 +21,7 @@ import 'package:deligo_driver/presentation/booking/provider/pusher_provider.dart
 import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_sheet.dart';
 import '../../../../core/utils/is_dark_mode.dart';
 
-Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: (context, ref, _) {
+Widget paymentReceived(BuildContext context, RideRequest? order) => Consumer(builder: (context, ref, _) {
     final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
     final rideOrderState = ref.watch(saveOrderStatusProvider);
     final tripStateNotifier = ref.read(onTripStatusProvider.notifier);
@@ -48,14 +50,16 @@ Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: 
                       status: 'END',
                       onSuccess: (v) {
                         WidgetsBinding.instance.addPostFrameCallback((_) async{
+
                           tripStateNotifier.updateOnTripStatus(
-                                  status: BookingStatus.initial,
+                                  status: BookingStatus.goForPickup,
                                   );
 
                           pusherNotifier.disconnect();
                           bookingNotifier.resetToInitial();
                           await LocalStorageService().clearOrderId();
                           pusherNotifier.setupPusherListeners();
+                          ref.read(rideDetailsProvider.notifier).reset();
                           NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
                         });
                       });
@@ -71,43 +75,48 @@ Widget paymentReceived(BuildContext context, Order? order) => Consumer(builder: 
         ]);
   });
 
-Widget serviceOverView(BuildContext context, Order? order,
+Widget serviceOverView(BuildContext context, RideRequest? order,
     {List<Widget>? widgets}) => Container(
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(color: const Color(0xFFF1F7FE))),
-    child: Column(
-      children: [
-        if (widgets != null) ...widgets,
-        Padding(
-          padding: EdgeInsets.all(8.0.r),
-          child: rowText(context,
-              title: localize(context).rideCharge,
-              value: r'$' '${order?.subTotal ?? 0.00}'),
-        ),
-        Padding(
-          padding: EdgeInsets.all(8.0.r),
-          child: rowText(context,
-              title: localize(context).service_charge,
-              value: r'$' '${order?.service?.baseFare ?? 0.00}'),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: 8.0.w, right: 8.w, bottom: 8.h),
-          child: rowText(context, title: localize(context).discount, value: r'$' + (order?.discount ?? 0).toString()),
-        ),
-        Container(
-            padding: EdgeInsets.all(8.r),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(8.r),
-                    bottomLeft: Radius.circular(8.r)),
-                color: isDarkMode() ? Colors.grey.shade900 : const Color(0xFFF6F4FE)),
-            child: rowText(context,
-                title: localize(context).total_amount,
-                value: r'$' '${order?.payableAmount ?? 0.00}',
-                fontWeight: FontWeight.w600,
-                color: ColorPalette.primary50)),
-      ],
+    child: Consumer(
+      builder: (context, ref, _) {
+        final currency = ref.watch(currencyProvider);
+        return Column(
+          children: [
+            if (widgets != null) ...widgets,
+            Padding(
+              padding: EdgeInsets.all(8.0.r),
+              child: rowText(context,
+                  title: localize(context).rideCharge,
+                  value:  '${order?.estimatedFare ?? 0.00}$currency'),
+            ),
+            // Padding(
+            //   padding: EdgeInsets.all(8.0.r),
+            //   child: rowText(context,
+            //       title: localize(context).service_charge,
+            //       value: '${order?.service?.baseFare ?? 0.00}$currency'),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 8.0.w, right: 8.w, bottom: 8.h),
+            //   child: rowText(context, title: localize(context).discount, value: (order?.discount ?? 0).toString() + currency),
+            // ),
+            Container(
+                padding: EdgeInsets.all(8.r),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(8.r),
+                        bottomLeft: Radius.circular(8.r)),
+                    color: isDarkMode() ? Colors.grey.shade900 : const Color(0xFFF6F4FE)),
+                child: rowText(context,
+                    title: localize(context).total_amount,
+                    value: '${order?.estimatedFare ?? 0.00}$currency',
+                    fontWeight: FontWeight.w600,
+                    color: ColorPalette.primary50)),
+          ],
+        );
+      }
     ),
   );
 

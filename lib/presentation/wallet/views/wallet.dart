@@ -20,8 +20,8 @@ class _WalletState extends ConsumerState<Wallet> {
   void initState() {
     super.initState();
     Future.microtask((){
-      ref.read(walletsBalanceProvider.notifier).getWalletBalance();
-      ref.read(transactionHistoryProvider.notifier).getTransactionHistory();
+      // ref.read(walletsBalanceProvider.notifier).getWalletBalance();
+      // ref.read(transactionHistoryProvider.notifier).getTransactionHistory();
     });
   }
   @override

@@ -74,7 +74,7 @@ Widget buildTabItem(BuildContext context, String label, int index) => Consumer(
           onTap: () async {
             selectedTabIndex.value = index;
             stateNotifier.updatePaymentMode(index == 0 ? 'received' : 'withdraw');
-            await stateNotifier.getTransactionHistory();
+            // await stateNotifier.getTransactionHistory();
           },
           borderRadius: BorderRadius.circular(8.r),
           child: Container(

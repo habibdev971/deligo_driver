@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,9 +14,8 @@ import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_she
 import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart';
 
 import '../../../../core/utils/localize.dart';
-import '../../provider/ride_providers.dart';
 
-Widget confirmArrival(BuildContext context,  Order? order)=> Consumer(
+Widget confirmArrival(BuildContext context,  RideRequest? order)=> Consumer(
     builder: (context, ref, _) {
       final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
       final rideOrderState = ref.read(saveOrderStatusProvider);

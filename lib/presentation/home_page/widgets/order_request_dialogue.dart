@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:deligo_driver/data/models/order_response/order_model/address/address.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/rider/rider.dart';
 import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,6 +13,7 @@ import 'package:deligo_driver/presentation/home_page/widgets/location_time_calcu
 import 'package:deligo_driver/presentation/home_page/widgets/order_request_buttons.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/readable_location_view.dart';
 
+import '../../../data/models/ride_details_model/RideDetailsModel.dart';
 import '../../booking/view_model/reverse_timer_notifier.dart';
 
 void orderRequestDialogue({PusherRequestOrderModel? data}) {

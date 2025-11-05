@@ -1,10 +1,15 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:deligo_driver/presentation/booking/provider/home_providers.dart';
 
+import '../../../core/enums/driver_status.dart';
 import '../../../data/repositories/interfaces/i_geo_location_manager.dart';
+import '../provider/driver_providers.dart';
+import '../provider/way_point_list_provider.dart';
 
 class LocationState {
   final bool isFirstEvent;
@@ -46,6 +51,11 @@ class LocationNotifier extends StateNotifier<LocationState> {
     _locationSubscription?.cancel();
 
     _locationSubscription = _geoManager.locationStream().listen((latLng) {
+      ref.read(bookingNotifierProvider.notifier).updateLocationMarker(latLng);
+      // if(ref.watch(driverStatusNotifierProvider).whenOrNull(onTrip: ()=> true) ?? false){
+      //
+      // }
+
       final now = DateTime.now();
 
       final double distance = _lastSentLatLng == null
@@ -54,6 +64,8 @@ class LocationNotifier extends StateNotifier<LocationState> {
 
       final bool movedSignificantly = _lastSentLatLng == null || distance > 25; //15
       final bool enoughTimePassed = now.difference(_lastSentTime).inSeconds >= 7; //5
+      // final bool movedSignificantly = true;
+      // final bool enoughTimePassed = true;
 
       if (state.isFirstEvent) {
         _lastSentTime = now;
@@ -75,7 +87,18 @@ class LocationNotifier extends StateNotifier<LocationState> {
         _lastSentTime = now;
         _lastSentLatLng = latLng;
         saveDriverLocations(latLng);
-        ref.read(bookingNotifierProvider.notifier).updateLocationMarker(latLng);
+        ref.read(rideDetailsProvider).whenOrNull(success: (data){
+          final String? status = data?.status;
+          debugPrint('current status: $status');
+           ref
+              .read(routeNotifierProvider.notifier)
+              .fetchRoutesDetail(
+            data?.points,
+            // sendDataToRider: mode == MovementMode.towardsDestination,
+            // pickUpPoint: pickupLatLng,
+            orderId: data?.id,
+          );
+        });
         if (state.isOnUpdateActive) {
           _onNewLocation?.call(latLng);
         }

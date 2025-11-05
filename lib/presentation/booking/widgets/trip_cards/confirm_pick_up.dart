@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:deligo_driver/presentation/booking/provider/save_order_status_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,12 +17,11 @@ import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart'
 import 'package:deligo_driver/presentation/home_page/widgets/location_time_calculated.dart';
 
 import '../../provider/cancel_button_provider.dart';
-import '../../provider/ride_providers.dart';
 
-Widget confirmPickup(BuildContext context, Order? order) => Consumer(
+Widget confirmPickup(BuildContext context, RideRequest? order) => Consumer(
   builder: (context, ref, _) {
     final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
-    final rideOrderState = ref.read(saveOrderStatusProvider);
+    // final rideOrderState = ref.read(saveOrderStatusProvider);
     final onTripNotifier = ref.read(onTripStatusProvider.notifier);
     final timerState = ref.watch(cancelButtonEnableTimerProvider);
     final timerStateNotifier = ref.read(

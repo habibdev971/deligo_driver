@@ -29,7 +29,7 @@ class RideService implements IRideService {
 
   @override
   Future<Response> cancelRide({required int? orderId}) async =>
-      await dioClient.dio.get('${ApiEndpoints.cancelRide}/$orderId');
+      await dioClient.dio.post('${ApiEndpoints.cancelRide}/$orderId/cancelled');
 
   @override
   Future<Response> checkActiveTrip() async =>

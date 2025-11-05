@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:deligo_driver/core/errors/failure.dart';
@@ -23,7 +24,10 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
   }) : super(const AppState.initial());
 
   Future<void> fetchRoutesDetail(Points? points,
-      {bool sendDataToRider = true, LatLng? pickUpPoint, num? orderId}) async {
+      {bool sendDataToRider = true,
+        LatLng? pickUpPoint,
+        required num? orderId
+      }) async {
     state = const AppState.loading();
 
     final result = await googleAPIRepo.fetchWayPoints(waypoints: points);
@@ -46,8 +50,8 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
             endCap: Cap.roundCap,
           ),
         };
-        if (sendDataToRider) {
-          final pickup = pickUpPoint;
+
+          // final pickup = pickUpPoint;
           final lat = (points?.pickupLocation?.firstOrNull)?.toDouble();
           final lng = (points?.pickupLocation?.lastOrNull)?.toDouble();
 
@@ -62,14 +66,14 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
           calculateRouteProgress(
             ref,
             orderId: int.tryParse(orderId.toString()),
-            pickup: pickup,
+            pickup: LatLng(lat ?? 0, lng ?? 0),
             current: current,
             totalDistanceInMeters: totalDistance,
             polylinePoints: polyline,
             routeInfo: v,
             destination: destination
           );
-        }
+
         ref.read(bookingNotifierProvider.notifier).updatePolyLines(polyLine);
         state = AppState.success(v);
       },
@@ -91,9 +95,10 @@ class SendTravelInfoNotifier extends StateNotifier<AppState<CommonResponse>> {
     result.fold((error) {
 
       state = AppState.error(error);
-      showNotification(message: error.message);
+      // showNotification(message: error.message);
 
     }, (v) {
+      debugPrint("-------------travel info send successfull");
       state = AppState.success(v);
     });
   }
@@ -119,12 +124,12 @@ double _toRadians(double degree) => degree * pi / 180;
 
 /// Calculate route progress between pickup -> current based on total distance.
 /// Returns progress [0.0 - 1.0]. If any input is null or invalid, returns 0.0.
-void calculateRouteProgress(Ref ref,
+Future<void> calculateRouteProgress(Ref ref,
     {required int? orderId,
     required LatLng? pickup,
     required LatLng? current,
     required int? totalDistanceInMeters,
-    required List<LatLng>? polylinePoints, required RouteInfo routeInfo, required LatLng? destination}) {
+    required List<LatLng>? polylinePoints, required RouteInfo routeInfo, required LatLng? destination}) async{
   if (pickup == null ||
       current == null ||
       totalDistanceInMeters == null ||

@@ -49,7 +49,7 @@ class _AddPaymentGatewayState extends ConsumerState<AddPaymentGateway> {
     super.initState();
     Future.microtask(() {
       ref.read(selectedPayMethodProvider.notifier).reset();
-      ref.read(paymentMethodsNotifierProvider.notifier).getPaymentMethods();
+      // ref.read(paymentMethodsNotifierProvider.notifier).getPaymentMethods();
     });
   }
 

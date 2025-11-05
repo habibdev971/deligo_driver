@@ -24,7 +24,7 @@ class CashPaymentConfirmation extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Consumer(
               builder: (context, ref, _){
-                final order = ref.read(rideOrderNotifierProvider);
+                final order = ref.read(rideDetailsProvider);
                 final data = order.maybeWhen(orElse: ()=> null, success: (d)=> d);
                 final rider = data?.rider;
 

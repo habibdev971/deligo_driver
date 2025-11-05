@@ -127,7 +127,7 @@ class CheckTripActivityNotifier extends StateNotifier<AppState<Order?>> {
             (data) {
           if(data.data?.order != null){
             state = AppState.success(data.data!.order);
-            ref.read(rideOrderNotifierProvider.notifier).setOrderData(data.data!.order!);
+            // ref.read(rideOrderNotifierProvider.notifier).setOrderData(data.data!.order!);
           }else{
             state = const AppState.success(null);
           }

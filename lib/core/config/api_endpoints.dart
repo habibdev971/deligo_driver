@@ -36,7 +36,7 @@ class ApiEndpoints {
   static const String acceptRejectUrl = '$mediator/ride-requests';
   static const String checkActiveTrip = '$mediator/order/on-trip';
   static const String dashboard = '$mediator/dashboard';
-  static const String cancelRide = '/cancel-ride';
+  static const String cancelRide = '/rides';
   static const String driverLocationsUpdate = '/driver/location';
   static const String rideHistory = '$mediator/order';
   static const String earnings = '/earning';
@@ -52,5 +52,5 @@ class ApiEndpoints {
   static const String deleteAccount = '$mediator/destroy';
   static const String termsAndConditions = 'legal-terms';
   static const String privacyPolicy = 'privacy-policy';
-  static const String sendTravelInfo = '$mediator/locations/send-travel-info';
+  static const String sendTravelInfo = '/locations/send-travel-info';
 }

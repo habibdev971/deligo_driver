@@ -25,7 +25,7 @@ class _PayoutMethodViewState extends ConsumerState<PayoutMethodView> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(()=> ref.read(myCardsProvider.notifier).myCards());
+    // Future.microtask(()=> ref.read(myCardsProvider.notifier).myCards());
   }
 
   @override

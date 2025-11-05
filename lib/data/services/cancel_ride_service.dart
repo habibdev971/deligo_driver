@@ -11,6 +11,9 @@ class CancelRideService implements ICancelRideService {
 
 
   @override
-  Future<Response> cancelRide({required int? orderId}) async => await dioClient.dio.get('${ApiEndpoints.cancelRide}/$orderId',);
+  Future<Response> cancelRide({required int? orderId}) async => await dioClient.dio.post('${ApiEndpoints.cancelRide}/$orderId/status-update', data: {
+    'action': 'CANCELLED',
+    'reason': 'Rider did not show up'
+  });
 
 }

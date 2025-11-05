@@ -10,7 +10,6 @@ import 'package:deligo_driver/core/widgets/connectivity_wrapper.dart';
 import 'data/services/local_storage_service.dart';
 import 'data/services/notification_service.dart';
 
-
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -31,6 +30,14 @@ void main() async {
   await NotificationService().init();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  // ✅ Handle tap when app is terminated
+  final RemoteMessage? initialMessage =
+  await FirebaseMessaging.instance.getInitialMessage();
+  if (initialMessage != null) {
+    //TODO: handle terminated state notification tap here
+    // await handleNotificationTap(initialMessage);
+  }
 
   runApp(
     const ProviderScope(

@@ -24,7 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     ref.read(bookingNotifierProvider.notifier).initialize();
     Future.microtask((){
       ref.read(homeProvider.notifier).getDashboard();
-      ref.read(rideHistoryProvider.notifier).getRideHistory(date: 'today');
+      // ref.read(rideHistoryProvider.notifier).getRideHistory(date: 'today');
     });
   }
   @override

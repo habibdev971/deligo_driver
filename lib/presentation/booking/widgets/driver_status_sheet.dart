@@ -81,7 +81,7 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
   Widget build(BuildContext context) {
 
     final onTripStatusState = ref.watch(onTripStatusProvider);
-    final Order? order = ref.watch(rideOrderNotifierProvider).whenOrNull(success: (d)=> d);
+    final order = ref.watch(rideDetailsProvider).whenOrNull(success: (d)=> d);
 
     return Align(
       alignment: Alignment.bottomCenter,

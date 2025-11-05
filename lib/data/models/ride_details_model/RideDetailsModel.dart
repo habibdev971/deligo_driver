@@ -1,3 +1,8 @@
+import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
+
+import '../order_response/order_model/address/address.dart';
+import '../order_response/order_model/points/points.dart';
+
 class RideDetailsModel {
   RideDetailsModel({
       this.status, 
@@ -60,28 +65,28 @@ Data copyWith({  RideRequest? rideRequest,
 
 class RideRequest {
   RideRequest({
-      this.id, 
-      this.status, 
-      this.actualDistance, 
-      this.duration, 
-      this.waitMinutes, 
-      this.rideNumber, 
-      this.estimatedFare, 
-      this.estimatedTime, 
-      this.distance, 
-      this.points, 
-      this.addresses, 
-      this.orderTime, 
-      this.payMethod, 
-      this.subTotal, 
-      this.discount, 
-      this.payableAmount, 
-      this.currency, 
-      this.directions, 
-      this.service, 
-      this.ridePreferences, 
-      this.driver, 
-      this.rider, 
+      this.id,
+      this.status,
+      this.actualDistance,
+      this.duration,
+      this.waitMinutes,
+      this.rideNumber,
+      this.estimatedFare,
+      this.estimatedTime,
+      this.distance,
+      this.points,
+      this.addresses,
+      this.orderTime,
+      this.payMethod,
+      this.subTotal,
+      this.discount,
+      this.payableAmount,
+      this.currency,
+      this.directions,
+      this.service,
+      this.ridePreferences,
+      this.driver,
+      this.rider,
       this.vehicle,});
 
   RideRequest.fromJson(dynamic json) {
@@ -230,11 +235,11 @@ RideRequest copyWith({  num? id,
 
 class Vehicle {
   Vehicle({
-      this.id, 
-      this.carColor, 
-      this.carModel, 
-      this.carPlateNumber, 
-      this.carProductionYear, 
+      this.id,
+      this.carColor,
+      this.carModel,
+      this.carPlateNumber,
+      this.carProductionYear,
       this.direction,});
 
   Vehicle.fromJson(dynamic json) {
@@ -279,12 +284,12 @@ Vehicle copyWith({  num? id,
 
 class Rider {
   Rider({
-      this.id, 
-      this.name, 
-      this.email, 
-      this.mobile, 
-      this.profilePicture, 
-      this.totalTrip, 
+      this.id,
+      this.name,
+      this.email,
+      this.mobile,
+      this.profilePicture,
+      this.totalTrip,
       this.rating,});
 
   Rider.fromJson(dynamic json) {
@@ -334,14 +339,14 @@ Rider copyWith({  num? id,
 
 class Driver {
   Driver({
-      this.id, 
-      this.name, 
-      this.email, 
-      this.mobile, 
-      this.profilePicture, 
-      this.rating, 
-      this.direction, 
-      this.currentLocation, 
+      this.id,
+      this.name,
+      this.email,
+      this.mobile,
+      this.profilePicture,
+      this.rating,
+      this.direction,
+      this.currentLocation,
       this.totalTrip,});
 
   Driver.fromJson(dynamic json) {
@@ -401,10 +406,10 @@ Driver copyWith({  num? id,
 
 class RidePreferences {
   RidePreferences({
-      this.id, 
-      this.name, 
-      this.description, 
-      this.type, 
+      this.id,
+      this.name,
+      this.description,
+      this.type,
       this.additionalFee,});
 
   RidePreferences.fromJson(dynamic json) {
@@ -446,7 +451,7 @@ RidePreferences copyWith({  num? id,
 
 class Type {
   Type({
-      this.value, 
+      this.value,
       this.label,});
 
   Type.fromJson(dynamic json) {
@@ -471,12 +476,12 @@ Type copyWith({  String? value,
 
 class Service {
   Service({
-      this.id, 
-      this.name, 
-      this.logo, 
-      this.capacity, 
-      this.minimumFee, 
-      this.baseFare, 
+      this.id,
+      this.name,
+      this.logo,
+      this.capacity,
+      this.minimumFee,
+      this.baseFare,
       this.perHundredMeters,});
 
   Service.fromJson(dynamic json) {
@@ -524,64 +529,3 @@ Service copyWith({  num? id,
 
 }
 
-class Addresses {
-  Addresses({
-      this.pickupAddress, 
-      this.dropAddress, 
-      this.waitAddress,});
-
-  Addresses.fromJson(dynamic json) {
-    pickupAddress = json['pickup_address'];
-    dropAddress = json['drop_address'];
-    waitAddress = json['wait_address'];
-  }
-  String? pickupAddress;
-  String? dropAddress;
-  dynamic waitAddress;
-Addresses copyWith({  String? pickupAddress,
-  String? dropAddress,
-  dynamic waitAddress,
-}) => Addresses(  pickupAddress: pickupAddress ?? this.pickupAddress,
-  dropAddress: dropAddress ?? this.dropAddress,
-  waitAddress: waitAddress ?? this.waitAddress,
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['pickup_address'] = pickupAddress;
-    map['drop_address'] = dropAddress;
-    map['wait_address'] = waitAddress;
-    return map;
-  }
-
-}
-
-class Points {
-  Points({
-      this.pickupLocation, 
-      this.dropLocation, 
-      this.waitLocation,});
-
-  Points.fromJson(dynamic json) {
-    pickupLocation = json['pickup_location'] != null ? json['pickup_location'].cast<num>() : [];
-    dropLocation = json['drop_location'] != null ? json['drop_location'].cast<num>() : [];
-    waitLocation = json['wait_location'];
-  }
-  List<num>? pickupLocation;
-  List<num>? dropLocation;
-  dynamic waitLocation;
-Points copyWith({  List<num>? pickupLocation,
-  List<num>? dropLocation,
-  dynamic waitLocation,
-}) => Points(  pickupLocation: pickupLocation ?? this.pickupLocation,
-  dropLocation: dropLocation ?? this.dropLocation,
-  waitLocation: waitLocation ?? this.waitLocation,
-);
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['pickup_location'] = pickupLocation;
-    map['drop_location'] = dropLocation;
-    map['wait_location'] = waitLocation;
-    return map;
-  }
-
-}
