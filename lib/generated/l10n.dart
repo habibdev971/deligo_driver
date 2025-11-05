@@ -2114,10 +2114,10 @@ class AppLocalizations {
     );
   }
 
-  /// `Tap to Start Ride`
+  /// `Start Ride`
   String get tap_to_start_ride {
     return Intl.message(
-      'Tap to Start Ride',
+      'Start Ride',
       name: 'tap_to_start_ride',
       desc: '',
       args: [],

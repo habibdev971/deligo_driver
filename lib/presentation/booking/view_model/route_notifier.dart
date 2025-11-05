@@ -26,6 +26,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
   Future<void> fetchRoutesDetail(Points? points,
       {bool sendDataToRider = true,
         LatLng? pickUpPoint,
+        LatLng? current,
         required num? orderId
       }) async {
     state = const AppState.loading();
@@ -57,8 +58,8 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
 
           final latD = (points?.dropLocation?.firstOrNull)?.toDouble();
           final lngD = (points?.dropLocation?.lastOrNull)?.toDouble();
-          final current =
-              (lat != null && lng != null) ? LatLng(lat, lng) : null;
+          // final current =
+          //     (lat != null && lng != null) ? LatLng(lat, lng) : null;
           final destination = (latD != null && lngD != null ) ? LatLng(latD, lngD) : null;
           final totalDistance = v.distanceInMeters;
           final polyline = v.polylinePoints;
@@ -68,6 +69,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
             orderId: int.tryParse(orderId.toString()),
             pickup: LatLng(lat ?? 0, lng ?? 0),
             current: current,
+            // current: ref.watch(bookingNotifierProvider).currentLocation, //TODO: check the update if it works fine
             totalDistanceInMeters: totalDistance,
             polylinePoints: polyline,
             routeInfo: v,

@@ -561,9 +561,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tap_to_confirm_arrival": MessageLookupByLibrary.simpleMessage(
       "Tap to Confirm Your Arrival",
     ),
-    "tap_to_start_ride": MessageLookupByLibrary.simpleMessage(
-      "Tap to Start Ride",
-    ),
+    "tap_to_start_ride": MessageLookupByLibrary.simpleMessage("Start Ride"),
     "tax_number": MessageLookupByLibrary.simpleMessage("Tax Number"),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Terms & Conditions",

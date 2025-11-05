@@ -516,7 +516,7 @@
   "@all_set_start_ride": {},
   "start_journey_navigation": "Start the journey by following the in-app navigation. Make sure both parties are comfortable before beginning.",
   "@start_journey_navigation": {},
-  "tap_to_start_ride": "Tap to Start Ride",
+  "tap_to_start_ride": "Start Ride",
   "@tap_to_start_ride": {},
   "follow_directions_comfortable": "Follow the directions, stay calm, and create a comfortable ride environment.",
   "@follow_directions_comfortable": {},

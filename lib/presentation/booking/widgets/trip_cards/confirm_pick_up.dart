@@ -45,7 +45,7 @@ Widget confirmPickup(BuildContext context, RideRequest? order) => Consumer(
           child: AppPrimaryButton(
             isLoading:
                 ref
-                    .read(cancelRideNotifierProvider)
+                    .watch(cancelRideNotifierProvider)
                     .whenOrNull(loading: () => true) ??
                 false,
             isDisabled: !timerState.isButtonEnabled,
