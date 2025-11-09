@@ -36,7 +36,7 @@ class ApiEndpoints {
   static const String acceptRejectUrl = '$mediator/ride-requests';
   static const String checkActiveTrip = '$mediator/order/on-trip';
   static const String dashboard = '$mediator/dashboard';
-  static const String cancelRide = '/rides';
+  static const String cancelRide = '/driver/rides';
   static const String driverLocationsUpdate = '/driver/location';
   static const String rideHistory = '$mediator/order';
   static const String earnings = '/earning';

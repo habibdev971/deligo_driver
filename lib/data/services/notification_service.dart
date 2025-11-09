@@ -125,6 +125,7 @@ Future<void> handleNotificationTap(RemoteMessage message) async {
   final locale = LocalStorageService();
   final data = message.data;
 
+  log(data.toString());
   if (data.isEmpty) return;
   // await locale.clearRemoteMessage();
 

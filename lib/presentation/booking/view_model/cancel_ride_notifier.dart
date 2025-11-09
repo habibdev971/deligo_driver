@@ -14,11 +14,11 @@ class CancelRideNotifier extends StateNotifier<AppState<CommonResponse>> {
   final Ref ref;
   CancelRideNotifier(this.ref, this.rideRepo) : super(const AppState.initial());
 
-  Future<void> cancelRide() async {
+  Future<void> cancelRide({num? orderId}) async {
     final local = LocalStorageService();
     state = const AppState.loading();
 
-    final orderId = await local.getRideId();
+    // final orderId = await local.getRideId();
 
     final result = await rideRepo.cancelRide(orderId: orderId?.toInt());
 
@@ -35,6 +35,7 @@ class CancelRideNotifier extends StateNotifier<AppState<CommonResponse>> {
 
         showNotification(
           message: message,
+          isSuccess: true
         );
 
           state = AppState.success(data);

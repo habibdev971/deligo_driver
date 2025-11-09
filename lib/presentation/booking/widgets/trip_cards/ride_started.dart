@@ -21,12 +21,14 @@ import '../../provider/cancel_ride_provider.dart';
 Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
   builder: (context, ref, _) {
     final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
+    final orderLoading = ref.watch(saveOrderStatusProvider).whenOrNull(loading: () => true) ?? false;
     final onTripNotifier = ref.read(onTripStatusProvider.notifier);
     // final timerState = ref.watch(cancelButtonEnableTimerProvider);
     // final timerStateNotifier = ref.read(
     //   cancelButtonEnableTimerProvider.notifier,
     // );
     final cancelProvider = ref.read(cancelRideNotifierProvider.notifier);
+    final cancelLoading = ref.watch(cancelRideNotifierProvider).whenOrNull(loading: () => true) ?? false;
     return actionSheet(
       context,
       riderInfo: riderDetails(context, order?.rider),
@@ -42,15 +44,16 @@ Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
         Expanded(
           child: AppPrimaryButton(
             isLoading:
-                ref
-                    .watch(cancelRideNotifierProvider)
-                    .whenOrNull(loading: () => true) ??
-                false,
+                cancelLoading,
             // isDisabled: !timerState.isButtonEnabled,
+            isDisabled: orderLoading,
+            // onPressed: () {
+            //   timerStateNotifier.startTimer();
+            // },),
             backgroundColor: Colors.red,
             onPressed: () {
               // showNotification(message: "Working on it");
-              // cancelProvider.cancelRide();
+              cancelProvider.cancelRide(orderId: order?.id);
             },
             child: Text(
               localize(context).cancel_ride,
@@ -67,6 +70,8 @@ Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
         Gap(16.w),
         Expanded(
           child: AppPrimaryButton(
+            isLoading: orderLoading,
+            isDisabled: cancelLoading,
             onPressed: () {
               rideOrderNotifier.saveOrderStatus(
                 status: 'START',
