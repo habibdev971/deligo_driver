@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -122,12 +123,16 @@ class LocationNotifier extends StateNotifier<LocationState> {
   }
 
   Future<void> saveDriverLocations(LatLng latLng) async {
+    final results = await Connectivity().checkConnectivity();
+
+    // এখন results হলো List<ConnectivityResult>
+    final hasInternet = results.any((result) => result != ConnectivityResult.none);
+    if (!hasInternet) return;
+
     try {
       await _geoManager.saveDriverLocation(latLng, ref: ref);
-    } catch (e) {
-      if(true){
-
-      }
+    } catch (e, st) {
+      debugPrint('Error saving driver location: $e');
     }
   }
 
