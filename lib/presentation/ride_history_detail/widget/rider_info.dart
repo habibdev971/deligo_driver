@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -6,14 +7,12 @@ import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/format_date.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/rider/rider.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/activity_card.dart';
 
 Widget riderInfo(
   BuildContext context,
   Rider? rider,
-  Order? order, {
+  RideRequest? order, {
   bool showCancelItem = false,
 }) => Row(
   children: [

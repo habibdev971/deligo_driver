@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:deligo_driver/presentation/auth/views/bank_info_page.dart';
 import 'package:deligo_driver/presentation/auth/views/legal_documents_page.dart';
 import 'package:deligo_driver/presentation/auth/views/registration_page.dart';
@@ -96,7 +97,7 @@ class AppRouter {
         final orderId = settings.arguments as int?;
         return MaterialPageRoute(builder: (_) => ReportIssueView(orderId));
       case '/ride-history-detail':
-        final Order? order = settings.arguments as Order? ;
+        final RideRequest? order = settings.arguments as RideRequest? ;
         return MaterialPageRoute(builder: (_) => RideHistoryDetail(order: order,));
       case '/add-payment-gateway':
         return MaterialPageRoute(builder: (_) => const AddPaymentGateway());

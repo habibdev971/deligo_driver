@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -10,7 +11,7 @@ import '../../home_page/widgets/activity_card.dart';
 
 Widget travelInfo(
   BuildContext context,
-  Order? order, {
+  RideRequest? order, {
   bool showCancelItem = false,
 }) => Row(
   children: [

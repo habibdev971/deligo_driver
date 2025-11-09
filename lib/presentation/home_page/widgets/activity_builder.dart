@@ -1,12 +1,12 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/activity_card.dart';
 
 import '../../../core/routes/app_routes.dart';
 
-Widget activityBuilder(BuildContext context, {List<Order> orderList = const <Order>[], bool showPrice = false})=> ListView.builder(
+Widget activityBuilder(BuildContext context, {List<RideRequest> orderList = const <RideRequest>[], bool showPrice = false})=> ListView.builder(
     padding: EdgeInsets.symmetric(vertical: 8.h),
     itemCount: orderList.length,
     itemBuilder: (context, index) {

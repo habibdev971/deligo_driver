@@ -67,7 +67,8 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
         body: rideState.when(
           initial: () => Center(child: Text(localize(context).no_rides_yet)),
           loading: () => const LoadingView(),
-          error: (e) => Center(child: Text(localize(context).error_with_msg(e.message))),
+          error: (e) =>
+              Center(child: Text(localize(context).error_with_msg(e.message))),
           success: (orders) {
             if (orders.isEmpty) {
               return Center(
@@ -79,7 +80,7 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
             }
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: activityBuilder(context, orderList: orders, showPrice: true),
+              child: activityBuilder(context, orderList: [], showPrice: true),
             );
           },
         ),

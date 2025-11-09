@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +11,7 @@ import 'package:deligo_driver/presentation/ride_history_detail/provider/ride_his
 final Completer<GoogleMapController> _controller = Completer();
 bool _cameraMoved = false;
 
-Widget activityMap(BuildContext context, WidgetRef ref, Order? order) {
+Widget activityMap(BuildContext context, WidgetRef ref, RideRequest? order) {
   final List<num> pick = order?.points?.pickupLocation ?? [];
   final List<num> drop = order?.points?.dropLocation ?? [];
 

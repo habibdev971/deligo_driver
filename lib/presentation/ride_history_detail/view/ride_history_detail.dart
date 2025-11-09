@@ -1,3 +1,4 @@
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,7 +9,6 @@ import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/buttons/app_back_button.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/order/order.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/readable_location_view.dart';
 import 'package:deligo_driver/presentation/ride_history_detail/widget/rider_and_location.dart';
@@ -20,7 +20,7 @@ import '../../booking/widgets/trip_cards/payment_received.dart';
 
 class RideHistoryDetail extends ConsumerWidget {
   const RideHistoryDetail({super.key, this.order});
-  final Order? order;
+  final RideRequest? order;
 
   void _copyText(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
@@ -31,7 +31,7 @@ class RideHistoryDetail extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isComplete =
         order?.status != null &&
-        order!.status!.toLowerCase().contains('completed');
+            order!.status!.toLowerCase().contains('completed');
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -68,11 +68,10 @@ class RideHistoryDetail extends ConsumerWidget {
             onTap: () {
               _copyText(context, '${order?.id}');
             },
-            child: SizedBox(
-              width: 100,
+            child: IntrinsicWidth(
               child: Row(
                 children: [
-                  Expanded(
+                  Flexible(
                     child: Text(
                       (order?.id ?? 0).toString(),
                       textAlign: TextAlign.end,
@@ -112,30 +111,29 @@ class RideHistoryDetail extends ConsumerWidget {
               Gap(16.h),
               isComplete
                   ? serviceOverView(
-                      context,
-                      null,
-                      // order!, //TODO: here add data
-                      widgets: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 8.0.w,
-                            right: 8.w,
-                            top: 8.h,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              rowText(
-                                context,
-                                title: localize(context).payout_method,
-                                value: order?.payMethod?.capitalize(),
-                              ),
-                              const Divider(),
-                            ],
-                          ),
+                context,
+                order,
+                widgets: [
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: 8.0.w,
+                      right: 8.w,
+                      top: 8.h,
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        rowText(
+                          context,
+                          title: 'Payment Method',
+                          value: order?.payMethod?.capitalize(),
                         ),
+                        const Divider(),
                       ],
-                    )
+                    ),
+                  ),
+                ],
+              )
                   : const SizedBox.shrink(),
               Gap(120.h)
             ],
@@ -147,13 +145,13 @@ class RideHistoryDetail extends ConsumerWidget {
 }
 
 Widget issueButton(
-  BuildContext context, {
-  String title = '',
-  IconData? icon,
-  Color? backgroundColor,
-  Color? textColor,
-  Function()? onTap,
-}) => InkWell(
+    BuildContext context, {
+      String title = '',
+      IconData? icon,
+      Color? backgroundColor,
+      Color? textColor,
+      Function()? onTap,
+    }) => InkWell(
   onTap: onTap,
   child: Container(
     padding: EdgeInsets.symmetric(vertical: 13.h, horizontal: 8.w),

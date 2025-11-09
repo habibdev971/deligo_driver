@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:deligo_driver/core/utils/build_network_image.dart';
 import 'package:deligo_driver/data/services/url_launch_services.dart';
 import 'package:deligo_driver/presentation/account_page/widgets/language_dropdown.dart';
@@ -13,7 +12,6 @@ import 'package:deligo_driver/core/utils/delete_account_dialogue.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
-import 'package:deligo_driver/presentation/account_page/provider/terms_and_privacy_provider.dart';
 import 'package:deligo_driver/presentation/profile/provider/profile_providers.dart';
 
 import '../../../core/routes/app_routes.dart';
@@ -21,7 +19,6 @@ import '../../../core/utils/exit_app_dialogue.dart';
 import '../../../data/models/user_model/user_model.dart';
 import '../../../gen/assets.gen.dart';
 import '../provider/theme_provider.dart';
-import '../widgets/about_dialogue.dart';
 
 class AccountPage extends ConsumerStatefulWidget {
   const AccountPage({super.key});

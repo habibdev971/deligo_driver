@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -15,7 +16,7 @@ import '../../../gen/assets.gen.dart';
 
 Widget activityCard(
   BuildContext context, {
-  required Order order,
+  required RideRequest order,
   Function()? onTap,
   bool showCancelItem = false,
   bool showPrice = false
@@ -39,7 +40,7 @@ Widget activityCard(
 
 Widget rideActivityCard(
   BuildContext context, {
-  required Order order,
+  required RideRequest order,
   Function()? onTap,
   bool showCancelItem = false,
   bool showPrice = false
@@ -82,7 +83,7 @@ Widget ratingDate(
   BuildContext context, {
   bool showCancelItem = false,
   bool showPrice = false,
-  required Order order,
+  required RideRequest order,
 }) => SizedBox(
   width: 61.w,
   child: Column(
@@ -144,7 +145,7 @@ Widget ratingDate(
 
 Widget rideDetails(
   BuildContext context, {
-  required Order order,
+  required RideRequest order,
   bool showCancelItem = false,
 }) => Column(
   crossAxisAlignment: CrossAxisAlignment.start,
