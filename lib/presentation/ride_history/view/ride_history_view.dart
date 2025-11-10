@@ -8,6 +8,8 @@ import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/presentation/home_page/widgets/activity_builder.dart';
+import 'package:intl/intl.dart';
+import '../../../core/utils/custom_date_picker.dart';
 import '../provider/ride_history_provider.dart';
 
 class RideHistoryPage extends ConsumerStatefulWidget {
@@ -18,6 +20,7 @@ class RideHistoryPage extends ConsumerStatefulWidget {
 }
 
 class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
+  DateTime? date;
   @override
   void initState() {
     super.initState();
@@ -47,21 +50,35 @@ class _RideHistoryPageState extends ConsumerState<RideHistoryPage> {
             ),
           ),
           actions: [
-            Text(
-              localize(context).today,
-              style: context.bodyMedium?.copyWith(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF687387),
+            InkWell(
+              onTap: ()async{
+                date = await customDatePickerReturnDate(context, initialDate: date, lastDate: DateTime.now(), firstDate: DateTime.now().subtract(const Duration(days: 1000)));
+                setState(() {});
+                await Future.delayed(const Duration(milliseconds: 100));
+                // _fetchData();
+
+              },
+              child: Row(
+                children: [
+                  Text(
+                    date == null ? '' : DateFormat('dd-MM-yyyy', 'en').format(date!),
+                    // AppLocalizations.of(context).today,
+                    style: context.bodyMedium?.copyWith(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF687387),
+                    ),
+                  ),
+                  Gap(8.w),
+                  Icon(
+                    Icons.calendar_month,
+                    color: ColorPalette.primary50,
+                    size: 24.h,
+                  ),
+                  Gap(16.w),
+                ],
               ),
-            ),
-            Gap(8.w),
-            Icon(
-              Icons.calendar_month,
-              color: ColorPalette.primary50,
-              size: 24.h,
-            ),
-            Gap(16.w),
+            )
           ],
         ),
         body: rideState.when(

@@ -33,7 +33,10 @@ class GeoLocationManager implements IGeoLocationManager {
   }
 
   @override
-  Stream<LatLng> locationStream() => _location.onLocationChanged.map((locationData) => LatLng(locationData.latitude!, locationData.longitude!));
+  Stream<LatLng> locationStream() {
+    _location.changeSettings(accuracy: LocationAccuracy.navigation,);
+    return _location.onLocationChanged.map((locationData) => LatLng(locationData.latitude!, locationData.longitude!));
+  }
 
   @override
   Future<CommonResponse> saveDriverLocation(LatLng latLng, {required Ref ref}) async{

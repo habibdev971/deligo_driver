@@ -10,8 +10,10 @@ import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/error_view.dart';
 import 'package:deligo_driver/gen/assets.gen.dart';
 import 'package:deligo_driver/presentation/wallet/provider/provider.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/utils/build_network_image.dart';
+import '../../../core/utils/custom_date_picker.dart';
 import '../../../core/utils/format_date.dart';
 import '../../../data/models/wallet_model/wallet_transaction_history_model.dart';
 
@@ -21,6 +23,7 @@ Widget transactionHistory(BuildContext context)=> Expanded(
     child: Consumer(
       builder: (context, ref, _) {
         final state = ref.watch(transactionHistoryProvider);
+        final notifier = ref.read(transactionHistoryProvider.notifier);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,9 +36,34 @@ Widget transactionHistory(BuildContext context)=> Expanded(
                   ),
                 ),
                 const SizedBox(width: 8),
-                Text(state.dateTime?.formatDateTime ?? 'N/A', style: context.bodyMedium?.copyWith(fontSize: 12.sp, fontWeight: FontWeight.w400, color: Colors.grey.shade600),),
-                Gap(8.w),
-                Icon(Icons.calendar_month, color: ColorPalette.primary50, size: 24.h,),
+                InkWell(
+                  onTap: ()async{
+                    final date = await customDatePickerReturnDate(context, initialDate: state.dateTime, lastDate: DateTime.now(), firstDate: DateTime.now().subtract(const Duration(days: 1000)));
+                    notifier.updateDateTime(date);
+                    await Future.delayed(const Duration(milliseconds: 100));
+                    // notifier.getTransactionHistory();
+
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        state.dateTime == null ? '' : DateFormat('dd/MM/yyyy', 'en').format(state.dateTime!),
+                        style: context.bodyMedium?.copyWith(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: const Color(0xFF687387),
+                        ),
+                      ),
+                      Gap(8.w),
+                      Icon(
+                        Icons.calendar_month,
+                        color: ColorPalette.primary50,
+                        size: 24.h,
+                      ),
+                      Gap(16.w),
+                    ],
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 8),
