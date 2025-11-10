@@ -15,7 +15,7 @@ import '../../../../core/utils/localize.dart';
 Widget reachedDestination(BuildContext context,  RideRequest? order)=> Consumer(
       builder: (context, ref, _) {
         final rideOrderNotifier = ref.read(saveOrderStatusProvider.notifier);
-        final rideOrderState = ref.read(saveOrderStatusProvider);
+        final rideOrderState = ref.watch(saveOrderStatusProvider);
         final onTripNotifier = ref.read(onTripStatusProvider.notifier);
 
         return actionSheet(context,

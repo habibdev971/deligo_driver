@@ -22,11 +22,9 @@ mixin _$OnTripStatusState<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,11 +32,9 @@ mixin _$OnTripStatusState<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -46,11 +42,9 @@ mixin _$OnTripStatusState<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -60,12 +54,10 @@ mixin _$OnTripStatusState<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,11 +65,9 @@ mixin _$OnTripStatusState<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,11 +75,9 @@ mixin _$OnTripStatusState<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
@@ -167,11 +155,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return initial();
@@ -183,11 +169,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return initial?.call();
@@ -199,11 +183,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -220,12 +202,10 @@ class _$InitialImpl<T> implements _Initial<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return initial(this);
@@ -237,11 +217,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return initial?.call(this);
@@ -253,11 +231,9 @@ class _$InitialImpl<T> implements _Initial<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -318,11 +294,9 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return goForPickup();
@@ -334,11 +308,9 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return goForPickup?.call();
@@ -350,11 +322,9 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -371,12 +341,10 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return goForPickup(this);
@@ -388,11 +356,9 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return goForPickup?.call(this);
@@ -404,11 +370,9 @@ class _$GoForPickupImpl<T> implements _GoForPickup<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -471,11 +435,9 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return arrivedAtPickupPoint();
@@ -487,11 +449,9 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return arrivedAtPickupPoint?.call();
@@ -503,11 +463,9 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -524,12 +482,10 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return arrivedAtPickupPoint(this);
@@ -541,11 +497,9 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return arrivedAtPickupPoint?.call(this);
@@ -557,11 +511,9 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -574,157 +526,6 @@ class _$ArrivedAtPickupPointImpl<T> implements _ArrivedAtPickupPoint<T> {
 
 abstract class _ArrivedAtPickupPoint<T> implements OnTripStatusState<T> {
   const factory _ArrivedAtPickupPoint() = _$ArrivedAtPickupPointImpl<T>;
-}
-
-/// @nodoc
-abstract class _$$PickupConfirmedImplCopyWith<T, $Res> {
-  factory _$$PickupConfirmedImplCopyWith(
-    _$PickupConfirmedImpl<T> value,
-    $Res Function(_$PickupConfirmedImpl<T>) then,
-  ) = __$$PickupConfirmedImplCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$PickupConfirmedImplCopyWithImpl<T, $Res>
-    extends _$OnTripStatusStateCopyWithImpl<T, $Res, _$PickupConfirmedImpl<T>>
-    implements _$$PickupConfirmedImplCopyWith<T, $Res> {
-  __$$PickupConfirmedImplCopyWithImpl(
-    _$PickupConfirmedImpl<T> _value,
-    $Res Function(_$PickupConfirmedImpl<T>) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of OnTripStatusState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$PickupConfirmedImpl<T> implements _PickupConfirmed<T> {
-  const _$PickupConfirmedImpl();
-
-  @override
-  String toString() {
-    return 'OnTripStatusState<$T>.pickupConfirmed()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PickupConfirmedImpl<T>);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() goForPickup,
-    required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
-    required TResult Function() rideStarted,
-    required TResult Function() headingToDestination,
-    required TResult Function() reachedDestination,
-    required TResult Function() chat,
-    required TResult Function() payment,
-  }) {
-    return pickupConfirmed();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? goForPickup,
-    TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
-    TResult? Function()? rideStarted,
-    TResult? Function()? headingToDestination,
-    TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
-    TResult? Function()? payment,
-  }) {
-    return pickupConfirmed?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? goForPickup,
-    TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
-    TResult Function()? rideStarted,
-    TResult Function()? headingToDestination,
-    TResult Function()? reachedDestination,
-    TResult Function()? chat,
-    TResult Function()? payment,
-    required TResult orElse(),
-  }) {
-    if (pickupConfirmed != null) {
-      return pickupConfirmed();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_GoForPickup<T> value) goForPickup,
-    required TResult Function(_ArrivedAtPickupPoint<T> value)
-    arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
-    required TResult Function(_RideStarted<T> value) rideStarted,
-    required TResult Function(_HeadingToDestination<T> value)
-    headingToDestination,
-    required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
-    required TResult Function(_Payment<T> value) payment,
-  }) {
-    return pickupConfirmed(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_GoForPickup<T> value)? goForPickup,
-    TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
-    TResult? Function(_RideStarted<T> value)? rideStarted,
-    TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
-    TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
-    TResult? Function(_Payment<T> value)? payment,
-  }) {
-    return pickupConfirmed?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_GoForPickup<T> value)? goForPickup,
-    TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
-    TResult Function(_RideStarted<T> value)? rideStarted,
-    TResult Function(_HeadingToDestination<T> value)? headingToDestination,
-    TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
-    TResult Function(_Payment<T> value)? payment,
-    required TResult orElse(),
-  }) {
-    if (pickupConfirmed != null) {
-      return pickupConfirmed(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _PickupConfirmed<T> implements OnTripStatusState<T> {
-  const factory _PickupConfirmed() = _$PickupConfirmedImpl<T>;
 }
 
 /// @nodoc
@@ -773,11 +574,9 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return rideStarted();
@@ -789,11 +588,9 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return rideStarted?.call();
@@ -805,11 +602,9 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -826,12 +621,10 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return rideStarted(this);
@@ -843,11 +636,9 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return rideStarted?.call(this);
@@ -859,11 +650,9 @@ class _$RideStartedImpl<T> implements _RideStarted<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -926,11 +715,9 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return headingToDestination();
@@ -942,11 +729,9 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return headingToDestination?.call();
@@ -958,11 +743,9 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -979,12 +762,10 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return headingToDestination(this);
@@ -996,11 +777,9 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return headingToDestination?.call(this);
@@ -1012,11 +791,9 @@ class _$HeadingToDestinationImpl<T> implements _HeadingToDestination<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -1079,11 +856,9 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return reachedDestination();
@@ -1095,11 +870,9 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return reachedDestination?.call();
@@ -1111,11 +884,9 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -1132,12 +903,10 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return reachedDestination(this);
@@ -1149,11 +918,9 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return reachedDestination?.call(this);
@@ -1165,11 +932,9 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {
@@ -1182,157 +947,6 @@ class _$ReachedDestinationImpl<T> implements _ReachedDestination<T> {
 
 abstract class _ReachedDestination<T> implements OnTripStatusState<T> {
   const factory _ReachedDestination() = _$ReachedDestinationImpl<T>;
-}
-
-/// @nodoc
-abstract class _$$ChatImplCopyWith<T, $Res> {
-  factory _$$ChatImplCopyWith(
-    _$ChatImpl<T> value,
-    $Res Function(_$ChatImpl<T>) then,
-  ) = __$$ChatImplCopyWithImpl<T, $Res>;
-}
-
-/// @nodoc
-class __$$ChatImplCopyWithImpl<T, $Res>
-    extends _$OnTripStatusStateCopyWithImpl<T, $Res, _$ChatImpl<T>>
-    implements _$$ChatImplCopyWith<T, $Res> {
-  __$$ChatImplCopyWithImpl(
-    _$ChatImpl<T> _value,
-    $Res Function(_$ChatImpl<T>) _then,
-  ) : super(_value, _then);
-
-  /// Create a copy of OnTripStatusState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$ChatImpl<T> implements _Chat<T> {
-  const _$ChatImpl();
-
-  @override
-  String toString() {
-    return 'OnTripStatusState<$T>.chat()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ChatImpl<T>);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() goForPickup,
-    required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
-    required TResult Function() rideStarted,
-    required TResult Function() headingToDestination,
-    required TResult Function() reachedDestination,
-    required TResult Function() chat,
-    required TResult Function() payment,
-  }) {
-    return chat();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? goForPickup,
-    TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
-    TResult? Function()? rideStarted,
-    TResult? Function()? headingToDestination,
-    TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
-    TResult? Function()? payment,
-  }) {
-    return chat?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? goForPickup,
-    TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
-    TResult Function()? rideStarted,
-    TResult Function()? headingToDestination,
-    TResult Function()? reachedDestination,
-    TResult Function()? chat,
-    TResult Function()? payment,
-    required TResult orElse(),
-  }) {
-    if (chat != null) {
-      return chat();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial<T> value) initial,
-    required TResult Function(_GoForPickup<T> value) goForPickup,
-    required TResult Function(_ArrivedAtPickupPoint<T> value)
-    arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
-    required TResult Function(_RideStarted<T> value) rideStarted,
-    required TResult Function(_HeadingToDestination<T> value)
-    headingToDestination,
-    required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
-    required TResult Function(_Payment<T> value) payment,
-  }) {
-    return chat(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial<T> value)? initial,
-    TResult? Function(_GoForPickup<T> value)? goForPickup,
-    TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
-    TResult? Function(_RideStarted<T> value)? rideStarted,
-    TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
-    TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
-    TResult? Function(_Payment<T> value)? payment,
-  }) {
-    return chat?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial<T> value)? initial,
-    TResult Function(_GoForPickup<T> value)? goForPickup,
-    TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
-    TResult Function(_RideStarted<T> value)? rideStarted,
-    TResult Function(_HeadingToDestination<T> value)? headingToDestination,
-    TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
-    TResult Function(_Payment<T> value)? payment,
-    required TResult orElse(),
-  }) {
-    if (chat != null) {
-      return chat(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Chat<T> implements OnTripStatusState<T> {
-  const factory _Chat() = _$ChatImpl<T>;
 }
 
 /// @nodoc
@@ -1381,11 +995,9 @@ class _$PaymentImpl<T> implements _Payment<T> {
     required TResult Function() initial,
     required TResult Function() goForPickup,
     required TResult Function() arrivedAtPickupPoint,
-    required TResult Function() pickupConfirmed,
     required TResult Function() rideStarted,
     required TResult Function() headingToDestination,
     required TResult Function() reachedDestination,
-    required TResult Function() chat,
     required TResult Function() payment,
   }) {
     return payment();
@@ -1397,11 +1009,9 @@ class _$PaymentImpl<T> implements _Payment<T> {
     TResult? Function()? initial,
     TResult? Function()? goForPickup,
     TResult? Function()? arrivedAtPickupPoint,
-    TResult? Function()? pickupConfirmed,
     TResult? Function()? rideStarted,
     TResult? Function()? headingToDestination,
     TResult? Function()? reachedDestination,
-    TResult? Function()? chat,
     TResult? Function()? payment,
   }) {
     return payment?.call();
@@ -1413,11 +1023,9 @@ class _$PaymentImpl<T> implements _Payment<T> {
     TResult Function()? initial,
     TResult Function()? goForPickup,
     TResult Function()? arrivedAtPickupPoint,
-    TResult Function()? pickupConfirmed,
     TResult Function()? rideStarted,
     TResult Function()? headingToDestination,
     TResult Function()? reachedDestination,
-    TResult Function()? chat,
     TResult Function()? payment,
     required TResult orElse(),
   }) {
@@ -1434,12 +1042,10 @@ class _$PaymentImpl<T> implements _Payment<T> {
     required TResult Function(_GoForPickup<T> value) goForPickup,
     required TResult Function(_ArrivedAtPickupPoint<T> value)
     arrivedAtPickupPoint,
-    required TResult Function(_PickupConfirmed<T> value) pickupConfirmed,
     required TResult Function(_RideStarted<T> value) rideStarted,
     required TResult Function(_HeadingToDestination<T> value)
     headingToDestination,
     required TResult Function(_ReachedDestination<T> value) reachedDestination,
-    required TResult Function(_Chat<T> value) chat,
     required TResult Function(_Payment<T> value) payment,
   }) {
     return payment(this);
@@ -1451,11 +1057,9 @@ class _$PaymentImpl<T> implements _Payment<T> {
     TResult? Function(_Initial<T> value)? initial,
     TResult? Function(_GoForPickup<T> value)? goForPickup,
     TResult? Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult? Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult? Function(_RideStarted<T> value)? rideStarted,
     TResult? Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult? Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult? Function(_Chat<T> value)? chat,
     TResult? Function(_Payment<T> value)? payment,
   }) {
     return payment?.call(this);
@@ -1467,11 +1071,9 @@ class _$PaymentImpl<T> implements _Payment<T> {
     TResult Function(_Initial<T> value)? initial,
     TResult Function(_GoForPickup<T> value)? goForPickup,
     TResult Function(_ArrivedAtPickupPoint<T> value)? arrivedAtPickupPoint,
-    TResult Function(_PickupConfirmed<T> value)? pickupConfirmed,
     TResult Function(_RideStarted<T> value)? rideStarted,
     TResult Function(_HeadingToDestination<T> value)? headingToDestination,
     TResult Function(_ReachedDestination<T> value)? reachedDestination,
-    TResult Function(_Chat<T> value)? chat,
     TResult Function(_Payment<T> value)? payment,
     required TResult orElse(),
   }) {

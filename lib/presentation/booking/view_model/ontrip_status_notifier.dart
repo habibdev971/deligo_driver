@@ -34,12 +34,12 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
         bookingNotifier.updateMarkerForTowardsPickup();
 
         break;
-      case BookingStatus.pickupConfirmed:
-        state = const OnTripStatusState.pickupConfirmed();
-          bookingNotifier.updateMarkerForOrder(mode: MovementMode.towardsPickup);
-        bookingNotifier.stopLocationUpdates();
-
-        break;
+      // case BookingStatus.pickupConfirmed:
+      //   state = const OnTripStatusState.pickupConfirmed();
+      //     bookingNotifier.updateMarkerForOrder(mode: MovementMode.towardsPickup);
+      //   bookingNotifier.stopLocationUpdates();
+      //
+      //   break;
       case BookingStatus.rideStarted:
         state = const OnTripStatusState.rideStarted();
         if(fromSplash){
@@ -73,21 +73,21 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
 
   OnTripStatusState? _previousState;
 
-  void goToChat() async{
-    _previousState = state;
-    state = const OnTripStatusState.chat();
-    await local.saveChatState(isOpen: true);
-  }
-
-  void hideChat() async{
-    if (_previousState != null) {
-      state = _previousState!;
-      _previousState = null;
-    } else {
-      state = const OnTripStatusState.initial();
-    }
-    await local.saveChatState(isOpen: false);
-  }
+  // void goToChat() async{
+  //   _previousState = state;
+  //   state = const OnTripStatusState.chat();
+  //   await local.saveChatState(isOpen: true);
+  // }
+  //
+  // void hideChat() async{
+  //   if (_previousState != null) {
+  //     state = _previousState!;
+  //     _previousState = null;
+  //   } else {
+  //     state = const OnTripStatusState.initial();
+  //   }
+  //   await local.saveChatState(isOpen: false);
+  // }
 
   void resetState() {
     state = const OnTripStatusState.goForPickup();

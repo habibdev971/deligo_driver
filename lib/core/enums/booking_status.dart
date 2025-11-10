@@ -2,7 +2,7 @@ enum BookingStatus {
   initial,
   goForPickup,
   arrivedAtPickupPoint,
-  pickupConfirmed,
+  // pickupConfirmed,
   rideStarted,
   headingToDestination,
   reachedDestination,

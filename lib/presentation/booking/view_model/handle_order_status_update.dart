@@ -32,9 +32,9 @@ void handleOrderStatusUpdate({
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.arrivedAtPickupPoint,  fromSplash: true);
       break;
 
-    case 'confirm_arrival':
-      tripStatusNotifier.updateOnTripStatus(status: BookingStatus.pickupConfirmed,  fromSplash: true);
-      break;
+    // case 'confirm_arrival':
+    //   tripStatusNotifier.updateOnTripStatus(status: BookingStatus.pickupConfirmed,  fromSplash: true);
+    //   break;
 
     case 'picked_up':
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.rideStarted,  fromSplash: true);

@@ -103,8 +103,8 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
             ),
             child: _isVisible
                 ? AppCardSheet(
-                    padding: onTripStatusState.whenOrNull(
-                        chat: () => EdgeInsets.zero),
+                    // padding: onTripStatusState.whenOrNull(
+                    //     chat: () => EdgeInsets.zero),
 
                     /// this is for chat sheet appbar padding and design
                     child: onTripStatusState.when(
@@ -113,13 +113,13 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
                           gotoPickupLocation(context, order),
                       arrivedAtPickupPoint: () =>
                           confirmArrival(context, order),
-                      pickupConfirmed: () => confirmPickup(context, order),
+                      // pickupConfirmed: () => confirmPickup(context, order),
                       rideStarted: () => rideStarted(context, order),
                       headingToDestination: () =>
                           headingToDestination(context),
                       reachedDestination: () =>
                           reachedDestination(context, order),
-                      chat: () => const ChatPage(),
+                      // chat: () => const ChatPage(),
                       payment: () => paymentReceived(context, order),
                     )
                   )
