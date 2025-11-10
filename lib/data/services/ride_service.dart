@@ -45,7 +45,7 @@ class RideService implements IRideService {
 
   @override
   Future<Response> rideDetail({required int? orderId}) async =>
-      await dioClient.dio.get('${ApiEndpoints.getRideDetails}/$orderId');
+      await dioClient.dio.get('${ApiEndpoints.getRideDetails}/$orderId/details');
 
   @override
   Future<Response> saveOrderStatus({

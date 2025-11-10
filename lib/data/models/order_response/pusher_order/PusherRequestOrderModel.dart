@@ -1,19 +1,11 @@
-/// rideRequestId : 21
-/// userId : 22
-/// pickupLocation : {"address":"ctg, Bangla, City","latitude":"23.810711","longitude":"90.412422"}
-/// dropoffLocation : {"address":"murad nagar, feni, Park Ave, City","latitude":"23.750631","longitude":"90.400293"}
-/// category : {"id":1,"categoryName":"Car","slug":"cab-car","lnCategoryName":"{\"en\":\"Car\",\"ar\":\"خدمة 2\",\"de\":\"Dienstleistung 2\",\"fr\":\"Service 2\"}","IconMediaId":43,"type":"type-1","serviceId":2,"moreMediaIds":[4,5,6],"baseAmount":12,"maxSeat":4,"minPerUnitCharge":1.5,"maxPerUnitCharge":3.5,"minPermuniteCharge":0.3,"maxPermuniteCharge":1.2,"minPerWeightCharge":0.7,"maxPerWeightCharge":2.3,"cancellationCharge":3,"waitingTimeCharge":0.6,"commissionType":"percentage","commissionRate":6,"createdById":null,"taxId":null,"status":true,"additionInfo":null,"sortOrder":1,"deletedAt":null,"createdAt":"2025-10-18T15:10:45.914Z","updatedAt":"2025-10-18T15:10:45.914Z","updatedBy":0}
-/// distance : 6.79
-/// estimatedFare : 22.38
-/// estimatedTime : 14
-/// distanceFromDriver : 4.49
-/// user : {"id":22,"firstName":"First22","lastName":"Last22","fullName":"First22 Last22","userInfo":{"picture":"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1757438383~exp=1757441983~hmac=72975912e16e40f389800dcc9616849af4237b1ec9c0683201d8e1f2d03410c2&w=1480","rattings":3}}
-/// timestamp : "2025-10-19T14:54:53.320Z"
+
 
 class PusherRequestOrderModel {
   PusherRequestOrderModel({
       num? rideRequestId, 
-      num? userId, 
+      num? serviceTypeId,
+      String? scheduledAt,
+      num? userId,
       PickupLocation? pickupLocation, 
       DropoffLocation? dropoffLocation, 
       Category? category, 
@@ -24,6 +16,8 @@ class PusherRequestOrderModel {
       User? user, 
       String? timestamp,}){
     _rideRequestId = rideRequestId;
+    _serviceTypeId = serviceTypeId;
+    _scheduledAt = scheduledAt;
     _userId = userId;
     _pickupLocation = pickupLocation;
     _dropoffLocation = dropoffLocation;
@@ -38,6 +32,8 @@ class PusherRequestOrderModel {
 
   PusherRequestOrderModel.fromJson(dynamic json) {
     _rideRequestId = json['rideRequestId'];
+    _serviceTypeId = json['serviceTypeId'];
+    _scheduledAt = json['scheduledAt'];
     _userId = json['userId'];
     _pickupLocation = json['pickupLocation'] != null ? PickupLocation.fromJson(json['pickupLocation']) : null;
     _dropoffLocation = json['dropoffLocation'] != null ? DropoffLocation.fromJson(json['dropoffLocation']) : null;
@@ -50,6 +46,8 @@ class PusherRequestOrderModel {
     _timestamp = json['timestamp'];
   }
   num? _rideRequestId;
+  num? _serviceTypeId;
+  String? _scheduledAt;
   num? _userId;
   PickupLocation? _pickupLocation;
   DropoffLocation? _dropoffLocation;
@@ -61,6 +59,8 @@ class PusherRequestOrderModel {
   User? _user;
   String? _timestamp;
 PusherRequestOrderModel copyWith({  num? rideRequestId,
+  num? serviceTypeId,
+  String? scheduledAt,
   num? userId,
   PickupLocation? pickupLocation,
   DropoffLocation? dropoffLocation,
@@ -72,6 +72,8 @@ PusherRequestOrderModel copyWith({  num? rideRequestId,
   User? user,
   String? timestamp,
 }) => PusherRequestOrderModel(  rideRequestId: rideRequestId ?? _rideRequestId,
+  serviceTypeId: serviceTypeId ?? _serviceTypeId,
+  scheduledAt: scheduledAt ?? _scheduledAt,
   userId: userId ?? _userId,
   pickupLocation: pickupLocation ?? _pickupLocation,
   dropoffLocation: dropoffLocation ?? _dropoffLocation,
@@ -84,6 +86,8 @@ PusherRequestOrderModel copyWith({  num? rideRequestId,
   timestamp: timestamp ?? _timestamp,
 );
   num? get rideRequestId => _rideRequestId;
+  num? get serviceTypeId => _serviceTypeId;
+  String? get scheduledAt => _scheduledAt;
   num? get userId => _userId;
   PickupLocation? get pickupLocation => _pickupLocation;
   DropoffLocation? get dropoffLocation => _dropoffLocation;
@@ -98,6 +102,8 @@ PusherRequestOrderModel copyWith({  num? rideRequestId,
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['rideRequestId'] = _rideRequestId;
+    map['serviceTypeId'] = _serviceTypeId;
+    map['scheduledAt'] = _scheduledAt;
     map['userId'] = _userId;
     if (_pickupLocation != null) {
       map['pickupLocation'] = _pickupLocation?.toJson();
@@ -121,11 +127,6 @@ PusherRequestOrderModel copyWith({  num? rideRequestId,
 
 }
 
-/// id : 22
-/// firstName : "First22"
-/// lastName : "Last22"
-/// fullName : "First22 Last22"
-/// userInfo : {"picture":"https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1757438383~exp=1757441983~hmac=72975912e16e40f389800dcc9616849af4237b1ec9c0683201d8e1f2d03410c2&w=1480","rattings":3}
 
 class User {
   User({
@@ -184,9 +185,6 @@ User copyWith({  num? id,
 
 }
 
-/// picture : "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?t=st=1757438383~exp=1757441983~hmac=72975912e16e40f389800dcc9616849af4237b1ec9c0683201d8e1f2d03410c2&w=1480"
-/// rattings : 3
-
 class UserInfo {
   UserInfo({
       String? picture, 
@@ -218,35 +216,6 @@ UserInfo copyWith({  String? picture,
 
 }
 
-/// id : 1
-/// categoryName : "Car"
-/// slug : "cab-car"
-/// lnCategoryName : "{\"en\":\"Car\",\"ar\":\"خدمة 2\",\"de\":\"Dienstleistung 2\",\"fr\":\"Service 2\"}"
-/// IconMediaId : 43
-/// type : "type-1"
-/// serviceId : 2
-/// moreMediaIds : [4,5,6]
-/// baseAmount : 12
-/// maxSeat : 4
-/// minPerUnitCharge : 1.5
-/// maxPerUnitCharge : 3.5
-/// minPermuniteCharge : 0.3
-/// maxPermuniteCharge : 1.2
-/// minPerWeightCharge : 0.7
-/// maxPerWeightCharge : 2.3
-/// cancellationCharge : 3
-/// waitingTimeCharge : 0.6
-/// commissionType : "percentage"
-/// commissionRate : 6
-/// createdById : null
-/// taxId : null
-/// status : true
-/// additionInfo : null
-/// sortOrder : 1
-/// deletedAt : null
-/// createdAt : "2025-10-18T15:10:45.914Z"
-/// updatedAt : "2025-10-18T15:10:45.914Z"
-/// updatedBy : 0
 
 class Category {
   Category({
@@ -495,10 +464,6 @@ Category copyWith({  num? id,
 
 }
 
-/// address : "murad nagar, feni, Park Ave, City"
-/// latitude : "23.750631"
-/// longitude : "90.400293"
-
 class DropoffLocation {
   DropoffLocation({
       String? address, 
@@ -538,9 +503,6 @@ DropoffLocation copyWith({  String? address,
 
 }
 
-/// address : "ctg, Bangla, City"
-/// latitude : "23.810711"
-/// longitude : "90.412422"
 
 class PickupLocation {
   PickupLocation({

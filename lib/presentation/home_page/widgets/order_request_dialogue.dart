@@ -1,7 +1,10 @@
 import 'dart:ui';
 
+import 'package:deligo_driver/core/extensions/extensions.dart';
+import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/data/models/order_response/order_model/address/address.dart';
 import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
+import 'package:deligo_driver/presentation/booking/widgets/iso_date_formater.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -61,6 +64,16 @@ class _OrderRequestDialogState extends ConsumerState<_OrderRequestDialog> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Visibility(
+                    visible: widget.data?.serviceTypeId == 2,
+                    child: Column(
+                      children: [
+                        Text('Schedule Ride', style: context.bodyMedium?.copyWith(color: isDarkMode() ? Colors.white : Colors.black),),
+                        Gap(8.h),
+                        Text(isoDateFormater(isoDateTime: widget.data?.scheduledAt), style: context.bodyMedium?.copyWith(color: ColorPalette.primary50),),
+                        Gap(8.h),
+                      ],
+                    )),
                 riderDetails(
                   context,
                   Rider(
@@ -88,7 +101,7 @@ class _OrderRequestDialogState extends ConsumerState<_OrderRequestDialog> {
                 ),
                 Gap(16.h),
                 orderRequestButtons(context,
-                    orderId: widget.data?.rideRequestId),
+                    orderId: widget.data?.rideRequestId, serviceTypeId: widget.data?.serviceTypeId),
               ],
             ),
           ),

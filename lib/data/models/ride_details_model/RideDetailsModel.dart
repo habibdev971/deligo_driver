@@ -68,6 +68,8 @@ class RideRequest {
       this.id,
       this.status,
       this.actualDistance,
+      this.serviceTypeId,
+      this.scheduledAt,
       this.duration,
       this.waitMinutes,
       this.rideNumber,
@@ -93,6 +95,8 @@ class RideRequest {
     id = json['id'];
     status = json['status'];
     actualDistance = json['actual_distance'];
+    serviceTypeId = json['serviceTypeId'];
+    scheduledAt = json['scheduledAt'];
     duration = json['duration'];
     waitMinutes = json['wait_minutes'];
     rideNumber = json['ride_number'];
@@ -122,6 +126,8 @@ class RideRequest {
   num? id;
   String? status;
   num? actualDistance;
+  num? serviceTypeId;
+  String? scheduledAt;
   num? duration;
   num? waitMinutes;
   String? rideNumber;
@@ -145,6 +151,8 @@ class RideRequest {
 RideRequest copyWith({  num? id,
   String? status,
   num? actualDistance,
+  num? serviceTypeId,
+  String? scheduledAt,
   num? duration,
   num? waitMinutes,
   String? rideNumber,
@@ -168,6 +176,8 @@ RideRequest copyWith({  num? id,
 }) => RideRequest(  id: id ?? this.id,
   status: status ?? this.status,
   actualDistance: actualDistance ?? this.actualDistance,
+  serviceTypeId: serviceTypeId ?? this.serviceTypeId,
+  scheduledAt: scheduledAt ?? this.scheduledAt,
   duration: duration ?? this.duration,
   waitMinutes: waitMinutes ?? this.waitMinutes,
   rideNumber: rideNumber ?? this.rideNumber,
@@ -194,6 +204,8 @@ RideRequest copyWith({  num? id,
     map['id'] = id;
     map['status'] = status;
     map['actual_distance'] = actualDistance;
+    map['serviceTypeId'] = serviceTypeId;
+    map['scheduledAt'] = scheduledAt;
     map['duration'] = duration;
     map['wait_minutes'] = waitMinutes;
     map['ride_number'] = rideNumber;

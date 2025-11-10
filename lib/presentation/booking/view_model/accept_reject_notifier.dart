@@ -17,7 +17,7 @@ class AcceptRejectNotifier extends StateNotifier<AppState<OrderAcceptModel>>{
   final IRideRepo repo;
   AcceptRejectNotifier({required this.ref, required this.repo}):super(const AppState.initial());
   String status = '';
-  Future<void> acceptRide({required int orderId, Function? onSuccess})async{
+  Future<void> acceptRide({required int orderId, Function? onSuccess, bool isSchedule = false})async{
     status = 'accept';
     state = const AppState.loading();
     final res = await repo.acceptRejectRide(orderId: orderId, status: 'accept');
@@ -28,10 +28,14 @@ class AcceptRejectNotifier extends StateNotifier<AppState<OrderAcceptModel>>{
             },
             (r) async{
               state = AppState.success(r);
-              await LocalStorageService().saveRideId(num.tryParse(r.data?.rides?.id ?? ''));
-              showNotification(message: r.message, isSuccess: true);
-              NavigationService.pushNamed(AppRoutes.bookingPage);
-              await ref.read(rideDetailsProvider.notifier).getRideDetails(orderId);
+              if(isSchedule){
+                // r.data?.rides?.
+              }else{
+                await LocalStorageService().saveRideId(num.tryParse(r.data?.rides?.id ?? ''));
+                showNotification(message: r.message, isSuccess: true);
+                NavigationService.pushNamed(AppRoutes.bookingPage);
+                await ref.read(rideDetailsProvider.notifier).getRideDetails(int.tryParse(r.data?.rides?.id ?? ''));
+              }
               onSuccess != null ? onSuccess() : null;
             });
     status = '';

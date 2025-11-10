@@ -10,10 +10,11 @@ import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 
 import '../../../core/enums/booking_status.dart';
+import '../../../data/services/local_storage_service.dart';
 import '../../booking/provider/driver_providers.dart';
 import '../../booking/view_model/reverse_timer_notifier.dart';
 
-Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
+Widget orderRequestButtons(BuildContext context, {num? orderId, num? serviceTypeId}) => Consumer(
   builder: (context, ref, _) {
     final driverStatusNotifier = ref.watch(
       driverStatusNotifierProvider.notifier,
@@ -75,8 +76,15 @@ Widget orderRequestButtons(BuildContext context, {num? orderId}) => Consumer(
             onPressed: () async {
               await acceptRejectNotifier.acceptRide(
                 orderId: int.tryParse(orderId.toString()) ?? 0,
-                onSuccess: (){
+                isSchedule: serviceTypeId == 2,
+                onSuccess: ()async{
                   timerNotifier.stopTimer();
+                  if(serviceTypeId == 2){
+                    await LocalStorageService().clearOrderId();
+                    // await LocalStorageService().cl();
+                    NavigationService.pop();
+                    return;
+                  }
                   driverStatusNotifier.onTrip();
                   rideDetailState.whenOrNull(
                     success: (data) {
