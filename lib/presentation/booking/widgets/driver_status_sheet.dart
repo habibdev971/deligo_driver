@@ -83,51 +83,53 @@ class _DriverStatusSheetState extends ConsumerState<DriverStatusSheet>
     final onTripStatusState = ref.watch(onTripStatusProvider);
     final order = ref.watch(rideDetailsProvider).whenOrNull(success: (d)=> d);
 
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: SlideTransition(
-        position: _animation,
-        child: GestureDetector(
-          onTap: _toggleSheet,
-          onVerticalDragUpdate: _onDragUpdate,
-          child: Container(
-            width: double.infinity,
-            decoration: context.responsive(
-              const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: SlideTransition(
+          position: _animation,
+          child: GestureDetector(
+            onTap: _toggleSheet,
+            onVerticalDragUpdate: _onDragUpdate,
+            child: Container(
+              width: double.infinity,
+              decoration: context.responsive(
+                const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(30),
+                  ),
                 ),
+                xl: const BoxDecoration(),
               ),
-              xl: const BoxDecoration(),
-            ),
-            child: _isVisible
-                ? AppCardSheet(
-                    // padding: onTripStatusState.whenOrNull(
-                    //     chat: () => EdgeInsets.zero),
+              child: _isVisible
+                  ? AppCardSheet(
+                      // padding: onTripStatusState.whenOrNull(
+                      //     chat: () => EdgeInsets.zero),
 
-                    /// this is for chat sheet appbar padding and design
-                    child: onTripStatusState.when(
-                      initial: () => const Text('Initializing'),
-                      goForPickup: () =>
-                          gotoPickupLocation(context, order),
-                      arrivedAtPickupPoint: () =>
-                          confirmArrival(context, order),
-                      // pickupConfirmed: () => confirmPickup(context, order),
-                      rideStarted: () => rideStarted(context, order),
-                      headingToDestination: () =>
-                          headingToDestination(context),
-                      reachedDestination: () =>
-                          reachedDestination(context, order),
-                      // chat: () => const ChatPage(),
-                      payment: () => paymentReceived(context, order),
+                      /// this is for chat sheet appbar padding and design
+                      child: onTripStatusState.when(
+                        initial: () => const Text('Initializing'),
+                        goForPickup: () =>
+                            gotoPickupLocation(context, order),
+                        arrivedAtPickupPoint: () =>
+                            confirmArrival(context, order),
+                        // pickupConfirmed: () => confirmPickup(context, order),
+                        rideStarted: () => rideStarted(context, order),
+                        headingToDestination: () =>
+                            headingToDestination(context),
+                        reachedDestination: () =>
+                            reachedDestination(context, order),
+                        // chat: () => const ChatPage(),
+                        payment: () => paymentReceived(context, order),
+                      )
                     )
-                  )
-                : AppCardSheet(
-                    child: SizedBox(
-                    height: 300.h,
-                    width: double.infinity,
-                  )),
+                  : AppCardSheet(
+                      child: SizedBox(
+                      height: 300.h,
+                      width: double.infinity,
+                    )),
+            ),
           ),
         ),
       ),

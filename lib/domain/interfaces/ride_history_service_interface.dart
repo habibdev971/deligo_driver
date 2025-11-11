@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
 
 abstract class IRideHistoryService {
-  Future<Response> getRideHistory({String? status, String? date});
+  Future<Response> getRideHistory({required Map<String, dynamic> params});
 }

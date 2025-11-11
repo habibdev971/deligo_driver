@@ -13,12 +13,9 @@ class WalletService implements IWalletService {
       ApiEndpoints.wallets,
     );
   @override
-  Future<Response> getWalletsTransaction({String? dateTime, String? paymentMode}) async => await dioClient.dio.get(
+  Future<Response> getWalletsTransaction({required Map<String, dynamic> param}) async => await dioClient.dio.get(
       ApiEndpoints.transactionHistory,
-      queryParameters: {
-        'date': dateTime,
-        'payment_mode': paymentMode
-      }
+      queryParameters: param
     );
 
   @override

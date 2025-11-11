@@ -49,29 +49,31 @@ void _showPhoneCodeBottomSheet(BuildContext context, WidgetRef ref) {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
     ),
-    builder: (context) => ListView.separated(
-      shrinkWrap: true,
-      padding: EdgeInsets.all(16.r),
-      itemCount: allowedPhoneCodes.length,
-      separatorBuilder: (_, _) => SizedBox(height: 12.h),
-      itemBuilder: (context, index) {
-        final lang = allowedPhoneCodes[index];
-        final phoneCode = lang['phone_code'] ?? '';
-
-        return ListTile(
-          leading: Text(lang['flag']!, style: const TextStyle(fontSize: 24)),
-          title: Text("${lang["name"]} ($phoneCode)"),
-          onTap: () async {
-            await ref
-                .read(selectedPhoneCodeProvider.notifier)
-                .changePhoneCode(phoneCode);
-
-            if (context.mounted) {
-              NavigationService.pop();
-            }
-          },
-        );
-      },
+    builder: (context) => SafeArea(
+      child: ListView.separated(
+        shrinkWrap: true,
+        padding: EdgeInsets.all(16.r),
+        itemCount: allowedPhoneCodes.length,
+        separatorBuilder: (_, _) => SizedBox(height: 12.h),
+        itemBuilder: (context, index) {
+          final lang = allowedPhoneCodes[index];
+          final phoneCode = lang['phone_code'] ?? '';
+      
+          return ListTile(
+            leading: Text(lang['flag']!, style: const TextStyle(fontSize: 24)),
+            title: Text("${lang["name"]} ($phoneCode)"),
+            onTap: () async {
+              await ref
+                  .read(selectedPhoneCodeProvider.notifier)
+                  .changePhoneCode(phoneCode);
+      
+              if (context.mounted) {
+                NavigationService.pop();
+              }
+            },
+          );
+        },
+      ),
     ),
   );
 }

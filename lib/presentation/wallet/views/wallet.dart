@@ -19,25 +19,32 @@ class _WalletState extends ConsumerState<Wallet> {
   @override
   void initState() {
     super.initState();
-    Future.microtask((){
-      // ref.read(walletsBalanceProvider.notifier).getWalletBalance();
-      // ref.read(transactionHistoryProvider.notifier).getTransactionHistory();
+    Future.microtask(() {
+      ref.read(walletsBalanceProvider.notifier).getWalletBalance();
+      ref.read(transactionHistoryProvider.notifier).getTransactionHistory(refresh: true);
     });
+
   }
   @override
   Widget build(BuildContext context) => SafeArea(
-      child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.all(16.r),
-          decoration: BoxDecoration(
-            color: isDarkMode() ? Colors.black : Colors.white,
-          ),
-          child: Column(
-            children: [
-              walletSummery(context),
-              Gap(16.h),
-              transactionHistory(context),
-            ],
+      child: RefreshIndicator(
+        onRefresh: ()async{
+          ref.read(walletsBalanceProvider.notifier).getWalletBalance();
+          ref.read(transactionHistoryProvider.notifier).getTransactionHistory(refresh: true);
+        },
+        child: Scaffold(
+          body: Container(
+            padding: EdgeInsets.all(16.r),
+            decoration: BoxDecoration(
+              color: isDarkMode() ? Colors.black : Colors.white,
+            ),
+            child: Column(
+              children: [
+                walletSummery(context),
+                Gap(16.h),
+                transactionHistory(context),
+              ],
+            ),
           ),
         ),
       ),

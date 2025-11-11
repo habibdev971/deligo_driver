@@ -19,8 +19,8 @@ class WalletsRepoImpl extends BaseRepository implements IWalletsRepo {
     });
 
   @override
-  Future<Either<Failure, WalletTransactionHistoryModel>> getWalletsTransaction({String? dateTime, String? paymentMode}) async => await safeApiCall(() async {
-      final response = await walletService.getWalletsTransaction(dateTime: dateTime, paymentMode: paymentMode);
+  Future<Either<Failure, WalletTransactionHistoryModel>> getWalletsTransaction({required Map<String, dynamic> param}) async => await safeApiCall(() async {
+      final response = await walletService.getWalletsTransaction(param: param);
       return WalletTransactionHistoryModel.fromJson(response.data);
     });
 

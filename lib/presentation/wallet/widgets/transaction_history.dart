@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/wallet/widgets/transaction_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,253 +9,144 @@ import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/error_view.dart';
-import 'package:deligo_driver/gen/assets.gen.dart';
 import 'package:deligo_driver/presentation/wallet/provider/provider.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/utils/build_network_image.dart';
 import '../../../core/utils/custom_date_picker.dart';
-import '../../../core/utils/format_date.dart';
-import '../../../data/models/wallet_model/wallet_transaction_history_model.dart';
 
-ValueNotifier<int> selectedTabIndex = ValueNotifier(0);
-
-Widget transactionHistory(BuildContext context)=> Expanded(
-    child: Consumer(
-      builder: (context, ref, _) {
-        final state = ref.watch(transactionHistoryProvider);
-        final notifier = ref.read(transactionHistoryProvider.notifier);
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                      localize(context).transactions,
-                      style: context.bodyMedium?.copyWith(fontSize: 18.sp, fontWeight: FontWeight.w600, color: isDarkMode() ? Colors.white : const Color(0xFF24262D))
-                  ),
-                ),
-                const SizedBox(width: 8),
-                InkWell(
-                  onTap: ()async{
-                    final date = await customDatePickerReturnDate(context, initialDate: state.dateTime, lastDate: DateTime.now(), firstDate: DateTime.now().subtract(const Duration(days: 1000)));
-                    notifier.updateDateTime(date);
-                    await Future.delayed(const Duration(milliseconds: 100));
-                    // notifier.getTransactionHistory();
-
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        state.dateTime == null ? '' : DateFormat('dd/MM/yyyy', 'en').format(state.dateTime!),
-                        style: context.bodyMedium?.copyWith(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xFF687387),
-                        ),
-                      ),
-                      Gap(8.w),
-                      Icon(
-                        Icons.calendar_month,
-                        color: ColorPalette.primary50,
-                        size: 24.h,
-                      ),
-                      Gap(16.w),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Container(
-              padding: EdgeInsets.all(8.r),
-              decoration: BoxDecoration(
-                color: isDarkMode() ? Colors.black : const Color(0xFFF6F7F9),
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Row(
-                children: [
-                  buildTabItem(context, localize(context).payment_received, 0, ),
-                  buildTabItem(context, localize(context).withdraw_history, 1, ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 16),
-            ValueListenableBuilder<int>(valueListenable: selectedTabIndex, builder: (context, int v, _)=> Expanded(
-                child: selectedTabIndex.value == 0
-                    ?  transactionList(context, isPaymentReceive: true)
-                    :  transactionList(context, isPaymentReceive: false),
-              ))
-          ],
-        );
-      }
-    ),
-  );
-
-Widget buildTabItem(BuildContext context, String label, int index) => Consumer(
-    builder: (context, ref, _) {
-      final stateNotifier = ref.read(transactionHistoryProvider.notifier);
-      final isSelected = selectedTabIndex.value == index;
-
-      return Expanded(
-        child: InkWell(
-          onTap: () async {
-            selectedTabIndex.value = index;
-            stateNotifier.updatePaymentMode(index == 0 ? 'received' : 'withdraw');
-            // await stateNotifier.getTransactionHistory();
-          },
-          borderRadius: BorderRadius.circular(8.r),
-          child: Container(
-            height: 40,
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: isSelected ? isDarkMode() ? Colors.black12 : Colors.white : Colors.transparent,
-              borderRadius: BorderRadius.circular(8.r),
-              border: isSelected ? Border.all(color: const Color(0xFFDFDBF9), width: 1.w) : null,
-            ),
-            child: Text(
-              label,
-              style: context.bodyMedium?.copyWith(
-                fontSize: 12.sp,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                color: isSelected ? ColorPalette.primary50 : isDarkMode() ? Colors.white : const Color(0xFF24262D),
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  );
-
-Widget transactionList(BuildContext context, {required bool isPaymentReceive}) => Consumer(
+Widget transactionHistory(BuildContext context) => Expanded(
+  child: Consumer(
     builder: (context, ref, _) {
       final state = ref.watch(transactionHistoryProvider);
-      final transactions = state.transactions;
-
-      return transactions.when(
-        initial: ()=> const SizedBox.shrink(),
-        loading: () => const LoadingView(),
-        error: (e) => ErrorView(message: e.message),
-        success: (data) {
-          if (data.isEmpty) {
-            return Center(child: Text(localize(context).no_transactions_found));
-          }
-          return ListView.builder(
-            itemCount: data.length,
-            itemBuilder: (context, index) => transactionTile(
-              context,
-              transaction: data[index],
-              isPaymentReceive: isPaymentReceive,
-            ),
-          );
-        },
-      );
-    },
-  );
-
-Widget transactionTile(BuildContext context, {
-  required Transaction transaction,
-  required bool isPaymentReceive,
-}) => Container(
-    margin: EdgeInsets.only(bottom: 8.h),
-    padding: EdgeInsets.all(8.r),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(8.r),
-      color: isDarkMode() ? Colors.black : const Color(0xFFF6F7F9),
-      border: isDarkMode() ? Border.all(color: Colors.white) : null,
-    ),
-    child: Row(
-      children: [
-        isPaymentReceive
-            ? CircleAvatar(
-          radius: 25.r,
-          backgroundColor: ColorPalette.primary50,
-          child: CircleAvatar(
-            radius: 24.r,
-            child: ClipOval(child: buildNetworkImage(imageUrl: transaction.rider?.profilePicture),),
-          ),
-        )
-            : CircleAvatar(
-          radius: 25.r,
-          backgroundImage: Assets.images.paymentWithdrawCircle.provider(),
-        ),
-        Gap(8.w),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      final notifier = ref.read(transactionHistoryProvider.notifier);
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
             children: [
-              Text(
-                isPaymentReceive ? transaction.rider?.name ?? 'N/A' : localize(context).payment_withdraw,
-                style: context.bodyMedium?.copyWith(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                    color: isDarkMode() ? Colors.white : const Color(0xFF24262D)),
+              Expanded(
+                child: Text(
+                  localize(context).transactions,
+                  style: context.bodyMedium?.copyWith(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: isDarkMode() ? Colors.white : const Color(0xFF24262D),
+                  ),
+                ),
               ),
-              Gap(4.h),
-              Row(
-                children: [
-                  richTextTransaction(context,
-                      title: localize(context).id, value: (transaction.id ?? 'N/A').toString()),
-                  richTextTransaction(context,
-                      title: localize(context).method, value: transaction.method ?? 'N/A'),
-                ],
+              const SizedBox(width: 8),
+              InkWell(
+                onTap: () async {
+                  final date = await customDatePickerReturnDate(
+                    context,
+                    initialDate: state.dateTime,
+                    lastDate: DateTime.now(),
+                    firstDate: DateTime.now().subtract(const Duration(days: 1000)),
+                  );
+                  notifier.updateDateTime(date);
+                  // Wait a bit for state to update, then fetch
+                  await Future.delayed(const Duration(milliseconds: 50));
+                  notifier.getTransactionHistory(refresh: true);
+                },
+                child: Row(
+                  children: [
+                    Text(
+                      state.dateTime == null
+                          ? 'N/A'
+                          : DateFormat('dd/MM/yyyy', 'en').format(state.dateTime!),
+                      style: context.bodyMedium?.copyWith(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFF687387),
+                      ),
+                    ),
+                    Gap(8.w),
+                    Icon(
+                      Icons.calendar_month,
+                      color: ColorPalette.primary50,
+                      size: 24.h,
+                    ),
+                    Gap(16.w),
+                  ],
+                ),
               ),
             ],
           ),
-        ),
-        Container(
-          height: 42.h,
-          width: 1.w,
-          color: Colors.grey.shade200,
-          margin: EdgeInsets.only(right: 8.w),
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            RichText(
-              text: TextSpan(
-                text: isPaymentReceive ? '+ ' : '- ',
-                style: context.bodyMedium?.copyWith(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
-                  color: isPaymentReceive ? Colors.greenAccent : Colors.red,
-                ),
-                children: [
-                  TextSpan(
-                    text: "\$${transaction.amount?.toStringAsFixed(2) ?? '0.00'}",
-                    style: context.bodyMedium?.copyWith(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode() ? Colors.grey.shade500 : const Color(0xFF24262D),
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Gap(4.h),
-            Text(
-              formatDateEnglish(transaction.createdAt),
-              style: context.bodyMedium?.copyWith(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey.shade600),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
+          const SizedBox(height: 8),
+          transactionList(context),
+        ],
+      );
+    },
+  ),
+);
 
+class TransactionListWidget extends ConsumerStatefulWidget {
+  const TransactionListWidget({super.key});
 
-Widget richTextTransaction(BuildContext context, {String? title, String? value})=> Expanded(
-    child: RichText(text: TextSpan(
-      text: title,
-      style: context.bodyMedium?.copyWith(fontSize: 10.sp, fontWeight: FontWeight.w400, color: const Color(0xFF565F73)),
-      children: [
-        TextSpan(text: value,
-          style: context.bodyMedium?.copyWith(fontSize: 10.sp, fontWeight: FontWeight.w600, color: ColorPalette.primary50),
-        )
-      ]
-    )),
-  );
+  @override
+  ConsumerState<TransactionListWidget> createState() => _TransactionListWidgetState();
+}
+
+class _TransactionListWidgetState extends ConsumerState<TransactionListWidget> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    _scrollController..removeListener(_onScroll)
+    ..dispose();
+    super.dispose();
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      ref.read(transactionHistoryProvider.notifier).loadMoreTransactions();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(transactionHistoryProvider);
+    final transactions = state.transactions;
+
+    return transactions.when(
+      initial: () => const SizedBox.shrink(),
+      loading: () => const LoadingView(),
+      error: (e) => ErrorView(message: e.message),
+      success: (data) {
+        if (data.isEmpty) {
+          return Center(
+            child: Text(localize(context).no_transactions_found),
+          );
+        }
+
+        return ListView.builder(
+          controller: _scrollController,
+          padding: EdgeInsets.only(bottom: 20.h),
+          itemCount: data.length + (state.isPaginating ? 1 : 0),
+          itemBuilder: (context, index) {
+            if (index < data.length) {
+              return TransactionTile(wallet: data[index]);
+            } else {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: Center(child: CircularProgressIndicator()),
+              );
+            }
+          },
+        );
+      },
+    );
+  }
+}
+
+Widget transactionList(BuildContext context) => const Expanded(
+  child: TransactionListWidget(),
+);

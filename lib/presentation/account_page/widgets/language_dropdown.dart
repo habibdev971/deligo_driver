@@ -65,32 +65,34 @@ void _showLanguageBottomSheet(
     builder: (context) => Consumer(
       builder: (context, ref, _) {
         final languageNotifier = ref.read(selectedLanguageProvider.notifier);
-        return ListView.separated(
-          shrinkWrap: true,
-          padding: EdgeInsets.all(16.r),
-          itemCount: allowedLanguages.length,
-          separatorBuilder: (_, _) => Gap(12.h),
-          itemBuilder: (context, index) {
-            final lang = allowedLanguages[index];
-            return ListTile(
-              leading: Text(
-                lang['flag']!,
-                style: const TextStyle(fontSize: 24),
-              ),
-              title: Text(lang['name']!),
-              onTap: () async {
-                final newCode = lang['code']!;
-
-                languageNotifier.changeLanguage(newCode);
-
-                onChanged != null
-                    ? onChanged(newCode)
-                    : context.mounted
-                    ? NavigationService.pop()
-                    : null;
-              },
-            );
-          },
+        return SafeArea(
+          child: ListView.separated(
+            shrinkWrap: true,
+            padding: EdgeInsets.all(16.r),
+            itemCount: allowedLanguages.length,
+            separatorBuilder: (_, _) => Gap(12.h),
+            itemBuilder: (context, index) {
+              final lang = allowedLanguages[index];
+              return ListTile(
+                leading: Text(
+                  lang['flag']!,
+                  style: const TextStyle(fontSize: 24),
+                ),
+                title: Text(lang['name']!),
+                onTap: () async {
+                  final newCode = lang['code']!;
+          
+                  languageNotifier.changeLanguage(newCode);
+          
+                  onChanged != null
+                      ? onChanged(newCode)
+                      : context.mounted
+                      ? NavigationService.pop()
+                      : null;
+                },
+              );
+            },
+          ),
         );
       },
     ),

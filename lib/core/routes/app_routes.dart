@@ -18,13 +18,15 @@ class AppRoutes {
   static const String profilePage = '/profile-page';
   static const String profileInfoPage = '/profile-info-page';
   static const String payoutMethod = '/payout-method';
+  static const String rideHistoryDetailsPage = '/ride-history-details-page';
+  static const String reportIssue = '/report-issue';
+  static const String complaintPage = '/complaint-page';
   // static const String settingsPage = '/settings-page';
   // static const String languageSettingsPage = '/language-settings-page';
-  static const String rideHistory = '/ride-history-page';
+  // static const String rideHistory = '/ride-history-page';
   static const String rideHistoryDetail = '/ride-history-detail';
   static const String paymentMethodsPage = '/payment-methods';
   static const String walletsPage = '/wallets-page';
-  static const String reportIssue = '/report-issue';
   static const String addPaymentGateway = '/add-payment-gateway';
   static const String noInternet = '/no-internet';
   static const String brokenPage = '/broken-page';

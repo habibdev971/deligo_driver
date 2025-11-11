@@ -67,9 +67,9 @@ class RideDetailsNotifier extends StateNotifier<AppState<RideRequest?>>{
   final IRideRepo repo;
   RideDetailsNotifier({required this.ref, required this.repo}):super(const AppState.initial());
 
-  Future<void> getRideDetails(int? orderId)async{
+  Future<void> getRideDetails(num? orderId)async{
     state = const AppState.loading();
-    final res = await repo.rideDetail(orderId: orderId);
+    final res = await repo.rideDetail(orderId: orderId?.toInt());
     res.fold(
             (l) => state = AppState.error(l),
             (r) {

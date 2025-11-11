@@ -4,11 +4,11 @@ import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/utils/set_status_bar_color.dart';
 import 'package:deligo_driver/core/widgets/location_permission_wrapper.dart';
 import 'package:deligo_driver/presentation/account_page/view/account_page.dart';
-import 'package:deligo_driver/presentation/ride_history/view/ride_history_view.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../home_page/view/home_page.dart';
+import '../../ride_history/view/ride_history.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
@@ -35,7 +35,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
   final List<Widget> _pages = const [
     HomePage(),
     Wallet(),
-    RideHistoryPage(),
+    RideHistoryView(),
     AccountPage(),
   ];
 

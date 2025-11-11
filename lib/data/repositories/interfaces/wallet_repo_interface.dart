@@ -7,7 +7,7 @@ import '../../models/my_card_model/my_card_model.dart';
 
 abstract class IWalletsRepo {
   Future<Either<Failure, WalletBalanceModel>> getWallets();
-  Future<Either<Failure, WalletTransactionHistoryModel>> getWalletsTransaction({String? dateTime, String? paymentMode});
+  Future<Either<Failure, WalletTransactionHistoryModel>> getWalletsTransaction({required Map<String, dynamic> param});
   Future<Either<Failure, CommonResponse>> withdraw({required Map<String, dynamic> body});
   Future<Either<Failure, MyCardModel>> myCards();
   Future<Either<Failure, CommonResponse>> addCard({required Map<String, dynamic> body});

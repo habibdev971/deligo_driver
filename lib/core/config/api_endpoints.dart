@@ -39,19 +39,22 @@ class ApiEndpoints {
   static const String dashboard = '$mediator/dashboard';
   static const String cancelRide = '/driver/rides';
   static const String driverLocationsUpdate = '/driver/location';
-  static const String rideHistory = '$mediator/order';
+  static const String rideHistory = '/ride/history';
   static const String earnings = '/earning';
   static const String paymentMethods = '/payment-method';
-  static const String wallets = '$mediator/wallet';
+  static const String wallets = 'user-info/$mediator/wallet';
   static const String withdraw = '$mediator/withdraw';
   static const String addCard = '$mediator/add-card';
   static const String myCard = '$mediator/my-card';
   static const String deleteCard = '$mediator/delete-card';
-  static const String transactionHistory = '$mediator/transaction/details';
+  static const String transactionHistory = 'user-info/$mediator/disbursement/history';
   static const String getReportTypes = '/report-types';
   static const String submitReport = '/report-create';
   static const String deleteAccount = '$mediator/destroy';
   static const String termsAndConditions = 'legal-terms';
   static const String privacyPolicy = 'privacy-policy';
   static const String sendTravelInfo = '/locations/send-travel-info';
+  static const String getMyComplaint = '/complains/rides';
+  static const String createComplaint = '/complains/rides';
+  static const String getComplaintTypes = '/complains/types';
 }

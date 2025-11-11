@@ -19,17 +19,16 @@ import 'package:deligo_driver/presentation/no_internet/view/no_internet_view.dar
 import 'package:deligo_driver/presentation/payment_method/view/payment_method_view.dart';
 import 'package:deligo_driver/presentation/payout_method/view/payout_method_view.dart';
 import 'package:deligo_driver/presentation/profile_under_review/view/profile_under_review.dart';
-import 'package:deligo_driver/presentation/ride_history/view/ride_history_view.dart';
-import 'package:deligo_driver/presentation/ride_history_detail/view/ride_history_detail.dart';
 import 'package:deligo_driver/presentation/splash/views/splash_page.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
 
-import '../../data/models/auth_models/register_data_model.dart';
 import '../../presentation/auth/views/firebase_otp_page.dart';
+import '../../presentation/complaint/view/complaint_view.dart';
 import '../../presentation/home_page/view/home_page.dart';
 import '../../presentation/payout_method/view/add_payment_gateway.dart';
 import '../../presentation/profile/view/profile_info_page.dart';
 import '../../presentation/report_issue/view/report_issue_view.dart';
+import '../../presentation/ride_history/view/ride_details_page.dart';
 import '../widgets/error_view.dart';
 import 'app_routes.dart';
 
@@ -83,12 +82,16 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const ProfileInfoPage());
       case '/payout-method':
         return MaterialPageRoute(builder: (_) => const PayoutMethodView());
+      case AppRoutes.complaintPage:
+        final num? orderId = settings.arguments as num?;
+        return MaterialPageRoute(builder: (_) => ComplaintView(orderId: orderId,));
       // case '/settings-page':
       //   return MaterialPageRoute(builder: (_) => const SettingsPage());
       // case '/language-settings-page':
       //   return MaterialPageRoute(builder: (_) => const LanguageSettingPage());
-      case '/ride-history-page':
-        return MaterialPageRoute(builder: (_) => const RideHistoryPage());
+      case AppRoutes.rideHistoryDetailsPage:
+        final RideRequest order = settings.arguments as RideRequest;
+        return MaterialPageRoute(builder: (_) => RideDetailsPage(order: order));
       case '/payment-methods':
         return MaterialPageRoute(builder: (_) => const PaymentMethodsPage());
       case '/wallets-page':
@@ -96,9 +99,6 @@ class AppRouter {
       case '/report-issue':
         final orderId = settings.arguments as int?;
         return MaterialPageRoute(builder: (_) => ReportIssueView(orderId));
-      case '/ride-history-detail':
-        final RideRequest? order = settings.arguments as RideRequest? ;
-        return MaterialPageRoute(builder: (_) => RideHistoryDetail(order: order,));
       case '/add-payment-gateway':
         return MaterialPageRoute(builder: (_) => const AddPaymentGateway());
       case '/no-internet':

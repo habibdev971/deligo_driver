@@ -17,7 +17,7 @@ Widget todayActivity(BuildContext context) => Padding(
         child: Consumer(
           builder: (context, ref, _) {
             final state = ref.watch(rideHistoryProvider);
-            return state.when(
+            return state.list.when(
               initial: () => const SizedBox.shrink(),
               loading: () => const LoadingView(),
               success: (data) => activityBuilder(context, orderList: []),

@@ -36,6 +36,8 @@ Widget gradientCard(
             Expanded(
               child: Text(
                 currency + (value ?? ''),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: context.bodyMedium?.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,

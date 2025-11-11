@@ -35,7 +35,7 @@ Widget walletSummery(BuildContext context) => Consumer(
                 gradientCard(
                   context,
                   title: localize(context).payment_received,
-                  value: (data?.paymentHistory ?? 0).toString(),
+                  value: (data?.receivedAmount ?? 0).toString(),
                   currency: currency,
                 ),
                 Gap(16.w),
@@ -57,7 +57,9 @@ Widget walletSummery(BuildContext context) => Consumer(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        currency + (data?.wallet?.toString() ?? '0'),
+                        currency + (data?.balance?.toString() ?? '0'),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
                         style: context.bodyMedium?.copyWith(
                           fontSize: 32.sp,
@@ -67,6 +69,7 @@ Widget walletSummery(BuildContext context) => Consumer(
                       ),
                       Text(
                         localize(context).current_balance,
+
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.start,
