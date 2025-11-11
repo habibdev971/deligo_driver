@@ -76,6 +76,7 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
   Widget build(BuildContext context) => ExitAppWrapper(
       child: Scaffold(
         backgroundColor: isDarkMode() ? Colors.black : Colors.white,
+        appBar: mainAppBar(context, title: 'Ride History', hideLeading: true),
         body: SafeArea(
           child: Column(
             children: [

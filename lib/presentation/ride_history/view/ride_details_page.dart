@@ -5,6 +5,7 @@ import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/pusher_provider.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
+import 'package:deligo_driver/presentation/booking/view_model/handle_order_status_update.dart';
 import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:deligo_driver/presentation/ride_history/widgets/schedule_info.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -64,7 +65,7 @@ class _RideDetailsPageState extends ConsumerState<RideDetailsPage> {
     final isDetailLoading = rideDetailState.whenOrNull(loading: ()=> true) ?? false;
     final bool isDark = isDarkMode();
     return Scaffold(
-      appBar: mainAppBar(context, ),
+      appBar: mainAppBar(context, title: 'Ride Details'),
       body: SafeArea(
         child: Column(
           children: [
@@ -192,13 +193,16 @@ class _RideDetailsPageState extends ConsumerState<RideDetailsPage> {
                         final Points? points = widget.order.points;
                         await LocalStorageService().saveRideId(widget.order.id);
                         await ref.read(rideDetailsProvider.notifier).getRideDetails(widget.order.id);
+                        handleOrderStatusUpdate(status: widget.order.status ?? '', orderId: widget.order.id?.toInt(), ref: ref);
+                        // ref.read(routeNotifierProvider.notifier).fetchRoutesDetail(points, orderId: widget.order.id);
+                          ///--------
                         // ref.read(wayPointListNotifierProvider.notifier).setWayPointList([
                         //   Waypoint(name: 'Pick-up point', address: address?.pickupAddress ?? '', location: LatLng(points?.pickupLocation?.first.toDouble() ?? 0, points?.pickupLocation?.last.toDouble() ?? 0)),
                         //   Waypoint(name: 'Drop-off point', address: address?.dropAddress ?? '', location: LatLng(points?.dropLocation?.first.toDouble() ?? 0, points?.dropLocation?.last.toDouble() ?? 0)),
                         // ]);
                         // ref.read(tripProvider.notifier).goForOrderAccept();
-                        ref.read(pusherNotifierProvider.notifier).setupPusherListeners();
-                        ref.read(routeNotifierProvider.notifier).fetchRoutesDetail(points, orderId: widget.order.id);
+                        // ref.read(pusherNotifierProvider.notifier).setupPusherListeners();
+
                         // ref.read(homeProvider.notifier).updateForAccepted();
 
                         // NavigationService.pushNamedAndRemoveUntil(AppRoutes.tripPage);

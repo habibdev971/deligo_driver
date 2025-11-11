@@ -12,11 +12,12 @@ AppBar mainAppBar(
       String? title,
       void Function()? onPressed,
       PreferredSizeWidget? bottom,
+      bool hideLeading = false
     }) => AppBar(
-    leadingWidth: 100,
+    leadingWidth: hideLeading ? null : 100,
     backgroundColor: isDarkMode() ? Colors.black : Colors.white,
     bottom: bottom,
-    leading: Semantics(
+    leading: hideLeading ? null : Semantics(
       label:
       '${AppLocalizations.of(context).back} ${AppLocalizations.of(context).button}',
       child: backButton(context, onPressed: onPressed),

@@ -28,7 +28,7 @@ class AppFlowNotifier extends StateNotifier<AppFlowState> {
     if (isLoggedIn) {
       _ref.watch(tripActivityNotifierProvider).when(success: (order){
         if(order != null){
-          return handleOrderStatusUpdate(status: order.status?.toLowerCase() ?? '', orderId: order.id?.toInt(), ref: _ref, payMethod: order.payMethod);
+          // return handleOrderStatusUpdate(status: order.status?.toLowerCase() ?? '', orderId: order.id?.toInt(), ref: _ref, payMethod: order.payMethod);
         }else{
            NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
            return;

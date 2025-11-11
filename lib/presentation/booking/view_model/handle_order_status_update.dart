@@ -10,7 +10,7 @@ import '../provider/pusher_provider.dart';
 void handleOrderStatusUpdate({
   required String status,
   required int? orderId,
-  required Ref ref,
+  required WidgetRef ref,
   bool fromPusher = false,
   String? payMethod,
 }) {
@@ -24,11 +24,11 @@ void handleOrderStatusUpdate({
   }
 
   switch (status) {
-    case 'accepted':
+    case 'ACCEPTED':
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.goForPickup,  fromSplash: true);
       break;
 
-    case 'go_to_pickup':
+    case 'GO_TO_PICKUP':
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.arrivedAtPickupPoint,  fromSplash: true);
       break;
 
@@ -36,20 +36,20 @@ void handleOrderStatusUpdate({
     //   tripStatusNotifier.updateOnTripStatus(status: BookingStatus.pickupConfirmed,  fromSplash: true);
     //   break;
 
-    case 'picked_up':
+    case 'ARRIVED':
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.rideStarted,  fromSplash: true);
       break;
 
-    case 'start_ride':
+    case 'STARTED':
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.headingToDestination,  fromSplash: true);
       break;
 
-    case 'dropped_off':
+    case 'DROPPED_OFF':
       ref.read(locationNotifierProvider.notifier).stopTracking();
       tripStatusNotifier.updateOnTripStatus(status: BookingStatus.payment,  fromSplash: true);
       break;
 
-    case 'completed':
+    case 'END' || 'COMPLETED':
       if (!fromPusher) {
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
       }

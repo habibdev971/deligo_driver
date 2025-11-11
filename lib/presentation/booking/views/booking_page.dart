@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,6 +7,8 @@ import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/widgets/location_permission_wrapper.dart';
 
 import '../../../core/routes/app_routes.dart';
+import '../../../data/services/local_storage_service.dart';
+import '../../../data/services/navigation_service.dart';
 import '../provider/driver_providers.dart';
 import '../provider/home_providers.dart';
 import '../widgets/driver_status_sheet.dart';
@@ -42,6 +45,12 @@ class _HomePageState extends ConsumerState<BookingPage> {
         child: Scaffold(
           key: scaffoldKey,
           resizeToAvoidBottomInset: false,
+          appBar: mainAppBar(context, onPressed: ()async{
+            final local = LocalStorageService();
+            await local.clearOrderId();
+            ref.read(bookingNotifierProvider.notifier).resetToInitial();
+            NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
+          }),
           body: bookingState.currentLocation == null ? const LoadingView() : Stack(
                   children: [
             GoogleMap(
