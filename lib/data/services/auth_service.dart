@@ -16,140 +16,177 @@ class AuthServiceImpl extends IAuthService {
   AuthServiceImpl({required this.dioClient});
 
   @override
-  Future<Response> getDriverDropdownData() async => await dioClient.dio.get(ApiEndpoints.getDriverDropdownDataUrl);
+  Future<Response> getDriverDropdownData() async =>
+      await dioClient.dio.get(ApiEndpoints.getDriverDropdownDataUrl);
 
   @override
-  Future<Response> initialRegistration({required Map<String, dynamic> data})async{
+  Future<Response> initialRegistration({
+    required Map<String, dynamic> data,
+  }) async {
     // final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     final deviceToken = await deviceTokenFirebase();
-    data.addAll({
-      'device_token': deviceToken,
-    });
+    data.addAll({'device_token': deviceToken});
     return await dioClient.dio.post(
       ApiEndpoints.initialRegistrationUrl,
-      data: data
+      data: data,
     );
   }
 
   @override
-  Future<Response> registration({required Map<String, dynamic> data})async{
+  Future<Response> registration({required Map<String, dynamic> data}) async {
     // final idToken = await FirebaseAuth.instance.currentUser?.getIdToken();
     data.addAll({
       'isNewUser': false,
       'password': 'secret',
       'device_token': await deviceTokenFirebase(),
-      // 'idToken': idToken,
 
+      // 'idToken': idToken,
     });
     // log(data.toString());
     return await dioClient.dio.post(
-        ApiEndpoints.registrationUrl,
-        data: await buildMultipartForm(data)
+      ApiEndpoints.registrationUrl,
+      data: await buildMultipartForm(data),
     );
   }
 
   @override
-  Future<Response> forgetVerifyOtp({required String mobile, required String otp}) async => await dioClient.dio.post(ApiEndpoints.forgetVerifyOtp, data: {
-      'mobile': mobile,
-      'otp': otp,
-    });
-
-  @override
-  Future<Response> checkUserExistence({required String phone, required String countryCode, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.checkUserExistenceUrl,
-      data: {'phoneNumber': phone, 'device_token': deviceToken, 'country_code': countryCode},
-    );
-
-  @override
-  Future<Response> loginPhoneOrEmail(
-      {required String phoneOrEmail,
-        required String password,
-        // required String countryCode,
-        String? deviceToken}) async => dioClient.dio.post(
-      ApiEndpoints.loginWithPhoneOrEmailUrl,
-      data: {
-        'phoneOremail': phoneOrEmail,
-        'password': password,
-        'userType': 'DRIVER',
-        'device_token': await deviceTokenFirebase()
-      },
-    );
-
-  @override
-  Future<Response> resendSignIn({required num? userId, required String? deviceToken}) async => await dioClient.dio.post(
-    '${ApiEndpoints.resendSignIn}/$userId',
-    data: {
-      'device_token': deviceToken,
-    }
+  Future<Response> forgetVerifyOtp({
+    required String mobile,
+    required String otp,
+  }) async => await dioClient.dio.post(
+    ApiEndpoints.forgetVerifyOtp,
+    data: {'mobile': mobile, 'otp': otp},
   );
 
   @override
-  Future<Response> loginWithPassword({required String mobile, required String password, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.loginWithPasswordUrl,
-      data: {
-        'mobile': mobile,
-        'country_code': await LocalStorageService().getPhoneCode(),
-        'password': password,
-        'device_token': deviceToken
-      },
-    );
-  @override
-  Future<Response> changePassword({required String currentPassword, required String newPassword, required newConfirmPassword}) async => await dioClient.dio.post(
-      ApiEndpoints.changePassword,
-      data: {
-        'current_password': currentPassword,
-        'password': newPassword,
-        'password_confirmation': newConfirmPassword
-      },
-    );
-
+  Future<Response> checkUserExistence({
+    required String phone,
+    required String countryCode,
+    String? deviceToken,
+  }) async => await dioClient.dio.post(
+    ApiEndpoints.checkUserExistenceUrl,
+    data: {
+      'phoneOremail': phone,
+      'userType' : 'DRIVER',
+      'device_token': deviceToken,
+      // 'country_code': countryCode,
+    },
+  );
 
   @override
-  Future<Response> logout() async => await dioClient.dio.post(ApiEndpoints.logout);
-
-  @override
-  Future<Response> requestOTP({required String mobile}) async => await dioClient.dio.post(ApiEndpoints.requestOTP, data: {
-      'mobile': mobile,
-    });
-
-  @override
-  Future<Response> resendOTP({required String mobile}) async => await dioClient.dio.post(
-      ApiEndpoints.resendOTP,
-      data: {'mobile': mobile},
-    );
-
-  @override
-  Future<Response> resetPassword({required Map<String, dynamic> data}) async => await dioClient.dio.post(ApiEndpoints.resetPassword, data: data);
-
-  @override
-  Future<Response> updatePassword({required String password}) async => dioClient.dio.post(ApiEndpoints.updatePassword, data: {
+  Future<Response> loginPhoneOrEmail({
+    required String phoneOrEmail,
+    required String password,
+    // required String countryCode,
+    String? deviceToken,
+  }) async => dioClient.dio.post(
+    ApiEndpoints.loginWithPhoneOrEmailUrl,
+    data: {
+      'phoneOremail': phoneOrEmail,
       'password': password,
-      // 'password_confirmation': password,
-    'userType': 'DRIVER'
-    });
+      'userType': 'DRIVER',
+      'device_token': await deviceTokenFirebase(),
+    },
+  );
+
+  @override
+  Future<Response> resendSignIn({
+    required num? userId,
+    required String? deviceToken,
+  }) async => await dioClient.dio.post(
+    '${ApiEndpoints.resendSignIn}/$userId',
+    data: {'device_token': deviceToken},
+  );
+
+  @override
+  Future<Response> loginWithPassword({
+    required String mobile,
+    required String password,
+    String? deviceToken,
+  }) async => await dioClient.dio.post(
+    ApiEndpoints.loginWithPasswordUrl,
+    data: {
+      'mobile': mobile,
+      'country_code': await LocalStorageService().getPhoneCode(),
+      'password': password,
+      'device_token': deviceToken,
+    },
+  );
+  @override
+  Future<Response> changePassword({
+    required String currentPassword,
+    required String newPassword,
+    required newConfirmPassword,
+  }) async => await dioClient.dio.post(
+    ApiEndpoints.changePassword,
+    data: {
+      'current_password': currentPassword,
+      'password': newPassword,
+      'password_confirmation': newConfirmPassword,
+    },
+  );
+
+  @override
+  Future<Response> logout() async =>
+      await dioClient.dio.post(ApiEndpoints.logout);
+
+  @override
+  Future<Response> requestOTP({required String mobile}) async => await dioClient
+      .dio
+      .post(ApiEndpoints.requestOTP, data: {'mobile': mobile});
+
+  @override
+  Future<Response> resendOTP({required String mobile}) async => await dioClient
+      .dio
+      .post(ApiEndpoints.resendOTP, data: {'mobile': mobile});
+
+  @override
+  Future<Response> resetPassword({required Map<String, dynamic> data}) async =>
+      await dioClient.dio.post(ApiEndpoints.resetPassword, data: data);
+
+  @override
+  Future<Response> updatePassword({required String password}) async =>
+      dioClient.dio.post(
+        ApiEndpoints.updatePassword,
+        data: {
+          'password': password,
+          // 'password_confirmation': password,
+          'userType': 'DRIVER',
+        },
+      );
 
   @override
   Future<Response> updateProfilePhoto({required String imagePath}) async {
     final FormData formData = FormData.fromMap({
       'profile_picture': await MultipartFile.fromFile(imagePath),
     });
-    return await dioClient.dio.post(ApiEndpoints.updateProfilePhoto, data: formData);
+    return await dioClient.dio.post(
+      ApiEndpoints.updateProfilePhoto,
+      data: formData,
+    );
   }
 
   @override
-  Future<Response> verifyOtp({required String mobile, required String otp, String? deviceToken}) async => await dioClient.dio.post(
-      ApiEndpoints.verifyOTP,
-      data: {
-        'mobile': mobile,
-        // 'country_code': await LocalStorageService().getPhoneCode(),
-        'otp': otp,
-        'userType': 'DRIVER',
-        'device_token': deviceToken
-      },
-    );
+  Future<Response> verifyOtp({
+    required String mobile,
+    required String otp,
+    String? deviceToken,
+  }) async => await dioClient.dio.post(
+    ApiEndpoints.verifyOTP,
+    data: {
+      'mobile': mobile,
+      // 'country_code': await LocalStorageService().getPhoneCode(),
+      'otp': otp,
+      'userType': 'DRIVER',
+      'device_token': deviceToken,
+    },
+  );
 
   @override
-  Future<Response> updatePersonalInfo({required File profilePicture, required Map<String, dynamic> data}) async {
+  Future<Response> updatePersonalInfo({
+    required File profilePicture,
+    required Map<String, dynamic> data,
+  }) async {
     final FormData formData = FormData();
 
     formData.files.add(
@@ -186,7 +223,6 @@ class AuthServiceImpl extends IAuthService {
     );
   }
 
-
   @override
   Future<Response> updateVehicleDetails({
     required List<File> documents,
@@ -219,7 +255,9 @@ class AuthServiceImpl extends IAuthService {
         ),
       ]);
     } else {
-      throw Exception('Documents list must contain at least 3 files: nid, license, vehicle_paper');
+      throw Exception(
+        'Documents list must contain at least 3 files: nid, license, vehicle_paper',
+      );
     }
 
     data.forEach((key, value) {
@@ -238,24 +276,32 @@ class AuthServiceImpl extends IAuthService {
     );
   }
 
-
   @override
-  Future<Response> uploadDocuments({required File profilePicture, required List<File> documents}) async {
+  Future<Response> uploadDocuments({
+    required File profilePicture,
+    required List<File> documents,
+  }) async {
     // Convert files to MultipartFile
     final FormData formData = FormData();
 
     formData.files.addAll([
       MapEntry(
         'profile_picture',
-        await MultipartFile.fromFile(profilePicture.path, filename: profilePicture.path.split('/').last),
-      )
+        await MultipartFile.fromFile(
+          profilePicture.path,
+          filename: profilePicture.path.split('/').last,
+        ),
+      ),
     ]);
 
     for (var doc in documents) {
       formData.files.add(
         MapEntry(
           'documents[]', // Ensure correct key for multiple files
-          await MultipartFile.fromFile(doc.path, filename: doc.path.split('/').last),
+          await MultipartFile.fromFile(
+            doc.path,
+            filename: doc.path.split('/').last,
+          ),
         ),
       );
     }
@@ -273,5 +319,6 @@ class AuthServiceImpl extends IAuthService {
   }
 
   @override
-  Future<Response> getDriverDetails() async => await dioClient.dio.get(ApiEndpoints.getDriverDetails);
+  Future<Response> getDriverDetails() async =>
+      await dioClient.dio.get(ApiEndpoints.getDriverDetails);
 }
