@@ -38,22 +38,20 @@ Widget loginSignUpButton(
               onPressed: () async {
                 final bool? isValid = formKey.currentState?.validate();
                 if (isValid == true) {
-                  String phoneCode = '';
+                  final String phoneCode = '';
 
                   if (isLogin) {
                     String input = emailController.text.trim();
 
 
-                    bool isEmail(String value) {
-                      return RegExp(
+                    bool isEmail(String value) => RegExp(
                           r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@"
                           r'[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?'
                           r'(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$'
                       ).hasMatch(value);
-                    }
 
                     bool isPhone(String value) {
-                      String cleaned = value.replaceAll(RegExp(r'[^\d+]'), '');
+                      final String cleaned = value.replaceAll(RegExp(r'[^\d+]'), '');
                       return RegExp(r'^\+?\d{7,15}$').hasMatch(cleaned);
                     }
 

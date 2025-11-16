@@ -59,6 +59,7 @@ Widget registrationLoginFields(
                   hint: AppLocalizations.of(context).phoneNo,
                   keyboardType: TextInputType.phone,
                   readOnly: isPhoneReadable == true,
+                  // suffix:
                   // suffix: buildPhoneCodePickerButton(),
                 ),
           ),
