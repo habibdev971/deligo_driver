@@ -23,6 +23,7 @@ import 'package:deligo_driver/presentation/splash/views/splash_page.dart';
 import 'package:deligo_driver/presentation/wallet/views/wallet.dart';
 
 import '../../presentation/auth/views/firebase_otp_page.dart';
+import '../../presentation/auth/views/registration_login_page/view/registration_login_page.dart';
 import '../../presentation/complaint/view/complaint_view.dart';
 import '../../presentation/home_page/view/home_page.dart';
 import '../../presentation/payout_method/view/add_payment_gateway.dart';
@@ -39,14 +40,20 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const SplashPage());
       case '/login':
         return MaterialPageRoute(builder: (_) => const LoginPage());
+      case AppRoutes.loginSignUp:
+        final Map<String, dynamic>? data = settings.arguments as Map<String, dynamic>?;
+        final bool isLoginPage = data?['isLoginPage'] ?? true;
+        final String? phoneNumber = data?['phone'];
+        final String? email = data?['email'];
+        return MaterialPageRoute(builder: (_) =>  LoginSignUpPage(isLoginPage: isLoginPage, phoneNumber: phoneNumber, email: email,));
       case '/dashboard':
         return MaterialPageRoute(builder: (_) => const DashboardPage());
       case '/login-with-password':
         return MaterialPageRoute(builder: (_) => const LoginWithPasswordPage());
       case AppRoutes.verifyOTP:
         return MaterialPageRoute(builder: (_) {
-          final String? code = settings.arguments as String?;
-          return VerifyOtpPage(code: code,);
+          final String? data = settings.arguments as String?;
+          return VerifyOtpPage(data: data,);
         });
       case AppRoutes.verifyFirebaseOtp:
         return MaterialPageRoute(

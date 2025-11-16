@@ -738,7 +738,20 @@
   "female": "Female",
   "@female": {},
   "other": "Other",
-  "@other": {}
+  "@other": {},
 
+  "terms_agreement": "By signing up. you agree to the",
+  "@terms_agreement": {},
 
+  "sign_up": "Sign up",
+  "@sign_up": {},
+
+  "and": "and",
+  "@and": {},
+
+  "terms_of_service": "Terms of service",
+  "@terms_of_service": {},
+
+  "sign_up_with_email_or_phone": "Sign up with your email or phone number",
+  "@sign_up_with_email_or_phone": {}
 }

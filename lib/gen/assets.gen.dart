@@ -2155,6 +2155,9 @@ class $AssetsImagesGen {
   AssetGenImage get exitLogo =>
       const AssetGenImage('assets/images/exit-logo.png');
 
+  /// File path: assets/images/gmail.png
+  AssetGenImage get gmail => const AssetGenImage('assets/images/gmail.png');
+
   /// File path: assets/images/go-to-pick-up-location.png
   AssetGenImage get goToPickUpLocation =>
       const AssetGenImage('assets/images/go-to-pick-up-location.png');
@@ -2280,6 +2283,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/send.png
   AssetGenImage get send => const AssetGenImage('assets/images/send.png');
 
+  /// File path: assets/images/sign-in.png
+  AssetGenImage get signIn => const AssetGenImage('assets/images/sign-in.png');
+
   /// File path: assets/images/star.png
   AssetGenImage get star => const AssetGenImage('assets/images/star.png');
 
@@ -2347,6 +2353,7 @@ class $AssetsImagesGen {
     doneCircle,
     drawerTopBackground,
     exitLogo,
+    gmail,
     goToPickUpLocation,
     googlemapPreview,
     gradientTotal,
@@ -2380,6 +2387,7 @@ class $AssetsImagesGen {
     scheduledRidesHeaderBackground,
     sendRight,
     send,
+    signIn,
     star,
     startRide,
     successRound,

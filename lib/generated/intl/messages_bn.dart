@@ -75,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "ইতিমধ্যে একটি অ্যাকাউন্ট আছে?",
     ),
     "amount": MessageLookupByLibrary.simpleMessage("পরিমাণ"),
+    "and": MessageLookupByLibrary.simpleMessage("এবং"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "অ্যাপটি একটি অপ্রত্যাশিত ত্রুটির সম্মুখীন হয়েছে এবং বন্ধ করতে হয়েছে। এটি হতে পারে ডিভাইসের মেমোরি কম থাকা, অ্যাপের বাগ, বা ক্ষতিগ্রস্ত ফাইলের কারণে। সমস্যা চলতে থাকলে অ্যাপটি রিস্টার্ট করুন অথবা পুনরায় ইনস্টল করুন।",
     ),
@@ -533,6 +534,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
       "আপনার ইমেইল বা ফোন নম্বর দিয়ে সাইন ইন করুন",
     ),
+    "sign_up": MessageLookupByLibrary.simpleMessage("সাইন আপ"),
+    "sign_up_with_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "আপনার ইমেইল বা ফোন নম্বর দিয়ে সাইন আপ করুন",
+    ),
     "signup_with_apple": MessageLookupByLibrary.simpleMessage(
       "অ্যাপল দিয়ে সাইন আপ করুন",
     ),
@@ -569,10 +574,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "রাইড শুরু করতে ট্যাপ করুন",
     ),
     "tax_number": MessageLookupByLibrary.simpleMessage("ট্যাক্স নম্বর"),
+    "terms_agreement": MessageLookupByLibrary.simpleMessage(
+      "সাইন আপ করে আপনি সম্মত হচ্ছেন",
+    ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage("শর্তাবলী"),
     "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
       "শর্তাবলি চেকবক্স এবং বিবরণ",
     ),
+    "terms_of_service": MessageLookupByLibrary.simpleMessage("সেবার শর্তাবলী"),
     "textCopied": MessageLookupByLibrary.simpleMessage("টেক্সট কপি হয়েছে"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(
       "সমস্যা জানানোর জন্য ধন্যবাদ। আমাদের টিম দ্রুত আপনার সাথে যোগাযোগ করবে।",

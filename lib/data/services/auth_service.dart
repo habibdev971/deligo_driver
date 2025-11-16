@@ -138,7 +138,11 @@ class AuthServiceImpl extends IAuthService {
   @override
   Future<Response> resendOTP({required String mobile}) async => await dioClient
       .dio
-      .post(ApiEndpoints.resendOTP, data: {'mobile': mobile});
+      .post(ApiEndpoints.resendOTP, data: {
+    'phoneOremail': mobile,
+    'userType':'DRIVER'
+    // 'country_code': LocalStorageService().getCountryCode(),
+  },);
 
   @override
   Future<Response> resetPassword({required Map<String, dynamic> data}) async =>
@@ -174,7 +178,7 @@ class AuthServiceImpl extends IAuthService {
   }) async => await dioClient.dio.post(
     ApiEndpoints.verifyOTP,
     data: {
-      'mobile': mobile,
+      'phoneOremail': mobile,
       // 'country_code': await LocalStorageService().getPhoneCode(),
       'otp': otp,
       'userType': 'DRIVER',

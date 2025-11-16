@@ -50,13 +50,15 @@ class LocalStorageService {
     if (phoneCode == null) {
       /// this current lang used for if the device location is not in our allowed list then default will be allowed language.first
 
-      final currentLang = allowedPhoneCodes.firstWhere(
-        (lang) =>
-            lang['code'] ==
-            PlatformDispatcher.instance.locale.languageCode.toLowerCase(),
-        orElse: () => allowedLanguages.first,
-      );
-      return currentLang['phone_code']!;
+      // final currentLang = allowedPhoneCodes.firstWhere(
+      //   (lang) =>
+      //       lang['code'] ==
+      //       PlatformDispatcher.instance.locale.languageCode.toLowerCase(),
+      //   orElse: () => allowedLanguages.first,
+      // );
+      final code = allowedPhoneCodes.first['phone_code']!;
+      savePhoneCode(code);
+      return code;
     } else {
       return phoneCode;
     }

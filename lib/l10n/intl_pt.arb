@@ -721,6 +721,21 @@
   "female": "Feminino",
   "@female": {},
   "other": "Outro",
-  "@other": {}
+  "@other": {},
+
+  "terms_agreement": "Ao se cadastrar, você concorda com a",
+  "@terms_agreement": {},
+
+  "sign_up": "Cadastrar-se",
+  "@sign_up": {},
+
+  "and": "e",
+  "@and": {},
+
+  "terms_of_service": "Termos de serviço",
+  "@terms_of_service": {},
+
+  "sign_up_with_email_or_phone": "Cadastre-se com seu e-mail ou número de telefone",
+  "@sign_up_with_email_or_phone": {}
 }
 

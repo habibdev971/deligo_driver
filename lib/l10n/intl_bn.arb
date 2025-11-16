@@ -718,5 +718,20 @@
   "female": "মহিলা",
   "@female": {},
   "other": "অন্যান্য",
-  "@other": {}
+  "@other": {},
+
+  "terms_agreement": "সাইন আপ করে আপনি সম্মত হচ্ছেন",
+  "@terms_agreement": {},
+
+  "sign_up": "সাইন আপ",
+  "@sign_up": {},
+
+  "and": "এবং",
+  "@and": {},
+
+  "terms_of_service": "সেবার শর্তাবলী",
+  "@terms_of_service": {},
+
+  "sign_up_with_email_or_phone": "আপনার ইমেইল বা ফোন নম্বর দিয়ে সাইন আপ করুন",
+  "@sign_up_with_email_or_phone": {}
 }

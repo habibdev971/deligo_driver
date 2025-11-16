@@ -21,8 +21,8 @@ import '../widgets/auth_app_bar.dart';
 import '../widgets/auth_bottom_buttons.dart';
 
 class VerifyOtpPage extends ConsumerStatefulWidget {
-  final String? code ;
-  const VerifyOtpPage( {super.key, this.code,});
+  final String? data;
+  const VerifyOtpPage({super.key, this.data});
 
   @override
   ConsumerState<VerifyOtpPage> createState() => _VerifyOtpPageState();
@@ -67,59 +67,63 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
     });
   }
 
+  void stopCountdown(){
+    _timer?.cancel();
+    canResend = true;
+    secondsRemaining = 60;
+
+  }
   Widget _buildTitle(BuildContext context) => Text(
-      localize(context).otp_enter_title,
-      style: context.bodyMedium?.copyWith(
-        fontSize: 24.sp,
-        fontWeight: FontWeight.w700,
-        color: isDarkMode() ? const Color(0xFF687387) : ColorPalette.neutral24,
-      ),
-    );
+    localize(context).otp_enter_title,
+    style: context.bodyMedium?.copyWith(
+      fontSize: 24.sp,
+      fontWeight: FontWeight.w700,
+      color: isDarkMode() ? const Color(0xFF687387) : ColorPalette.neutral24,
+    ),
+  );
 
   Widget _buildSubTitle(BuildContext context, String? phoneNumber) => RichText(
-      text: TextSpan(
-        style: context.bodyMedium?.copyWith(
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w400,
-          color: const Color(0xFF687387),
-        ),
-        text: localize(context).otp_sent_message,
-        children: [
-          TextSpan(
-            style: context.bodyMedium?.copyWith(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-              color: ColorPalette.primary50,
-            ),
-            text: phoneNumber,
+    text: TextSpan(
+      style: context.bodyMedium?.copyWith(
+        fontSize: 16.sp,
+        fontWeight: FontWeight.w400,
+        color: const Color(0xFF687387),
+      ),
+      text: localize(context).otp_sent_message,
+      children: [
+        TextSpan(
+          style: context.bodyMedium?.copyWith(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w500,
+            color: ColorPalette.primary50,
           ),
-        ],
-      ),
-    );
+          text: phoneNumber,
+        ),
+      ],
+    ),
+  );
 
-  Widget _buildOtpInput() => Center(
-      child: OtpTextField(
-        otpController: otpController,
-        length: 6,
-      ),
-    );
+  Widget _buildOtpInput() =>
+      Center(child: OtpTextField(otpController: otpController, length: 6));
 
   Widget _buildResendSection(BuildContext context, WidgetRef ref) {
     final resentOTPState = ref.watch(resendOTPNotifierProvider);
     final resentOTPNotifier = ref.read(resendOTPNotifierProvider.notifier);
-    final existingUserData = ref.read(existingUserProvider).maybeWhen(
-      success: (data) => data,
-      orElse: () => null,
-    );
+    // final existingUserData = ref
+    //     .read(existingUserProvider)
+    //     .maybeWhen(success: (data) => data, orElse: () => null);
 
     if (canResend) {
       return resentOTPState.when(
         initial: () => AppTextButton(
           text: localize(context).otp_resend,
           onPressed: () {
-            resentOTPNotifier.resendOtp(mobile: existingUserData?.data?.user?.phoneNumber ?? '', onSuccess: (otp){
-              otpController.text = (otp.data?.otp ?? '').toString();
-            });
+            resentOTPNotifier.resendOtp(
+              mobile: widget.data ?? '',
+              onSuccess: (otp) {
+                otpController.text = (otp.data?.otp ?? '').toString();
+              },
+            );
             _startResendCountdown();
           },
         ),
@@ -142,7 +146,9 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
       );
     } else {
       return Text(
-        localize(context).otp_resend_timer(secondsRemaining.toString().padLeft(2, '0')),
+        localize(
+          context,
+        ).otp_resend_timer(secondsRemaining.toString().padLeft(2, '0')),
         style: GoogleFonts.mulish(
           fontSize: 16.sp,
           fontWeight: FontWeight.w400,
@@ -152,7 +158,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
     }
   }
 
-  Widget _buildVerifyButton(BuildContext context, WidgetRef ref) {
+  Widget _buildVerifyButton(BuildContext context, WidgetRef ref, void Function() onSuccess) {
     final verifyState = ref.watch(otpVerifyProvider);
     final verifyNotifier = ref.read(otpVerifyProvider.notifier);
     // final existingUserData = ref.read(existingUserProvider).maybeWhen(
@@ -161,18 +167,19 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
     // );
 
     return AuthBottomButtons(
-      isLoading:(verifyState.whenOrNull(loading: ()=> true) ?? false),
+      isLoading: (verifyState.whenOrNull(loading: () => true) ?? false),
       // isLoading: otpController.text.trim().length < 6 || (verifyState.whenOrNull(loading: () => true,) ?? false),
       title: '${localize(context).confirm} OTP',
       onTap: () {
-        if(otpController.text.trim().length < 6){
+        if (otpController.text.trim().length < 6) {
           showNotification(message: 'Please enter a valid OTP');
           return;
         }
         verifyNotifier.verifyOTP(
-          mobile: widget.code ?? '',
+          mobile: widget.data ?? '',
           otp: otpController.text.trim(),
         );
+        verifyState.whenOrNull(success: (d){onSuccess();});
         // if (existingUserData?.data?.user?.phoneNumber != null) {
         //   verifyNotifier.verifyOTP(
         //     mobile: existingUserData?.data?.user?.phoneNumber ?? '',
@@ -185,10 +192,9 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final existingUserData = ref.read(existingUserProvider).maybeWhen(
-      success: (data) => data,
-      orElse: () => null,
-    );
+    final existingUserData = ref
+        .read(existingUserProvider)
+        .maybeWhen(success: (data) => data, orElse: () => null);
 
     return ExitAppWrapper(
       child: Scaffold(
@@ -199,14 +205,19 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildTitle(context),
-              _buildSubTitle(context, existingUserData?.data?.user?.phoneNumber),
+              _buildSubTitle(
+                context,
+                existingUserData?.data?.user?.phoneNumber,
+              ),
               Gap(24.h),
               Text(
                 localize(context).otp_enter_title,
                 style: context.bodyMedium?.copyWith(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
-                  color: isDarkMode() ? const Color(0xFF687387) : const Color(0xFF24262D),
+                  color: isDarkMode()
+                      ? const Color(0xFF687387)
+                      : const Color(0xFF24262D),
                 ),
               ),
               Gap(12.h),
@@ -216,7 +227,9 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
             ],
           ),
         ),
-        bottomNavigationBar: _buildVerifyButton(context, ref),
+        bottomNavigationBar: _buildVerifyButton(context, ref, (){
+          stopCountdown();
+        }),
       ),
     );
   }

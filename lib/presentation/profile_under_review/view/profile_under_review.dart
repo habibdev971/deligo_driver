@@ -58,7 +58,7 @@ class ProfileUnderReview extends StatelessWidget {
               ),
             ),
             Gap(16.h),
-            AppPrimaryButton(onPressed: () => NavigationService.pushNamedAndRemoveUntil(AppRoutes.login), child: Text('Go to Login Page', style: context.bodyMedium?.copyWith(color: Colors.white),)),
+            AppPrimaryButton(onPressed: () => NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginSignUp, arguments: {'isLoginPage': true}), child: Text('Go to Login Page', style: context.bodyMedium?.copyWith(color: Colors.white),)),
           ],
         ),
       ),

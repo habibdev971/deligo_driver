@@ -41,7 +41,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       if(isLoggedIn){
         NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
       }else{
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginSignUp, arguments: {'isLoginPage': true});
       }
     // });
 

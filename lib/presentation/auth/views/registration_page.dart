@@ -62,14 +62,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
               }
             if(_formKey.currentState!.validate()){
               _formKey.currentState!.save();
-              notifier.initialRegistration(mapData: {
-                'firstName': firstNameController.text.trim(),
-                'lastName': lastNameController.text.trim(),
-                'email': emailController.text.trim(),
-                'phoneNumber': phoneCode + phoneController.text.trim(),
-                'gender': genderController.text.toUpperCase(),
-                'userType': 'DRIVER'
-              });
+              // notifier.initialRegistration(mapData: {
+              //   'firstName': firstNameController.text.trim(),
+              //   'lastName': lastNameController.text.trim(),
+              //   'email': emailController.text.trim(),
+              //   'phoneNumber': phoneCode + phoneController.text.trim(),
+              //   'gender': genderController.text.toUpperCase(),
+              //   'userType': 'DRIVER'
+              // });
             }
           },);
         }),

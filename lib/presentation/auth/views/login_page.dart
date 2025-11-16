@@ -54,9 +54,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     // phoneCode = phoneCode.contains('+880')
     //     ? phoneCode.replaceAll('0', '')
     //     : phoneCode;
-    ref
-        .read(existingUserProvider.notifier)
-        .checkExistenceUser(phone: phoneCode + phoneController.text.trim(), countryCode: phoneCode);
+    // ref
+    //     .read(existingUserProvider.notifier)
+    //     .checkExistenceUser(phoneOrEmail: phoneCode + phoneController.text.trim(), countryCode: phoneCode);
   }
 
   @override

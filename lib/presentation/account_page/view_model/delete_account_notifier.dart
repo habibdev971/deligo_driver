@@ -30,7 +30,7 @@ class DeleteAccountNotifier extends StateNotifier<AppState<CommonResponse>>{
             await LocalStorageService().destroyAll();
         await ref.read(bookingNotifierProvider.notifier).resetState();
         await ref.read(pusherNotifierProvider.notifier).disconnect();
-            NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
+            NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginSignUp, arguments: {'isLoginPage': true});
       },
     );
   }

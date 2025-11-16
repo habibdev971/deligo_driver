@@ -44,8 +44,8 @@ class DioInterceptors extends Interceptor {
       await LocalStorageService().clearToken();
       await LocalStorageService().clearStorage();
 
-      if (currentContext != null && currentRoute != AppRoutes.login) {
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
+      if (currentContext != null && currentRoute != AppRoutes.loginSignUp) {
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginSignUp, arguments: {'isLoginPage': true});
       }
     }
 

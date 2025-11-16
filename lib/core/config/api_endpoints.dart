@@ -9,7 +9,7 @@ class ApiEndpoints {
   static const String loginWithPasswordUrl = '/users/login';
   static const String loginWithPhoneOrEmailUrl = '/users/login';
   static const String resendSignIn = '/resend-sign-in';
-  static const String resendOTP = '/resend-otp';
+  static const String resendOTP = '/users/resend-otp';
   static const String updatePassword = 'users/set-password';
   static const String verifyOTP = 'users/verify-otp';
   static const String requestOTP = '/forgot-password/request-otp';
@@ -50,7 +50,7 @@ class ApiEndpoints {
   static const String transactionHistory = 'user-info/$mediator/disbursement/history';
   static const String getReportTypes = '/report-types';
   static const String submitReport = '/report-create';
-  static const String deleteAccount = '$mediator/destroy';
+  static const String deleteAccount = 'users/delete-account';
   static const String termsAndConditions = 'legal-terms';
   static const String privacyPolicy = 'privacy-policy';
   static const String sendTravelInfo = '/locations/send-travel-info';

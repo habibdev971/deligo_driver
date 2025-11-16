@@ -2868,6 +2868,46 @@ class AppLocalizations {
   String get other {
     return Intl.message('Other', name: 'other', desc: '', args: []);
   }
+
+  /// `By signing up. you agree to the`
+  String get terms_agreement {
+    return Intl.message(
+      'By signing up. you agree to the',
+      name: 'terms_agreement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up`
+  String get sign_up {
+    return Intl.message('Sign up', name: 'sign_up', desc: '', args: []);
+  }
+
+  /// `and`
+  String get and {
+    return Intl.message('and', name: 'and', desc: '', args: []);
+  }
+
+  /// `Terms of service`
+  String get terms_of_service {
+    return Intl.message(
+      'Terms of service',
+      name: 'terms_of_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up with your email or phone number`
+  String get sign_up_with_email_or_phone {
+    return Intl.message(
+      'Sign up with your email or phone number',
+      name: 'sign_up_with_email_or_phone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

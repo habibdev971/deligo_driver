@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Já tem uma conta?",
     ),
     "amount": MessageLookupByLibrary.simpleMessage("Valor"),
+    "and": MessageLookupByLibrary.simpleMessage("e"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "O aplicativo encontrou um erro inesperado e precisou ser fechado. Isso pode ser causado por memória insuficiente, um bug no app ou um arquivo corrompido. Reinicie o app ou reinstale se o problema continuar.",
     ),
@@ -558,6 +559,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
       "Entre com seu e-mail ou número de telefone",
     ),
+    "sign_up": MessageLookupByLibrary.simpleMessage("Cadastrar-se"),
+    "sign_up_with_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "Cadastre-se com seu e-mail ou número de telefone",
+    ),
     "signup_with_apple": MessageLookupByLibrary.simpleMessage(
       "Cadastre-se com Apple",
     ),
@@ -594,11 +599,17 @@ class MessageLookup extends MessageLookupByLibrary {
       "Toque para Começar a Corrida",
     ),
     "tax_number": MessageLookupByLibrary.simpleMessage("Número fiscal"),
+    "terms_agreement": MessageLookupByLibrary.simpleMessage(
+      "Ao se cadastrar, você concorda com a",
+    ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Termos e Condições",
     ),
     "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
       "Caixa de seleção de termos e condições e descrição",
+    ),
+    "terms_of_service": MessageLookupByLibrary.simpleMessage(
+      "Termos de serviço",
     ),
     "textCopied": MessageLookupByLibrary.simpleMessage("Texto copiado"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(

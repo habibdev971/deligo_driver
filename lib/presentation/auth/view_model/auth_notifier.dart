@@ -21,6 +21,7 @@ import '../../../data/models/common_response.dart';
 import '../../../data/models/login_with_pass_response/login_with_pass_response.dart';
 import '../../../data/models/resend_otp_model/resend_otp_mode.dart';
 import '../../../data/services/firebase_auth_service.dart';
+import '../provider/auth_providers.dart';
 
 class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
   final IAuthRepo authRepoProvider;
@@ -29,14 +30,15 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
     : super(const AppState.initial());
 
   Future<void> checkExistenceUser({
-    required String phone,
+    required String phoneOrEmail,
     required String countryCode,
+    required bool isPhoneNumber,
   }) async {
     state = const AppState.loading();
     final String? deviceToken = await deviceTokenFirebase();
     await LocalStorageService().clearToken();
     final response = await authRepoProvider.checkUserExistence(
-      mobile: phone,
+      mobile: phoneOrEmail,
       deviceToken: deviceToken,
       countryCode: countryCode,
     );
@@ -46,24 +48,25 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
         return state = AppState.error(failure);
       },
       (data) {
-        _handleLoginSuccess(data.data, phone);
+        _handleLoginSuccess(data.data, phoneOrEmail, isPhoneNumber);
         return state = AppState.success(data);
       },
     );
   }
 
-  void _handleLoginSuccess(ExistenceData? data, String phone) {
+  void _handleLoginSuccess(ExistenceData? data, String phoneOrEmail, bool isPhoneNumber) {
     // final localStorage = LocalStorageService();
     final isNewUser = data?.isNew == true;
     // final isUnderReview = loginResponse.data?.isUnderReview == true;
     final isUnderReview = data?.isLicenseVerified == false;
     if (isNewUser ) { //|| (isNewUser == false && data?.isDriver == false)
+      NavigationService.pushNamed(AppRoutes.loginSignUp, arguments: {'isLoginPage': false, 'phone': isPhoneNumber ? phoneOrEmail : null, 'email': isPhoneNumber ? null : phoneOrEmail});
       // showNotification(message: 'otp: ${loginResponse.data?.otp}', isSuccess: true);
-      final loading = ref.read(authLoadingProvider.notifier);
-
-      firebaseAuthNotifier.value.signInWithMobile(phone,
-          onLoadingChange: (val) => loading.state = val,
-      );
+      // final loading = ref.read(authLoadingProvider.notifier);
+      //
+      // firebaseAuthNotifier.value.signInWithMobile(phone,
+      //     onLoadingChange: (val) => loading.state = val,
+      // );
         // ..setRegistrationProgress(AppRoutes.verifyOtp);
       // NavigationService.pushNamed(
       //   AppRoutes.verifyOtp,
@@ -71,11 +74,11 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
       // );
     } else {
       if (isUnderReview && data?.isDriver == false) {
-        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage, arguments: phone);
+        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage, arguments: phoneOrEmail);
       }else if(isUnderReview){
         NavigationService.pushNamed(AppRoutes.profileUnderReview);
       } else {
-        NavigationService.pushNamed(AppRoutes.loginWithPassword);
+        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: phoneOrEmail);
       }
     }
   }
@@ -221,10 +224,19 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
           (response) async{
         showNotification(message: response.message, isSuccess: true);
         state = AppState.success(response);
+        final existingData = ref.watch(existingUserProvider).whenOrNull(success: (data) => data.data);
         await LocalStorageService().clearToken();
-        await LocalStorageService().clearRegisterToken();
-        await LocalStorageService().saveRegisterToken(response.data?.token);
-        NavigationService.pushNamed(AppRoutes.driverPersonalInfoPage,);
+
+        if(existingData?.isNew == true){
+          await LocalStorageService().saveRegisterToken(response.data!.token);
+          NavigationService.pushReplacementNamed(AppRoutes.driverPersonalInfoPage,);
+        }else{
+          await LocalStorageService().saveUser(data: response.data!.user!.toJson());
+          await LocalStorageService().saveToken(response.data!.token);
+          NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard,);
+        }
+
+
       },
     );
   }
@@ -542,7 +554,7 @@ class LogoutNotifier extends StateNotifier<AppState<CommonResponse>> {
 
         showNotification(message: data.message, isSuccess: true);
         state = AppState.success(data);
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
+        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginSignUp, arguments: {'isLoginPage': true});
         resetStateAfterDelay();
       },
     );

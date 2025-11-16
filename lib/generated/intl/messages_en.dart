@@ -76,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Already have an account?",
     ),
     "amount": MessageLookupByLibrary.simpleMessage("Amount"),
+    "and": MessageLookupByLibrary.simpleMessage("and"),
     "app_encountered_unexpected_error": MessageLookupByLibrary.simpleMessage(
       "The app encountered an unexpected error and had to close. This could be caused by insufficient device memory, a bug in the app, or a corrupted file. Please restart the app or reinstall it if the issue continues.",
     ),
@@ -529,6 +530,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "sign_in_with_email_phone": MessageLookupByLibrary.simpleMessage(
       "Sign in with your email or phone number",
     ),
+    "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "sign_up_with_email_or_phone": MessageLookupByLibrary.simpleMessage(
+      "Sign up with your email or phone number",
+    ),
     "signup_with_apple": MessageLookupByLibrary.simpleMessage(
       "Sign up with Apple",
     ),
@@ -563,11 +568,17 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tap_to_start_ride": MessageLookupByLibrary.simpleMessage("Start Ride"),
     "tax_number": MessageLookupByLibrary.simpleMessage("Tax Number"),
+    "terms_agreement": MessageLookupByLibrary.simpleMessage(
+      "By signing up. you agree to the",
+    ),
     "terms_conditions": MessageLookupByLibrary.simpleMessage(
       "Terms & Conditions",
     ),
     "terms_conditions_checkbox": MessageLookupByLibrary.simpleMessage(
       "Terms and Conditions Checkbox and Description",
+    ),
+    "terms_of_service": MessageLookupByLibrary.simpleMessage(
+      "Terms of service",
     ),
     "textCopied": MessageLookupByLibrary.simpleMessage("Text been copied"),
     "thanksForReporting": MessageLookupByLibrary.simpleMessage(
