@@ -9,6 +9,7 @@ import 'package:deligo_driver/data/models/driver_info_update_response/driver_inf
 import 'package:deligo_driver/data/models/forgot_verify_otp_response/forgot_verify_otp_response.dart';
 import 'package:deligo_driver/data/models/otp_verify_response/otp_verify_response.dart';
 import 'package:deligo_driver/data/models/resend_otp_model/resend_otp_mode.dart';
+import 'package:deligo_driver/data/models/ride_data_model/RideDataModel.dart';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
 import 'package:deligo_driver/data/repositories/base_repository.dart';
 import 'package:deligo_driver/domain/interfaces/auth_service_interface.dart';
@@ -157,6 +158,16 @@ class AuthRepoImpl extends BaseRepository implements IAuthRepo {
         return GetProfileModel.fromJson(response.data);
       }catch(e){
         return GetProfileModel.fromJson(response.data);
+      }
+    });
+
+  @override
+  Future<Either<Failure, RideDataModel>> getRideData() async => await safeApiCall(() async {
+      final response = await authService.getRideData();
+      try{
+        return RideDataModel.fromJson(response.data);
+      }catch(e){
+        return RideDataModel.fromJson(response.data);
       }
     });
 

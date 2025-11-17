@@ -17,6 +17,7 @@ import '../../../core/utils/build_network_image.dart';
 import '../../../core/utils/helpers.dart';
 import '../../../core/utils/is_dark_mode.dart';
 import '../../../core/utils/localize.dart';
+import '../../../data/services/url_launch_services.dart';
 import '../provider/auth_providers.dart';
 import '../provider/driver_info_provider.dart';
 import '../widgets/auth_bottom_buttons.dart';
@@ -133,6 +134,7 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
                     Flexible(
                       child: GestureDetector(
                         onTap: () {
+                          UrlLaunchServices.launchUrls('https://deligoeu.com/term.html');
                           // 👉 এখানে তুমি Terms & Conditions পেজে যেতে পারো
                           // Navigator.push(context, MaterialPageRoute(builder: (_) => TermsPage()));
                         },

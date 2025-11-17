@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:deligo_driver/data/models/ride_data_model/Driver.dart';
+import 'package:deligo_driver/presentation/account_page/view_model/ride_data_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/state/app_state.dart';
@@ -19,6 +21,8 @@ final selectedProfilePhotoProvider = StateNotifierProvider<SelectedProfilePhotoN
 
 final driverDetailsNotifierProvider = StateNotifierProvider<DriverDetailsViewModel, AppState<GetProfileModel>>(
     (ref) => DriverDetailsViewModel(ref: ref, authRepo: ref.read(authRepoProvider)));
+final rideDataCountProvider = StateNotifierProvider<RideDataNotifier, AppState<RideDataCount?>>(
+    (ref) => RideDataNotifier(ref: ref, repo: ref.read(authRepoProvider)));
 
 final updateProfileProvider = StateNotifierProvider<UpdateProfileNotifier, AppState<CommonResponse>>(
     (ref) => UpdateProfileNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));

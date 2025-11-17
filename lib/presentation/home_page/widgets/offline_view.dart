@@ -8,8 +8,8 @@ Widget offlineView(BuildContext context)=> Padding(
   padding: EdgeInsets.symmetric(horizontal: 16.w),
   child: Column(
       children: [
-        summery(context),
-        Container(height: 8.h, width: double.infinity, color: isDarkMode() ? Colors.grey.shade600 : const Color(0xFFF6F7F9),),
+        // summery(context),
+        // Container(height: 8.h, width: double.infinity, color: isDarkMode() ? Colors.grey.shade600 : const Color(0xFFF6F7F9),),
         Expanded(child: todayActivity(context)),
       ],
     ),

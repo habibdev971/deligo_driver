@@ -13,8 +13,8 @@ Widget textFieldOnly({
   bool readOnly = false,
   bool obscureText = false,
   void Function()? onTap,
-}) {
-  return SizedBox(
+  void Function(String? v)? onChange,
+}) => SizedBox(
     height: 60.h,
     child: Semantics(
       textField: true,
@@ -25,6 +25,7 @@ Widget textFieldOnly({
         keyboardType: keyboardType,
         onChanged: (val) {
           state?.didChange(val);
+          onChange != null ? onChange(val) : null;
         },
         readOnly: readOnly,
         obscureText: obscureText,
@@ -51,4 +52,3 @@ Widget textFieldOnly({
       ),
     ),
   );
-}

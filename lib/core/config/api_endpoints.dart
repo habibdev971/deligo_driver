@@ -26,6 +26,7 @@ class ApiEndpoints {
   static const String onlineOfflineStatusUpdate = '/users/user-active-deactive';
   static const String updateRadius = '/radius-update';
   static const String getDriverDetails = 'users/profile';
+  static const String getRideData = 'driver/home-data';
   static const String logout = 'users/logout';
   static const String sendMessage = '/ride';
   static const String getMessage = '/ride';

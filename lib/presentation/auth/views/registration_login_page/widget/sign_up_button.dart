@@ -58,7 +58,7 @@ Widget loginSignUpButton(
                     if (isEmail(input)) {
                       debugPrint('Email detected $input');
                     } else if (isPhone(input)) {
-                      input = mergePhoneNumber(input, ref.watch(selectedPhoneCodeProvider));
+                      // input = mergePhoneNumber(input, ref.watch(selectedPhoneCodeProvider));
                       debugPrint('Phone number detected $input');
                     } else {
                       debugPrint('Invalid input $input');
@@ -105,7 +105,7 @@ String mergePhoneNumber(String rawNumber, String selectedCode) {
   number = number.replaceAll(RegExp(r'[^\d+]'), '');
 
   // Check if number already contains a valid country code
-  bool hasCountryCode = RegExp(r'^\+\d{1,3}').hasMatch(number);
+  final bool hasCountryCode = RegExp(r'^\+\d{1,3}').hasMatch(number);
 
   // If already has country code → return as is
   if (hasCountryCode) {

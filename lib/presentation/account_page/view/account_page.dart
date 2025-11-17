@@ -1,4 +1,5 @@
 import 'package:deligo_driver/core/utils/build_network_image.dart';
+import 'package:deligo_driver/data/models/ride_data_model/Driver.dart';
 import 'package:deligo_driver/data/services/url_launch_services.dart';
 import 'package:deligo_driver/presentation/account_page/widgets/language_dropdown.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class _AccountPageState extends ConsumerState<AccountPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(driverDetailsNotifierProvider.notifier).getDriverDetails();
+      ref.read(rideDataCountProvider.notifier).getRideData();
     });
   }
 
@@ -65,10 +67,11 @@ Widget userDetails(BuildContext context) => Padding(
         padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
-          image: DecorationImage(
-            image: Assets.images.walletBackground.provider(),
-            fit: BoxFit.fill,
-          ),
+
+          // image: DecorationImage(
+          //   image: Assets.images.walletBackground.provider(),
+          //   fit: BoxFit.fill,
+          // ),
         ),
         child: Consumer(
           builder: (context, ref, _) {
@@ -78,11 +81,13 @@ Widget userDetails(BuildContext context) => Padding(
                   success: (data) => data.data.data,
                   error: (error) => null,
                 );
+            final rideData = ref.watch(rideDataCountProvider).whenOrNull(success: (v)=> v);
+
             final bool isLoading =
-                ref
+                (ref
                     .watch(driverDetailsNotifierProvider)
                     .whenOrNull(loading: () => true) ??
-                false;
+                false) || (ref.watch(rideDataCountProvider).whenOrNull(loading: ()=> true) ?? false);
 
             return isLoading
                 ? buildShimmer(
@@ -155,7 +160,7 @@ Widget userDetails(BuildContext context) => Padding(
                         style: context.bodyMedium?.copyWith(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          // color: Colors.white,
                         ),
                       ),
                       Gap(4.h),
@@ -166,11 +171,11 @@ Widget userDetails(BuildContext context) => Padding(
                         style: context.bodyMedium?.copyWith(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white60,
+                          // color: Colors.white60,
                         ),
                       ),
                       Gap(16.h),
-                      driverRideStory(context, null),
+                      driverRideStory(context, rideData),
                     ],
                   );
           },
@@ -180,49 +185,49 @@ Widget userDetails(BuildContext context) => Padding(
   ),
 );
 
-Widget driverRideStory(BuildContext context, User? driverDetail) => Row(
+Widget driverRideStory(BuildContext context, RideDataCount? rideData) => Row(
   children: [
     rideStory(
       context,
-      logo: Assets.images.taxiCab,
+      // logo: Assets.images.taxiCab,
       title: localize(context).total_rides,
-      amount: (driverDetail?.totalRide ?? 0).toString(),
+      amount: (rideData?.rideCount ?? 0).toString(),
     ),
     Gap(8.w),
     rideStory(
       context,
-      logo: Assets.images.distanceLogo,
+      // logo: Assets.images.distanceLogo,
       title: localize(context).total_distance,
-      amount: '${driverDetail?.totalDistance ?? 0} KM',
+      amount: '${rideData?.totalDistance ?? 0} KM',
     ),
-    Gap(8.w),
-    rideStory(
-      context,
-      logo: Assets.images.star,
-      title: localize(context).average_rating,
-      amountWidget: RichText(
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-        text: TextSpan(
-          text: (driverDetail?.rating ?? 0).toString(),
-          style: context.bodyMedium?.copyWith(
-            fontSize: 14.sp,
-            fontWeight: FontWeight.w600,
-            color: isDarkMode() ? Colors.white54 : const Color(0xFF24262D),
-          ),
-          children: [
-            TextSpan(
-              text: '(${driverDetail?.reviewCount ?? 0})',
-              style: context.bodyMedium?.copyWith(
-                fontSize: 10.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xFF687387),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
+    // Gap(8.w),
+    // rideStory(
+    //   context,
+    //   // logo: Assets.images.star,
+    //   title: localize(context).average_rating,
+    //   amountWidget: RichText(
+    //     maxLines: 1,
+    //     overflow: TextOverflow.ellipsis,
+    //     text: TextSpan(
+    //       text: (driverDetail?.rating ?? 0).toString(),
+    //       style: context.bodyMedium?.copyWith(
+    //         fontSize: 14.sp,
+    //         fontWeight: FontWeight.w600,
+    //         color: isDarkMode() ? Colors.white54 : const Color(0xFF24262D),
+    //       ),
+    //       children: [
+    //         TextSpan(
+    //           text: '(${driverDetail?.reviewCount ?? 0})',
+    //           style: context.bodyMedium?.copyWith(
+    //             fontSize: 10.sp,
+    //             fontWeight: FontWeight.w400,
+    //             color: const Color(0xFF687387),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // ),
   ],
 );
 
@@ -230,7 +235,7 @@ Widget rideStory(
   BuildContext context, {
   String? amount,
   Widget? amountWidget,
-  required AssetGenImage logo,
+  // required AssetGenImage logo,
   required String title,
 }) => Expanded(
   child: Container(
@@ -238,33 +243,23 @@ Widget rideStory(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.r),
       color: isDarkMode() ? Colors.black : Colors.white,
-      border: isDarkMode() ? Border.all(color: Colors.white) : null,
+      border: Border.all(color: ColorPalette.primary50),
     ),
     child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child:
-                  amountWidget ??
-                  Text(
-                    amount ?? '',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.bodyMedium?.copyWith(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w700,
-                      color: isDarkMode()
-                          ? Colors.white54
-                          : const Color(0xFF24262D),
-                    ),
-                  ),
+        amountWidget ??
+            Text(
+              amount ?? '',
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: context.bodyMedium?.copyWith(
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
+                color: isDarkMode()
+                    ? Colors.white54
+                    : const Color(0xFF24262D),
+              ),
             ),
-            Gap(4.w),
-            logo.image(height: 20.h, width: 20.w, fit: BoxFit.fill),
-          ],
-        ),
         Gap(4.h),
         Text(
           title,
@@ -322,6 +317,7 @@ Widget accountDetails(
               height: 24.h,
               width: 24.w,
               fit: BoxFit.fill,
+              // color: ColorPalette.primary50
             ),
             title: localize(context).language,
             trailing: countrySelector(loadAddress: true),

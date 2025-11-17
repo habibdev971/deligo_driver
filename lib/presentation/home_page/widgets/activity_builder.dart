@@ -12,7 +12,7 @@ Widget activityBuilder(BuildContext context, {List<RideRequest> orderList = cons
     itemBuilder: (context, index) {
       final order = orderList[index];
       return activityCard(context, order: order, onTap: (){
-        NavigationService.pushNamed(AppRoutes.rideHistoryDetail, arguments: order);
+        NavigationService.pushNamed(AppRoutes.rideHistoryDetailsPage, arguments: order);
       }, showCancelItem: order.status != null && order.status!.toLowerCase() == 'cancelled', showPrice: showPrice);
     },
   );

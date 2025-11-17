@@ -26,5 +26,6 @@ abstract class IAuthService {
   Future<Response> uploadDocuments(
       {required File profilePicture, required List<File> documents});
   Future<Response> getDriverDetails();
+  Future<Response> getRideData();
   Future<Response> logout();
 }

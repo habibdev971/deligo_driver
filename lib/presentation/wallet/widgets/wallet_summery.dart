@@ -6,12 +6,10 @@ import 'package:gap/gap.dart';
 import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
-import 'package:deligo_driver/gen/assets.gen.dart';
 import 'package:deligo_driver/presentation/wallet/provider/provider.dart';
 import 'package:deligo_driver/presentation/wallet/widgets/withdraw_dialogue.dart';
 
 import '../../payment_method/provider/provider.dart';
-import 'gradient_card.dart';
 
 Widget walletSummery(BuildContext context) => Consumer(
   builder: (context, ref, _) {
@@ -20,41 +18,41 @@ Widget walletSummery(BuildContext context) => Consumer(
     final currency = ref.watch(currencyProvider);
     return Container(
       padding: EdgeInsets.all(12.r),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.r),
-        image: DecorationImage(
-          image: Assets.images.walletBackground.provider(),
-          fit: BoxFit.fill,
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(12.r),
+      //   image: DecorationImage(
+      //     image: Assets.images.walletBackground.provider(),
+      //     fit: BoxFit.fill,
+      //   ),
+      // ),
       child: IntrinsicHeight(
         child: Column(
           children: [
-            Row(
-              children: [
-                gradientCard(
-                  context,
-                  title: localize(context).payment_received,
-                  value: (data?.receivedAmount ?? 0).toString(),
-                  currency: currency,
-                ),
-                Gap(16.w),
-                gradientCard(
-                  context,
-                  title: localize(context).payment_withdraw,
-                  value: (data?.paymentWithdraw ?? 0).toString(),
-                  isReceived: false,
-                  currency: currency,
-                ),
-              ],
-            ),
-            Gap(12.h),
+            // Row(
+            //   children: [
+            //     gradientCard(
+            //       context,
+            //       title: localize(context).payment_received,
+            //       value: (data?.receivedAmount ?? 0).toString(),
+            //       currency: currency,
+            //     ),
+            //     Gap(16.w),
+            //     gradientCard(
+            //       context,
+            //       title: localize(context).payment_withdraw,
+            //       value: (data?.paymentWithdraw ?? 0).toString(),
+            //       isReceived: false,
+            //       currency: currency,
+            //     ),
+            //   ],
+            // ),
+            // Gap(12.h),
             Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         currency + (data?.balance?.toString() ?? '0'),
@@ -64,7 +62,7 @@ Widget walletSummery(BuildContext context) => Consumer(
                         style: context.bodyMedium?.copyWith(
                           fontSize: 32.sp,
                           fontWeight: FontWeight.w700,
-                          color: Colors.white,
+                          // color: Colors.black,
                         ),
                       ),
                       Text(
@@ -76,39 +74,41 @@ Widget walletSummery(BuildContext context) => Consumer(
                         style: context.bodyMedium?.copyWith(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white60,
+                          // color: Colors.black,
                         ),
                       ),
                     ],
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    ref
-                        .read(paymentMethodsNotifierProvider.notifier)
-                        .getPaymentMethods();
-                    showWithdrawDialog(context);
-                  },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: ColorPalette.primary50,
-                    ),
-                    child: Text(
-                      localize(context).tips_withdraw,
-                      style: context.bodyMedium?.copyWith(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white,
-                      ),
-                    ),
+
+              ],
+            ),
+            Gap(16.h),
+            InkWell(
+              onTap: () {
+                ref
+                    .read(paymentMethodsNotifierProvider.notifier)
+                    .getPaymentMethods();
+                showWithdrawDialog(context);
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16.w,
+                  vertical: 8.h,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: ColorPalette.primary50,
+                ),
+                child: Text(
+                  localize(context).tips_withdraw,
+                  style: context.bodyMedium?.copyWith(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
                   ),
                 ),
-              ],
+              ),
             ),
           ],
         ),

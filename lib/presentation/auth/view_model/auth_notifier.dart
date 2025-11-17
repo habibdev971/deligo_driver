@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:deligo_driver/data/models/user_existence_model/user_existence_model.dart';
+import 'package:deligo_driver/presentation/account_page/provider/select_country_provider.dart';
+import 'package:deligo_driver/presentation/auth/views/registration_login_page/widget/sign_up_button.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:deligo_driver/core/state/app_state.dart';
@@ -38,7 +40,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
     final String? deviceToken = await deviceTokenFirebase();
     await LocalStorageService().clearToken();
     final response = await authRepoProvider.checkUserExistence(
-      mobile: phoneOrEmail,
+      mobile: isPhoneNumber ? mergePhoneNumber(phoneOrEmail, ref.watch(selectedPhoneCodeProvider)) : phoneOrEmail,
       deviceToken: deviceToken,
       countryCode: countryCode,
     );
@@ -78,7 +80,7 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
       }else if(isUnderReview){
         NavigationService.pushNamed(AppRoutes.profileUnderReview);
       } else {
-        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: phoneOrEmail);
+        NavigationService.pushNamed(AppRoutes.verifyOTP, arguments: isPhoneNumber ? mergePhoneNumber(phoneOrEmail, ref.watch(selectedPhoneCodeProvider)) : phoneOrEmail);
       }
     }
   }

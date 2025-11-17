@@ -33,7 +33,7 @@ class LocalStorageService {
         (lang) =>
             lang['code'] ==
             PlatformDispatcher.instance.locale.languageCode.toLowerCase(),
-        orElse: () => allowedLanguages.first,
+        orElse: () => allowedLanguages.last,
       );
       return currentLang['code']!;
     } else {

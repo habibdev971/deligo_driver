@@ -11,6 +11,7 @@ class RideHistoryState {
   int page;
   int limit;
   bool hasMore;
+  // DateTime? dateTime;
 
   RideHistoryState({
     this.list = const AppState.initial(),
@@ -18,6 +19,7 @@ class RideHistoryState {
     this.page = 1,
     this.limit = 10,
     this.hasMore = true,
+    // this.dateTime,
   });
 
   RideHistoryState copyWith({
@@ -26,12 +28,14 @@ class RideHistoryState {
     int? page,
     int? limit,
     bool? hasMore,
+    DateTime? dateTime,
   }) => RideHistoryState(
       list: list ?? this.list,
       status: status ?? this.status,
       page: page ?? this.page,
       limit: limit ?? this.limit,
       hasMore: hasMore ?? this.hasMore,
+    // dateTime: dateTime ?? this.dateTime
     );
 
   RideHistoryState.empty()
@@ -41,6 +45,7 @@ class RideHistoryState {
     page: 1,
     limit: 10,
     hasMore: true,
+    // dateTime: null,
   );
 }
 
@@ -52,11 +57,22 @@ class RideHistoryNotifier extends StateNotifier<RideHistoryState> {
       : super(RideHistoryState.empty());
 
   /// ✅ প্রথমবার history লোড করা
-  Future<void> getRideHistory({bool refresh = false}) async {
+  Future<void> getRideHistory({bool refresh = false, bool isDateToday = false}) async {
     // if (refresh) {
     //   state = RideHistoryState.empty();
     // }
-
+    if(isDateToday){
+      state = state.copyWith(status: 'today');
+    }
+    // if (isDateToday) {
+    //   state = RideHistoryState.empty();
+    //   state = state.copyWith(dateTime: DateTime.now(), status: '');
+    // }else{
+    //   if(refresh){
+    //     state = RideHistoryState.empty();
+    //   }
+    //   // state = state.copyWith(dateTime: )
+    // }
     // প্রথমবার লোডের সময় লোডিং দেখাবে
     if (state.page == 1) {
       state = state.copyWith(list: const AppState.loading());
@@ -66,6 +82,8 @@ class RideHistoryNotifier extends StateNotifier<RideHistoryState> {
       'status': state.status,
       'page': state.page,
       'limit': state.limit,
+      // 'startDate': state.dateTime?.toIso8601String(),
+      // 'endDate': state.dateTime?.toIso8601String(),
     });
 
     result.fold(

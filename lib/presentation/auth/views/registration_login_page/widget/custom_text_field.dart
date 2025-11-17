@@ -11,10 +11,12 @@ Widget textField(
   Widget? suffix,
   Widget? prefix,
   String? Function(String?)? validator,
+      void Function(String? v)? onChange,
   TextInputType? keyboardType,
   bool emailOrPhoneEnable = false,
       bool obscureText = false,
       bool readOnly = false,
+      bool hideValidator = false
 }) {
   String? Function(String?)? dynamicValidator = validator;
 
@@ -88,8 +90,8 @@ Widget textField(
   }
 
   return FormField<String>(
-    validator: readOnly ? null : dynamicValidator,
-    autovalidateMode: readOnly ? null : dynamicValidator == null
+    validator: readOnly || hideValidator ? null : dynamicValidator,
+    autovalidateMode: readOnly || hideValidator ? null : dynamicValidator == null
         ? null
         : AutovalidateMode.onUserInteraction,
     builder: (state) => Column(
@@ -103,8 +105,9 @@ Widget textField(
             controller: controller,
             state: state,
             keyboardType: keyboardType,
-            validator: readOnly ? null : validator,
-            readOnly: readOnly
+            validator: readOnly || hideValidator ? null : validator,
+            readOnly: readOnly,
+            onChange: onChange
           ),
           SizedBox(height: 4.h),
           if (state.hasError)

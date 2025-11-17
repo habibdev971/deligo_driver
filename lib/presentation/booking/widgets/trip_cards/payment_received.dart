@@ -92,6 +92,13 @@ Widget serviceOverView(BuildContext context, RideRequest? order,
                   title: localize(context).rideCharge,
                   value:  '${order?.estimatedFare ?? 0.00}$currency'),
             ),
+
+            Padding(
+              padding: EdgeInsets.all(8.0.r),
+              child: rowText(context,
+                  title: localize(context).discount,
+                  value:  '${order?.discount ?? 0.00}$currency'),
+            ),
             // Padding(
             //   padding: EdgeInsets.all(8.0.r),
             //   child: rowText(context,

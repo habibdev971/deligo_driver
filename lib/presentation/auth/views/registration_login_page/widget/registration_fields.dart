@@ -1,6 +1,7 @@
 import 'package:deligo_driver/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../account_page/widgets/phone_code_picker_button.dart';
 import 'custom_text_field.dart';
 import 'gender_dropdown.dart';
 
@@ -13,6 +14,8 @@ Widget registrationLoginFields(
   required TextEditingController passwordController,
   required TextEditingController genderController,
   bool loginPage = false,
+      void Function(String? v)? onChange,
+      bool showCountryCode = false,
   // bool visibleEmail = false,
       bool? isPhoneReadable,
 }) => Semantics(
@@ -46,7 +49,10 @@ Widget registrationLoginFields(
               : AppLocalizations.of(context).email,
           keyboardType: TextInputType.emailAddress,
           emailOrPhoneEnable: loginPage,
-          readOnly: isPhoneReadable == false,
+          hideValidator: loginPage == false,
+          // readOnly: isPhoneReadable == false,
+          onChange: loginPage ? onChange : null,
+          suffix: loginPage && showCountryCode ? buildPhoneCodePickerButton() : null,
         ),
         // loginPage
         //     ? const SizedBox.shrink()
@@ -60,7 +66,7 @@ Widget registrationLoginFields(
                   keyboardType: TextInputType.phone,
                   readOnly: isPhoneReadable == true,
                   // suffix:
-                  // suffix: buildPhoneCodePickerButton(),
+                  suffix: loginPage ? null : buildPhoneCodePickerButton(),
                 ),
           ),
         // loginPage

@@ -127,7 +127,7 @@ class AppLocalizations {
   /// `We sent OTP code to your phone number`
   String get otp_sent_message {
     return Intl.message(
-      'We sent OTP code to your phone number',
+      'We sent OTP code to your ',
       name: 'otp_sent_message',
       desc: '',
       args: [],

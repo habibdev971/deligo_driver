@@ -7,7 +7,7 @@ import '../../../data/services/local_storage_service.dart';
 class SelectedLanguageNotifier extends StateNotifier<Locale> {
   final LocalStorageService _storage = LocalStorageService();
 
-  SelectedLanguageNotifier() : super(Locale(allowedLanguages.first['code']!)) {
+  SelectedLanguageNotifier() : super(Locale(allowedLanguages.last['code']!)) {
     _init();
   }
   /// Change language and persist it

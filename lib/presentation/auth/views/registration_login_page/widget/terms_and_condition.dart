@@ -14,13 +14,11 @@ Widget termsAndCondition(
   bool isSelected = true,
   required void Function() onTap,
 }) {
-  TextStyle? textStyle([bool primary = false]) {
-    return context.bodyMedium?.copyWith(
+  TextStyle? textStyle([bool primary = false]) => context.bodyMedium?.copyWith(
       fontSize: 12.sp,
       fontWeight: FontWeight.w500,
       color: primary ? ColorPalette.primary50 : const Color(0xFFB8B8B8),
     );
-  }
 
   return loginPage
       ? Gap(20.h)

@@ -42,7 +42,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
   final passwordController = TextEditingController();
   final genderController = TextEditingController();
 
-  bool isTermsAndServiceSelected = true;
+  bool isTermsAndServiceSelected = false;
   bool? isPhoneReadable;
 
   @override
@@ -53,9 +53,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     if (!widget.isLoginPage) {
       if (widget.phoneNumber != null) {
         isPhoneReadable = true;
+        showCountryCode = true;
         phoneController.text = widget.phoneNumber!;
       } else if (widget.email != null) {
         isPhoneReadable = false;
+        showCountryCode = false;
         emailController.text = widget.email!;
       }
     }
@@ -84,6 +86,22 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     });
   }
 
+  bool showCountryCode = false;
+
+  bool isPhone(String value) {
+    final String cleaned = value.replaceAll(RegExp(r'[^\d+]'), '');
+    return RegExp(r'^\+?\d{7,15}$').hasMatch(cleaned);
+  }
+  void onChange(String? v){
+    if(isPhone(v ?? '')){
+      showCountryCode = true;
+    }else{
+      showCountryCode = false;
+    }
+    setState(() {
+
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final bool isLogin = widget.isLoginPage;
@@ -120,6 +138,8 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
                     genderController: genderController,
                     // visibleEmail: isLogin,
                     isPhoneReadable: isPhoneReadable,
+                      showCountryCode: showCountryCode,
+                      onChange: onChange
                   ),
 
                   /// TERMS AND CONDITIONS

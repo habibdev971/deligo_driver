@@ -325,4 +325,8 @@ class AuthServiceImpl extends IAuthService {
   @override
   Future<Response> getDriverDetails() async =>
       await dioClient.dio.get(ApiEndpoints.getDriverDetails);
+
+  @override
+  Future<Response> getRideData() async =>
+      await dioClient.dio.get(ApiEndpoints.getRideData);
 }

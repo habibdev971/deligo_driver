@@ -20,7 +20,7 @@ Widget todayActivity(BuildContext context) => Padding(
             return state.list.when(
               initial: () => const SizedBox.shrink(),
               loading: () => const LoadingView(),
-              success: (data) => activityBuilder(context, orderList: []),
+              success: (data) => activityBuilder(context, orderList: data),
               error: (e) => ErrorView(message: e.message),
             );
           },
