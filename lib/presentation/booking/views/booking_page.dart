@@ -63,7 +63,7 @@ class _HomePageState extends ConsumerState<BookingPage> {
             compassEnabled: false,
             zoomControlsEnabled: false,
             rotateGesturesEnabled: false,
-            trafficEnabled: true,
+            // trafficEnabled: false,
 
             markers: bookingState.markers,
             polylines: bookingState.polylines,
