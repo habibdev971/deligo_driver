@@ -89,7 +89,7 @@ class _OrderRequestDialogState extends ConsumerState<_OrderRequestDialog> {
                   context,
                   time: (widget.data?.estimatedTime ?? 0).toStringAsFixed(1),
                   distance:
-                  (widget.data?.distanceFromDriver ?? 0).toStringAsFixed(1),
+                  (widget.data?.distance ?? 0).toStringAsFixed(1),
                 ),
                 Gap(8.h),
                 readAbleLocationView(
