@@ -222,7 +222,7 @@ class Category {
       num? id, 
       String? categoryName, 
       String? slug, 
-      String? lnCategoryName, 
+      // String? lnCategoryName,
       num? iconMediaId, 
       String? type, 
       num? serviceId, 
@@ -251,7 +251,7 @@ class Category {
     _id = id;
     _categoryName = categoryName;
     _slug = slug;
-    _lnCategoryName = lnCategoryName;
+    // _lnCategoryName = lnCategoryName;
     _iconMediaId = iconMediaId;
     _type = type;
     _serviceId = serviceId;
@@ -283,7 +283,7 @@ class Category {
     _id = json['id'];
     _categoryName = json['categoryName'];
     _slug = json['slug'];
-    _lnCategoryName = json['lnCategoryName'];
+    // _lnCategoryName = json['lnCategoryName'];
     _iconMediaId = json['IconMediaId'];
     _type = json['type'];
     _serviceId = json['serviceId'];
@@ -313,7 +313,7 @@ class Category {
   num? _id;
   String? _categoryName;
   String? _slug;
-  String? _lnCategoryName;
+  // String? _lnCategoryName;
   num? _iconMediaId;
   String? _type;
   num? _serviceId;
@@ -342,7 +342,7 @@ class Category {
 Category copyWith({  num? id,
   String? categoryName,
   String? slug,
-  String? lnCategoryName,
+  // String? lnCategoryName,
   num? iconMediaId,
   String? type,
   num? serviceId,
@@ -371,7 +371,7 @@ Category copyWith({  num? id,
 }) => Category(  id: id ?? _id,
   categoryName: categoryName ?? _categoryName,
   slug: slug ?? _slug,
-  lnCategoryName: lnCategoryName ?? _lnCategoryName,
+  // lnCategoryName: lnCategoryName ?? _lnCategoryName,
   iconMediaId: iconMediaId ?? _iconMediaId,
   type: type ?? _type,
   serviceId: serviceId ?? _serviceId,
@@ -401,7 +401,7 @@ Category copyWith({  num? id,
   num? get id => _id;
   String? get categoryName => _categoryName;
   String? get slug => _slug;
-  String? get lnCategoryName => _lnCategoryName;
+  // String? get lnCategoryName => _lnCategoryName;
   num? get iconMediaId => _iconMediaId;
   String? get type => _type;
   num? get serviceId => _serviceId;
@@ -433,7 +433,7 @@ Category copyWith({  num? id,
     map['id'] = _id;
     map['categoryName'] = _categoryName;
     map['slug'] = _slug;
-    map['lnCategoryName'] = _lnCategoryName;
+    // map['lnCategoryName'] = _lnCategoryName;
     map['IconMediaId'] = _iconMediaId;
     map['type'] = _type;
     map['serviceId'] = _serviceId;

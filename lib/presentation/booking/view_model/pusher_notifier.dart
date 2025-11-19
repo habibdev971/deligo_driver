@@ -60,43 +60,47 @@ class PusherNotifier extends StateNotifier<void> {
 
     final chatChannel = 'user-$driverId';
 
-    if (event.channelName.contains(chatChannel)) {
-      _handleChatMessages(eventData);
-    } else if (event.channelName.contains(orderChannel)) {
-      if(event.eventName.contains('new-ride-request')){
-        if(Navigator.canPop(NavigationService.navigatorKey.currentContext!))return;
-        playRingtone();
-        final PusherRequestOrderModel model = PusherRequestOrderModel.fromJson(eventData);
+    try{
+      if (event.channelName.contains(chatChannel)) {
+        _handleChatMessages(eventData);
+      } else if (event.channelName.contains(orderChannel)) {
+        if(event.eventName.contains('new-ride-request')){
+          if(Navigator.canPop(NavigationService.navigatorKey.currentContext!))return;
+          playRingtone();
+          final PusherRequestOrderModel model = PusherRequestOrderModel.fromJson(eventData);
 
-        final orderId = model.rideRequestId;
-        await LocalStorageService().saveRequestId(orderId?.toInt());
-        orderRequestDialogue(data: model);
-        // ref.read(driverStatusNotifierProvider.notifier)
-        // .orderRequest(data: {'order_id': orderId});
-        return;
-      }else if(event.eventName.contains('ride-cancelled')){
-        playRingtone();
-        await PusherService().unsubscribeChannel(
-          'order.${await LocalStorageService().getRequestId()}.$driverId',
-        );
-        showNotification(message: 'Your Ride has been cancel by Rider!');
-        final local = LocalStorageService();
-        await local.clearOrderId();
-        ref.read(bookingNotifierProvider.notifier).resetToInitial();
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
+          final orderId = model.rideRequestId;
+          await LocalStorageService().saveRequestId(orderId?.toInt());
+          orderRequestDialogue(data: model);
+          // ref.read(driverStatusNotifierProvider.notifier)
+          // .orderRequest(data: {'order_id': orderId});
+          return;
+        }else if(event.eventName.contains('ride-cancelled')){
+          playRingtone();
+          await PusherService().unsubscribeChannel(
+            'order.${await LocalStorageService().getRequestId()}.$driverId',
+          );
+          showNotification(message: 'Your Ride has been cancel by Rider!');
+          final local = LocalStorageService();
+          await local.clearOrderId();
+          ref.read(bookingNotifierProvider.notifier).resetToInitial();
+          NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
+        }
+
+        // if (eventData.containsKey('data')) {
+        //   final data = eventData['data'];
+        //   if (data is Map && data.containsKey('order_id')) {
+        //     final int? orderId = data['order_id'];
+        //     playRingtone();
+        //     await LocalStorageService().saveOrderId(orderId);
+        //     ref
+        //         .read(driverStatusNotifierProvider.notifier)
+        //         .orderRequest(data: {'order_id': orderId});
+        //   }
+        // }
       }
-
-      // if (eventData.containsKey('data')) {
-      //   final data = eventData['data'];
-      //   if (data is Map && data.containsKey('order_id')) {
-      //     final int? orderId = data['order_id'];
-      //     playRingtone();
-      //     await LocalStorageService().saveOrderId(orderId);
-      //     ref
-      //         .read(driverStatusNotifierProvider.notifier)
-      //         .orderRequest(data: {'order_id': orderId});
-      //   }
-      // }
+    }catch(e, stack){
+      debugPrintStack(stackTrace: stack);
     }
 
   }
