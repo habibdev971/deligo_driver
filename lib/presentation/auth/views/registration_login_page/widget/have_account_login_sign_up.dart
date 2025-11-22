@@ -19,7 +19,7 @@ Widget alreadyHaveAccountLoginSignUp(BuildContext context, {bool loginPage = fal
   return Semantics(
     label: '${AppLocalizations.of(context).already_have_account} ${loginPage ? AppLocalizations.of(context).sign_up : AppLocalizations.of(context).sign_in}',
     child: Text.rich(TextSpan(
-      text: AppLocalizations.of(context).already_have_account,
+      text: loginPage ? "Don't have account? " : AppLocalizations.of(context).already_have_account,
       children: [
         TextSpan(
           text: ' ${loginPage ? AppLocalizations.of(context).sign_up : AppLocalizations.of(context).sign_in}',

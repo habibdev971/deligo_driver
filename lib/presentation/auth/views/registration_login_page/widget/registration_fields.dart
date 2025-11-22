@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
@@ -44,15 +45,17 @@ Widget registrationLoginFields(
         textField(
           context,
           emailController,
-          hint: loginPage
-              ? AppLocalizations.of(context).email_or_phone
-              : AppLocalizations.of(context).email,
-          keyboardType: TextInputType.emailAddress,
+          hint:
+          loginPage && showCountryCode
+              ? AppLocalizations.of(context).phoneNo
+              :
+          AppLocalizations.of(context).email,
+          keyboardType: loginPage && showCountryCode ? TextInputType.phone : TextInputType.emailAddress,
           emailOrPhoneEnable: loginPage,
           hideValidator: loginPage == false,
           // readOnly: isPhoneReadable == false,
           onChange: loginPage ? onChange : null,
-          suffix: loginPage && showCountryCode ? buildPhoneCodePickerButton() : null,
+          suffix: loginPage && showCountryCode ? buildPhoneCodePickerButton() : const Icon(Icons.email, color: ColorPalette.primary50,),
         ),
         // loginPage
         //     ? const SizedBox.shrink()

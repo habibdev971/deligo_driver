@@ -1,4 +1,5 @@
 import 'package:deligo_driver/presentation/auth/views/registration_login_page/widget/registration_fields.dart';
+import 'package:deligo_driver/presentation/auth/widgets/use_prefer_login_method.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -62,13 +63,11 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       }
     }
 
-
-  WidgetsBinding.instance.addPostFrameCallback((_) {
-    setState(() {
-
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {});
     });
-  });
-      }
+  }
+
   @override
   void dispose() {
     firstNameController.dispose();
@@ -86,22 +85,22 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     });
   }
 
-  bool showCountryCode = false;
+  bool showCountryCode = true;
 
-  bool isPhone(String value) {
-    final String cleaned = value.replaceAll(RegExp(r'[^\d+]'), '');
-    return RegExp(r'^\+?\d{7,15}$').hasMatch(cleaned);
-  }
-  void onChange(String? v){
-    if(isPhone(v ?? '')){
-      showCountryCode = true;
-    }else{
-      showCountryCode = false;
-    }
-    setState(() {
+  // bool isPhone(String value) {
+  //   final String cleaned = value.replaceAll(RegExp(r'[^\d+]'), '');
+  //   return RegExp(r'^\+?\d{7,15}$').hasMatch(cleaned);
+  // }
+  //
+  // void onChange(String? v) {
+  //   if (isPhone(v ?? '')) {
+  //     showCountryCode = true;
+  //   } else {
+  //     showCountryCode = false;
+  //   }
+  //   setState(() {});
+  // }
 
-    });
-  }
   @override
   Widget build(BuildContext context) {
     final bool isLogin = widget.isLoginPage;
@@ -121,11 +120,16 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
                   /// TOP TITLE
                   registrationTop(context, loginPage: isLogin),
                   Visibility(
-                      visible: isLogin,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: Assets.images.signIn.image(height: 163.h, width: 163.w),
-                      )),
+                    visible: isLogin,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20.0),
+                      child: Assets.images.signIn.image(
+                        height: 163.h,
+                        width: 163.w,
+                      ),
+                    ),
+                  ),
+
                   /// INPUT FIELDS
                   registrationLoginFields(
                     context,
@@ -138,8 +142,20 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
                     genderController: genderController,
                     // visibleEmail: isLogin,
                     isPhoneReadable: isPhoneReadable,
-                      showCountryCode: showCountryCode,
-                      onChange: onChange
+                    showCountryCode: showCountryCode,
+                    // onChange: onChange,
+                  ),
+
+                  usePreferMethod(
+                    context,
+                    loginWithPhone: showCountryCode,
+                    onTap: () {
+                      FocusScope.of(context).unfocus();
+                      emailController.clear();
+                      showCountryCode = !showCountryCode;
+                      setState(() {});
+                    },
+                    visible: isLogin,
                   ),
 
                   /// TERMS AND CONDITIONS
@@ -169,10 +185,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
                   Gap(32.h),
 
                   /// ALREADY HAVE ACCOUNT → LOGIN or SIGNUP
-                  alreadyHaveAccountLoginSignUp(
-                    context,
-                    loginPage: isLogin,
-                  ),
+                  alreadyHaveAccountLoginSignUp(context, loginPage: isLogin),
 
                   Gap(20.h),
 

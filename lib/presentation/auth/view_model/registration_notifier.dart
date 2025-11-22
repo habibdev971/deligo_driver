@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:deligo_driver/data/models/auth_models/initial_registration_model.dart';
 import 'package:deligo_driver/presentation/auth/provider/auth_providers.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -95,6 +97,8 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
       ..addAll(ref.read(driverInfoProvider).bankPaymentInfo)
       ..addAll(ref.read(driverInfoProvider).agreement);
 
+    log(ref.read(driverInfoProvider).initialRegisterInfo.toString());
+    // log(allData.toString());
     final result = await authRepo.registration(data: allData);
     result.fold(
       (failure) {

@@ -24,29 +24,8 @@ Widget textField(
     if (keyboardType == TextInputType.emailAddress) {
       dynamicValidator = (value) {
         if (value == null || value.isEmpty) {
-          return emailOrPhoneEnable
-              ? AppLocalizations.of(context).email_or_phone_required
-              : AppLocalizations.of(context).validator_email_required;
-        }
-
-        final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-        if (emailOrPhoneEnable) {
-          final phoneRegex = RegExp(r'^\d{7,}$'); // কমপক্ষে ৭ ডিজিট
-
-          final isEmail = emailRegex.hasMatch(value);
-          final isPhone = phoneRegex.hasMatch(value);
-
-          if (!isEmail && !isPhone) {
-            return AppLocalizations.of(context).enter_valid_email_or_phone;
-          }
-          return null;
-        }
-        if (!emailRegex.hasMatch(value)) {
-          return AppLocalizations.of(context).validator_email_invalid;
-        }
-        return null;
-      };
-    } else if (keyboardType == TextInputType.phone) {
+          return AppLocalizations.of(context).validator_email_required;
+        } else if (keyboardType == TextInputType.phone) {
       dynamicValidator = (value) {
         if (value == null || value.isEmpty) {
           return AppLocalizations.of(context).validator_phone_required;
@@ -86,8 +65,10 @@ Widget textField(
         }
         return null;
       };
-    }
-  }
+    }else{
+      return null;
+        }};
+  }}
 
   return FormField<String>(
     validator: readOnly || hideValidator ? null : dynamicValidator,

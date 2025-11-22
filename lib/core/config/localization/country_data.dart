@@ -13,7 +13,7 @@ final List<Map<String, String>> allowedLanguages = [
 final List<Map<String, String>> allowedPhoneCodes = [
   {'code': 'pt', 'name': 'Portuguese', 'flag': '🇵🇹', 'phone_code': '+351'},
   {'code': 'en', 'name': 'English', 'flag': '🇺🇸', 'phone_code': '+1'},
-  {'code': 'bn', 'name': 'Bengali', 'flag': '🇧🇩', 'phone_code': '+88'},
+  // {'code': 'bn', 'name': 'Bengali', 'flag': '🇧🇩', 'phone_code': '+88'},
   // {"code": "ar", "name": "Arabic", "flag": "🇸🇦", "phone_code": "+966"},
   // {"code": "de", "name": "German", "flag": "🇩🇪", "phone_code": "+49"},
   // {"code": "es", "name": "Spanish", "flag": "🇪🇸", "phone_code": "+34"},

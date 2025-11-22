@@ -41,7 +41,7 @@ Widget loginSignUpButton(
                   final String phoneCode = '';
 
                   if (isLogin) {
-                    String input = emailController.text.trim();
+                    final String input = emailController.text.trim();
 
 
                     bool isEmail(String value) => RegExp(
