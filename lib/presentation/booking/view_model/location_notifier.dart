@@ -61,10 +61,10 @@ class LocationNotifier extends StateNotifier<LocationState> {
           ? 0
           : _calculateDistance(_lastSentLatLng!, latLng);
 
-      final bool movedSignificantly = _lastSentLatLng == null || distance > 25; //15
-      final bool enoughTimePassed = now.difference(_lastSentTime).inSeconds >= 7; //5
-      // final bool movedSignificantly = true;
-      // final bool enoughTimePassed = true;
+      // final bool movedSignificantly = _lastSentLatLng == null || distance > 25; //15
+      // final bool enoughTimePassed = now.difference(_lastSentTime).inSeconds >= 7; //5
+      final bool movedSignificantly = true;
+      final bool enoughTimePassed = true;
 
       if (state.isFirstEvent) {
         _lastSentTime = now;
