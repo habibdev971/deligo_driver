@@ -10,7 +10,7 @@
 
 
     <application
-        android:label="Deligo Driver"
+        android:label="DeliGo Driver"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

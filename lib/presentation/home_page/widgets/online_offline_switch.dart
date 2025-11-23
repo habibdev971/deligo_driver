@@ -86,33 +86,33 @@ class AnimatedSwitchBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Switch(value: isOnline, onChanged: (value){});
-  }
-  // => AnimatedAlign(
-  //   alignment: !isOnline ? Alignment.centerLeft : Alignment.centerRight,
-  //   duration: SwitchConstants.animationDuration,
-  //   curve: Curves.easeInOutCubic,
-  //   child: FractionallySizedBox(   // ✅ takes half of parent width instead of fixed width
-  //     widthFactor: 0.5,
-  //     child: Container(
-  //       height: SwitchConstants.height - (SwitchConstants.padding * 2),
-  //       decoration: BoxDecoration(
-  //         color: ColorPalette.primary50,
-  //         borderRadius: BorderRadius.circular(
-  //           SwitchConstants.borderRadius - SwitchConstants.padding,
-  //         ),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.black.withValues(alpha: 0.1),
-  //             blurRadius: 4,
-  //             offset: const Offset(0, 2),
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   ),
-  // );
-}
+  //   return Switch(value: isOnline, onChanged: (value){});
+  // }
+  return AnimatedAlign(
+    alignment: !isOnline ? Alignment.centerLeft : Alignment.centerRight,
+    duration: SwitchConstants.animationDuration,
+    curve: Curves.easeInOutCubic,
+    child: FractionallySizedBox(   // ✅ takes half of parent width instead of fixed width
+      widthFactor: 0.5,
+      child: Container(
+        height: SwitchConstants.height - (SwitchConstants.padding * 2),
+        decoration: BoxDecoration(
+          color: ColorPalette.primary50,
+          borderRadius: BorderRadius.circular(
+            SwitchConstants.borderRadius - SwitchConstants.padding,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}}
 
 // Main widget
 class OnlineOfflineSwitch extends ConsumerWidget {
@@ -125,20 +125,20 @@ class OnlineOfflineSwitch extends ConsumerWidget {
         builder: (context, isOnline, _) {
           final switchState = _getSwitchState(ref);
 
-          return Switch(
-              activeThumbColor: Colors.white,
-              inactiveThumbColor: Colors.white,
-              // activeColor: ColorPalette.primary50,
-              inactiveTrackColor: Colors.black,
-              activeTrackColor: ColorPalette.primary50,
-              // padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
-              value: switchState.isOnline, onChanged: (v){
-            _handleTap(ref, isOnline);
-          });
-          // return GestureDetector(
-          //   onTap: () => _handleTap(ref, isOnline),
-          //   child: _buildSwitchContainer(context, switchState),
-          // );
+          // return Switch(
+          //     activeThumbColor: Colors.white,
+          //     inactiveThumbColor: Colors.white,
+          //     activeColor: ColorPalette.primary50,
+          //     inactiveTrackColor: Colors.black,
+          //     activeTrackColor: ColorPalette.primary50,
+          //     padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+          //     value: switchState.isOnline, onChanged: (v){
+          //   _handleTap(ref, isOnline);
+          // });
+          return GestureDetector(
+            onTap: () => _handleTap(ref, isOnline),
+            child: _buildSwitchContainer(context, switchState),
+          );
         },
       );
 

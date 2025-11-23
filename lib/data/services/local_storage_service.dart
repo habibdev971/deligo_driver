@@ -17,8 +17,24 @@ class LocalStorageService {
   static const String userKey = 'user';
   static const String languageKey = 'language';
   static const String phoneCodeKey = 'phone-code';
+  static const String rideNotificationKey = 'ride-notification';
+
 
   Future<void> init() async {}
+
+  Future<void> saveRideNotification({required Map<String, dynamic> data}) async{
+    await _storage.write(key: rideNotificationKey, value: jsonEncode(data));
+  }
+
+  Future<Map<String, dynamic>?> getRideNotification() async{
+    final data = await _storage.safeRead(key: rideNotificationKey);
+    if (data == null) return null;
+    return jsonDecode(data);
+  }
+
+  Future<void> clearRideNotification() async{
+    await _storage.delete(key: rideNotificationKey);
+  }
 
   Future<void> selectLanguage(String language) async {
     await _storage.write(key: languageKey, value: language);
@@ -234,4 +250,5 @@ class LocalStorageService {
     await clearUser();
     await clearOrderId();
   }
+
 }

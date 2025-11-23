@@ -134,10 +134,14 @@ Future<void> handleNotificationTap(RemoteMessage message) async {
   // });
   if (data['notification_type'] != 'ride_request_to_driver') return;
   if(data['notification_send_time'] != null){
-    final orderId = int.tryParse(data['order_id'].toString());
-    final sentTime = DateTime.tryParse(data['notification_send_time'] ?? '');
-
-  }
+    final orderId = num.tryParse(data['order_id'].toString());
+    // final sentTime = DateTime.tryParse(data['notification_send_time'] ?? '');
+    final String? sendTime = data['notification_send_time'];
+    await locale.saveRideNotification(data: {
+      'order_id': orderId,
+      'notification_send_time': sendTime
+    });
+        }
 
 
   // final orderStatus = data['order_status'];

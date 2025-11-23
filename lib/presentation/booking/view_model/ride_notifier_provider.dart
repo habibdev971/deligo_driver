@@ -7,7 +7,9 @@ import 'package:deligo_driver/presentation/booking/provider/home_providers.dart'
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import '../../../core/state/app_state.dart';
 import '../../../data/models/order_response/order_model/order/order.dart';
+import '../../../data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
 import '../../../data/services/local_storage_service.dart';
+import '../../home_page/widgets/order_request_dialogue.dart';
 import '../../splash/provider/app_flow_providers.dart';
 import '../provider/driver_providers.dart';
 import 'loading_notifier.dart';
@@ -22,23 +24,28 @@ class RideOrderNotifier extends StateNotifier<AppStateOrder<Order?>> {
   }) : super(const AppStateOrder.loading());
 
   Future<void> orderDetails({required int orderId}) async {
-    final previousData = _getPreviousDataOrNull();
-    state = previousData != null
-        ? AppStateOrder.success(previousData)
-        : const AppStateOrder.loading();
+    // final previousData = _getPreviousDataOrNull();
+    // state = previousData != null
+    //     ? AppStateOrder.success(previousData)
+        state = const AppStateOrder.loading();
 
     final result = await rideRepo.orderDetails(orderId: orderId);
 
     result.fold(
           (failure) {
         showNotification(message: failure.message);
-        Future.delayed(const Duration(milliseconds: 600)).then((_) {
-          ref.read(driverStatusNotifierProvider.notifier).online();
-        });
+        // Future.delayed(const Duration(milliseconds: 600)).then((_) {
+        //   ref.read(driverStatusNotifierProvider.notifier).online();
+        // });
         // state unchanged → previous success data shown
       },
           (data) {
         state = AppStateOrder.success(data.data);
+        // final PusherRequestOrderModel model = ;
+        // orderRequestDialogue(data: PusherRequestOrderModel(
+        //   rideRequestId: data.data?.id,
+        //   serviceTypeId: data.data?.s,
+        // ));
       },
     );
   }

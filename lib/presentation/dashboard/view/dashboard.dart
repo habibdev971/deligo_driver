@@ -1,3 +1,5 @@
+import 'package:deligo_driver/core/utils/date_time_expiry.dart';
+import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
@@ -30,6 +32,27 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     Future.microtask((){
       ref.read(rideDetailsProvider.notifier).reset();
     });
+  }
+
+  Future<void> handleRideRequestNotification()async{
+    final locale = LocalStorageService();
+    final rideData = await locale.getRideNotification();
+    if(rideData != null){
+      final orderId = rideData['order_id'];
+      final sendTime = rideData['notification_send_time'];
+      if(orderId != null && sendTime != null){
+        final sentTime = DateTime.tryParse(sendTime); //?.toLocal()
+        if(sentTime != null){
+          final result = checkExpiry(sentTime);
+          if(result.isExpired){
+            await locale.clearRideNotification();
+          }else{
+            ref.read(rideDetailsProvider.notifier).getRideDetails(orderId);
+
+          }
+        }
+      }
+    }
   }
 
   final List<Widget> _pages = const [
