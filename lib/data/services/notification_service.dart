@@ -132,49 +132,54 @@ Future<void> handleNotificationTap(RemoteMessage message) async {
   // delayShowMessage( show: (){
   //   showNotification(message: 'Notification tapped data: ${data.toString()}');
   // });
-  if (data['type'] != 'new_ride_available') return;
+  if (data['notification_type'] != 'ride_request_to_driver') return;
+  if(data['notification_send_time'] != null){
+    final orderId = int.tryParse(data['order_id'].toString());
+    final sentTime = DateTime.tryParse(data['notification_send_time'] ?? '');
 
-  final orderId = int.tryParse(data['order_id'].toString());
-  final orderStatus = data['order_status'];
-  final sentTime = DateTime.tryParse(data['sent_at'] ?? '');
-
-  if (orderId == null) {
-    log('❌ Invalid order_id in notification data');
-    return;
   }
 
-  // 🕒 30s expiry check
-  if (sentTime != null) {
-    final now = DateTime.now().toUtc();
-    final difference = now.difference(sentTime).inSeconds;
-    if (difference > 30) {
-      log('⚠️ Order request expired (order_id: $orderId)');
-      // delayShowMessage(show: () {
-      //   showNotification(
-      //     message:
-      //     '⚠️ Order expired (order_id: $orderId). Sent at: $sentTime, diff: $difference sec',
-      //   );
-      // }, seconds: 8);
-      return;
-    }
-  }
 
-  try {
-    log('✅ Handling order request from notification...');
-    log('Order ID: $orderId');
-    log('Order Status: $orderStatus');
-    log('Sent Time: $sentTime');
+  // final orderStatus = data['order_status'];
+  //
+  //
+  // if (orderId == null) {
+  //   log('❌ Invalid order_id in notification data');
+  //   return;
+  // }
+  //
+  // // 🕒 30s expiry check
+  // if (sentTime != null) {
+  //   final now = DateTime.now().toUtc();
+  //   final difference = now.difference(sentTime).inSeconds;
+  //   if (difference > 30) {
+  //     log('⚠️ Order request expired (order_id: $orderId)');
+  //     // delayShowMessage(show: () {
+  //     //   showNotification(
+  //     //     message:
+  //     //     '⚠️ Order expired (order_id: $orderId). Sent at: $sentTime, diff: $difference sec',
+  //     //   );
+  //     // }, seconds: 8);
+  //     return;
+  //   }
+  // }
 
-    // final msg = RemoteMessageModel.fromJson(message.data);
-    // await LocalStorageService().saveRemoteMessage(msg: msg.toJson());
-    // delayShowMessage(show: (){
-    //   showNotification(message: '✅ Order request handled successfully and saved',);
-    // }, seconds: 10);
-    // TODO: এখানে তুমি তোমার Riverpod provider বা dialogue trigger করবে
-  } catch (e) {
-    // delayShowMessage(show: (){
-    //   showNotification(message: '❌ Error while handling order request: $e');
-    // });
-    log('❌ Error while handling order request: $e');
-  }
+  // try {
+  //   log('✅ Handling order request from notification...');
+  //   log('Order ID: $orderId');
+  //   log('Order Status: $orderStatus');
+  //   log('Sent Time: $sentTime');
+  //
+  //   // final msg = RemoteMessageModel.fromJson(message.data);
+  //   // await LocalStorageService().saveRemoteMessage(msg: msg.toJson());
+  //   // delayShowMessage(show: (){
+  //   //   showNotification(message: '✅ Order request handled successfully and saved',);
+  //   // }, seconds: 10);
+  //   // TODO: এখানে তুমি তোমার Riverpod provider বা dialogue trigger করবে
+  // } catch (e) {
+  //   // delayShowMessage(show: (){
+  //   //   showNotification(message: '❌ Error while handling order request: $e');
+  //   // });
+  //   log('❌ Error while handling order request: $e');
+  // }
 }

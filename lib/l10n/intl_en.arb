@@ -16,7 +16,7 @@
   "@phoneMinLengthError": {},
   "otp_enter_title": "Enter Your OTP",
   "@otp_enter_title": {},
-  "otp_sent_message": "We sent OTP code to your phone number",
+  "otp_sent_message": "We sent OTP code to you",
   "@otp_sent_message": {},
   "otp_input_hint": "Write Your OTP",
   "@otp_input_hint": {},
@@ -753,5 +753,8 @@
   "@terms_of_service": {},
 
   "sign_up_with_email_or_phone": "Sign up with your email or phone number",
-  "@sign_up_with_email_or_phone": {}
+  "@sign_up_with_email_or_phone": {},
+
+  "hi": "hi",
+  "@hi": {}
 }

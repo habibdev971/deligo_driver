@@ -273,6 +273,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Grant Permission",
     ),
     "helloText": MessageLookupByLibrary.simpleMessage("Hello..."),
+    "hi": MessageLookupByLibrary.simpleMessage("hi"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "id": MessageLookupByLibrary.simpleMessage("ID: "),
     "initializing": MessageLookupByLibrary.simpleMessage("Initializing..."),
@@ -356,7 +357,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "otp_resend_timer": m4,
     "otp_save_button": MessageLookupByLibrary.simpleMessage("Save"),
     "otp_sent_message": MessageLookupByLibrary.simpleMessage(
-      "We sent OTP code to your phone number",
+      "We sent OTP code to you",
     ),
     "otp_title_short": MessageLookupByLibrary.simpleMessage("OTP"),
     "otp_verify_button": MessageLookupByLibrary.simpleMessage(

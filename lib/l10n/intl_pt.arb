@@ -16,7 +16,7 @@
   "@phoneMinLengthError": {},
   "otp_enter_title": "Digite seu OTP",
   "@otp_enter_title": {},
-  "otp_sent_message": "Enviamos o código OTP para seu número de telefone",
+  "otp_sent_message": "Enviamos o código OTP para si",
   "@otp_sent_message": {},
   "otp_input_hint": "Escreva seu OTP",
   "@otp_input_hint": {},

@@ -36,7 +36,7 @@ void main() async {
   await FirebaseMessaging.instance.getInitialMessage();
   if (initialMessage != null) {
     //TODO: handle terminated state notification tap here
-    // await handleNotificationTap(initialMessage);
+    await handleNotificationTap(initialMessage);
   }
 
   runApp(

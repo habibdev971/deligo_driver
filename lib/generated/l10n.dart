@@ -124,10 +124,10 @@ class AppLocalizations {
     );
   }
 
-  /// `We sent OTP code to your phone number`
+  /// `We sent OTP code to you`
   String get otp_sent_message {
     return Intl.message(
-      'We sent OTP code to your ',
+      'We sent OTP code to you',
       name: 'otp_sent_message',
       desc: '',
       args: [],
@@ -2907,6 +2907,11 @@ class AppLocalizations {
       desc: '',
       args: [],
     );
+  }
+
+  /// `hi`
+  String get hi {
+    return Intl.message('hi', name: 'hi', desc: '', args: []);
   }
 }
 

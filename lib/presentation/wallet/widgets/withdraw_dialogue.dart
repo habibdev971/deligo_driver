@@ -68,8 +68,8 @@ class _WithdrawDialogState extends State<WithdrawDialog> {
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFF687387))),
               Gap(16.h),
-              paymentMethodDropdown(context),
-              Gap(16.h),
+              // paymentMethodDropdown(context),
+              // Gap(16.h),
               TextField(
                 controller: _amountController,
                 style: context.bodyMedium?.copyWith(

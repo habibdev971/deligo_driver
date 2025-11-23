@@ -188,9 +188,9 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
                   alreadyHaveAccountLoginSignUp(context, loginPage: isLogin),
 
                   Gap(20.h),
-
-                  /// SOCIAL LOGIN BUTTONS
-                  socialLogin(context),
+                  //
+                  // /// SOCIAL LOGIN BUTTONS
+                  // socialLogin(context),
                 ],
               ),
             ),

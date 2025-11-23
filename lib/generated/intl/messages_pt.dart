@@ -367,7 +367,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "otp_resend_timer": m4,
     "otp_save_button": MessageLookupByLibrary.simpleMessage("Salvar"),
     "otp_sent_message": MessageLookupByLibrary.simpleMessage(
-      "Enviamos o código OTP para seu número de telefone",
+      "Enviamos o código OTP para si",
     ),
     "otp_title_short": MessageLookupByLibrary.simpleMessage("OTP"),
     "otp_verify_button": MessageLookupByLibrary.simpleMessage(
