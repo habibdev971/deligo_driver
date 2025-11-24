@@ -24,14 +24,13 @@ final rideRepoProvider = Provider<IRideRepo>(
   (ref) => RideRepoImpl(rideService: ref.read(rideServiceProvider)),
 );
 
-// AcceptRide ViewModel Provider (autoDispose)
-// final rideOrderNotifierProvider = StateNotifierProvider<
-//     RideOrderNotifier, AppStateOrder<Order?>>(
-//   (ref) => RideOrderNotifier(
-//     ref: ref,
-//     rideRepo: ref.read(rideRepoProvider),
-//   ),
-// );
+final rideRequestDetailProvider = StateNotifierProvider<
+    RideOrderNotifier, AppState<RideRequest?>>(
+  (ref) => RideOrderNotifier(
+    ref: ref,
+    rideRepo: ref.read(rideRepoProvider),
+  ),
+);
 
 final tripActivityNotifierProvider = StateNotifierProvider<
     CheckTripActivityNotifier, AppState<Order?>>(

@@ -47,7 +47,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           if(result.isExpired){
             await locale.clearRideNotification();
           }else{
-            ref.read(rideDetailsProvider.notifier).getRideDetails(orderId);
+            ref.read(rideRequestDetailProvider.notifier).orderDetails(orderId: orderId);
 
           }
         }

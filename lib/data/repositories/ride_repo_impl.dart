@@ -25,12 +25,12 @@ class RideRepoImpl extends BaseRepository implements IRideRepo {
     });
 
   @override
-  Future<Either<Failure, OrderDetailModel>> orderDetails({required int orderId}) async => await safeApiCall(()async{
+  Future<Either<Failure, RideDetailsModel>> orderDetails({required int orderId}) async => await safeApiCall(()async{
       final response = await rideService.orderDetails(orderId: orderId,);
       try{
-        return OrderDetailModel.fromJson(response.data);
+        return RideDetailsModel.fromJson(response.data);
       }catch (e){
-        return OrderDetailModel.fromJson(response.data);
+        return RideDetailsModel.fromJson(response.data);
       }
     });
 

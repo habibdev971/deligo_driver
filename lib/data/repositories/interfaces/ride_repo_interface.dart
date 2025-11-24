@@ -9,7 +9,7 @@ import '../../models/request_accept_model/OrderAcceptModel.dart';
 abstract class IRideRepo {
   Future<Either<Failure, OrderDetailModel>> rideOrder(
       {required int orderId, required String status});
-  Future<Either<Failure, OrderDetailModel>> orderDetails(
+  Future<Either<Failure, RideDetailsModel>> orderDetails(
       {required int orderId,});
   Future<Either<Failure, OrderDetailModel>> saveRideStatus(
       {required int orderId, required String status});
