@@ -1,4 +1,5 @@
 import 'package:deligo_driver/core/extensions/extensions.dart';
+import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ Future<void> showAutoCloseDialog(BuildContext context, {required String timeDiff
   );
 
   /// Auto close after 3 seconds
-  await Future.delayed(const Duration(seconds: 3));
+  await Future.delayed(const Duration(seconds: 4));
   Navigator.of(context).pop();
 }
 
@@ -83,7 +84,7 @@ class RideExpireDialog extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 'Request was send $timeDifference ago',
-                style: context.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+                style: context.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: ColorPalette.primary50),
               ),
               const SizedBox(height: 10),
             ],
