@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,9 +43,9 @@ Widget headingToDestination(BuildContext context) => Column(
 
     Consumer(builder: (context, ref, _){
       final onTripStatusNotifier = ref.read(onTripStatusProvider.notifier);
-      return TextButton(onPressed: (){
+      return AppPrimaryButton(onPressed: (){
         onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.reachedDestination, );
-      }, child: const Text('Test button for next page'));
+      }, child: Text('Complete', style: context.bodyMedium?.copyWith(color: Colors.white),));
     })
   ],
 );

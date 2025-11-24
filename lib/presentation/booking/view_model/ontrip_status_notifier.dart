@@ -71,7 +71,7 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
     }
   }
 
-  OnTripStatusState? _previousState;
+  // OnTripStatusState? _previousState;
 
   // void goToChat() async{
   //   _previousState = state;
