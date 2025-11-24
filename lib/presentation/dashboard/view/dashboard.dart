@@ -33,6 +33,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
     setStatusBarColor(change: true);
     Future.microtask((){
       ref.read(rideDetailsProvider.notifier).reset();
+      handleRideRequestNotification();
     });
   }
 
