@@ -1,6 +1,7 @@
 import 'package:deligo_driver/core/utils/date_time_expiry.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
+import 'package:deligo_driver/presentation/dashboard/widgets/format_duration.dart';
 import 'package:flutter/material.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/utils/set_status_bar_color.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../home_page/view/home_page.dart';
 import '../../ride_history/view/ride_history.dart';
 import '../widgets/custom_bottom_nav_bar.dart';
+import '../widgets/ride_expire_dialogue.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
   const DashboardPage({super.key});
@@ -46,12 +48,19 @@ class _DashboardPageState extends ConsumerState<DashboardPage> {
           final result = checkExpiry(sentTime);
           if(result.isExpired){
             await locale.clearRideNotification();
+            showAutoCloseDialog(context, timeDifference: formatDuration(result.difference));
           }else{
             ref.read(rideRequestDetailProvider.notifier).orderDetails(orderId: orderId);
-
+            await locale.clearRideNotification();
           }
+        }else{
+          await locale.clearRideNotification();
         }
+      }else{
+        await locale.clearRideNotification();
       }
+    }else{
+      await locale.clearRideNotification();
     }
   }
 
