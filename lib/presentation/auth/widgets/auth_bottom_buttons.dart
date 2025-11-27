@@ -19,29 +19,31 @@ class AuthBottomButtons extends StatelessWidget {
 
 
   @override
-  Widget build(BuildContext context) => Container(
-      height: 96.h,
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
-      decoration: BoxDecoration(
-        color: isDarkMode() ? context.surface : Colors.white,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: AppPrimaryButton(
-              isDisabled: isLoading,
-              onPressed: onTap,
-              child: Text(
-                title,
-                style: GoogleFonts.inter(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: ColorPalette.neutral100),
+  Widget build(BuildContext context) => SafeArea(
+    child: Container(
+        height: 96.h,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.h),
+        decoration: BoxDecoration(
+          color: isDarkMode() ? context.surface : Colors.white,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: AppPrimaryButton(
+                isDisabled: isLoading,
+                onPressed: onTap,
+                child: Text(
+                  title,
+                  style: GoogleFonts.inter(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                      color: ColorPalette.neutral100),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
-    );
+  );
 }
