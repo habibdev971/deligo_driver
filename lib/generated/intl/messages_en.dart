@@ -273,7 +273,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "Grant Permission",
     ),
     "helloText": MessageLookupByLibrary.simpleMessage("Hello..."),
-    "hi": MessageLookupByLibrary.simpleMessage("hi"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
     "id": MessageLookupByLibrary.simpleMessage("ID: "),
     "initializing": MessageLookupByLibrary.simpleMessage("Initializing..."),
@@ -673,6 +672,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Phone number is required",
     ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("Vehicle Color"),
+    "vehicle_model": MessageLookupByLibrary.simpleMessage("Vehicle model"),
+    "vehicle_model_name": MessageLookupByLibrary.simpleMessage(
+      "Vehicle model name",
+    ),
     "vehicle_name": MessageLookupByLibrary.simpleMessage("Vehicle Name"),
     "vehicle_papers": MessageLookupByLibrary.simpleMessage("Vehicle Papers"),
     "vehicle_papers_required": MessageLookupByLibrary.simpleMessage(

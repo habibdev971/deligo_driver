@@ -709,6 +709,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "Número de telefone é obrigatório",
     ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("Cor do veículo"),
+    "vehicle_model": MessageLookupByLibrary.simpleMessage("Modelo do veículo"),
+    "vehicle_model_name": MessageLookupByLibrary.simpleMessage(
+      "Nome do modelo do veículo",
+    ),
     "vehicle_name": MessageLookupByLibrary.simpleMessage("Nome do veículo"),
     "vehicle_papers": MessageLookupByLibrary.simpleMessage(
       "Documentos do veículo",

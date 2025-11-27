@@ -2909,9 +2909,24 @@ class AppLocalizations {
     );
   }
 
-  /// `hi`
-  String get hi {
-    return Intl.message('hi', name: 'hi', desc: '', args: []);
+  /// `Vehicle model`
+  String get vehicle_model {
+    return Intl.message(
+      'Vehicle model',
+      name: 'vehicle_model',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle model name`
+  String get vehicle_model_name {
+    return Intl.message(
+      'Vehicle model name',
+      name: 'vehicle_model_name',
+      desc: '',
+      args: [],
+    );
   }
 }
 

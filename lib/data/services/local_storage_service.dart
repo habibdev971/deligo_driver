@@ -41,7 +41,7 @@ class LocalStorageService {
   }
 
   Future<String> getSelectedLanguage() async {
-    final String? locale = await _storage.read(key: languageKey);
+    final String? locale = await _storage.safeRead(key: languageKey);
     if (locale == null) {
       /// this current lang used for if the device location is not in our allowed list then default will be allowed language.first
 
@@ -62,7 +62,7 @@ class LocalStorageService {
   }
 
   Future<String> getPhoneCode() async {
-    final String? phoneCode = await _storage.read(key: phoneCodeKey);
+    final String? phoneCode = await _storage.safeRead(key: phoneCodeKey);
     if (phoneCode == null) {
       /// this current lang used for if the device location is not in our allowed list then default will be allowed language.first
 
@@ -101,7 +101,7 @@ class LocalStorageService {
   }
 
   Future<User?> getSavedUser() async {
-    final data = await _storage.read(key: userKey);
+    final data = await _storage.safeRead(key: userKey);
     if (data == null) return null;
     return User.fromJson(jsonDecode(data));
   }

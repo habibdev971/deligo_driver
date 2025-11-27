@@ -38,6 +38,7 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
   final formKey = GlobalKey<FormBuilderState>();
 
   final TextEditingController plateNumberController = TextEditingController();
+  final TextEditingController vehicleModelController = TextEditingController();
   final TextEditingController manufactureYearController =
       TextEditingController();
 
@@ -69,6 +70,7 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
   void dispose() {
     plateNumberController.dispose();
     manufactureYearController.dispose();
+    vehicleModelController.dispose();
     super.dispose();
   }
 
@@ -178,7 +180,14 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                       }
                     }
                 ),
-      
+
+                textFieldFromBuilderWithTitle(
+                  context,
+                  title: localize(context).vehicle_model,
+                  name: 'vehicleModel',
+                  hintText: localize(context).vehicle_model_name,
+                  controller: vehicleModelController,
+                ),
                 dropdownWithTitle<VehicleColors>(
                     context,
                     title: 'Vehicle Color',
@@ -313,7 +322,7 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
               if (formKey.currentState!.saveAndValidate()) {
                 // final formData = Map<String, dynamic>.from(formKey.currentState!.value);
                 final formData = {
-                  'vehicleModel': selectedVehicleType?.categoryName,
+                  'vehicleModel': vehicleModelController.text.trim(),
                   'categoryId': selectedVehicleType?.id,
                   'vehicleBrand': selectedVehicleBrand?.name,
                   'vehicleColor': selectedVehicleColor?.name,

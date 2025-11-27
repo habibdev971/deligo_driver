@@ -736,6 +736,11 @@
   "@terms_of_service": {},
 
   "sign_up_with_email_or_phone": "Cadastre-se com seu e-mail ou número de telefone",
-  "@sign_up_with_email_or_phone": {}
-}
+  "@sign_up_with_email_or_phone": {},
 
+  "vehicle_model": "Modelo do veículo",
+  "@vehicle_model": {},
+
+  "vehicle_model_name": "Nome do modelo do veículo",
+  "@vehicle_model_name": {}
+}

@@ -755,6 +755,9 @@
   "sign_up_with_email_or_phone": "Sign up with your email or phone number",
   "@sign_up_with_email_or_phone": {},
 
-  "hi": "hi",
-  "@hi": {}
+  "vehicle_model": "Vehicle model",
+  "@vehicle_model": {},
+
+  "vehicle_model_name": "Vehicle model name",
+  "@vehicle_model_name": {}
 }
