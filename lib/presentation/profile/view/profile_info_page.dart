@@ -32,7 +32,8 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
       .map((e) => DropdownMenuItem(value: e, child: Text(e)))
       .toList();
 
-  final nameController = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final mobileController = TextEditingController();
   final emailController = TextEditingController();
   String? selectedGender;
@@ -47,7 +48,9 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
 
   @override
   void dispose() {
-    nameController.dispose();
+    // nameController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
     mobileController.dispose();
     emailController.dispose();
     super.dispose();
@@ -60,8 +63,8 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
       .updateProfile(
 
         data: {
-          'firstName': nameController.text.trim(),
-          'lastName': '',
+          'firstName': firstNameController.text.trim(),
+          'lastName': lastNameController.text.trim(),
           'phoneNumber': mobileController.text.trim(),
           'email': emailController.text.trim(),
           'gender': selectedGender?.capitalize(),
@@ -103,7 +106,9 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
             state.when(initial: ()=> const SizedBox.shrink(), loading: ()=> const LoadingView(), success: (data){
               final user = data.data;
 
-                nameController.text = user?.fullName ?? '';
+                // nameController.text = user?.fullName ?? '';
+                firstNameController.text = user?.firstName ?? '';
+                lastNameController.text = user?.lastName ?? '';
                 mobileController.text = user?.phoneNumber ?? '';
                 emailController.text = user?.email ?? '';
                 selectedGender = user?.userInfo?.gender?.capitalize();
@@ -121,7 +126,9 @@ class _ProfileInfoPageState extends ConsumerState<ProfileInfoPage> {
                         children: [
                           AvatarSelectButton(avatarPath: user?.userInfo?.fullPictureUrl, ref: ref),
                           Gap(16.h),
-                          _buildTextField(context, title: localize(context).full_name, controller: nameController),
+                          _buildTextField(context, title: localize(context).first_name, controller: firstNameController),
+                          Gap(16.h),
+                          _buildTextField(context, title: localize(context).last_name, controller: lastNameController),
                           Gap(16.h),
                           _buildTextField(context, title: localize(context).mobile_number, controller: mobileController),
                           Gap(16.h),
