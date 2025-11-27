@@ -8,7 +8,7 @@ Widget topBarOnlineOffline(BuildContext context)=> Row(
       Assets.images.appLogo.image(
         height: 38.h,
         width: 62.w,
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
       ),
       const Spacer(),
       onlineOfflineSwitch(context)

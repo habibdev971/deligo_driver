@@ -98,7 +98,7 @@ class RegistrationNotifier extends StateNotifier<AppState<RegistrationModel>> {
       ..addAll(ref.read(driverInfoProvider).agreement);
 
     log(ref.read(driverInfoProvider).initialRegisterInfo.toString());
-    // log(allData.toString());
+    log(allData.toString());
     final result = await authRepo.registration(data: allData);
     result.fold(
       (failure) {

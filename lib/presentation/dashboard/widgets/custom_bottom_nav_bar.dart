@@ -20,18 +20,20 @@ class CustomBottomNavBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(themeModeProvider);
     final isDarkMode = themeMode == ThemeMode.dark;
-    return Container(
-      height: 80,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      color: isDarkMode ? Colors.black54 : Colors.white,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildNavItem(0, localize(context).home, Assets.icons.home, isDarkMode),
-          _buildNavItem(1, localize(context).wallet, Assets.icons.wallet, isDarkMode),
-          _buildNavItem(2, localize(context).ride_history, Assets.icons.wallet, isDarkMode),
-          _buildNavItem(3, localize(context).account, Assets.icons.account, isDarkMode),
-        ],
+    return SafeArea(
+      child: Container(
+        height: 80,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        color: isDarkMode ? Colors.black54 : Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _buildNavItem(0, localize(context).home, Assets.icons.home, isDarkMode),
+            _buildNavItem(1, localize(context).wallet, Assets.icons.wallet, isDarkMode),
+            _buildNavItem(2, localize(context).ride_history, Assets.icons.wallet, isDarkMode),
+            _buildNavItem(3, localize(context).account, Assets.icons.account, isDarkMode),
+          ],
+        ),
       ),
     );
   }
