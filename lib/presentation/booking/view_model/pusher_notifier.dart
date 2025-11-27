@@ -76,7 +76,7 @@ class PusherNotifier extends StateNotifier<void> {
           // .orderRequest(data: {'order_id': orderId});
           return;
         }else if(event.eventName.contains('ride-cancelled')){
-          playRingtone();
+          // playRingtone();
           await PusherService().unsubscribeChannel(
             'order.${await LocalStorageService().getRequestId()}.$driverId',
           );
@@ -112,7 +112,7 @@ class PusherNotifier extends StateNotifier<void> {
     if(isChatOpen){
       ref.read(messageProvider.notifier).addMessage(message);
     }else{
-      playRingtone();
+      // playRingtone();
       _showChatSnackBar(message);
     }
 
