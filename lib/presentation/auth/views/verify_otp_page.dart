@@ -97,7 +97,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
             fontWeight: FontWeight.w500,
             color: ColorPalette.primary50,
           ),
-          text: phoneNumber,
+          text: (' ${phoneNumber ?? ''}'),
         ),
       ],
     ),
@@ -207,7 +207,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
               _buildTitle(context),
               _buildSubTitle(
                 context,
-                existingUserData?.data?.user?.phoneNumber,
+                widget.data,
               ),
               Gap(24.h),
               Text(
