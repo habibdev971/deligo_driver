@@ -127,8 +127,8 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                 Gap(24.h),
                 dropdownWithTitle<VehicleTypes>(
                   context,
-                  title: 'Vehicle Type',
-                  hintText: 'Select Vehicle Type',
+                  title: localize(context).vehicle_type,
+                  hintText: localize(context).select_vehicle_type,
                   // name: 'categoryId',
                   items: gerDropDownData()?.vehicleTypes?.map(
                     (e) => DropdownMenuItem<VehicleTypes>(
@@ -158,8 +158,8 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                 ),
                 dropdownWithTitle<VehicleBrands>(
                     context,
-                    title: 'Vehicle Brands',
-                    hintText: 'Select Vehicle Brand',
+                    title: localize(context).vehicle_brands,
+                    hintText: localize(context).select_vehicle_brand,
                     items: gerDropDownData()?.vehicleBrands?.map(
                           (e) => DropdownMenuItem<VehicleBrands>(
                         value: e,
@@ -190,8 +190,8 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                 ),
                 dropdownWithTitle<VehicleColors>(
                     context,
-                    title: 'Vehicle Color',
-                    hintText: 'Select Vehicle Color',
+                    title: localize(context).vehicle_color,
+                    hintText: localize(context).select_vehicle_color,
                     items: gerDropDownData()?.colors?.map(
                           (e) => DropdownMenuItem<VehicleColors>(
                           value: e,
@@ -215,8 +215,8 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
       
                 dropdownWithTitle<FuelTypes>(
                     context,
-                    title: 'Fuel Types',
-                    hintText: 'Select Fuel Types',
+                    title: localize(context).fuel_types,
+                    hintText: localize(context).select_fuel_types,
                     items: gerDropDownData()?.fuelTypes?.map(
                           (e) => DropdownMenuItem<FuelTypes>(
                           value: e,
@@ -239,8 +239,8 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                 ),
                 dropdownWithTitle<GearTypes>(
                     context,
-                    title: 'Gear Types',
-                    hintText: 'Select Gear Types',
+                    title: localize(context).gear_types,
+                    hintText: localize(context).select_gear_types,
                     items: gerDropDownData()?.gearTypes?.map(
                           (e) => DropdownMenuItem<GearTypes>(
                           value: e,
@@ -282,20 +282,20 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                   context: context,
                   name: 'inspectionCertificate',
                   // title: localize(context).nid_photo,
-                  title: 'Inspection Certificate',
+                  title: localize(context).inspection_certificate,
                   initialFile: inspectionCertificate,
                   validator: (file) =>
-                      file == null ? 'Inspection Certificate Required' : null,
+                      file == null ? localize(context).inspection_certificate_required : null,
                   onChanged: (file) => setState(() => inspectionCertificate = file),
                 ),
                 Gap(16.h),
                 imagePickerFormField(
                   context: context,
                   name: 'registrationCertificate',
-                  title: 'Registration Certificate',
+                  title: localize(context).registration_certificate,
                   initialFile: registrationCertificate,
                   validator: (file) => file == null
-                      ? 'Registration Certificate Required'
+                      ? localize(context).registration_certificate_required
                       : null,
                   onChanged: (file) => setState(() => registrationCertificate = file),
                 ),
@@ -303,10 +303,10 @@ class _DocumentUploadPageState extends ConsumerState<VehicleInfoPage> {
                 imagePickerFormField(
                   context: context,
                   name: 'insurancePolicy',
-                  title: 'Insurance Policy',
+                  title: localize(context).insurance_policy,
                   initialFile: insuranceCertificate,
                   validator: (file) => file == null
-                      ? 'Insurance Policy Required'
+                      ? localize(context).insurance_policy_required
                       : null,
                   onChanged: (file) => setState(() => insuranceCertificate = file),
                 ),

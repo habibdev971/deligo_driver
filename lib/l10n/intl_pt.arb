@@ -742,5 +742,109 @@
   "@vehicle_model": {},
 
   "vehicle_model_name": "Nome do modelo do veículo",
-  "@vehicle_model_name": {}
+  "@vehicle_model_name": {},
+
+  "sign_up_sign_in": "Registar / Iniciar sessão com número de telefone ou email",
+  "@sign_up_sign_in": {},
+
+  "use_email_instead": "Usar email em vez disso",
+  "@use_email_instead": {},
+
+  "dont_have_account": "Não tem conta?",
+  "@dont_have_account": {},
+
+  "use_phone_instead": "Usar telefone em vez disso",
+  "@use_phone_instead": {},
+
+  "vehicle_brands": "Marcas de Veículos",
+  "@vehicle_brands": {},
+
+  "select_vehicle_brand": "Selecionar Marca do Veículo",
+  "@select_vehicle_brand": {},
+
+  "fuel_types": "Tipos de Combustível",
+  "@fuel_types": {},
+
+  "select_fuel_types": "Selecionar Tipos de Combustível",
+  "@select_fuel_types": {},
+
+  "gear_types": "Tipos de Caixa de Velocidades",
+  "@gear_types": {},
+
+  "select_gear_types": "Selecionar Tipos de Caixa de Velocidades",
+  "@select_gear_types": {},
+
+  "inspection_certificate": "Certificado de Inspeção",
+  "@inspection_certificate": {},
+
+  "inspection_certificate_required": "Certificado de Inspeção Obrigatório",
+  "@inspection_certificate_required": {},
+
+  "registration_certificate": "Certificado de Registo",
+  "@registration_certificate": {},
+
+  "registration_certificate_required": "Certificado de Registo Obrigatório",
+  "@registration_certificate_required": {},
+
+  "insurance_policy": "Apólice de Seguro",
+  "@insurance_policy": {},
+
+  "insurance_policy_required": "Apólice de Seguro Obrigatória",
+  "@insurance_policy_required": {},
+
+  "year_must_be_selected": "O ano deve ser selecionado",
+  "@year_must_be_selected": {},
+
+  "bank_info": "Informações Bancárias",
+  "@bank_info": {},
+
+  "add_bank_info": "Adicionar Informações Bancárias",
+  "@add_bank_info": {},
+
+  "iban": "IBAN",
+  "@iban": {},
+
+  "enter_iban": "Introduza o IBAN",
+  "@enter_iban": {},
+
+  "confirm_information_true": "Confirmo que todas as informações são verdadeiras e os documentos são válidos.",
+  "@confirm_information_true": {},
+
+  "must_confirm_information": "Deve confirmar estas informações.",
+  "@must_confirm_information": {},
+
+  "i_agree_to": "Concordo com ",
+  "@i_agree_to": {},
+
+  "deliGo_ride_terms": "Termos e Condições da DeliGo Ride",
+  "@deliGo_ride_terms": {},
+
+  "must_agree_terms": "Deve concordar com os termos.",
+  "@must_agree_terms": {},
+
+  "consent_data_processing": "Consinto o processamento de dados (conformidade com o GDPR).",
+  "@consent_data_processing": {},
+
+  "must_provide_gdpr_consent": "Deve fornecer consentimento GDPR.",
+  "@must_provide_gdpr_consent": {},
+
+  "tab_upcoming": "Próximas",
+  "@tab_upcoming": {},
+
+  "tab_ongoing": "Em curso",
+  "@tab_ongoing": {},
+
+  "tab_completed": "Concluídas",
+  "@tab_completed": {},
+
+  "tab_cancelled": "Canceladas",
+  "@tab_cancelled": {},
+
+  "no_status_rides_found": "Nenhuma viagem {status} encontrada.",
+  "@no_status_rides_found": {
+    "placeholders": {
+      "status": {}
+    }
+  }
+
 }

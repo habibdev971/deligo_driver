@@ -49,12 +49,12 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
   final taxNumberController = TextEditingController();
   final socialSecurityNumberController = TextEditingController();
 
-  final genderList = <GenderModel>[
-    GenderModel(value: 'Male', name: AppLocalizations().gender_male),
-    GenderModel(value: 'Female', name: AppLocalizations().gender_female),
-    GenderModel(value: 'Other', name: AppLocalizations().gender_other),
-  ];
-  GenderModel? selectedGender;
+  // final genderList = <GenderModel>[
+  //   GenderModel(value: 'Male', name: AppLocalizations().gender_male),
+  //   GenderModel(value: 'Female', name: AppLocalizations().gender_female),
+  //   GenderModel(value: 'Other', name: AppLocalizations().gender_other),
+  // ];
+  // GenderModel? selectedGender;
   DateTime initialDate = DateTime.now().subtract(
     const Duration(days: 365 * 20),
   );
@@ -70,7 +70,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     nationalityController.dispose();
     taxNumberController.dispose();
     socialSecurityNumberController.dispose();
-    selectedGender = null;
+    // selectedGender = null;
     passwordController.dispose();
     initialDate = DateTime.now().subtract(const Duration(days: 365 * 20));
     super.dispose();
@@ -214,7 +214,7 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
           }
         },
       ),
-      _buildGenderDropdown(context),
+      // _buildGenderDropdown(context),
       _buildTextField(
         context,
         title: localize(context).nationality,
@@ -320,126 +320,126 @@ class _ContactDetailsPageState extends ConsumerState<DriverPersonalInfoPage> {
     ),
   );
 
-  Widget _buildGenderDropdown(BuildContext context, {bool isRequired = true}) {
-    TextStyle? textStyle() => context.bodyMedium?.copyWith(
-      fontSize: 16.sp,
-      // fontWeight: FontWeight.w500,
-      color: isDarkMode() ? Colors.white : Colors.black,
-    );
-    // Build gender list dynamically from localization
-    // final genderItems = <DropdownMenuItem<String>>[
-    //   DropdownMenuItem(
-    //     value: 'Male',
-    //     child: Text(
-    //       localize(context).gender_male,
-    //       style: context.bodyMedium?.copyWith(
-    //         fontSize: 16.sp,
-    //         fontWeight: FontWeight.w400,
-    //         color: isDarkMode() ? Colors.white : Colors.black,
-    //       ),
-    //     ),
-    //   ),
-    //   DropdownMenuItem(
-    //     value: 'Female',
-    //     child: Text(
-    //       localize(context).gender_female,
-    //       style: context.bodyMedium?.copyWith(
-    //         fontSize: 16.sp,
-    //         fontWeight: FontWeight.w400,
-    //         color: isDarkMode() ? Colors.white : Colors.black,
-    //       ),
-    //     ),
-    //   ),
-    //   DropdownMenuItem(
-    //     value: 'Other',
-    //     child: Text(
-    //       localize(context).gender_other,
-    //       style: context.bodyMedium?.copyWith(
-    //         fontSize: 16.sp,
-    //         fontWeight: FontWeight.w400,
-    //         color: isDarkMode() ? Colors.white : Colors.black,
-    //       ),
-    //     ),
-    //   ),
-    // ];
-
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: FormBuilderField<String>(
-        name: 'gender',
-        validator: FormBuilderValidators.required(
-          errorText: localize(context).gender_required,
-        ),
-        initialValue: selectedGender?.value,
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        builder: (field) => Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            requiredTitle(
-              context,
-              title: localize(context).gender_label,
-              isRequired: isRequired,
-            ),
-            Gap(8.h),
-            customDropdown<String>(
-              context,
-              value: field.value,
-              hint: AppLocalizations.of(context).gender,
-              contentPadding: const EdgeInsets.symmetric(),
-              items: [
-                DropdownMenuItem(
-                  value: 'Male',
-                  child: Text(AppLocalizations.of(context).male, style: textStyle()),
-                ),
-                DropdownMenuItem(
-                  value: 'Female',
-                  child: Text(AppLocalizations.of(context).female, style: textStyle()),
-                ),
-                DropdownMenuItem(
-                  value: 'Other',
-                  child: Text(AppLocalizations.of(context).other, style: textStyle()),
-                ),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  selectedGender = GenderModel(value: value!, name: '');
-                });
-                field.didChange(value);
-              },
-
-              menuPadding: EdgeInsets.only(left: 16.w),
-            ),
-            // DropdownButtonFormField<String>(
-            //   initialValue: field.value,
-            //   hint: Text(
-            //     localize(context).gender_select,
-            //     style: context.bodyMedium?.copyWith(
-            //       fontSize: 16.sp,
-            //       fontWeight: FontWeight.w400,
-            //       color: const Color(0xFF687387),
-            //     ),
-            //   ),
-            //   dropdownColor: context.surface,
-            //   decoration: InputDecoration(
-            //     contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
-            //     focusedBorder: border(true),
-            //     enabledBorder: border(),
-            //     border: border(),
-            //     errorText: field.errorText,
-            //   ),
-            //   items: genderItems,
-            //   onChanged: (value) {
-            //     setState(() {
-            //       selectedGender = GenderModel(value: value!, name: '');
-            //     });
-            //     field.didChange(value);
-            //   },
-            // ),
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget _buildGenderDropdown(BuildContext context, {bool isRequired = true}) {
+  //   TextStyle? textStyle() => context.bodyMedium?.copyWith(
+  //     fontSize: 16.sp,
+  //     // fontWeight: FontWeight.w500,
+  //     color: isDarkMode() ? Colors.white : Colors.black,
+  //   );
+  //   // Build gender list dynamically from localization
+  //   // final genderItems = <DropdownMenuItem<String>>[
+  //   //   DropdownMenuItem(
+  //   //     value: 'Male',
+  //   //     child: Text(
+  //   //       localize(context).gender_male,
+  //   //       style: context.bodyMedium?.copyWith(
+  //   //         fontSize: 16.sp,
+  //   //         fontWeight: FontWeight.w400,
+  //   //         color: isDarkMode() ? Colors.white : Colors.black,
+  //   //       ),
+  //   //     ),
+  //   //   ),
+  //   //   DropdownMenuItem(
+  //   //     value: 'Female',
+  //   //     child: Text(
+  //   //       localize(context).gender_female,
+  //   //       style: context.bodyMedium?.copyWith(
+  //   //         fontSize: 16.sp,
+  //   //         fontWeight: FontWeight.w400,
+  //   //         color: isDarkMode() ? Colors.white : Colors.black,
+  //   //       ),
+  //   //     ),
+  //   //   ),
+  //   //   DropdownMenuItem(
+  //   //     value: 'Other',
+  //   //     child: Text(
+  //   //       localize(context).gender_other,
+  //   //       style: context.bodyMedium?.copyWith(
+  //   //         fontSize: 16.sp,
+  //   //         fontWeight: FontWeight.w400,
+  //   //         color: isDarkMode() ? Colors.white : Colors.black,
+  //   //       ),
+  //   //     ),
+  //   //   ),
+  //   // ];
+  //
+  //   return Padding(
+  //     padding: const EdgeInsets.only(bottom: 16),
+  //     child: FormBuilderField<String>(
+  //       name: 'gender',
+  //       validator: FormBuilderValidators.required(
+  //         errorText: localize(context).gender_required,
+  //       ),
+  //       initialValue: selectedGender?.value,
+  //       autovalidateMode: AutovalidateMode.onUserInteraction,
+  //       builder: (field) => Column(
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: [
+  //           requiredTitle(
+  //             context,
+  //             title: localize(context).gender_label,
+  //             isRequired: isRequired,
+  //           ),
+  //           Gap(8.h),
+  //           customDropdown<String>(
+  //             context,
+  //             value: field.value,
+  //             hint: AppLocalizations.of(context).gender,
+  //             contentPadding: const EdgeInsets.symmetric(),
+  //             items: [
+  //               DropdownMenuItem(
+  //                 value: 'Male',
+  //                 child: Text(AppLocalizations.of(context).male, style: textStyle()),
+  //               ),
+  //               DropdownMenuItem(
+  //                 value: 'Female',
+  //                 child: Text(AppLocalizations.of(context).female, style: textStyle()),
+  //               ),
+  //               DropdownMenuItem(
+  //                 value: 'Other',
+  //                 child: Text(AppLocalizations.of(context).other, style: textStyle()),
+  //               ),
+  //             ],
+  //             onChanged: (value) {
+  //               setState(() {
+  //                 selectedGender = GenderModel(value: value!, name: '');
+  //               });
+  //               field.didChange(value);
+  //             },
+  //
+  //             menuPadding: EdgeInsets.only(left: 16.w),
+  //           ),
+  //           // DropdownButtonFormField<String>(
+  //           //   initialValue: field.value,
+  //           //   hint: Text(
+  //           //     localize(context).gender_select,
+  //           //     style: context.bodyMedium?.copyWith(
+  //           //       fontSize: 16.sp,
+  //           //       fontWeight: FontWeight.w400,
+  //           //       color: const Color(0xFF687387),
+  //           //     ),
+  //           //   ),
+  //           //   dropdownColor: context.surface,
+  //           //   decoration: InputDecoration(
+  //           //     contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+  //           //     focusedBorder: border(true),
+  //           //     enabledBorder: border(),
+  //           //     border: border(),
+  //           //     errorText: field.errorText,
+  //           //   ),
+  //           //   items: genderItems,
+  //           //   onChanged: (value) {
+  //           //     setState(() {
+  //           //       selectedGender = GenderModel(value: value!, name: '');
+  //           //     });
+  //           //     field.didChange(value);
+  //           //   },
+  //           // ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }
 
 enum Gender { male, female, unknown }

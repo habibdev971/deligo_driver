@@ -11,13 +11,13 @@ Widget registrationTop(BuildContext context, {bool loginPage = false}) => Paddin
     padding: EdgeInsets.only(right: 41.w, bottom: 30.h),
     child: Semantics(
       label: loginPage
-          ? 'Sign up/ Sign in with phone number or email'
+          ? AppLocalizations.of(context).sign_up_sign_in
       // AppLocalizations.of(context).sign_in_heading
           : AppLocalizations.of(context).registration_heading,
       header: true,
       child: Text(
         loginPage
-            ? 'Sign up/ Sign in with phone number or email'
+            ? AppLocalizations.of(context).sign_up_sign_in
             : AppLocalizations.of(context).sign_up_with_email_or_phone,
         textAlign: TextAlign.center,
         style: context.bodyMedium?.copyWith(

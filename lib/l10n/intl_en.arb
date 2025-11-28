@@ -759,5 +759,109 @@
   "@vehicle_model": {},
 
   "vehicle_model_name": "Vehicle model name",
-  "@vehicle_model_name": {}
+  "@vehicle_model_name": {},
+
+  "sign_up_sign_in": "Sign up/ Sign in with phone number or email",
+  "@sign_up_sign_in": {},
+
+  "use_email_instead": "Use Email Instead",
+  "@use_email_instead": {},
+
+  "dont_have_account": "Don't have account?",
+  "@dont_have_account": {},
+
+  "use_phone_instead": "Use Phone Instead",
+  "@use_phone_instead": {},
+
+  "vehicle_brands": "Vehicle Brands",
+  "@vehicle_brands": {},
+
+  "select_vehicle_brand": "Select Vehicle Brand",
+  "@select_vehicle_brand": {},
+
+  "fuel_types": "Fuel Types",
+  "@fuel_types": {},
+
+  "select_fuel_types": "Select Fuel Types",
+  "@select_fuel_types": {},
+
+  "gear_types": "Gear Types",
+  "@gear_types": {},
+
+  "select_gear_types": "Select Gear Types",
+  "@select_gear_types": {},
+
+  "inspection_certificate": "Inspection Certificate",
+  "@inspection_certificate": {},
+
+  "inspection_certificate_required": "Inspection Certificate Required",
+  "@inspection_certificate_required": {},
+
+  "registration_certificate": "Registration Certificate",
+  "@registration_certificate": {},
+
+  "registration_certificate_required": "Registration Certificate Required",
+  "@registration_certificate_required": {},
+
+  "insurance_policy": "Insurance Policy",
+  "@insurance_policy": {},
+
+  "insurance_policy_required": "Insurance Policy Required",
+  "@insurance_policy_required": {},
+
+  "year_must_be_selected": "Year must be selected",
+  "@year_must_be_selected": {},
+
+  "bank_info": "Bank Info",
+  "@bank_info": {},
+
+  "add_bank_info": "Add Bank Info",
+  "@add_bank_info": {},
+
+  "iban": "IBAN",
+  "@iban": {},
+
+  "enter_iban": "Enter IBAN",
+  "@enter_iban": {},
+
+  "confirm_information_true": "I confirm that all information is true and documents are valid.",
+  "@confirm_information_true": {},
+
+  "must_confirm_information": "You must confirm this information.",
+  "@must_confirm_information": {},
+
+  "i_agree_to": "I agree to ",
+  "@i_agree_to": {},
+
+  "deliGo_ride_terms": "DeliGo Ride Terms & Conditions",
+  "@deliGo_ride_terms": {},
+
+  "must_agree_terms": "You must agree to the terms.",
+  "@must_agree_terms": {},
+
+  "consent_data_processing": "I consent to data processing (GDPR compliance).",
+  "@consent_data_processing": {},
+
+  "must_provide_gdpr_consent": "You must provide GDPR consent.",
+  "@must_provide_gdpr_consent": {},
+
+  "tab_upcoming": "Upcoming",
+  "@tab_upcoming": {},
+
+  "tab_ongoing": "Ongoing",
+  "@tab_ongoing": {},
+
+  "tab_completed": "Completed",
+  "@tab_completed": {},
+
+  "tab_cancelled": "Cancelled",
+  "@tab_cancelled": {},
+
+  "no_status_rides_found": "No {status} rides found.",
+  "@no_status_rides_found": {
+    "placeholders": {
+      "status": {}
+    }
+  }
+
 }

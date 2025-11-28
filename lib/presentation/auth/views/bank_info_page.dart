@@ -1,11 +1,9 @@
 import 'dart:developer';
 
 import 'package:deligo_driver/core/extensions/extensions.dart';
-import 'package:deligo_driver/core/widgets/custom_dropdown/custom_dropdown.dart';
 import 'package:deligo_driver/core/widgets/custom_dropdown/dropdown_from_builder.dart';
 import 'package:deligo_driver/data/models/auth_models/driver_dropdown_model_data/driver_dropdown_model.dart';
 import 'package:deligo_driver/presentation/auth/widgets/auth_app_bar.dart';
-import 'package:deligo_driver/presentation/payout_method/widget/text_field_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -49,14 +47,14 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
   Widget build(BuildContext context) => Scaffold(
       backgroundColor: context.surface,
       body: AuthAppBar(
-        title: 'Bank Info',
+        title: localize(context).bank_info,
         child: FormBuilder(
           key: formKey,
           child: Column(
             children: [
               Text(
                 // localize(context).add_driver_documents,
-                'Add Bank Info',
+                localize(context).add_bank_info,
                 style: context.bodyMedium?.copyWith(
                   fontSize: 24.sp,
                   fontWeight: FontWeight.w700,
@@ -68,16 +66,16 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
               Gap(8.h),
               textFieldFromBuilderWithTitle(
                 context,
-                title: 'IBAN',
+                title: localize(context).iban,
                 name: 'iban',
-                hintText: 'Enter IBAN',
+                hintText: localize(context).enter_iban,
                 controller: iban,
               ),
 
               dropdownWithTitle<PaymentMethods>(
                 context,
-                  title: 'Payment Method',
-                  hintText: 'Select Payment Method',
+                  title: localize(context).payout_method,
+                  hintText: localize(context).select_payment_method,
                   // name: 'categoryId',
                   items: gerDropDownData()?.paymentMethods?.map(
                         (e) => DropdownMenuItem<PaymentMethods>(
@@ -110,12 +108,12 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
               FormBuilderCheckbox(
                 name: 'confirm_info',
                 title: Text(
-                  'I confirm that all information is true and documents are valid.',
+                  localize(context).confirm_information_true,
                   style: TextStyle(fontSize: 14.sp),
                 ),
                 validator: FormBuilderValidators.equal(
                   true,
-                  errorText: 'You must confirm this information.',
+                  errorText: localize(context).must_confirm_information,
                 ),
               ),
 
@@ -128,7 +126,7 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
                   crossAxisAlignment: CrossAxisAlignment.baseline,
                   children: [
                     Text(
-                      'I agree to ',
+                      localize(context).i_agree_to,
                       style: TextStyle(fontSize: 14.sp),
                     ),
                     Flexible(
@@ -139,7 +137,7 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
                           // Navigator.push(context, MaterialPageRoute(builder: (_) => TermsPage()));
                         },
                         child: Text(
-                          'DeliGo Ride Terms & Conditions',
+                          localize(context).deliGo_ride_terms,
                           style: TextStyle(
                             fontSize: 10.sp,
                             color: Colors.blue,
@@ -153,7 +151,7 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
                 ),
                 validator: FormBuilderValidators.equal(
                   true,
-                  errorText: 'You must agree to the terms.',
+                  errorText: localize(context).must_agree_terms,
                 ),
               ),
 
@@ -161,12 +159,12 @@ class _BankInfoPageState extends ConsumerState<BankInfoPage> {
               FormBuilderCheckbox(
                 name: 'consentToDataProcessing',
                 title: Text(
-                  'I consent to data processing (GDPR compliance).',
+                  localize(context).consent_data_processing,
                   style: TextStyle(fontSize: 14.sp),
                 ),
                 validator: FormBuilderValidators.equal(
                   true,
-                  errorText: 'You must provide GDPR consent.',
+                  errorText: localize(context).must_provide_gdpr_consent,
                 ),
               ),
 

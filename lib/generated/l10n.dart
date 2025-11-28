@@ -2928,6 +2928,286 @@ class AppLocalizations {
       args: [],
     );
   }
+
+  /// `Sign up/ Sign in with phone number or email`
+  String get sign_up_sign_in {
+    return Intl.message(
+      'Sign up/ Sign in with phone number or email',
+      name: 'sign_up_sign_in',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Email Instead`
+  String get use_email_instead {
+    return Intl.message(
+      'Use Email Instead',
+      name: 'use_email_instead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have account?`
+  String get dont_have_account {
+    return Intl.message(
+      'Don\'t have account?',
+      name: 'dont_have_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Phone Instead`
+  String get use_phone_instead {
+    return Intl.message(
+      'Use Phone Instead',
+      name: 'use_phone_instead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle Brands`
+  String get vehicle_brands {
+    return Intl.message(
+      'Vehicle Brands',
+      name: 'vehicle_brands',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Vehicle Brand`
+  String get select_vehicle_brand {
+    return Intl.message(
+      'Select Vehicle Brand',
+      name: 'select_vehicle_brand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fuel Types`
+  String get fuel_types {
+    return Intl.message('Fuel Types', name: 'fuel_types', desc: '', args: []);
+  }
+
+  /// `Select Fuel Types`
+  String get select_fuel_types {
+    return Intl.message(
+      'Select Fuel Types',
+      name: 'select_fuel_types',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gear Types`
+  String get gear_types {
+    return Intl.message('Gear Types', name: 'gear_types', desc: '', args: []);
+  }
+
+  /// `Select Gear Types`
+  String get select_gear_types {
+    return Intl.message(
+      'Select Gear Types',
+      name: 'select_gear_types',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inspection Certificate`
+  String get inspection_certificate {
+    return Intl.message(
+      'Inspection Certificate',
+      name: 'inspection_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inspection Certificate Required`
+  String get inspection_certificate_required {
+    return Intl.message(
+      'Inspection Certificate Required',
+      name: 'inspection_certificate_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration Certificate`
+  String get registration_certificate {
+    return Intl.message(
+      'Registration Certificate',
+      name: 'registration_certificate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Registration Certificate Required`
+  String get registration_certificate_required {
+    return Intl.message(
+      'Registration Certificate Required',
+      name: 'registration_certificate_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insurance Policy`
+  String get insurance_policy {
+    return Intl.message(
+      'Insurance Policy',
+      name: 'insurance_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insurance Policy Required`
+  String get insurance_policy_required {
+    return Intl.message(
+      'Insurance Policy Required',
+      name: 'insurance_policy_required',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year must be selected`
+  String get year_must_be_selected {
+    return Intl.message(
+      'Year must be selected',
+      name: 'year_must_be_selected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Info`
+  String get bank_info {
+    return Intl.message('Bank Info', name: 'bank_info', desc: '', args: []);
+  }
+
+  /// `Add Bank Info`
+  String get add_bank_info {
+    return Intl.message(
+      'Add Bank Info',
+      name: 'add_bank_info',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IBAN`
+  String get iban {
+    return Intl.message('IBAN', name: 'iban', desc: '', args: []);
+  }
+
+  /// `Enter IBAN`
+  String get enter_iban {
+    return Intl.message('Enter IBAN', name: 'enter_iban', desc: '', args: []);
+  }
+
+  /// `I confirm that all information is true and documents are valid.`
+  String get confirm_information_true {
+    return Intl.message(
+      'I confirm that all information is true and documents are valid.',
+      name: 'confirm_information_true',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must confirm this information.`
+  String get must_confirm_information {
+    return Intl.message(
+      'You must confirm this information.',
+      name: 'must_confirm_information',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I agree to `
+  String get i_agree_to {
+    return Intl.message('I agree to ', name: 'i_agree_to', desc: '', args: []);
+  }
+
+  /// `DeliGo Ride Terms & Conditions`
+  String get deliGo_ride_terms {
+    return Intl.message(
+      'DeliGo Ride Terms & Conditions',
+      name: 'deliGo_ride_terms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must agree to the terms.`
+  String get must_agree_terms {
+    return Intl.message(
+      'You must agree to the terms.',
+      name: 'must_agree_terms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `I consent to data processing (GDPR compliance).`
+  String get consent_data_processing {
+    return Intl.message(
+      'I consent to data processing (GDPR compliance).',
+      name: 'consent_data_processing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must provide GDPR consent.`
+  String get must_provide_gdpr_consent {
+    return Intl.message(
+      'You must provide GDPR consent.',
+      name: 'must_provide_gdpr_consent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get tab_upcoming {
+    return Intl.message('Upcoming', name: 'tab_upcoming', desc: '', args: []);
+  }
+
+  /// `Ongoing`
+  String get tab_ongoing {
+    return Intl.message('Ongoing', name: 'tab_ongoing', desc: '', args: []);
+  }
+
+  /// `Completed`
+  String get tab_completed {
+    return Intl.message('Completed', name: 'tab_completed', desc: '', args: []);
+  }
+
+  /// `Cancelled`
+  String get tab_cancelled {
+    return Intl.message('Cancelled', name: 'tab_cancelled', desc: '', args: []);
+  }
+
+  /// `No {status} rides found.`
+  String no_status_rides_found(Object status) {
+    return Intl.message(
+      'No $status rides found.',
+      name: 'no_status_rides_found',
+      desc: '',
+      args: [status],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

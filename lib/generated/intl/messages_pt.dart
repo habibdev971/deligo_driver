@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(length) => "Deve ter pelo menos ${length} caracteres";
 
+  static String m8(status) => "Nenhuma viagem ${status} encontrada.";
+
   static String m4(secondsRemaining) =>
       "Reenviar código em 00:${secondsRemaining}";
 
@@ -40,7 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m7(amount) =>
       "Sucesso! Você solicitou ${amount} de saque. Os fundos serão transferidos para sua conta em breve.";
 
-  static String m8(msg) => "Escreva ${msg}";
+  static String m9(msg) => "Escreva ${msg}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -49,6 +51,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "activity": MessageLookupByLibrary.simpleMessage("Atividade"),
     "add_balance_to_your_wallet": MessageLookupByLibrary.simpleMessage(
       "Adicionar saldo à sua carteira",
+    ),
+    "add_bank_info": MessageLookupByLibrary.simpleMessage(
+      "Adicionar Informações Bancárias",
     ),
     "add_driver_documents": MessageLookupByLibrary.simpleMessage(
       "Adicionar documentos do motorista",
@@ -92,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Certificado inválido com o servidor API",
     ),
     "bad_request": MessageLookupByLibrary.simpleMessage("Solicitação inválida"),
+    "bank_info": MessageLookupByLibrary.simpleMessage("Informações Bancárias"),
     "button": MessageLookupByLibrary.simpleMessage("Botão"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
     "cancel_ride": MessageLookupByLibrary.simpleMessage("Cancelar viagem"),
@@ -113,6 +119,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "close": MessageLookupByLibrary.simpleMessage("FECHAR"),
     "complete_ride": MessageLookupByLibrary.simpleMessage("Concluir viagem"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
+    "confirm_information_true": MessageLookupByLibrary.simpleMessage(
+      "Confirmo que todas as informações são verdadeiras e os documentos são válidos.",
+    ),
     "confirm_new_password": MessageLookupByLibrary.simpleMessage(
       "Confirme a Nova Senha",
     ),
@@ -124,6 +133,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "connection_timeout_with_api_server": MessageLookupByLibrary.simpleMessage(
       "Tempo de conexão esgotado com o servidor API",
+    ),
+    "consent_data_processing": MessageLookupByLibrary.simpleMessage(
+      "Consinto o processamento de dados (conformidade com o GDPR).",
     ),
     "contact_support": MessageLookupByLibrary.simpleMessage("Contatar Suporte"),
     "country": MessageLookupByLibrary.simpleMessage("País"),
@@ -142,12 +154,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_account_warning": MessageLookupByLibrary.simpleMessage(
       "Esta ação é permanente e não pode ser desfeita.",
     ),
+    "deliGo_ride_terms": MessageLookupByLibrary.simpleMessage(
+      "Termos e Condições da DeliGo Ride",
+    ),
     "destination": MessageLookupByLibrary.simpleMessage("Destino"),
     "details": MessageLookupByLibrary.simpleMessage("Detalhes"),
     "didnt_receive_code": MessageLookupByLibrary.simpleMessage(
       "Não recebeu o código?",
     ),
     "discount": MessageLookupByLibrary.simpleMessage("Desconto"),
+    "dont_have_account": MessageLookupByLibrary.simpleMessage("Não tem conta?"),
     "double_check_rider": MessageLookupByLibrary.simpleMessage(
       "Verifique o nome do passageiro e confirme o destino antes de prosseguir.",
     ),
@@ -200,6 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "Digite Sua Experiência!",
     ),
+    "enter_iban": MessageLookupByLibrary.simpleMessage("Introduza o IBAN"),
     "enter_legal_documents_to_complete_profile":
         MessageLookupByLibrary.simpleMessage(
           "Introduza os documentos legais para completar o perfil",
@@ -260,7 +277,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "form_is_not_valid": MessageLookupByLibrary.simpleMessage(
       "O formulário não é válido",
     ),
+    "fuel_types": MessageLookupByLibrary.simpleMessage("Tipos de Combustível"),
     "full_name": MessageLookupByLibrary.simpleMessage("Nome Completo"),
+    "gear_types": MessageLookupByLibrary.simpleMessage(
+      "Tipos de Caixa de Velocidades",
+    ),
     "gender": MessageLookupByLibrary.simpleMessage("Gênero"),
     "gender_female": MessageLookupByLibrary.simpleMessage("Feminino"),
     "gender_label": MessageLookupByLibrary.simpleMessage("Gênero"),
@@ -279,10 +300,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "helloText": MessageLookupByLibrary.simpleMessage("Olá..."),
     "home": MessageLookupByLibrary.simpleMessage("Início"),
+    "i_agree_to": MessageLookupByLibrary.simpleMessage("Concordo com "),
+    "iban": MessageLookupByLibrary.simpleMessage("IBAN"),
     "id": MessageLookupByLibrary.simpleMessage("ID: "),
     "initializing": MessageLookupByLibrary.simpleMessage("Inicializando..."),
     "insertAllData": MessageLookupByLibrary.simpleMessage(
       "Por favor, insira todos os dados",
+    ),
+    "inspection_certificate": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Inspeção",
+    ),
+    "inspection_certificate_required": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Inspeção Obrigatório",
+    ),
+    "insurance_policy": MessageLookupByLibrary.simpleMessage(
+      "Apólice de Seguro",
+    ),
+    "insurance_policy_required": MessageLookupByLibrary.simpleMessage(
+      "Apólice de Seguro Obrigatória",
     ),
     "internal_server_error": MessageLookupByLibrary.simpleMessage(
       "Erro interno do servidor",
@@ -316,6 +351,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "method": MessageLookupByLibrary.simpleMessage("Método: "),
     "min_length_error": m3,
     "mobile_number": MessageLookupByLibrary.simpleMessage("Número de Celular"),
+    "must_agree_terms": MessageLookupByLibrary.simpleMessage(
+      "Deve concordar com os termos.",
+    ),
+    "must_confirm_information": MessageLookupByLibrary.simpleMessage(
+      "Deve confirmar estas informações.",
+    ),
+    "must_provide_gdpr_consent": MessageLookupByLibrary.simpleMessage(
+      "Deve fornecer consentimento GDPR.",
+    ),
     "my_profile": MessageLookupByLibrary.simpleMessage("Meu Perfil"),
     "name_label": MessageLookupByLibrary.simpleMessage("Nome"),
     "nationality": MessageLookupByLibrary.simpleMessage("Nacionalidade"),
@@ -346,6 +390,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_service_available": MessageLookupByLibrary.simpleMessage(
       "Nenhum serviço disponível",
     ),
+    "no_status_rides_found": m8,
     "no_transactions_found": MessageLookupByLibrary.simpleMessage(
       "Nenhuma transação encontrada",
     ),
@@ -453,6 +498,12 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Recebida uma resposta inválida do servidor.",
         ),
+    "registration_certificate": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Registo",
+    ),
+    "registration_certificate_required": MessageLookupByLibrary.simpleMessage(
+      "Certificado de Registo Obrigatório",
+    ),
     "registration_done": MessageLookupByLibrary.simpleMessage(
       "Registro Concluído!",
     ),
@@ -523,6 +574,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_card_type": MessageLookupByLibrary.simpleMessage(
       "Selecione o tipo de cartão",
     ),
+    "select_fuel_types": MessageLookupByLibrary.simpleMessage(
+      "Selecionar Tipos de Combustível",
+    ),
+    "select_gear_types": MessageLookupByLibrary.simpleMessage(
+      "Selecionar Tipos de Caixa de Velocidades",
+    ),
     "select_gender": MessageLookupByLibrary.simpleMessage("Selecionar gênero"),
     "select_payment_method": MessageLookupByLibrary.simpleMessage(
       "Selecione o método de pagamento",
@@ -535,6 +592,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "select_service": MessageLookupByLibrary.simpleMessage(
       "Selecione um serviço!",
+    ),
+    "select_vehicle_brand": MessageLookupByLibrary.simpleMessage(
+      "Selecionar Marca do Veículo",
     ),
     "select_vehicle_color": MessageLookupByLibrary.simpleMessage(
       "Selecione a cor do veículo",
@@ -560,6 +620,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Entre com seu e-mail ou número de telefone",
     ),
     "sign_up": MessageLookupByLibrary.simpleMessage("Cadastrar-se"),
+    "sign_up_sign_in": MessageLookupByLibrary.simpleMessage(
+      "Registar / Iniciar sessão com número de telefone ou email",
+    ),
     "sign_up_with_email_or_phone": MessageLookupByLibrary.simpleMessage(
       "Cadastre-se com seu e-mail ou número de telefone",
     ),
@@ -592,6 +655,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "stop_point": MessageLookupByLibrary.simpleMessage("Ponto de parada"),
     "submit": MessageLookupByLibrary.simpleMessage("Enviar"),
+    "tab_cancelled": MessageLookupByLibrary.simpleMessage("Canceladas"),
+    "tab_completed": MessageLookupByLibrary.simpleMessage("Concluídas"),
+    "tab_ongoing": MessageLookupByLibrary.simpleMessage("Em curso"),
+    "tab_upcoming": MessageLookupByLibrary.simpleMessage("Próximas"),
     "tap_to_confirm_arrival": MessageLookupByLibrary.simpleMessage(
       "Toque para Confirmar Sua Chegada",
     ),
@@ -669,8 +736,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "upload_front": MessageLookupByLibrary.simpleMessage("Carregar Frente"),
     "upload_image": MessageLookupByLibrary.simpleMessage("Carregar imagem"),
+    "use_email_instead": MessageLookupByLibrary.simpleMessage(
+      "Usar email em vez disso",
+    ),
     "use_otp_instead": MessageLookupByLibrary.simpleMessage(
       "Usar OTP em vez disso",
+    ),
+    "use_phone_instead": MessageLookupByLibrary.simpleMessage(
+      "Usar telefone em vez disso",
     ),
     "use_your_password_here": MessageLookupByLibrary.simpleMessage(
       "Use sua senha aqui",
@@ -707,6 +780,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "validator_phone_required": MessageLookupByLibrary.simpleMessage(
       "Número de telefone é obrigatório",
+    ),
+    "vehicle_brands": MessageLookupByLibrary.simpleMessage(
+      "Marcas de Veículos",
     ),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("Cor do veículo"),
     "vehicle_model": MessageLookupByLibrary.simpleMessage("Modelo do veículo"),
@@ -746,9 +822,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "withdrawal_success": MessageLookupByLibrary.simpleMessage(
       "Solicitação de Saque Enviada com Sucesso!",
     ),
-    "write": m8,
+    "write": m9,
     "writeIssueDetails": MessageLookupByLibrary.simpleMessage(
       "Descreva os Detalhes do Problema",
+    ),
+    "year_must_be_selected": MessageLookupByLibrary.simpleMessage(
+      "O ano deve ser selecionado",
     ),
     "yourAccountAlreadyActive": MessageLookupByLibrary.simpleMessage(
       "Sua conta já está ativa em outro dispositivo. Para usar aqui, o outro dispositivo será desconectado.",

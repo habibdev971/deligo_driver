@@ -3,6 +3,8 @@ import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../generated/l10n.dart';
+
 Widget usePreferMethod(
   BuildContext context, {
   required bool loginWithPhone,
@@ -20,7 +22,7 @@ Widget usePreferMethod(
       color: ColorPalette.primary50,
     ),
     title: Text(
-      loginWithPhone ? 'Use Email Instead' : 'Use Phone Instead',
+      loginWithPhone ? AppLocalizations.of(context).use_email_instead : AppLocalizations.of(context).use_phone_instead,
       style: context.bodyMedium,
     ),
     onTap: onTap,

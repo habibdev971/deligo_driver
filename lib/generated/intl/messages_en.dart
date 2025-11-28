@@ -28,6 +28,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(length) => "Must be at least ${length} characters";
 
+  static String m8(status) => "No ${status} rides found.";
+
   static String m4(secondsRemaining) => "Resend code in 00:${secondsRemaining}";
 
   static String m5(length) =>
@@ -39,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m7(amount) =>
       "Success! You\'ve requested ${amount} withdrawal. Funds will be transferred to your selected account shortly.";
 
-  static String m8(msg) => "Write ${msg}";
+  static String m9(msg) => "Write ${msg}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -49,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "add_balance_to_your_wallet": MessageLookupByLibrary.simpleMessage(
       "Add Balance to Your Wallet",
     ),
+    "add_bank_info": MessageLookupByLibrary.simpleMessage("Add Bank Info"),
     "add_driver_documents": MessageLookupByLibrary.simpleMessage(
       "Add Driver Documents",
     ),
@@ -91,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Bad certificate with API server",
     ),
     "bad_request": MessageLookupByLibrary.simpleMessage("Bad request"),
+    "bank_info": MessageLookupByLibrary.simpleMessage("Bank Info"),
     "button": MessageLookupByLibrary.simpleMessage("Button"),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "cancel_ride": MessageLookupByLibrary.simpleMessage("Cancel Ride"),
@@ -108,6 +112,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "close": MessageLookupByLibrary.simpleMessage("CLOSE"),
     "complete_ride": MessageLookupByLibrary.simpleMessage("Complete Ride"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+    "confirm_information_true": MessageLookupByLibrary.simpleMessage(
+      "I confirm that all information is true and documents are valid.",
+    ),
     "confirm_new_password": MessageLookupByLibrary.simpleMessage(
       "Confirm New Password",
     ),
@@ -121,6 +128,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "connection_timeout_with_api_server": MessageLookupByLibrary.simpleMessage(
       "Connection timeout with API server",
+    ),
+    "consent_data_processing": MessageLookupByLibrary.simpleMessage(
+      "I consent to data processing (GDPR compliance).",
     ),
     "contact_support": MessageLookupByLibrary.simpleMessage("Contact Support"),
     "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -141,12 +151,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "delete_account_warning": MessageLookupByLibrary.simpleMessage(
       "This action is permanent and cannot be undone.",
     ),
+    "deliGo_ride_terms": MessageLookupByLibrary.simpleMessage(
+      "DeliGo Ride Terms & Conditions",
+    ),
     "destination": MessageLookupByLibrary.simpleMessage("Destination"),
     "details": MessageLookupByLibrary.simpleMessage("Details"),
     "didnt_receive_code": MessageLookupByLibrary.simpleMessage(
       "Didn’t receive code?",
     ),
     "discount": MessageLookupByLibrary.simpleMessage("Discount"),
+    "dont_have_account": MessageLookupByLibrary.simpleMessage(
+      "Don\'t have account?",
+    ),
     "double_check_rider": MessageLookupByLibrary.simpleMessage(
       "Double-check the rider’s name and verify their destination before proceeding.",
     ),
@@ -195,6 +211,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "enter_experience": MessageLookupByLibrary.simpleMessage(
       "Enter your Experience!",
     ),
+    "enter_iban": MessageLookupByLibrary.simpleMessage("Enter IBAN"),
     "enter_legal_documents_to_complete_profile":
         MessageLookupByLibrary.simpleMessage(
           "Enter legal documents to complete profile",
@@ -255,7 +272,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "form_is_not_valid": MessageLookupByLibrary.simpleMessage(
       "Form is not valid",
     ),
+    "fuel_types": MessageLookupByLibrary.simpleMessage("Fuel Types"),
     "full_name": MessageLookupByLibrary.simpleMessage("Full Name"),
+    "gear_types": MessageLookupByLibrary.simpleMessage("Gear Types"),
     "gender": MessageLookupByLibrary.simpleMessage("Gender"),
     "gender_female": MessageLookupByLibrary.simpleMessage("Female"),
     "gender_label": MessageLookupByLibrary.simpleMessage("Gender"),
@@ -274,10 +293,24 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "helloText": MessageLookupByLibrary.simpleMessage("Hello..."),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "i_agree_to": MessageLookupByLibrary.simpleMessage("I agree to "),
+    "iban": MessageLookupByLibrary.simpleMessage("IBAN"),
     "id": MessageLookupByLibrary.simpleMessage("ID: "),
     "initializing": MessageLookupByLibrary.simpleMessage("Initializing..."),
     "insertAllData": MessageLookupByLibrary.simpleMessage(
       "Please insert all Data",
+    ),
+    "inspection_certificate": MessageLookupByLibrary.simpleMessage(
+      "Inspection Certificate",
+    ),
+    "inspection_certificate_required": MessageLookupByLibrary.simpleMessage(
+      "Inspection Certificate Required",
+    ),
+    "insurance_policy": MessageLookupByLibrary.simpleMessage(
+      "Insurance Policy",
+    ),
+    "insurance_policy_required": MessageLookupByLibrary.simpleMessage(
+      "Insurance Policy Required",
     ),
     "internal_server_error": MessageLookupByLibrary.simpleMessage(
       "Internal server error",
@@ -309,6 +342,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "method": MessageLookupByLibrary.simpleMessage("Method: "),
     "min_length_error": m3,
     "mobile_number": MessageLookupByLibrary.simpleMessage("Mobile Number"),
+    "must_agree_terms": MessageLookupByLibrary.simpleMessage(
+      "You must agree to the terms.",
+    ),
+    "must_confirm_information": MessageLookupByLibrary.simpleMessage(
+      "You must confirm this information.",
+    ),
+    "must_provide_gdpr_consent": MessageLookupByLibrary.simpleMessage(
+      "You must provide GDPR consent.",
+    ),
     "my_profile": MessageLookupByLibrary.simpleMessage("My Profile"),
     "name_label": MessageLookupByLibrary.simpleMessage("Name"),
     "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
@@ -335,6 +377,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "no_service_available": MessageLookupByLibrary.simpleMessage(
       "No Service Available",
     ),
+    "no_status_rides_found": m8,
     "no_transactions_found": MessageLookupByLibrary.simpleMessage(
       "No transactions found",
     ),
@@ -430,6 +473,12 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Received an invalid response from the server.",
         ),
+    "registration_certificate": MessageLookupByLibrary.simpleMessage(
+      "Registration Certificate",
+    ),
+    "registration_certificate_required": MessageLookupByLibrary.simpleMessage(
+      "Registration Certificate Required",
+    ),
     "registration_done": MessageLookupByLibrary.simpleMessage(
       "Registration DONE!",
     ),
@@ -498,6 +547,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "select_card_type": MessageLookupByLibrary.simpleMessage(
       "Select Card type",
     ),
+    "select_fuel_types": MessageLookupByLibrary.simpleMessage(
+      "Select Fuel Types",
+    ),
+    "select_gear_types": MessageLookupByLibrary.simpleMessage(
+      "Select Gear Types",
+    ),
     "select_gender": MessageLookupByLibrary.simpleMessage("Select Gender"),
     "select_payment_method": MessageLookupByLibrary.simpleMessage(
       "Select payment method",
@@ -509,6 +564,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Select Profile Image",
     ),
     "select_service": MessageLookupByLibrary.simpleMessage("Select a Service!"),
+    "select_vehicle_brand": MessageLookupByLibrary.simpleMessage(
+      "Select Vehicle Brand",
+    ),
     "select_vehicle_color": MessageLookupByLibrary.simpleMessage(
       "Select vehicle color",
     ),
@@ -531,6 +589,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Sign in with your email or phone number",
     ),
     "sign_up": MessageLookupByLibrary.simpleMessage("Sign up"),
+    "sign_up_sign_in": MessageLookupByLibrary.simpleMessage(
+      "Sign up/ Sign in with phone number or email",
+    ),
     "sign_up_with_email_or_phone": MessageLookupByLibrary.simpleMessage(
       "Sign up with your email or phone number",
     ),
@@ -563,6 +624,10 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "stop_point": MessageLookupByLibrary.simpleMessage("Stop point"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "tab_cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
+    "tab_completed": MessageLookupByLibrary.simpleMessage("Completed"),
+    "tab_ongoing": MessageLookupByLibrary.simpleMessage("Ongoing"),
+    "tab_upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
     "tap_to_confirm_arrival": MessageLookupByLibrary.simpleMessage(
       "Tap to Confirm Your Arrival",
     ),
@@ -634,7 +699,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "upload_front": MessageLookupByLibrary.simpleMessage("Upload Front"),
     "upload_image": MessageLookupByLibrary.simpleMessage("Upload image"),
+    "use_email_instead": MessageLookupByLibrary.simpleMessage(
+      "Use Email Instead",
+    ),
     "use_otp_instead": MessageLookupByLibrary.simpleMessage("Use OTP Instead"),
+    "use_phone_instead": MessageLookupByLibrary.simpleMessage(
+      "Use Phone Instead",
+    ),
     "use_your_password_here": MessageLookupByLibrary.simpleMessage(
       "Use your password here",
     ),
@@ -671,6 +742,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "validator_phone_required": MessageLookupByLibrary.simpleMessage(
       "Phone number is required",
     ),
+    "vehicle_brands": MessageLookupByLibrary.simpleMessage("Vehicle Brands"),
     "vehicle_color": MessageLookupByLibrary.simpleMessage("Vehicle Color"),
     "vehicle_model": MessageLookupByLibrary.simpleMessage("Vehicle model"),
     "vehicle_model_name": MessageLookupByLibrary.simpleMessage(
@@ -707,9 +779,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "withdrawal_success": MessageLookupByLibrary.simpleMessage(
       "Withdrawal Request Submitted Successfully!",
     ),
-    "write": m8,
+    "write": m9,
     "writeIssueDetails": MessageLookupByLibrary.simpleMessage(
       "Write Issue Details",
+    ),
+    "year_must_be_selected": MessageLookupByLibrary.simpleMessage(
+      "Year must be selected",
     ),
     "yourAccountAlreadyActive": MessageLookupByLibrary.simpleMessage(
       "Your account is already active on another device. To use it here, the other device will be logged out.",

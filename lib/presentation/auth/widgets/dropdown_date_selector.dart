@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/custom_dropdown/custom_dropdown.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -100,10 +101,11 @@ class _DynamicYearDropdownFormFieldState
         },
         validator: (value) {
           if (value == null) {
-            return 'Year must be selected';
+            return localize(context).year_must_be_selected;
           }
           return null;
         },
+        autoValidateMode: AutovalidateMode.onUserInteraction
       ),
       // DropdownButtonFormField<int>(
       //   value: _selectedYear,

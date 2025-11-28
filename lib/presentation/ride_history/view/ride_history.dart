@@ -7,9 +7,9 @@ import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/app_colors.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
+import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/app_bar/app_bar.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
-import 'package:deligo_driver/generated/l10n.dart';
 import 'package:deligo_driver/presentation/dashboard/view_model/currency_notifier.dart';
 import 'package:deligo_driver/presentation/ride_history/provider/ride_history_provider.dart';
 import 'package:flutter/material.dart';
@@ -76,7 +76,7 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
   Widget build(BuildContext context) => ExitAppWrapper(
       child: Scaffold(
         backgroundColor: isDarkMode() ? Colors.black : Colors.white,
-        appBar: mainAppBar(context, title: 'Ride History', hideLeading: true),
+        appBar: mainAppBar(context, title: localize(context).ride_history, hideLeading: true),
         body: SafeArea(
           child: Column(
             children: [
@@ -116,11 +116,11 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
                       final status = getStatusFromIndex(index);
                       ref.read(rideHistoryProvider.notifier).refreshRideHistory(status: status);
                     },
-                    tabs: const [
-                      Tab(text: 'Upcoming'),
-                      Tab(text: 'Ongoing'),
-                      Tab(text: 'Completed'),
-                      Tab(text: 'Cancelled'),
+                    tabs:  [
+                      Tab(text: localize(context).tab_upcoming),
+                      Tab(text:  localize(context).tab_ongoing),
+                      Tab(text: localize(context).tab_completed),
+                      Tab(text: localize(context).tab_cancelled),
                     ],
                   ),
                 ),
@@ -149,7 +149,7 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
     return state.list.when(initial: ()=> const SizedBox.shrink(), loading: ()=> const LoadingView(), success: (data){
 
       if (data.isEmpty) {
-        return Center(child: Text('No $status rides found.'));
+        return Center(child: Text(localize(context).no_status_rides_found(status)));
       }else{
         return RefreshIndicator(
           onRefresh: () async {
