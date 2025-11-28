@@ -229,7 +229,7 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
         final existingData = ref.watch(existingUserProvider).whenOrNull(success: (data) => data.data);
         await LocalStorageService().clearToken();
 
-        if(existingData?.isNew == true){
+        if(existingData?.isNew == null || existingData?.isNew == true){
           await LocalStorageService().saveRegisterToken(response.data!.token);
           NavigationService.pushReplacementNamed(AppRoutes.driverPersonalInfoPage,);
         }else{
