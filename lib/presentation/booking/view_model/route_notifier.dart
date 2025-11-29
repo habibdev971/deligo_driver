@@ -30,23 +30,21 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
         LatLng? current,
         required num? orderId
       }) async {
-    final List<num>? alwaysPickLocationCurrent = points?.pickupLocation;
-    Points? tripLocations = Points(pickupLocation: alwaysPickLocationCurrent, dropLocation: points?.dropLocation);
-    final state = ref.watch(rideDetailsProvider);
-    state.when(initial: (){
-      tripLocations = points;
-    }, loading: (){
-      return;
-    }, success: (data){
-      if(data?.status == 'ACCEPTED'){
-        tripLocations = Points(
-          pickupLocation: ,
-          dropLocation: points?.pickupLocation
-        );
-      }
-    }, error: error);
+    List<num>? destination = points?.dropLocation;
+    List<num>? origin = [current?.latitude ?? 0, current?.longitude ?? 0];
+
+    final rideState = ref.watch(rideDetailsProvider);
+    final String? rideStatus = rideState.whenOrNull(success: (data)=> data?.status);
+    final bool isLoading = rideState.whenOrNull(loading: ()=> true, error: (e)=> true) ?? false;
+    if(isLoading)return;
+    if(rideStatus == 'GO_TO_PICKUP'){
+      destination = points?.pickupLocation;
+    }
     state = const AppState.loading();
-    final result = await googleAPIRepo.fetchWayPoints(waypoints: points);
+    final result = await googleAPIRepo.fetchWayPoints(waypoints: Points(
+      pickupLocation: origin,
+      dropLocation: destination,
+    ));
     result.fold(
       (error) {
         state = AppState.error(error);
