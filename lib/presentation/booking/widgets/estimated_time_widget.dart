@@ -1,4 +1,5 @@
 import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
+import 'package:deligo_driver/presentation/booking/view_model/route_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +71,7 @@ Widget estimatedTimeWidget(BuildContext context) => Consumer(
         distanceText = '0 km';
       },
       success: (data) {
-        timeText = data.durationText;
+        timeText = formatDuration(data.durationInSeconds);
         distanceText = data.distanceText;
       },
       error: (e) {
