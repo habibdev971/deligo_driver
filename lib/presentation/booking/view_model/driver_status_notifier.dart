@@ -44,15 +44,15 @@ class DriverStatusNotifier extends StateNotifier<DriverStatusState> {
     isOnlineNotifier.value = true;
   }
 
-  Future<void> orderRequest({required Map<String, dynamic> data}) async{
-
-    orderRequestDialogue();
-    // await ref.read(rideOrderNotifierProvider.notifier).orderDetails(orderId: data['order_id']);
-    ref.read(bookingNotifierProvider.notifier).updateMapZoom();
-
-    state = DriverStatusState.orderRequest(data);
-
-  }
+  // Future<void> orderRequest({required Map<String, dynamic> data}) async{
+  //
+  //   orderRequestDialogue();
+  //   // await ref.read(rideOrderNotifierProvider.notifier).orderDetails(orderId: data['order_id']);
+  //   ref.read(bookingNotifierProvider.notifier).updateMapZoom();
+  //
+  //   state = DriverStatusState.orderRequest(data);
+  //
+  // }
 
   Future<void> updateOnlineStatus(bool status) async {
     state = DriverStatusState.loading();

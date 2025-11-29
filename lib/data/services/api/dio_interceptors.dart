@@ -42,6 +42,7 @@ class DioInterceptors extends Interceptor {
 
     if (err.response?.statusCode == 401) {
       await LocalStorageService().clearToken();
+      await LocalStorageService().clearRegisterToken();
       await LocalStorageService().clearStorage();
 
       if (currentContext != null && currentRoute != AppRoutes.loginSignUp) {

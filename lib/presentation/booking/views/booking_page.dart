@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/utils/google_map_dark_mode_json.dart';
 import 'package:deligo_driver/core/widgets/app_bar/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +10,7 @@ import 'package:deligo_driver/core/widgets/location_permission_wrapper.dart';
 import '../../../core/routes/app_routes.dart';
 import '../../../data/services/local_storage_service.dart';
 import '../../../data/services/navigation_service.dart';
+import '../../account_page/provider/theme_provider.dart';
 import '../provider/driver_providers.dart';
 import '../provider/home_providers.dart';
 import '../widgets/driver_status_sheet.dart';
@@ -39,6 +41,7 @@ class _HomePageState extends ConsumerState<BookingPage> {
   Widget build(BuildContext context) {
     final driverStatusState = ref.watch(driverStatusNotifierProvider);
     final bookingState = ref.watch(bookingNotifierProvider);
+    final bool isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
     return ExitAppWrapper(
       child: LocationPermissionWrapper(
         pageName: AppRoutes.bookingPage,
@@ -59,6 +62,7 @@ class _HomePageState extends ConsumerState<BookingPage> {
               target: bookingState.currentLocation ?? const LatLng(0.0, 0.0),
               zoom: 18.0,
             ),
+            style: isDark ? darkMapJson : null,
             myLocationButtonEnabled: false,
             compassEnabled: false,
             zoomControlsEnabled: false,

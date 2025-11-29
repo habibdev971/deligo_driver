@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -29,8 +30,22 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
         LatLng? current,
         required num? orderId
       }) async {
+    final List<num>? alwaysPickLocationCurrent = points?.pickupLocation;
+    Points? tripLocations = Points(pickupLocation: alwaysPickLocationCurrent, dropLocation: points?.dropLocation);
+    final state = ref.watch(rideDetailsProvider);
+    state.when(initial: (){
+      tripLocations = points;
+    }, loading: (){
+      return;
+    }, success: (data){
+      if(data?.status == 'ACCEPTED'){
+        tripLocations = Points(
+          pickupLocation: ,
+          dropLocation: points?.pickupLocation
+        );
+      }
+    }, error: error);
     state = const AppState.loading();
-
     final result = await googleAPIRepo.fetchWayPoints(waypoints: points);
     result.fold(
       (error) {
@@ -100,7 +115,7 @@ class SendTravelInfoNotifier extends StateNotifier<AppState<CommonResponse>> {
       // showNotification(message: error.message);
 
     }, (v) {
-      debugPrint("-------------travel info send successfull");
+      debugPrint('-------------travel info send successfully');
       state = AppState.success(v);
     });
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/presentation/booking/provider/ride_providers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -89,6 +90,8 @@ class LocationNotifier extends StateNotifier<LocationState> {
         ref.read(rideDetailsProvider).whenOrNull(success: (data){
           final String? status = data?.status;
           debugPrint('current status: $status');
+          if(status == 'END' || status == 'CANCELLED' || status == 'REJECTED' || status == 'COMPLETED')return;
+
            ref
               .read(routeNotifierProvider.notifier)
               .fetchRoutesDetail(
@@ -125,6 +128,8 @@ class LocationNotifier extends StateNotifier<LocationState> {
 
     // এখন results হলো List<ConnectivityResult>
     final hasInternet = results.any((result) => result != ConnectivityResult.none);
+    final String? token = await LocalStorageService().getToken();
+    if (token == null) return;
     if (!hasInternet) return;
 
     try {

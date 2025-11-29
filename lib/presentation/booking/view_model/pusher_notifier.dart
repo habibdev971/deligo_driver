@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:deligo_driver/data/models/chatting_models/chat_message_model.dart';
 import 'package:deligo_driver/data/models/order_response/pusher_order/PusherRequestOrderModel.dart';
+import 'package:deligo_driver/presentation/booking/view_model/reverse_timer_notifier.dart';
 import 'package:deligo_driver/presentation/chat_page/provider/message_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_ringtone_player/flutter_ringtone_player.dart';
@@ -65,13 +66,16 @@ class PusherNotifier extends StateNotifier<void> {
         _handleChatMessages(eventData);
       } else if (event.channelName.contains(orderChannel)) {
         if(event.eventName.contains('new-ride-request')){
-          if(Navigator.canPop(NavigationService.navigatorKey.currentContext!))return;
+          // if(Navigator.canPop(NavigationService.navigatorKey.currentContext!))return;
+          if(ref.read(reverseTimerProvider.notifier).isRunning)return;
           playRingtone();
           final PusherRequestOrderModel model = PusherRequestOrderModel.fromJson(eventData);
 
           final orderId = model.rideRequestId;
           await LocalStorageService().saveRequestId(orderId?.toInt());
-          orderRequestDialogue(data: model);
+          orderRequestDialogue(
+              ref: ref,
+              data: model);
           // ref.read(driverStatusNotifierProvider.notifier)
           // .orderRequest(data: {'order_id': orderId});
           return;

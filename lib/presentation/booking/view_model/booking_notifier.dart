@@ -322,30 +322,34 @@ class BookingNotifier extends StateNotifier<BookingState> {
     updateMarkers(mode);
   }
 
-  void _fitBoundsToPickupAndDropOff(LatLng pickup, LatLng dropOff) {
-    final southwest = LatLng(
-      pickup.latitude < dropOff.latitude ? pickup.latitude : dropOff.latitude,
-      pickup.longitude < dropOff.longitude
-          ? pickup.longitude
-          : dropOff.longitude,
-    );
-    final northeast = LatLng(
-      pickup.latitude > dropOff.latitude ? pickup.latitude : dropOff.latitude,
-      pickup.longitude > dropOff.longitude
-          ? pickup.longitude
-          : dropOff.longitude,
-    );
+  void _fitBoundsToPickupAndDropOff(LatLng? pickup, LatLng? dropOff) {
+    if(pickup != null && dropOff != null && pickup.latitude != 0 && dropOff.latitude != 0){
+      // Calculate southwest and northeast coordinates for)
+      final southwest = LatLng(
+        pickup.latitude < dropOff.latitude ? pickup.latitude : dropOff.latitude,
+        pickup.longitude < dropOff.longitude
+            ? pickup.longitude
+            : dropOff.longitude,
+      );
+      final northeast = LatLng(
+        pickup.latitude > dropOff.latitude ? pickup.latitude : dropOff.latitude,
+        pickup.longitude > dropOff.longitude
+            ? pickup.longitude
+            : dropOff.longitude,
+      );
 
-    final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
+      final bounds = LatLngBounds(southwest: southwest, northeast: northeast);
 
-    if (state.mapController != null) {
-      // Animate camera to fit bounds with padding
-      Future.delayed(const Duration(milliseconds: 300), () {
-        state.mapController?.animateCamera(
-          CameraUpdate.newLatLngBounds(bounds, 80),
-        );
-      });
+      if (state.mapController != null) {
+        // Animate camera to fit bounds with padding
+        Future.delayed(const Duration(milliseconds: 300), () {
+          state.mapController?.animateCamera(
+            CameraUpdate.newLatLngBounds(bounds, 80),
+          );
+        });
+      }
     }
+
   }
 
   Future<void> updateMarkerForTowardsPickup() async {
@@ -410,8 +414,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
 
     ref
         .read(rideDetailsProvider)
-        .maybeWhen(
-          orElse: () {},
+        .whenOrNull(
           success: (data) async {
             final LatLng? pickupPos = listToLatLng(
               data?.points?.pickupLocation,
@@ -464,58 +467,58 @@ class BookingNotifier extends StateNotifier<BookingState> {
             if (mode != null) {
               switch (mode) {
                 case MovementMode.orderAccept:
-                  await ref
-                      .read(routeNotifierProvider.notifier)
-                      .fetchRoutesDetail(
-                        Points(
-                          pickupLocation: [
-                            state.currentLocation!.latitude,
-                            state.currentLocation!.longitude,
-                          ],
-                          dropLocation: [
-                            pickupPos!.latitude,
-                            pickupPos.longitude,
-                          ],
-                        ), orderId: data?.id,
-                      );
-                  _fitBoundsToPickupAndDropOff(pickupPos, dropPos!);
+                  // await ref
+                  //     .read(routeNotifierProvider.notifier)
+                  //     .fetchRoutesDetail(
+                  //       Points(
+                  //         pickupLocation: [
+                  //           state.currentLocation?.latitude,
+                  //           state.currentLocation?.longitude,
+                  //         ],
+                  //         dropLocation: [
+                  //           pickupPos?.latitude ?? 0,
+                  //           pickupPos?.longitude ?? 0,
+                  //         ],
+                  //       ), orderId: data?.id,
+                  //     );
+                  _fitBoundsToPickupAndDropOff(pickupPos, dropPos);
                   break;
 
                 case MovementMode.towardsPickup:
-                  await ref
-                      .read(routeNotifierProvider.notifier)
-                      .fetchRoutesDetail(
-                        Points(
-                          pickupLocation: [
-                            state.currentLocation!.latitude,
-                            state.currentLocation!.longitude,
-                          ],
-                          dropLocation: [
-                            pickupPos!.latitude,
-                            pickupPos.longitude,
-                          ],
-                        ), orderId: data?.id,
-                      );
+                  // await ref
+                      // .read(routeNotifierProvider.notifier)
+                      // .fetchRoutesDetail(
+                      //   Points(
+                      //     pickupLocation: [
+                      //       state.currentLocation!.latitude,
+                      //       state.currentLocation!.longitude,
+                      //     ],
+                      //     dropLocation: [
+                      //       pickupPos!.latitude,
+                      //       pickupPos.longitude,
+                      //     ],
+                      //   ), orderId: data?.id,
+                      // );
                   _fitBoundsToPickupAndDropOff(
-                    state.currentLocation!,
+                    state.currentLocation,
                     pickupPos,
                   );
 
                   break;
 
                 case MovementMode.towardsDestination:
-                  await ref
-                      .read(routeNotifierProvider.notifier)
-                      .fetchRoutesDetail(
-                        Points(
-                          pickupLocation: [
-                            state.currentLocation!.latitude,
-                            state.currentLocation!.longitude,
-                          ],
-                          dropLocation: [dropPos!.latitude, dropPos.longitude],
-                        ), orderId: data?.id,
-                      );
-                  _fitBoundsToPickupAndDropOff(state.currentLocation!, dropPos);
+                  // await ref
+                  //     .read(routeNotifierProvider.notifier)
+                  //     .fetchRoutesDetail(
+                  //       Points(
+                  //         pickupLocation: [
+                  //           state.currentLocation!.latitude,
+                  //           state.currentLocation!.longitude,
+                  //         ],
+                  //         dropLocation: [dropPos!.latitude, dropPos.longitude],
+                  //       ), orderId: data?.id,
+                  //     );
+                  _fitBoundsToPickupAndDropOff(state.currentLocation, dropPos);
                   break;
               }
             }

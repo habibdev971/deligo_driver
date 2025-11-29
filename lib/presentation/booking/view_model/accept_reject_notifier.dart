@@ -82,6 +82,8 @@ class RideDetailsNotifier extends StateNotifier<AppState<RideRequest?>>{
 
   }
 
+  String? getCurrentStatus()=> state.whenOrNull(success: (data)=> data?.status);
+
   void reset(){
     state = const AppState.initial();
   }
@@ -102,6 +104,7 @@ class SaveOrderStatusNotifier extends StateNotifier<AppState<CommonResponse>>{
               showNotification(message: l.message);
             },
             (r) {
+              ref.read(rideDetailsProvider.notifier).getRideDetails(orderId);
               state = AppState.success(r);
               showNotification(message: r.message, isSuccess: true);
               onSuccess != null ? onSuccess(r) : null;

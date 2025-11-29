@@ -20,6 +20,7 @@ class GoogleApiService implements IGoogleApiService {
       throw ArgumentError('Pickup and drop locations must contain valid coordinates.');
     }
 
+
     // Extract origin and destination
     final LatLng origin = LatLng(
         waypoints!.pickupLocation![0].toDouble(), waypoints.pickupLocation![1].toDouble());

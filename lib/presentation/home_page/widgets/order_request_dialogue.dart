@@ -19,7 +19,8 @@ import 'package:deligo_driver/presentation/home_page/widgets/readable_location_v
 import '../../../data/models/ride_details_model/RideDetailsModel.dart';
 import '../../booking/view_model/reverse_timer_notifier.dart';
 
-void orderRequestDialogue({PusherRequestOrderModel? data}) {
+void orderRequestDialogue({PusherRequestOrderModel? data, required Ref ref}) {
+  if(ref.read(reverseTimerProvider.notifier).isRunning)return;
   showGlobalAlertDialog(
     child: _OrderRequestDialog(data: data,),
   );

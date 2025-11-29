@@ -1,4 +1,6 @@
+import 'package:deligo_driver/core/utils/google_map_dark_mode_json.dart';
 import 'package:deligo_driver/data/models/auth_models/registration_model.dart';
+import 'package:deligo_driver/presentation/account_page/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -30,7 +32,7 @@ class _HomeMapState extends ConsumerState<HomeMap> {
     final homeState = ref.read(bookingNotifierProvider);
     ref.read(bookingNotifierProvider.notifier)
     .setMapController(controller);
-    final User? userHiveModel = await LocalStorageService().getSavedUser();
+    // final User? userHiveModel = await LocalStorageService().getSavedUser();
     // final UserHiveModel? userHiveModel = await LocalStorageService().getSavedUser();
     if (homeState.currentLocation != null) {
       // final int radius = ref.read(bookingNotifierProvider.notifier).getRadiusInKm(userHiveModel?.radiusInMeter);
@@ -45,6 +47,7 @@ class _HomeMapState extends ConsumerState<HomeMap> {
   @override
   Widget build(BuildContext context, ) {
     final driverStatusState = ref.watch(driverStatusNotifierProvider);
+    final bool isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
     return  Stack(
       children: [
         Consumer(
@@ -62,6 +65,7 @@ class _HomeMapState extends ConsumerState<HomeMap> {
               compassEnabled: false,
               zoomControlsEnabled: false,
               rotateGesturesEnabled: false,
+              style: isDark ? darkMapJson : null,
               markers: homeState.markers.isNotEmpty ? {homeState.markers.first} : {},
               circles: driverStatusState.maybeMap(
                 orElse: () => {},

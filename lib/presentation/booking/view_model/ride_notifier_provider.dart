@@ -41,7 +41,9 @@ class RideOrderNotifier extends StateNotifier<AppState<RideRequest?>> {
         final rideRequest = data.data?.rideRequest;
         final user = rideRequest?.rider;
         await LocalStorageService().saveRequestId(orderId.toInt());
-        orderRequestDialogue(data: PusherRequestOrderModel(
+        orderRequestDialogue(
+            ref: ref,
+            data: PusherRequestOrderModel(
           rideRequestId: rideRequest?.id,
           serviceTypeId: rideRequest?.serviceTypeId,
           scheduledAt: rideRequest?.scheduledAt,
