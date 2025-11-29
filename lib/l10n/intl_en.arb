@@ -767,11 +767,11 @@
   "use_email_instead": "Use Email Instead",
   "@use_email_instead": {},
 
-  "dont_have_account": "Don't have account?",
-  "@dont_have_account": {},
-
   "use_phone_instead": "Use Phone Instead",
   "@use_phone_instead": {},
+
+  "dont_have_account": "Don't have account?",
+  "@dont_have_account": {},
 
   "vehicle_brands": "Vehicle Brands",
   "@vehicle_brands": {},

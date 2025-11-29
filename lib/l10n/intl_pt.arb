@@ -750,11 +750,11 @@
   "use_email_instead": "Usar email em vez disso",
   "@use_email_instead": {},
 
-  "dont_have_account": "Não tem conta?",
-  "@dont_have_account": {},
-
   "use_phone_instead": "Usar telefone em vez disso",
   "@use_phone_instead": {},
+
+  "dont_have_account": "Não tem conta?",
+  "@dont_have_account": {},
 
   "vehicle_brands": "Marcas de Veículos",
   "@vehicle_brands": {},

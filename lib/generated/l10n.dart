@@ -2949,21 +2949,21 @@ class AppLocalizations {
     );
   }
 
-  /// `Don't have account?`
-  String get dont_have_account {
-    return Intl.message(
-      'Don\'t have account?',
-      name: 'dont_have_account',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Use Phone Instead`
   String get use_phone_instead {
     return Intl.message(
       'Use Phone Instead',
       name: 'use_phone_instead',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have account?`
+  String get dont_have_account {
+    return Intl.message(
+      'Don\'t have account?',
+      name: 'dont_have_account',
       desc: '',
       args: [],
     );
