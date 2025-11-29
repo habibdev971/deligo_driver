@@ -25,21 +25,27 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
   }) : super(const AppState.initial());
 
   Future<void> fetchRoutesDetail(Points? points,
-      {bool sendDataToRider = true,
-        LatLng? pickUpPoint,
+      {
+        // LatLng? pickUpPoint,
         LatLng? current,
         required num? orderId
       }) async {
     List<num>? destination = points?.dropLocation;
-    List<num>? origin = [current?.latitude ?? 0, current?.longitude ?? 0];
+    final List<num> origin = [current?.latitude ?? 0, current?.longitude ?? 0];
 
     final rideState = ref.watch(rideDetailsProvider);
     final String? rideStatus = rideState.whenOrNull(success: (data)=> data?.status);
     final bool isLoading = rideState.whenOrNull(loading: ()=> true, error: (e)=> true) ?? false;
     if(isLoading)return;
-    if(rideStatus == 'GO_TO_PICKUP'){
+    if(rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED'){
       destination = points?.pickupLocation;
+    }else if(rideStatus == 'DROPPED_OFF' || rideStatus == 'END' || rideStatus == 'COMPLETED'){
+      return;
     }
+    // else if(rideStatus == 'ACCEPTED'){
+    //   origin = points?.pickupLocation;
+    //   destination = points?.dropLocation;
+    // }
     state = const AppState.loading();
     final result = await googleAPIRepo.fetchWayPoints(waypoints: Points(
       pickupLocation: origin,
@@ -157,7 +163,7 @@ Future<void> calculateRouteProgress(Ref ref,
   ref.read(routeProgressProvider.notifier).state = progress;
   ref.read(sendTravelInfoProvider.notifier).sendTravelInfo(info: {
     'order_id': orderId,
-    'minute': routeInfo.durationText,
+    'minute': formatDuration(routeInfo.durationInSeconds),
     'distance': routeInfo.distanceText,
     'progress': progress,
     'destination': destination,
@@ -165,3 +171,33 @@ Future<void> calculateRouteProgress(Ref ref,
     'polyline': routeInfo.polylinePoints
   });
 }
+
+
+String formatDuration(int totalSeconds) {
+  if (totalSeconds == 0) return 'Reached';
+
+  final int days = totalSeconds ~/ 86400;
+  totalSeconds %= 86400;
+
+  final int hours = totalSeconds ~/ 3600;
+  totalSeconds %= 3600;
+
+  final int minutes = totalSeconds ~/ 60;
+  final int seconds = totalSeconds % 60;
+
+  final List<String> parts = [];
+
+  String plural(int value, String unit) => value == 1 ? '$value $unit' : '$value ${unit}s';
+
+  if (days > 0) parts.add(plural(days, 'day'));
+  if (hours > 0) parts.add(plural(hours, 'hour'));
+
+  if (minutes > 0) {
+    parts.add("${minutes.toString().padLeft(2, '0')} min");
+  }
+
+  if (seconds > 0) parts.add(plural(seconds, 'second'));
+
+  return parts.isEmpty ? 'Reached' : parts.join(', ');
+}
+

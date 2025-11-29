@@ -90,17 +90,21 @@ class LocationNotifier extends StateNotifier<LocationState> {
         ref.read(rideDetailsProvider).whenOrNull(success: (data){
           final String? status = data?.status;
           debugPrint('current status: $status');
-          if(status == 'END' || status == 'CANCELLED' || status == 'REJECTED' || status == 'COMPLETED')return;
+          if(status == 'END' || status == 'CANCELLED' || status == 'REJECTED' || status == 'COMPLETED'){
 
-           ref
-              .read(routeNotifierProvider.notifier)
-              .fetchRoutesDetail(
-            data?.points,
-            // sendDataToRider: mode == MovementMode.towardsDestination,
-            // pickUpPoint: pickupLatLng,
-             current: latLng,
-            orderId: data?.id,
-          );
+          }else{
+            ref
+                .read(routeNotifierProvider.notifier)
+                .fetchRoutesDetail(
+              data?.points,
+              // sendDataToRider: mode == MovementMode.towardsDestination,
+              // pickUpPoint: pickupLatLng,
+              current: latLng,
+              orderId: data?.id,
+            );
+          }
+
+
         });
         if (state.isOnUpdateActive) {
           _onNewLocation?.call(latLng);

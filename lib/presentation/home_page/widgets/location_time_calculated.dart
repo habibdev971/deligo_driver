@@ -1,3 +1,4 @@
+import 'package:deligo_driver/presentation/booking/view_model/route_notifier.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,33 +12,34 @@ import '../../../core/utils/is_dark_mode.dart';
 import '../../../gen/assets.gen.dart';
 import '../../booking/provider/way_point_list_provider.dart';
 
-Widget locationTime(BuildContext context, {String? time, String? distance}) =>
+Widget locationTime(BuildContext context, {String? time, String? distance, bool showHourMin = false}) =>
     Consumer(
       builder: (context, ref, _) {
         final state = ref.watch(routeNotifierProvider);
+        final bool showOnlyRouteTimes = time == null || distance == null;
 
         // Default value
-        String timeText = '0 min';
-        String distanceText = '0 km';
+        String timeText = '';
+        String distanceText = '';
 
         // Update timeText based on state
-        state.when(
-          initial: () {
-            timeText = '0 min';
-            distanceText = '0 km';
-          },
-          loading: () {
-            timeText = '0 min';
-            distanceText = '0 km';
-          },
+        state.whenOrNull(
+          // initial: () {
+          //   // timeText = '0 min';
+          //   // distanceText = '0 km';
+          // },
+          // loading: () {
+          //   timeText = '0 min';
+          //   distanceText = '0 km';
+          // },
           success: (data) {
-            timeText = data.durationText;
+            timeText = showHourMin ? formatDuration(data.durationInSeconds) : data.durationText;
             distanceText = data.distanceText;
           },
-          error: (e) {
-            timeText = '0 min';
-            distanceText = '0 km';
-          },
+          // error: (e) {
+          //   timeText = '0 min';
+          //   distanceText = '0 km';
+          // },
         );
         return Container(
           decoration: BoxDecoration(
@@ -46,7 +48,7 @@ Widget locationTime(BuildContext context, {String? time, String? distance}) =>
           ),
           child: Row(
             children: [
-              infoCard(context, title: distance == null ? distanceText : ('${distance}km') ),
+              infoCard(context, title: showOnlyRouteTimes ? distanceText : ('${distance}km') ),
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4.0),
                 child: DottedLine(
@@ -55,7 +57,7 @@ Widget locationTime(BuildContext context, {String? time, String? distance}) =>
                   lineLength: 80,
                 ),
               ),
-              infoCard(context, showImage: false, title: time == null ? timeText : ('${time}min')),
+              infoCard(context, showImage: false, title: showOnlyRouteTimes ? timeText : ('${time}min')),
             ],
           ),
         );
