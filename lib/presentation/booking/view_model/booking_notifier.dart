@@ -8,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/widgets/markers/app_marker_drop_off.dart';
-import 'package:deligo_driver/data/models/order_response/order_model/points/points.dart';
 import 'package:deligo_driver/data/repositories/interfaces/i_geo_location_manager.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
 import 'package:deligo_driver/gen/assets.gen.dart';
@@ -23,7 +22,6 @@ import '../provider/driver_providers.dart';
 import '../provider/location_provider.dart';
 import '../provider/pusher_provider.dart';
 import '../provider/ride_providers.dart';
-import '../provider/way_point_list_provider.dart';
 
 class BookingState {
   final GoogleMapController? mapController;
@@ -118,7 +116,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
 
     final markerIcon = await getMarkerIcon();
     if (location != null) {
-      final userData = await LocalStorageService().getSavedUser();
+      // final userData = await LocalStorageService().getSavedUser();
       state = state.copyWith(
         currentLocation: location,
         isOnline: false, //TODO: make is online dynamic
@@ -422,7 +420,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
             final LatLng? dropPos = listToLatLng(data?.points?.dropLocation);
 
             if (shouldUpdateMarker(pickupMarkerId, pickupPos)) {
-              final circleIcon = BitmapDescriptor.bytes(await createCircle());
+              // final circleIcon = BitmapDescriptor.bytes(await createCircle());
               await getPickupMarkerIcon(
                 address: data?.addresses?.pickupAddress ?? '',
               ).then((value) {
@@ -591,16 +589,16 @@ class BookingNotifier extends StateNotifier<BookingState> {
           .watch(rideDetailsProvider)
           .maybeWhen(success: (data) => data?.points, orElse: () => null);
 
-      final orderId = ref
-          .watch(rideDetailsProvider)
-          .maybeWhen(success: (data) => data?.id, orElse: () => null);
+      // final orderId = ref
+      //     .watch(rideDetailsProvider)
+      //     .maybeWhen(success: (data) => data?.id, orElse: () => null);
 
-      final LatLng? pickupLatLng = listToLatLng(points?.pickupLocation);
+      // final LatLng? pickupLatLng = listToLatLng(points?.pickupLocation);
       final LatLng? dropLatLng = listToLatLng(points?.dropLocation);
 
-      final LatLng? targetLatLng = mode == MovementMode.towardsPickup
-          ? pickupLatLng
-          : dropLatLng;
+      // final LatLng? targetLatLng = mode == MovementMode.towardsPickup
+      //     ? pickupLatLng
+      //     : dropLatLng;
 
       ref
           .read(locationNotifierProvider.notifier)
@@ -702,43 +700,43 @@ class BookingNotifier extends StateNotifier<BookingState> {
   double _degreesToRadians(double degrees) => degrees * pi / 180;
 
   /// Helper: Calculate bearing between two LatLng points
-  double _calculateBearing(LatLng from, LatLng to) {
-    final lat1 = _degreesToRadians(from.latitude);
-    final lon1 = _degreesToRadians(from.longitude);
-    final lat2 = _degreesToRadians(to.latitude);
-    final lon2 = _degreesToRadians(to.longitude);
-
-    final dLon = lon2 - lon1;
-    final y = sin(dLon) * cos(lat2);
-    final x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
-    final bearing = atan2(y, x) * 180 / pi;
-
-    return (bearing + 360) % 360;
-  }
+  // double _calculateBearing(LatLng from, LatLng to) {
+  //   final lat1 = _degreesToRadians(from.latitude);
+  //   final lon1 = _degreesToRadians(from.longitude);
+  //   final lat2 = _degreesToRadians(to.latitude);
+  //   final lon2 = _degreesToRadians(to.longitude);
+  //
+  //   final dLon = lon2 - lon1;
+  //   final y = sin(dLon) * cos(lat2);
+  //   final x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+  //   final bearing = atan2(y, x) * 180 / pi;
+  //
+  //   return (bearing + 360) % 360;
+  // }
 
   /// Helper: Check if current location is near segment between points a and b
-  bool _isPointNearSegment(LatLng current, LatLng a, LatLng b) {
-    const threshold = 30.0; // meters
-
-    final distanceToA = _calculateDistance(
-      current.latitude,
-      current.longitude,
-      a.latitude,
-      a.longitude,
-    );
-    final distanceToB = _calculateDistance(
-      current.latitude,
-      current.longitude,
-      b.latitude,
-      b.longitude,
-    );
-    final segmentLength = _calculateDistance(
-      a.latitude,
-      a.longitude,
-      b.latitude,
-      b.longitude,
-    );
-
-    return (distanceToA + distanceToB - segmentLength).abs() < threshold;
-  }
+  // bool _isPointNearSegment(LatLng current, LatLng a, LatLng b) {
+  //   const threshold = 30.0; // meters
+  //
+  //   final distanceToA = _calculateDistance(
+  //     current.latitude,
+  //     current.longitude,
+  //     a.latitude,
+  //     a.longitude,
+  //   );
+  //   final distanceToB = _calculateDistance(
+  //     current.latitude,
+  //     current.longitude,
+  //     b.latitude,
+  //     b.longitude,
+  //   );
+  //   final segmentLength = _calculateDistance(
+  //     a.latitude,
+  //     a.longitude,
+  //     b.latitude,
+  //     b.longitude,
+  //   );
+  //
+  //   return (distanceToA + distanceToB - segmentLength).abs() < threshold;
+  // }
 }
