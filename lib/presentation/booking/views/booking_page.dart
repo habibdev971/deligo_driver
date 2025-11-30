@@ -54,9 +54,9 @@ class _HomePageState extends ConsumerState<BookingPage> {
             ref.read(bookingNotifierProvider.notifier).resetToInitial();
             NavigationService.pushNamedAndRemoveUntil(AppRoutes.dashboard);
           }),
-          body: bookingState.currentLocation == null ? const LoadingView() : Stack(
+          body: Stack(
                   children: [
-            GoogleMap(
+                    bookingState.currentLocation == null ? const LoadingView() : GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(
               target: bookingState.currentLocation ?? const LatLng(0.0, 0.0),

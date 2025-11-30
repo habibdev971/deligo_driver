@@ -89,6 +89,7 @@ class LocationNotifier extends StateNotifier<LocationState> {
         saveDriverLocations(latLng);
         ref.read(rideDetailsProvider).whenOrNull(success: (data){
           final String? status = data?.status;
+          ref.read(bookingNotifierProvider.notifier).updateMarkerForOrder(mode: null);
           debugPrint('current status: $status');
           if(status == 'END' || status == 'CANCELLED' || status == 'REJECTED' || status == 'COMPLETED'){
 

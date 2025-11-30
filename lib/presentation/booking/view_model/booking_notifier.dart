@@ -318,7 +318,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
     state = state.copyWith(polylines: polyLines);
   }
 
-  Future<void> updateMarkerForOrder({required MovementMode mode}) async {
+  Future<void> updateMarkerForOrder({required MovementMode? mode}) async {
     updateMarkers(mode);
   }
 
@@ -411,7 +411,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
 
   Future<void> updateMarkers(MovementMode? mode) async {
     await setCurrentLocation(); // this is used for when user close the app and return the app and there is need for location permission
-
+    debugPrint('---------------->> updating markers');
     ref
         .read(rideDetailsProvider)
         .whenOrNull(
