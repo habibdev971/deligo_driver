@@ -1,4 +1,4 @@
-package com.deligo.driver
+package com.deligo.driver.app
 
 import io.flutter.embedding.android.FlutterActivity
 
