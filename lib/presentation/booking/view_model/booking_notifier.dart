@@ -105,7 +105,7 @@ class BookingNotifier extends StateNotifier<BookingState> {
   MarkerId carMarkerId = const MarkerId('car');
   MarkerId pickupMarkerId = const MarkerId('pick-up');
   MarkerId dropMarkerId = const MarkerId('Drop-off point');
-  MarkerId circleMarkerId = const MarkerId('circle');
+  // MarkerId circleMarkerId = const MarkerId('circle');
 
   final local = LocalStorageService();
   void setMapController(GoogleMapController controller) {
@@ -434,15 +434,15 @@ class BookingNotifier extends StateNotifier<BookingState> {
                       position: pickupPos!,
                       icon: value,
                     ),
-                  )
-                  ..removeWhere((m) => m.markerId == circleMarkerId)
-                  ..add(
-                    Marker(
-                      markerId: circleMarkerId,
-                      position: pickupPos,
-                      icon: circleIcon,
-                    ),
                   );
+                  // ..removeWhere((m) => m.markerId == circleMarkerId)
+                  // ..add(
+                  //   Marker(
+                  //     markerId: circleMarkerId,
+                  //     position: pickupPos,
+                  //     icon: circleIcon,
+                  //   ),
+                  // );
                 state = state.copyWith(markers: updatedMarkers);
               });
             }
