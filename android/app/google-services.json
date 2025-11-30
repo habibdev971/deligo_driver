@@ -58,6 +58,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "939178197757-vnnmeuqv8qvb16hf8o4dn9n81k3qftpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deligo.driver.app",
+            "certificate_hash": "2fd010cc816eac77eb9e00dea780318a17de7172"
+          }
+        },
+        {
+          "client_id": "939178197757-vq62kv2gb2p8s9u9p7peubit6s91rvms.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deligo.driver.app",
+            "certificate_hash": "ce0ea6b2498431e6789b1c987d3f876e629ab609"
+          }
+        },
+        {
           "client_id": "939178197757-fpj2r3lv7a3sth1u6o00rmngi2t8icpu.apps.googleusercontent.com",
           "client_type": 3
         }
