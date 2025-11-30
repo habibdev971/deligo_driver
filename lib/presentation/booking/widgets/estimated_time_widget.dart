@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/theme/color_palette.dart';
 import 'package:deligo_driver/core/widgets/buttons/app_primary_button.dart';
 import 'package:deligo_driver/presentation/booking/view_model/route_notifier.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ Widget estimatedTimeWidget(BuildContext context) => Consumer(
               backgroundColor: const Color(0xFFF1F7FE),
               child: Icon(
                 Icons.access_time,
-                color: const Color(0xFF1469B5),
+                color: ColorPalette.primary50,
                 size: 20.r,
               ),
             ),
@@ -121,7 +122,7 @@ Widget estimatedTimeWidget(BuildContext context) => Consumer(
                           text: ' $distanceText',
                           style: context.bodyMedium?.copyWith(
                             fontSize: 10.sp,
-                            color: const Color(0xFF1469B5),
+                            color: ColorPalette.primary50,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -159,7 +160,7 @@ Widget estimatedTimeWidget(BuildContext context) => Consumer(
                   width: MediaQuery.of(context).size.width * 0.8 * progress,
                   margin: EdgeInsets.only(top: 1.h), // Optional fine-tune
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1469B5),
+                    color: ColorPalette.primary50,
                     borderRadius: BorderRadius.circular(16.r),
                   ),
                 ),

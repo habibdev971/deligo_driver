@@ -86,7 +86,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
           calculateRouteProgress(
             ref,
             orderId: int.tryParse(orderId.toString()),
-            pickup: LatLng(lat ?? 0, lng ?? 0),
+            pickup: destination ?? LatLng(lat ?? 0, lng ?? 0),
             current: current,
             // current: ref.watch(bookingNotifierProvider).currentLocation, //TODO: check the update if it works fine
             totalDistanceInMeters: totalDistance,
