@@ -3,7 +3,6 @@ import 'package:deligo_driver/core/enums/booking_status.dart';
 import 'package:deligo_driver/core/enums/movements.dart';
 import 'package:deligo_driver/core/state/on_trip_status.dart';
 import 'package:deligo_driver/data/services/local_storage_service.dart';
-import 'package:deligo_driver/data/services/pusher_service.dart';
 
 import '../provider/home_providers.dart';
 
