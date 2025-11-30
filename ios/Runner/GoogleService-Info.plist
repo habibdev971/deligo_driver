@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>939178197757-9e7o5fnmqunr3e04f63tbmqllf4o23cn.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.939178197757-9e7o5fnmqunr3e04f63tbmqllf4o23cn</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>939178197757-l12p3otcru4e3ff9p6tl43sh80cs672q.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCVaaV2-4UfSxyGGM5-bGn7R4aRb3pxkLs</string>
 	<key>GCM_SENDER_ID</key>
@@ -9,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.deligo.driver</string>
+	<string>com.deligo.driver.app</string>
 	<key>PROJECT_ID</key>
 	<string>deligo-cab</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:939178197757:ios:f12cf83be9c62a17d8b494</string>
+	<string>1:939178197757:ios:7c3188bfaf2702bdd8b494</string>
 </dict>
 </plist>

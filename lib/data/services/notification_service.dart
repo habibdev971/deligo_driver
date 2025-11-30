@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:deligo_driver/core/routes/app_routes.dart';
+import 'package:deligo_driver/data/services/navigation_service.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -49,9 +51,10 @@ class NotificationService {
     });
 
     // ✅ Listen for notification taps (don’t show notification again)
-    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((message) async{
       log('[onMessageOpenedApp] ${message.data}');
-      handleNotificationTap(message);
+      await handleNotificationTap(message);
+      NavigationService.pushNamedAndRemoveUntil(AppRoutes.splash);
     });
   }
 

@@ -19,27 +19,30 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
   final IGoogleAPIRepo googleAPIRepo;
   final Ref ref;
 
-  RouteNotifier({
-    required this.ref,
-    required this.googleAPIRepo,
-  }) : super(const AppState.initial());
+  RouteNotifier({required this.ref, required this.googleAPIRepo})
+    : super(const AppState.initial());
 
-  Future<void> fetchRoutesDetail(Points? points,
-      {
-        // LatLng? pickUpPoint,
-        LatLng? current,
-        required num? orderId
-      }) async {
+  Future<void> fetchRoutesDetail(
+    Points? points, {
+    // LatLng? pickUpPoint,
+    LatLng? current,
+    required num? orderId,
+  }) async {
     List<num>? destination = points?.dropLocation;
     final List<num> origin = [current?.latitude ?? 0, current?.longitude ?? 0];
 
     final rideState = ref.watch(rideDetailsProvider);
-    final String? rideStatus = rideState.whenOrNull(success: (data)=> data?.status);
-    final bool isLoading = rideState.whenOrNull(loading: ()=> true, error: (e)=> true) ?? false;
-    if(isLoading)return;
-    if(rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED'){
+    final String? rideStatus = rideState.whenOrNull(
+      success: (data) => data?.status,
+    );
+    final bool isLoading =
+        rideState.whenOrNull(loading: () => true, error: (e) => true) ?? false;
+    if (isLoading) return;
+    if (rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED') {
       destination = points?.pickupLocation;
-    }else if(rideStatus == 'DROPPED_OFF' || rideStatus == 'END' || rideStatus == 'COMPLETED'){
+    } else if (rideStatus == 'DROPPED_OFF' ||
+        rideStatus == 'END' ||
+        rideStatus == 'COMPLETED') {
       return;
     }
     // else if(rideStatus == 'ACCEPTED'){
@@ -47,10 +50,9 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
     //   destination = points?.dropLocation;
     // }
     state = const AppState.loading();
-    final result = await googleAPIRepo.fetchWayPoints(waypoints: Points(
-      pickupLocation: origin,
-      dropLocation: destination,
-    ));
+    final result = await googleAPIRepo.fetchWayPoints(
+      waypoints: Points(pickupLocation: origin, dropLocation: destination),
+    );
     result.fold(
       (error) {
         state = AppState.error(error);
@@ -71,29 +73,33 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
           ),
         };
 
-          // final pickup = pickUpPoint;
-          final lat = (points?.pickupLocation?.firstOrNull)?.toDouble();
-          final lng = (points?.pickupLocation?.lastOrNull)?.toDouble();
+        // final pickup = pickUpPoint;
+        final lat = (points?.pickupLocation?.firstOrNull)?.toDouble();
+        final lng = (points?.pickupLocation?.lastOrNull)?.toDouble();
 
-          final latD = (points?.dropLocation?.firstOrNull)?.toDouble();
-          final lngD = (points?.dropLocation?.lastOrNull)?.toDouble();
-          // final current =
-          //     (lat != null && lng != null) ? LatLng(lat, lng) : null;
-          final destination = (latD != null && lngD != null ) ? LatLng(latD, lngD) : null;
-          final totalDistance = v.distanceInMeters;
-          final polyline = v.polylinePoints;
+        final latD = (points?.dropLocation?.firstOrNull)?.toDouble();
+        final lngD = (points?.dropLocation?.lastOrNull)?.toDouble();
+        // final current =
+        //     (lat != null && lng != null) ? LatLng(lat, lng) : null;
+        final destination = (latD != null && lngD != null)
+            ? LatLng(latD, lngD)
+            : null;
+        final pickUp = (lat != null && lng != null) ? LatLng(lat, lng) : null;
 
-          calculateRouteProgress(
-            ref,
-            orderId: int.tryParse(orderId.toString()),
-            pickup: destination ?? LatLng(lat ?? 0, lng ?? 0),
-            current: current,
-            // current: ref.watch(bookingNotifierProvider).currentLocation, //TODO: check the update if it works fine
-            totalDistanceInMeters: totalDistance,
-            polylinePoints: polyline,
-            routeInfo: v,
-            destination: destination
-          );
+        final totalDistance = v.distanceInMeters;
+        final polyline = v.polylinePoints;
+
+        calculateRouteProgress(
+          ref,
+          orderId: int.tryParse(orderId.toString()),
+          pickup: pickUp,
+          current: current,
+          // current: ref.watch(bookingNotifierProvider).currentLocation, //TODO: check the update if it works fine
+          totalDistanceInMeters: totalDistance,
+          polylinePoints: polyline,
+          routeInfo: v,
+          destination: destination,
+        );
 
         ref.read(bookingNotifierProvider.notifier).updatePolyLines(polyLine);
         state = AppState.success(v);
@@ -105,23 +111,22 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
 class SendTravelInfoNotifier extends StateNotifier<AppState<CommonResponse>> {
   final IGoogleAPIRepo googleAPIRepo;
   final Ref ref;
-  SendTravelInfoNotifier({
-    required this.ref,
-    required this.googleAPIRepo,
-  }) : super(const AppState.initial());
+  SendTravelInfoNotifier({required this.ref, required this.googleAPIRepo})
+    : super(const AppState.initial());
 
   Future<void> sendTravelInfo({required Map<String, dynamic> info}) async {
     final result = await googleAPIRepo.sendTravelInfo(info: info);
 
-    result.fold((error) {
-
-      state = AppState.error(error);
-      // showNotification(message: error.message);
-
-    }, (v) {
-      debugPrint('-------------travel info send successfully');
-      state = AppState.success(v);
-    });
+    result.fold(
+      (error) {
+        state = AppState.error(error);
+        // showNotification(message: error.message);
+      },
+      (v) {
+        debugPrint('-------------travel info send successfully');
+        state = AppState.success(v);
+      },
+    );
   }
 }
 
@@ -130,7 +135,8 @@ double calculateHaversineDistance(LatLng start, LatLng end) {
   final dLat = _toRadians(end.latitude - start.latitude);
   final dLng = _toRadians(end.longitude - start.longitude);
 
-  final a = sin(dLat / 2) * sin(dLat / 2) +
+  final a =
+      sin(dLat / 2) * sin(dLat / 2) +
       cos(_toRadians(start.latitude)) *
           cos(_toRadians(end.latitude)) *
           sin(dLng / 2) *
@@ -145,33 +151,42 @@ double _toRadians(double degree) => degree * pi / 180;
 
 /// Calculate route progress between pickup -> current based on total distance.
 /// Returns progress [0.0 - 1.0]. If any input is null or invalid, returns 0.0.
-Future<void> calculateRouteProgress(Ref ref,
-    {required int? orderId,
-    required LatLng? pickup,
-    required LatLng? current,
-    required int? totalDistanceInMeters,
-    required List<LatLng>? polylinePoints, required RouteInfo routeInfo, required LatLng? destination}) async{
+Future<void> calculateRouteProgress(
+  Ref ref, {
+  required int? orderId,
+  required LatLng? pickup,
+  required LatLng? current,
+  required int? totalDistanceInMeters,
+  required List<LatLng>? polylinePoints,
+  required RouteInfo routeInfo,
+  required LatLng? destination,
+}) async {
   if (pickup == null ||
       current == null ||
+      destination == null ||
       totalDistanceInMeters == null ||
       totalDistanceInMeters <= 0) {
     return;
   }
 
-  final distanceTravelled = calculateHaversineDistance(pickup, current);
+  final distanceTravelled = calculateHaversineDistance(pickup, destination);
   final progress = (distanceTravelled / totalDistanceInMeters).clamp(0.0, 1.0);
   ref.read(routeProgressProvider.notifier).state = progress;
-  ref.read(sendTravelInfoProvider.notifier).sendTravelInfo(info: {
-    'order_id': orderId,
-    'minute': formatDuration(routeInfo.durationInSeconds),
-    'distance': routeInfo.distanceText,
-    'progress': progress,
-    'destination': destination,
-    'driver_location': current,
-    'polyline': routeInfo.polylinePoints
-  });
+  ref
+      .read(sendTravelInfoProvider.notifier)
+      .sendTravelInfo(
+        info: {
+          'order_id': orderId,
+          'minute': formatDuration(routeInfo.durationInSeconds),
+          'distance': routeInfo.distanceText,
+          'progress': progress,
+          'destination': destination,
+          'driver_location': current,
+          'polyline': polylinePoints,
+          // 'polyline': routeInfo.polylinePoints,
+        },
+      );
 }
-
 
 String formatDuration(int totalSeconds) {
   if (totalSeconds == 0) return 'Reached';
@@ -187,7 +202,8 @@ String formatDuration(int totalSeconds) {
 
   final List<String> parts = [];
 
-  String plural(int value, String unit) => value == 1 ? '$value $unit' : '$value ${unit}s';
+  String plural(int value, String unit) =>
+      value == 1 ? '$value $unit' : '$value ${unit}s';
 
   if (days > 0) parts.add(plural(days, 'day'));
   if (hours > 0) parts.add(plural(hours, 'hour'));
@@ -200,4 +216,3 @@ String formatDuration(int totalSeconds) {
 
   return parts.isEmpty ? 'Reached' : parts.join(', ');
 }
-

@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBn6ytiu4w9VonelsTc9qR5MPnNjS7bTCc',
-    appId: '1:939178197757:android:bd7059e985d917ebd8b494',
+    appId: '1:939178197757:android:f627e46b8af4b82cd8b494',
     messagingSenderId: '939178197757',
     projectId: 'deligo-cab',
     storageBucket: 'deligo-cab.firebasestorage.app',
@@ -59,11 +59,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCVaaV2-4UfSxyGGM5-bGn7R4aRb3pxkLs',
-    appId: '1:939178197757:ios:f12cf83be9c62a17d8b494',
+    appId: '1:939178197757:ios:7c3188bfaf2702bdd8b494',
     messagingSenderId: '939178197757',
     projectId: 'deligo-cab',
     storageBucket: 'deligo-cab.firebasestorage.app',
-    iosBundleId: 'com.deligo.driver',
+    androidClientId: '939178197757-l12p3otcru4e3ff9p6tl43sh80cs672q.apps.googleusercontent.com',
+    iosClientId: '939178197757-9e7o5fnmqunr3e04f63tbmqllf4o23cn.apps.googleusercontent.com',
+    iosBundleId: 'com.deligo.driver.app',
   );
 
 }
