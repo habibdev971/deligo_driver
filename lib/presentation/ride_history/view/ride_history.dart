@@ -217,10 +217,12 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
     return '';
   }
 
-  Color getStatusColor(String status) {
-    if (status == 'COMPLETED') return Colors.green;
-    if (status == 'CANCELLED') return Colors.red;
-    if (status == 'ON_GOING') return Colors.orange;
-    return AppColors.textSecondary;
-  }
+
+}
+
+Color getStatusColor(String status) {
+  if (status == 'COMPLETED') return Colors.green;
+  if (status == 'CANCELLED') return Colors.red;
+  if (status == 'ON_GOING') return Colors.orange;
+  return AppColors.textSecondary;
 }

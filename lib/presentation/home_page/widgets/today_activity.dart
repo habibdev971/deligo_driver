@@ -8,6 +8,8 @@ import 'package:deligo_driver/presentation/home_page/widgets/activity_builder.da
 import 'package:deligo_driver/presentation/home_page/widgets/activity_top.dart';
 import 'package:deligo_driver/presentation/ride_history/provider/ride_history_provider.dart';
 
+import '../../dashboard/view_model/currency_notifier.dart';
+
 Widget todayActivity(BuildContext context) => Padding(
   padding: EdgeInsets.symmetric(vertical: 9.0.h),
   child: Column(
@@ -17,10 +19,11 @@ Widget todayActivity(BuildContext context) => Padding(
         child: Consumer(
           builder: (context, ref, _) {
             final state = ref.watch(rideHistoryProvider);
+            final currency = ref.watch(currencyProvider);
             return state.list.when(
               initial: () => const SizedBox.shrink(),
               loading: () => const LoadingView(),
-              success: (data) => activityBuilder(context, orderList: data),
+              success: (data) => activityBuilder(context, orderList: data, currency: currency),
               error: (e) => ErrorView(message: e.message),
             );
           },
