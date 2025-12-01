@@ -15,7 +15,8 @@ class NavigationService {
     _isNavigatingToLogin = true;
 
     navigatorKey.currentState?.pushNamedAndRemoveUntil(
-      AppRoutes.login,
+      AppRoutes.loginSignUp,
+          arguments: {'isLoginPage': true},
           (route) => false,
     );
 

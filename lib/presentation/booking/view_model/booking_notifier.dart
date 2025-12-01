@@ -128,16 +128,16 @@ class BookingNotifier extends StateNotifier<BookingState> {
         markers: {
           Marker(markerId: carMarkerId, position: location, icon: markerIcon),
         },
-        circles: {
-          Circle(
-            circleId: const CircleId('radius'),
-            center: location,
-            // radius: getRadiusInKm(userData?.radiusInMeter) * 1000,
-            fillColor: Colors.blue.withValues(alpha: 0.1),
-            strokeColor: Colors.blue.withValues(alpha: 0.3),
-            strokeWidth: 2,
-          ),
-        },
+        // circles: {
+        //   Circle(
+        //     circleId: const CircleId('radius'),
+        //     center: location,
+        //     // radius: getRadiusInKm(userData?.radiusInMeter) * 1000,
+        //     fillColor: Colors.blue.withValues(alpha: 0.1),
+        //     strokeColor: Colors.blue.withValues(alpha: 0.3),
+        //     strokeWidth: 2,
+        //   ),
+        // },
       );
       await _getAddressFromLatLng(location);
     }
@@ -162,17 +162,22 @@ class BookingNotifier extends StateNotifier<BookingState> {
     }
   }
 
-  Future<void> updateLocationMarker(LatLng? location) async {
+  void updateLocationMarker(LatLng? location) {
     if (location != null) {
-      state = state.copyWith(currentLocation: location);
-      state = state.copyWith(
-        markers: state.markers.map((marker) {
-          if (marker.markerId.value == carMarkerId.value) {
-            return marker.copyWith(positionParam: location);
-          }
-          return marker;
-        }).toSet(),
-      );
+      state = state.copyWith(currentLocation: location, markers: state.markers.map((marker) {
+        if (marker.markerId.value == carMarkerId.value) {
+          return marker.copyWith(positionParam: location);
+        }
+        return marker;
+      }).toSet(),);
+      // state = state.copyWith(
+      //   markers: state.markers.map((marker) {
+      //     if (marker.markerId.value == carMarkerId.value) {
+      //       return marker.copyWith(positionParam: location);
+      //     }
+      //     return marker;
+      //   }).toSet(),
+      // );
     }
   }
 

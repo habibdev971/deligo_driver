@@ -87,7 +87,7 @@ class LocationNotifier extends StateNotifier<LocationState> {
         _lastSentTime = now;
         _lastSentLatLng = latLng;
         saveDriverLocations(latLng);
-        ref.read(rideDetailsProvider).whenOrNull(success: (data){
+        ref.watch(rideDetailsProvider).whenOrNull(success: (data){
           final String? status = data?.status;
           ref.read(bookingNotifierProvider.notifier).updateMarkerForOrder(mode: null);
           debugPrint('current status: $status');

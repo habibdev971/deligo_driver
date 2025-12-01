@@ -1,14 +1,14 @@
 class AppRoutes {
   static const String splash = '/';
-  static const String login = '/login-with-password';
+  // static const String login = '/login-with-password';
   static const String loginSignUp = '/login-registration';
   static const String dashboard = '/dashboard';
-  static const String loginWithPassword = '/login-with-password';
+  // static const String loginWithPassword = '/login-with-password';
   static const String verifyOTP = '/verify-otp';
   static const String register = '/register';
   static const String verifyFirebaseOtp = '/verify-firebase-otp';
-  static const String setPassword = '/set-password';
-  static const String changePassword = '/change-password';
+  // static const String setPassword = '/set-password';
+  // static const String changePassword = '/change-password';
   static const String profileUnderReview = '/profile-under-review';
   static const String driverPersonalInfoPage = '/driver-personal-info-page';
   static const String legalDocumentsPage = '/legal-documents-page';

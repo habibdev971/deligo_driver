@@ -62,14 +62,14 @@ class AppRouter {
               return FirebaseOtpPage(phoneNumber: phoneNumber,);
             },
             );
-      case '/set-password':
-        return MaterialPageRoute(builder: (_) => const SetPasswordPage());
+      // case '/set-password':
+      //   return MaterialPageRoute(builder: (_) => const SetPasswordPage());
       case AppRoutes.chatSheet:
         return MaterialPageRoute(builder: (_) => const ChatPage());
       case AppRoutes.register:
         return MaterialPageRoute(builder: (_) => const RegistrationPage());
-      case '/change-password':
-        return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
+      // case '/change-password':
+      //   return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
       case AppRoutes.driverPersonalInfoPage:
         final String? phoneNumber = settings.arguments as String?;
         return MaterialPageRoute(builder: (_) => DriverPersonalInfoPage(phoneNumber: phoneNumber,));

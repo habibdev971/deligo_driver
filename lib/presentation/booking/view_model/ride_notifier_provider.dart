@@ -142,40 +142,40 @@ class RideOrderNotifier extends StateNotifier<AppState<RideRequest?>> {
 }
 
 
-class CheckTripActivityNotifier extends StateNotifier<AppState<Order?>> {
-  final IRideRepo rideRepo;
-  final Ref ref;
-
-  CheckTripActivityNotifier(this.rideRepo, this.ref)
-      : super(const AppState.initial());
-  Future<void> checkTripActivity({Function()? onSuccess}) async {
-    final String? token = await LocalStorageService().getToken();
-    if(token != null){
-      state = const AppState.loading();
-      final result = await rideRepo.checkActiveTrip();
-      result.fold(
-            (failure) => _handleFailure(failure),
-            (data) {
-          if(data.data?.order != null){
-            state = AppState.success(data.data!.order);
-            // ref.read(rideOrderNotifierProvider.notifier).setOrderData(data.data!.order!);
-          }else{
-            state = const AppState.success(null);
-          }
-          if(onSuccess != null){
-            onSuccess();
-          }
-        },
-      );
-    }
-    ref.read(appFlowViewModelProvider.notifier).setAppFlowState();
-  }
-
-  void _handleFailure(Failure failure) {
-    state = AppState.error(failure);
-    showNotification(
-      message: failure.message,
-    );
-  }
-
-}
+// class CheckTripActivityNotifier extends StateNotifier<AppState<Order?>> {
+//   final IRideRepo rideRepo;
+//   final Ref ref;
+//
+//   CheckTripActivityNotifier(this.rideRepo, this.ref)
+//       : super(const AppState.initial());
+//   Future<void> checkTripActivity({Function()? onSuccess}) async {
+//     final String? token = await LocalStorageService().getToken();
+//     if(token != null){
+//       state = const AppState.loading();
+//       final result = await rideRepo.checkActiveTrip();
+//       result.fold(
+//             (failure) => _handleFailure(failure),
+//             (data) {
+//           if(data.data?.order != null){
+//             state = AppState.success(data.data!.order);
+//             // ref.read(rideOrderNotifierProvider.notifier).setOrderData(data.data!.order!);
+//           }else{
+//             state = const AppState.success(null);
+//           }
+//           if(onSuccess != null){
+//             onSuccess();
+//           }
+//         },
+//       );
+//     }
+//     ref.read(appFlowViewModelProvider.notifier).setAppFlowState();
+//   }
+//
+//   void _handleFailure(Failure failure) {
+//     state = AppState.error(failure);
+//     showNotification(
+//       message: failure.message,
+//     );
+//   }
+//
+// }

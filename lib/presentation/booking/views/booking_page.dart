@@ -56,7 +56,7 @@ class _HomePageState extends ConsumerState<BookingPage> {
           }),
           body: Stack(
                   children: [
-                    // bookingState.currentLocation == null ? const LoadingView() :
+                    bookingState.currentLocation == null ? const LoadingView() :
                     GoogleMap(
             onMapCreated: _onMapCreated,
             initialCameraPosition: CameraPosition(

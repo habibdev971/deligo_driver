@@ -92,113 +92,113 @@ class ExistingUserNotifier extends StateNotifier<AppState<UserExistenceModel>> {
   }
 }
 
-class LoginWithPassNotifier
-    extends StateNotifier<AppState<LoginWithPassResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
+// class LoginWithPassNotifier
+//     extends StateNotifier<AppState<LoginWithPassResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//
+//   LoginWithPassNotifier({required this.ref, required this.authRepo})
+//     : super(const AppState.initial());
+//
+//   Future<void> loginWithPassword({
+//     required String mobile,
+//     required String password,
+//   }) async {
+//     state = const AppState.loading();
+//     final String? deviceToken = await deviceTokenFirebase();
+//     await LocalStorageService().clearToken();
+//     final result = await authRepo.loginWithPassword(
+//       mobile: mobile,
+//       password: password,
+//       deviceToken: deviceToken,
+//     );
+//     result.fold(
+//       (failure) {
+//         showNotification(message: failure.message);
+//         return state = AppState.error(failure);
+//       },
+//       (data) async {
+//         showNotification(
+//           message: data.message,
+//           isSuccess: !(data.data?.otherDevice ?? false),
+//         );
+//         if (data.data?.otherDevice != null && data.data?.otherDevice == true) {
+//           showWarning(
+//             ref: ref,
+//             userId: data.data?.user?.id,
+//             deviceToken: deviceToken,
+//           );
+//           state = AppState.success(data);
+//           return;
+//         }
+//         LocalStorageService().saveToken(data.data?.token);
+//         LocalStorageService().saveUser(data: data.data?.user?.toJson());
+//         LocalStorageService().setRegistrationProgress(AppRoutes.dashboard);
+//
+//         await ref
+//             .read(tripActivityNotifierProvider.notifier)
+//             .checkTripActivity();
+//         state = AppState.success(data);
+//       },
+//     );
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//     });
+//   }
+// }
 
-  LoginWithPassNotifier({required this.ref, required this.authRepo})
-    : super(const AppState.initial());
-
-  Future<void> loginWithPassword({
-    required String mobile,
-    required String password,
-  }) async {
-    state = const AppState.loading();
-    final String? deviceToken = await deviceTokenFirebase();
-    await LocalStorageService().clearToken();
-    final result = await authRepo.loginWithPassword(
-      mobile: mobile,
-      password: password,
-      deviceToken: deviceToken,
-    );
-    result.fold(
-      (failure) {
-        showNotification(message: failure.message);
-        return state = AppState.error(failure);
-      },
-      (data) async {
-        showNotification(
-          message: data.message,
-          isSuccess: !(data.data?.otherDevice ?? false),
-        );
-        if (data.data?.otherDevice != null && data.data?.otherDevice == true) {
-          showWarning(
-            ref: ref,
-            userId: data.data?.user?.id,
-            deviceToken: deviceToken,
-          );
-          state = AppState.success(data);
-          return;
-        }
-        LocalStorageService().saveToken(data.data?.token);
-        LocalStorageService().saveUser(data: data.data?.user?.toJson());
-        LocalStorageService().setRegistrationProgress(AppRoutes.dashboard);
-
-        await ref
-            .read(tripActivityNotifierProvider.notifier)
-            .checkTripActivity();
-        state = AppState.success(data);
-      },
-    );
-  }
-
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-    });
-  }
-}
-
-class ResendSignInNotifier
-    extends StateNotifier<AppState<LoginWithPassResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
-
-  ResendSignInNotifier({required this.ref, required this.authRepo})
-    : super(const AppState.initial());
-
-  Future<void> resendSignIn({
-    required num? userId,
-    required String? deviceToken,
-  }) async {
-    state = const AppState.loading();
-    final String? deviceToken = await deviceTokenFirebase();
-    await LocalStorageService().clearToken();
-    final result = await authRepo.resendSignIn(
-      userId: userId,
-      deviceToken: deviceToken,
-    );
-    result.fold(
-      (failure) {
-        showNotification(message: failure.message);
-        return state = AppState.error(failure);
-      },
-      (data) {
-        showNotification(message: data.message, isSuccess: true);
-
-        LocalStorageService().saveToken(data.data?.token);
-        LocalStorageService().saveUser(data: data.data?.user?.toJson());
-        LocalStorageService().setRegistrationProgress(AppRoutes.dashboard);
-        state = AppState.success(data);
-        // NavigationService.pushNamedAndRemoveUntil(AppRoutes.splash);
-        ref
-            .read(tripActivityNotifierProvider.notifier)
-            .checkTripActivity(
-              onSuccess: () {
-                ref.read(appFlowViewModelProvider.notifier).setAppFlowState();
-              },
-            );
-      },
-    );
-  }
-
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-    });
-  }
-}
+// class ResendSignInNotifier
+//     extends StateNotifier<AppState<LoginWithPassResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//
+//   ResendSignInNotifier({required this.ref, required this.authRepo})
+//     : super(const AppState.initial());
+//
+//   Future<void> resendSignIn({
+//     required num? userId,
+//     required String? deviceToken,
+//   }) async {
+//     state = const AppState.loading();
+//     final String? deviceToken = await deviceTokenFirebase();
+//     await LocalStorageService().clearToken();
+//     final result = await authRepo.resendSignIn(
+//       userId: userId,
+//       deviceToken: deviceToken,
+//     );
+//     result.fold(
+//       (failure) {
+//         showNotification(message: failure.message);
+//         return state = AppState.error(failure);
+//       },
+//       (data) {
+//         showNotification(message: data.message, isSuccess: true);
+//
+//         LocalStorageService().saveToken(data.data?.token);
+//         LocalStorageService().saveUser(data: data.data?.user?.toJson());
+//         LocalStorageService().setRegistrationProgress(AppRoutes.dashboard);
+//         state = AppState.success(data);
+//         // NavigationService.pushNamedAndRemoveUntil(AppRoutes.splash);
+//         ref
+//             .read(tripActivityNotifierProvider.notifier)
+//             .checkTripActivity(
+//               onSuccess: () {
+//                 ref.read(appFlowViewModelProvider.notifier).setAppFlowState();
+//               },
+//             );
+//       },
+//     );
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//     });
+//   }
+// }
 
 class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
   final IAuthRepo authRepoProvider;
@@ -324,41 +324,41 @@ class OtpVerifyNotifier extends StateNotifier<AppState<OtpVerifyModel>> {
   // }
 }
 
-class UpdatePassViewModel extends StateNotifier<AppState<CommonResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
-  UpdatePassViewModel({required this.ref, required this.authRepo})
-    : super(const AppState.initial());
-
-  Future<void> updatePassword({required String password}) async {
-    state = const AppState.loading();
-    final result = await authRepo.updatePassword(password: password);
-    result.fold(
-      (failure) {
-        showNotification(message: failure.message);
-        state = AppState.error(failure);
-      },
-      (data) async{
-        showNotification(message: data.message, isSuccess: true);
-        state = AppState.success(data);
-        LocalStorageService().setRegistrationProgress(
-          AppRoutes.driverPersonalInfoPage,
-        );
-        await LocalStorageService().clearToken();
-        await LocalStorageService().clearRegisterToken();
-        // await LocalStorageService().saveToken(data)
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
-        resetStateAfterDelay();
-      },
-    );
-  }
-
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-    });
-  }
-}
+// class UpdatePassViewModel extends StateNotifier<AppState<CommonResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//   UpdatePassViewModel({required this.ref, required this.authRepo})
+//     : super(const AppState.initial());
+//
+//   Future<void> updatePassword({required String password}) async {
+//     state = const AppState.loading();
+//     final result = await authRepo.updatePassword(password: password);
+//     result.fold(
+//       (failure) {
+//         showNotification(message: failure.message);
+//         state = AppState.error(failure);
+//       },
+//       (data) async{
+//         showNotification(message: data.message, isSuccess: true);
+//         state = AppState.success(data);
+//         LocalStorageService().setRegistrationProgress(
+//           AppRoutes.driverPersonalInfoPage,
+//         );
+//         await LocalStorageService().clearToken();
+//         await LocalStorageService().clearRegisterToken();
+//         // await LocalStorageService().saveToken(data)
+//         NavigationService.pushNamedAndRemoveUntil(AppRoutes.loginWithPassword);
+//         resetStateAfterDelay();
+//       },
+//     );
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//     });
+//   }
+// }
 
 class ResendOtpNotifier extends StateNotifier<AppState<ResendOtpModel>> {
   final IAuthRepo authRepo;
@@ -393,69 +393,69 @@ class ResendOtpNotifier extends StateNotifier<AppState<ResendOtpModel>> {
   }
 }
 
-class ResetPasswordNotifier extends StateNotifier<AppState<CommonResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
-  ResetPasswordNotifier({required this.ref, required this.authRepo})
-    : super(const AppState.initial());
+// class ResetPasswordNotifier extends StateNotifier<AppState<CommonResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//   ResetPasswordNotifier({required this.ref, required this.authRepo})
+//     : super(const AppState.initial());
+//
+//   Future<void> resetPassword({required Map<String, dynamic> data}) async {
+//     state = const AppState.loading();
+//     final result = await authRepo.resetPassword(data: data);
+//     result.fold((failure) => state = AppState.error(failure), (data) {
+//       showNotification(message: data.message, isSuccess: true);
+//       NavigationService.pushNamed(AppRoutes.login);
+//       state = AppState.success(data);
+//       resetStateAfterDelay();
+//     });
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//     });
+//   }
+// }
 
-  Future<void> resetPassword({required Map<String, dynamic> data}) async {
-    state = const AppState.loading();
-    final result = await authRepo.resetPassword(data: data);
-    result.fold((failure) => state = AppState.error(failure), (data) {
-      showNotification(message: data.message, isSuccess: true);
-      NavigationService.pushNamed(AppRoutes.login);
-      state = AppState.success(data);
-      resetStateAfterDelay();
-    });
-  }
-
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-    });
-  }
-}
-
-class ChangePasswordNotifier extends StateNotifier<AppState<CommonResponse>> {
-  final IAuthRepo authRepo;
-  final Ref ref;
-  ChangePasswordNotifier({required this.ref, required this.authRepo})
-    : super(const AppState.initial());
-
-  Future<void> changePassword({
-    required String currentPassword,
-    required String newPassword,
-    required newConfirmPassword,
-  }) async {
-    state = const AppState.loading();
-    final result = await authRepo.changePassword(
-      currentPassword: currentPassword,
-      newPassword: newPassword,
-      newConfirmPassword: newConfirmPassword,
-    );
-    result.fold(
-      (failure) {
-        state = AppState.error(failure);
-        showNotification(message: failure.message);
-      },
-      (data) {
-        LocalStorageService().clearToken();
-        LocalStorageService().clearUser();
-        showNotification(message: data.message, isSuccess: true);
-        NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
-        state = AppState.success(data);
-        resetStateAfterDelay();
-      },
-    );
-  }
-
-  void resetStateAfterDelay() {
-    Future.delayed(Duration.zero, () {
-      state = const AppState.initial();
-    });
-  }
-}
+// class ChangePasswordNotifier extends StateNotifier<AppState<CommonResponse>> {
+//   final IAuthRepo authRepo;
+//   final Ref ref;
+//   ChangePasswordNotifier({required this.ref, required this.authRepo})
+//     : super(const AppState.initial());
+//
+//   Future<void> changePassword({
+//     required String currentPassword,
+//     required String newPassword,
+//     required newConfirmPassword,
+//   }) async {
+//     state = const AppState.loading();
+//     final result = await authRepo.changePassword(
+//       currentPassword: currentPassword,
+//       newPassword: newPassword,
+//       newConfirmPassword: newConfirmPassword,
+//     );
+//     result.fold(
+//       (failure) {
+//         state = AppState.error(failure);
+//         showNotification(message: failure.message);
+//       },
+//       (data) {
+//         LocalStorageService().clearToken();
+//         LocalStorageService().clearUser();
+//         showNotification(message: data.message, isSuccess: true);
+//         NavigationService.pushNamedAndRemoveUntil(AppRoutes.login);
+//         state = AppState.success(data);
+//         resetStateAfterDelay();
+//       },
+//     );
+//   }
+//
+//   void resetStateAfterDelay() {
+//     Future.delayed(Duration.zero, () {
+//       state = const AppState.initial();
+//     });
+//   }
+// }
 
 class UpdatePersonalInfoNotifier
     extends StateNotifier<AppState<DriverInfoUpdateResponse>> {

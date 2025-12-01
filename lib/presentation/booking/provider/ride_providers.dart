@@ -32,12 +32,12 @@ final rideRequestDetailProvider = StateNotifierProvider<
   ),
 );
 
-final tripActivityNotifierProvider = StateNotifierProvider<
-    CheckTripActivityNotifier, AppState<Order?>>(
-      (ref) => CheckTripActivityNotifier(
-        ref.read(rideRepoProvider), ref,
-  ),
-);
+// final tripActivityNotifierProvider = StateNotifierProvider<
+//     CheckTripActivityNotifier, AppState<Order?>>(
+//       (ref) => CheckTripActivityNotifier(
+//         ref.read(rideRepoProvider), ref,
+//   ),
+// );
 
 final acceptRejectProvider = StateNotifierProvider<
     AcceptRejectNotifier, AppState<OrderAcceptModel>>(

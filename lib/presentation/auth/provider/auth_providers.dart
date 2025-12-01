@@ -48,26 +48,26 @@ final registrationProvider = StateNotifierProvider<RegistrationNotifier, AppStat
 final loginWithPhoneOrEmailProvider = StateNotifierProvider<LoginWithPhoneOrEmailNotifier, AppState<RegistrationModel>>(
         (ref) => LoginWithPhoneOrEmailNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
-final loginWithPassNotifierProvider = StateNotifierProvider<LoginWithPassNotifier, AppState<LoginWithPassResponse>>(
-    (ref) => LoginWithPassNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
-
-final resendSignInProvider = StateNotifierProvider<ResendSignInNotifier, AppState<LoginWithPassResponse>>(
-        (ref) => ResendSignInNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
+// final loginWithPassNotifierProvider = StateNotifierProvider<LoginWithPassNotifier, AppState<LoginWithPassResponse>>(
+//     (ref) => LoginWithPassNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
+//
+// final resendSignInProvider = StateNotifierProvider<ResendSignInNotifier, AppState<LoginWithPassResponse>>(
+//         (ref) => ResendSignInNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
 final otpVerifyProvider = StateNotifierProvider<OtpVerifyNotifier, AppState<OtpVerifyModel>>(
     (ref) => OtpVerifyNotifier(authRepoProvider: ref.read(authRepoProvider), ref: ref));
 
-final updatePassViewModelProvider = StateNotifierProvider.autoDispose<UpdatePassViewModel, AppState<CommonResponse>>(
-    (ref) => UpdatePassViewModel(authRepo: ref.read(authRepoProvider), ref: ref));
+// final updatePassViewModelProvider = StateNotifierProvider.autoDispose<UpdatePassViewModel, AppState<CommonResponse>>(
+//     (ref) => UpdatePassViewModel(authRepo: ref.read(authRepoProvider), ref: ref));
 
 final resendOTPNotifierProvider = StateNotifierProvider.autoDispose<ResendOtpNotifier, AppState<ResendOtpModel>>(
     (ref) => ResendOtpNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
-final resetPasswordNotifierProvider = StateNotifierProvider.autoDispose<ResetPasswordNotifier, AppState<CommonResponse>>(
-    (ref) => ResetPasswordNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
-
-final changePasswordProvider = StateNotifierProvider.autoDispose<ChangePasswordNotifier, AppState<CommonResponse>>(
-        (ref) => ChangePasswordNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
+// final resetPasswordNotifierProvider = StateNotifierProvider.autoDispose<ResetPasswordNotifier, AppState<CommonResponse>>(
+//     (ref) => ResetPasswordNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
+//
+// final changePasswordProvider = StateNotifierProvider.autoDispose<ChangePasswordNotifier, AppState<CommonResponse>>(
+//         (ref) => ChangePasswordNotifier(ref: ref, authRepo: ref.read(authRepoProvider)));
 
 final updatePersonalInfoProvider =
     StateNotifierProvider.autoDispose<UpdatePersonalInfoNotifier, AppState<DriverInfoUpdateResponse>>(
