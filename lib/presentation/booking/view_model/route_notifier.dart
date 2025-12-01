@@ -91,10 +91,10 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
 
         calculateRouteProgress(
           ref,
+          startProgress: !(rideStatus == 'ARRIVED' || rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED' || rideStatus == 'ACCEPT'),
           orderId: int.tryParse(orderId.toString()),
           pickup: pickUp,
           current: current,
-          // current: ref.watch(bookingNotifierProvider).currentLocation, //TODO: check the update if it works fine
           totalDistanceInMeters: totalDistance,
           polylinePoints: polyline,
           routeInfo: v,
@@ -153,6 +153,7 @@ double _toRadians(double degree) => degree * pi / 180;
 /// Returns progress [0.0 - 1.0]. If any input is null or invalid, returns 0.0.
 Future<void> calculateRouteProgress(
   Ref ref, {
+    bool startProgress = false,
   required int? orderId,
   required LatLng? pickup,
   required LatLng? current,
@@ -169,9 +170,9 @@ Future<void> calculateRouteProgress(
     return;
   }
 
-  final distanceTravelled = calculateHaversineDistance(pickup, destination);
-  final progress = (distanceTravelled / totalDistanceInMeters).clamp(0.0, 1.0);
-  ref.read(routeProgressProvider.notifier).state = progress;
+  final distanceTravelled = startProgress ? calculateHaversineDistance(pickup, destination) : 0;
+  final progress = startProgress ? (distanceTravelled / totalDistanceInMeters).clamp(0.0, 1.0) : 0.0;
+  ref.read(routeProgressProvider.notifier).state = startProgress ? progress : 0;
   ref
       .read(sendTravelInfoProvider.notifier)
       .sendTravelInfo(
