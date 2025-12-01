@@ -33,7 +33,7 @@ Widget locationTime(BuildContext context, {String? time, String? distance, bool 
           //   distanceText = '0 km';
           // },
           success: (data) {
-            timeText = showHourMin ? formatDuration(data.durationInSeconds) : data.durationText;
+            timeText = showHourMin ? formatDurationSeconds(data.durationInSeconds) : data.durationText;
             distanceText = data.distanceText;
           },
           // error: (e) {

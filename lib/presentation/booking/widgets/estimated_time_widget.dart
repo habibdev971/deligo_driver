@@ -75,7 +75,7 @@ Widget estimatedTimeWidget(BuildContext context) => Consumer(
         distanceText = '0 km';
       },
       success: (data) {
-        timeText = formatDuration(data.durationInSeconds);
+        timeText = formatDurationSeconds(data.durationInSeconds);
         distanceText = data.distanceText;
       },
       error: (e) {

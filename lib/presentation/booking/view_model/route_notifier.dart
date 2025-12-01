@@ -178,7 +178,7 @@ Future<void> calculateRouteProgress(
       .sendTravelInfo(
         info: {
           'order_id': orderId,
-          'minute': formatDuration(routeInfo.durationInSeconds),
+          'minute': formatDurationSeconds(routeInfo.durationInSeconds),
           'distance': routeInfo.distanceText,
           'progress': progress,
           'destination': destination,
@@ -189,7 +189,7 @@ Future<void> calculateRouteProgress(
       );
 }
 
-String formatDuration(int totalSeconds) {
+String formatDurationSeconds(int totalSeconds) {
   if (totalSeconds == 0) return 'Reached';
 
   final int days = totalSeconds ~/ 86400;

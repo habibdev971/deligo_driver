@@ -6,6 +6,7 @@ import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/core/routes/app_routes.dart';
 import 'package:deligo_driver/core/utils/app_colors.dart';
 import 'package:deligo_driver/core/utils/exit_app_dialogue.dart';
+import 'package:deligo_driver/core/utils/format_minute.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/localize.dart';
 import 'package:deligo_driver/core/widgets/app_bar/app_bar.dart';
@@ -179,7 +180,7 @@ class _RideHistoryState extends ConsumerState<RideHistoryView> with SingleTicker
               },
                 leading: ClipOval(child: buildNetworkImage(imageUrl: ride.rider?.profilePicture, height: 35, width: 35, fit: BoxFit.fill, errorIconSize: 15)),
                 title: ride.rider?.name ?? 'N/A',
-                subtitle: "${ride.distance ?? 0}km, ${ride.estimatedTime ?? 0}min, ${ride.estimatedFare ?? 0}$currency, ${ride.orderTime ?? ''}",
+                subtitle: "${ride.distance ?? 0}km, ${formatDurationMinutes(ride.estimatedTime)}, ${ride.estimatedFare ?? 0}$currency, ${ride.orderTime ?? ''}",
                 subTitleColor: AppColors.contentDisable,
                 trailing: Text(
                   ride.status ?? '',

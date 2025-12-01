@@ -1,3 +1,4 @@
+import 'package:deligo_driver/core/utils/format_minute.dart';
 import 'package:deligo_driver/core/utils/is_dark_mode.dart';
 import 'package:deligo_driver/core/utils/iso_date_time_formater.dart';
 import 'package:deligo_driver/presentation/ride_history/view/ride_details_page.dart';
@@ -24,7 +25,7 @@ Widget scheduleInfo(BuildContext context, {required RideRequest order}){
         Gap(4.h),
         rowText(context, title: 'Distance', isDark: isDarkMode(), value: '${order.distance ?? 0} km'),
         Gap(4.h),
-        rowText(context, title: 'Duration', isDark: isDarkMode(), value: '${order.estimatedTime ?? 0} min'),
+        rowText(context, title: 'Duration', isDark: isDarkMode(), value: formatDurationMinutes(order.estimatedTime)),
       ],
     ),
   );
