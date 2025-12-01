@@ -31,7 +31,7 @@ Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
     return actionSheet(
       context,
       riderInfo: riderDetails(context, order?.rider),
-      locationTime: locationTime(context),
+      // locationTime: locationTime(context),
       title: localize(context).all_set_start_ride,
       description: localize(context).start_journey_navigation,
       image: Assets.images.startRide.image(
