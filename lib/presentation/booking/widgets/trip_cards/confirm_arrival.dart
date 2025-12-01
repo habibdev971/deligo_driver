@@ -14,6 +14,7 @@ import 'package:deligo_driver/presentation/booking/widgets/trip_cards/action_she
 import 'package:deligo_driver/presentation/home_page/widgets/rider_details.dart';
 
 import '../../../../core/utils/localize.dart';
+import '../../provider/ride_providers.dart';
 
 Widget confirmArrival(BuildContext context,  RideRequest? order)=> Consumer(
     builder: (context, ref, _) {
@@ -30,7 +31,7 @@ Widget confirmArrival(BuildContext context,  RideRequest? order)=> Consumer(
         actions: [
           Expanded(
             child: AppPrimaryButton(
-                isLoading: rideOrderState.whenOrNull(loading: ()=> true) ?? false,
+                isLoading: rideOrderState.whenOrNull(loading: ()=> true) ?? false || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
                 onPressed: (){
               rideOrderNotifier.saveOrderStatus(status: 'ARRIVED', onSuccess: (v){
                 WidgetsBinding.instance.addPostFrameCallback((_){

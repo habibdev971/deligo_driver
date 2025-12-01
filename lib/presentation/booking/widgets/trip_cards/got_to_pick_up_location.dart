@@ -23,6 +23,7 @@ Widget gotoPickupLocation(BuildContext context, RideRequest? order) => Consumer(
     final onTripNotifier = ref.read(onTripStatusProvider.notifier);
     final riderData = ref.watch(rideDetailsProvider).whenOrNull(success: (data)=> data?.rider);
 
+
     return actionSheet(
       context,
       riderInfo: riderDetails(
@@ -48,7 +49,7 @@ Widget gotoPickupLocation(BuildContext context, RideRequest? order) => Consumer(
       actions: [
         Expanded(
           child: AppPrimaryButton(
-            isLoading: rideOrderState.whenOrNull(loading: () => true) ?? false,
+            isLoading: rideOrderState.whenOrNull(loading: () => true) ?? false || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
             onPressed: () {
               rideOrderNotifier.saveOrderStatus(
 

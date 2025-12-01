@@ -74,9 +74,9 @@ class RideDetailsNotifier extends StateNotifier<AppState<RideRequest?>>{
             (l) => state = AppState.error(l),
             (r) {
               state = AppState.success(r.data?.rideRequest );
-              if(r.data?.rideRequest != null){
-                // ref.read(rideOrderNotifierProvider.notifier).setOrderData(r.data!.rideRequest!);
-              }
+              // if(r.data?.rideRequest != null){
+              //   // ref.read(rideOrderNotifierProvider.notifier).setOrderData(r.data!.rideRequest!);
+              // }
 
             });
 

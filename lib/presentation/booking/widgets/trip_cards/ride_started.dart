@@ -15,6 +15,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../core/utils/localize.dart';
 import '../../provider/cancel_ride_provider.dart';
+import '../../provider/ride_providers.dart';
 
 Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
   builder: (context, ref, _) {
@@ -44,7 +45,7 @@ Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
             isLoading:
                 cancelLoading,
             // isDisabled: !timerState.isButtonEnabled,
-            isDisabled: orderLoading,
+            isDisabled: orderLoading || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
             // onPressed: () {
             //   timerStateNotifier.startTimer();
             // },),
@@ -68,7 +69,7 @@ Widget rideStarted(BuildContext context, RideRequest? order) => Consumer(
         Gap(16.w),
         Expanded(
           child: AppPrimaryButton(
-            isLoading: orderLoading,
+            isLoading: orderLoading  || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
             isDisabled: cancelLoading,
             onPressed: () {
               rideOrderNotifier.saveOrderStatus(

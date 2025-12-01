@@ -12,6 +12,7 @@ import '../../../core/enums/booking_status.dart';
 import '../../../core/utils/localize.dart';
 import '../../../gen/assets.gen.dart';
 import '../provider/driver_providers.dart';
+import '../provider/ride_providers.dart';
 import '../provider/way_point_list_provider.dart';
 
 Widget headingToDestination(BuildContext context) => Column(
@@ -45,7 +46,9 @@ Widget headingToDestination(BuildContext context) => Column(
 
     Consumer(builder: (context, ref, _){
       final onTripStatusNotifier = ref.read(onTripStatusProvider.notifier);
-      return AppPrimaryButton(onPressed: (){
+      return AppPrimaryButton(
+          isLoading:  (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
+          onPressed: (){
         onTripStatusNotifier.updateOnTripStatus(status: BookingStatus.reachedDestination, );
       }, child: Text('Complete', style: context.bodyMedium?.copyWith(color: Colors.white),));
     })

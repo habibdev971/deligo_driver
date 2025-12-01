@@ -44,7 +44,7 @@ Widget paymentReceived(BuildContext context, RideRequest? order) => Consumer(bui
           Expanded(
             child: AppPrimaryButton(
                 isLoading:
-                rideOrderState.whenOrNull(loading: () => true) ?? false,
+                rideOrderState.whenOrNull(loading: () => true) ?? false || (ref.watch(rideDetailsProvider).whenOrNull(loading: ()=> true) ?? false),
                 onPressed: () {
                   rideOrderNotifier.saveOrderStatus(
                       status: 'END',
