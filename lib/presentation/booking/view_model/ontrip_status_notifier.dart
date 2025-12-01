@@ -17,7 +17,7 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
     bool fromSplash = false,
   }) async{
     final bookingNotifier =  ref.read(bookingNotifierProvider.notifier);
-    await bookingNotifier.setCurrentLocation();
+    // await bookingNotifier.setCurrentLocation();
     switch (status) {
       case BookingStatus.initial:
         state = const OnTripStatusState.initial();
@@ -44,7 +44,7 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
         if(fromSplash){
           bookingNotifier.updateMarkerForTowardsPickup();
         }
-        bookingNotifier.stopLocationUpdates();
+        // bookingNotifier.stopLocationUpdates();
         break;
 
       case BookingStatus.headingToDestination:
@@ -54,9 +54,9 @@ class OnTripStatusNotifier extends StateNotifier<OnTripStatusState> {
 
       case BookingStatus.reachedDestination:
         state = const OnTripStatusState.reachedDestination();
-        if(fromSplash){
-          bookingNotifier.updateMarkerForOrder(mode: MovementMode.orderAccept);
-        }
+        // if(fromSplash){
+        //   bookingNotifier.updateMarkerForOrder(mode: MovementMode.orderAccept);
+        // }
           bookingNotifier.stopLocationUpdates();
         await local.saveChatState(isOpen: false);
 

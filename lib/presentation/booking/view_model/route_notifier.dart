@@ -38,7 +38,7 @@ class RouteNotifier extends StateNotifier<AppState<RouteInfo>> {
     final bool isLoading =
         rideState.whenOrNull(loading: () => true, error: (e) => true) ?? false;
     if (isLoading) return;
-    if (rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED') {
+    if (rideStatus == 'GO_TO_PICKUP' || rideStatus == 'ACCEPTED' || rideStatus == 'ACCEPT') {
       destination = points?.pickupLocation;
     } else if (rideStatus == 'DROPPED_OFF' ||
         rideStatus == 'END' ||
