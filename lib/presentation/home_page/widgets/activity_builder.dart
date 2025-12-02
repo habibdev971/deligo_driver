@@ -1,9 +1,7 @@
-import 'package:deligo_driver/core/extensions/extensions.dart';
 import 'package:deligo_driver/data/models/ride_details_model/RideDetailsModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:deligo_driver/data/services/navigation_service.dart';
-import 'package:deligo_driver/presentation/home_page/widgets/activity_card.dart';
 
 import '../../../core/routes/app_routes.dart';
 import '../../../core/utils/app_colors.dart';
